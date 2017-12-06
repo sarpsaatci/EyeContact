@@ -1,4 +1,4 @@
-# kurento-one2one-call with nod3ejs
+# kurento-one2one-call with nodejs
 
 App makes one-to-one video call peer-to-peer using Kurento Media Server and WebSocket as WebRTC. Each peer should be started with "npm start".
 
