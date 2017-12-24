@@ -180,7 +180,7 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                         self.pipeline = pipeline;
                         self.webRtcEndpoint[callerId] = callerWebRtcEndpoint;
                         self.webRtcEndpoint[calleeId] = calleeWebRtcEndpoint;
-						var recorder = yield pipeline.create('RecorderEndpoint', {uri: argv.file_uri});
+						var recorder = pipeline.create('RecorderEndpoint', {uri: argv.file_uri});
 						self.webRtcEndpoint[calleeId].connect(recorder);
 						self.webRtcEndpoint.connect(webRtc);
 						yield recorder.record();
