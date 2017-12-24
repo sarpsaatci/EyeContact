@@ -28,6 +28,7 @@ var argv = minimist(process.argv.slice(2), {
   default: {
       as_uri: "https://localhost:8443/",
       ws_uri: "ws://localhost:8888/kurento"
+	  file_uri: "file:///tmp/kurento-hello-world-recording.mp4"
   }
 });
 
@@ -179,6 +180,10 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                         self.pipeline = pipeline;
                         self.webRtcEndpoint[callerId] = callerWebRtcEndpoint;
                         self.webRtcEndpoint[calleeId] = calleeWebRtcEndpoint;
+						self.recorder = yield pipeline.create('RecorderEndpoint', {uri: argv.file_uri});
+						self.webRtcEndpoint.connect(recorder);
+						self.webRtcEndpoint.connect(webRtc);
+						yield recorder.record();
                         callback(null);
                     });
                 });
