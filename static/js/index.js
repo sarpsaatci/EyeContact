@@ -133,6 +133,9 @@ window.onbeforeunload = function() {
 }
 
 ws.onmessage = function(message) {
+	
+	console.log()
+	
 	var parsedMessage = JSON.parse(message.data);
 	console.info('Received message: ' + message.data);
 
@@ -154,7 +157,8 @@ ws.onmessage = function(message) {
 		stop(true);
 		break;
 	case 'iceCandidate':
-		webRtcPeer.addIceCandidate(parsedMessage.candidate)
+		console.log(videoOutput.currentTime);
+		webRtcPeer.addIceCandidate(parsedMessage.candidate);
 		break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
@@ -306,9 +310,6 @@ function call() {
 			sendMessage(message);
 		});
 	});
-	
-	
-
 }
 
 function stop(message) {
@@ -335,8 +336,6 @@ function sendMessage(message) {
 
 function onIceCandidate(candidate) {
 	console.log('Local candidate' + JSON.stringify(candidate));
-
-	console.log("time: " + videoOutput.currentTime);
 
 	var message = {
 		id : 'onIceCandidate',
