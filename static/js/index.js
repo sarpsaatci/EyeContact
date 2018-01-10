@@ -131,11 +131,11 @@ window.onload = function() {
 videoOutput.onplay = function() {
 	var i = 0;
 	
-	videoOutput.addEventListener('loadeddata', function() {
+	This.addEventListener('loadeddata', function() {
     this.currentTime = i;
 	});
 	
-	videoOutput.addEventListener('seeked', function() {
+	This.addEventListener('seeked', function() {
 
     // now video has seeked and current frames will show
     // at the time as we expect
