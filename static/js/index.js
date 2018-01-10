@@ -116,8 +116,6 @@ window.onload = function() {
 	videoInput = document.getElementById('videoInput');
 	videoOutput = document.getElementById('videoOutput');
 	document.getElementById('name').focus();
-	
-	console.log("duration" + videoOutput.duration);
 
 	document.getElementById('register').addEventListener('click', function() {
 		register();
@@ -238,6 +236,8 @@ function incomingCall(message) {
 						sendMessage(response);
 					});
 				});
+				
+				console.log("duration" + videoOutput.duration);
 
 	} else {
 		var response = {
@@ -276,7 +276,6 @@ function call() {
 
 	setCallState(PROCESSING_CALL);
 	
-	console.log("duration: " + video.duration);
 
 	showSpinner(videoInput, videoOutput);
 
@@ -307,6 +306,8 @@ function call() {
 			sendMessage(message);
 		});
 	});
+	
+	
 
 }
 
