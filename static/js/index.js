@@ -164,8 +164,6 @@ ws.onmessage = function(message) {
 	}
 }
 
-videoOutput.ontimeupdate = function() {console.log("time: " + videoOutput.currentTime)};
-
 function resgisterResponse(message) {
 	if (message.response == 'accepted') {
 		setRegisterState(REGISTERED);
@@ -193,6 +191,9 @@ function callResponse(message) {
 
 function startCommunication(message) {
 	setCallState(IN_CALL);
+	
+	videoOutput.ontimeupdate = function() {console.log("time: " + videoOutput.currentTime)};
+	
 	webRtcPeer.processAnswer(message.sdpAnswer);
 }
 
