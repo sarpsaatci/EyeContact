@@ -157,13 +157,14 @@ ws.onmessage = function(message) {
 		stop(true);
 		break;
 	case 'iceCandidate':
-		console.log(videoOutput.currentTime);
 		webRtcPeer.addIceCandidate(parsedMessage.candidate);
 		break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
 	}
 }
+
+videoOutput.ontimeupdate = function() {console.log("time: " + videoOutput.currentTime)};
 
 function resgisterResponse(message) {
 	if (message.response == 'accepted') {
