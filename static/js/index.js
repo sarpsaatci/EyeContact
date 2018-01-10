@@ -116,8 +116,6 @@ window.onload = function() {
 	videoInput = document.getElementById('videoInput');
 	videoOutput = document.getElementById('videoOutput');
 	document.getElementById('name').focus();
-	
-	console.log("duration" + videoOutput.duration);
 
 	document.getElementById('register').addEventListener('click', function() {
 		register();
