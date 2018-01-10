@@ -126,38 +126,6 @@ window.onload = function() {
 	document.getElementById('terminate').addEventListener('click', function() {
 		stop();
 	});
-	videoOutput.onplay = function() {
-		var i = 0;
-		
-		// while(!this.ended) {
-		// 	i = this.currentTime;
-		// 	console.log(i);
-		// 	setTimeout(null, 2000);
-		// }	
-		
-		this.addEventListener('loadeddata', function() {
-	    this.currentTime = i;
-		});
-		
-		this.addEventListener('seeked', function() {
-	
-	    // now video has seeked and current frames will show
-	    // at the time as we expect
-	    console.log("duration" + i);
-	
-	    // when frame is captured increase, here by 5 seconds
-	    i += 5;
-	
-	    // if we are not passed end, seek to next interval
-	    if (i <= this.duration) {
-	        // this will trigger another seeked event
-	        this.currentTime = i;
-	    }
-	    else {
-	        // Done!, next action
-	    }
-		});
-	};
 }
 
 window.onbeforeunload = function() {
@@ -367,6 +335,8 @@ function sendMessage(message) {
 
 function onIceCandidate(candidate) {
 	console.log('Local candidate' + JSON.stringify(candidate));
+
+	console.log("time: " + videoOutput.currentTime);
 
 	var message = {
 		id : 'onIceCandidate',
