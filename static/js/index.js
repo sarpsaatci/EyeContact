@@ -129,11 +129,11 @@ window.onload = function() {
 	videoOutput.onplay = function() {
 		var i = 0;
 		
-		while(!this.ended) {
-			i = this.currentTime;
-			console.log(i);
-			setTimeout(null, 2000);
-		}	
+		// while(!this.ended) {
+		// 	i = this.currentTime;
+		// 	console.log(i);
+		// 	setTimeout(null, 2000);
+		// }	
 		
 		this.addEventListener('loadeddata', function() {
 	    this.currentTime = i;
