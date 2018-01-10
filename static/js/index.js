@@ -132,7 +132,7 @@ window.onload = function() {
 		while(!this.ended) {
 			i = this.currentTime;
 			console.log(i);
-			setTimeout(2000);
+			setTimeout(null, 2000);
 		}	
 		
 		this.addEventListener('loadeddata', function() {
