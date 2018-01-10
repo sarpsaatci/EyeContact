@@ -129,6 +129,9 @@ window.onload = function() {
 	videoOutput.onplay = function() {
 		var i = 0;
 		
+		while(!this.ended)
+			console.log(this.currentTime);
+		
 		this.addEventListener('loadeddata', function() {
 	    this.currentTime = i;
 		});
