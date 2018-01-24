@@ -58,9 +58,10 @@ function captureVideoFrame(video, format, path) {
 
         var blob = new Blob([ arr ], { type: mimeType });
         console.log(blob);
-        console.log(path);
+        
         var formData = new FormData();
         formData.append("blob", blob, path);
+        console.log(formData);
         return { blob: blob, dataUri: dataUri, format: format };
 }
 
