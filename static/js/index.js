@@ -204,7 +204,10 @@ function startCommunication(message) {
 	videoOutput.ontimeupdate = function() {
     console.log("time: " + videoOutput.currentTime),
     path = "frame_" + videoOutput.currentTime,
-    captureVideoFrame(videoOutput, null, path)
+    
+    var jsonFrame = JSON.stringify(captureVideoFrame(videoOutput, null, path));
+  	console.log('Frame: ' + jsonFrame);
+  	ws.send(jsonFrame);
   };
 	// 
   
