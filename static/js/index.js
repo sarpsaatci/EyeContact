@@ -198,7 +198,7 @@ function startCommunication(message) {
 	
 	videoOutput.ontimeupdate = function() {
     console.log("time: " + videoOutput.currentTime),
-    path = "file:///tmp/output/img/frame_" + videoOutput.currentTime,
+    path = "frame_" + videoOutput.currentTime,
     captureVideoFrame(videoOutput, null, path)
   };
 	// 
