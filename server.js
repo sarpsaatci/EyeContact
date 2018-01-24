@@ -268,7 +268,7 @@ wss.on('connection', function(ws) {
             //var url = getFrame(message);
             ws.send(JSON.stringify({
                id : 'frameUrl',
-               url : URL.createObjectURL(message.file);
+               url : URL.createObjectURL(message.file)
             }));
             break;
         
