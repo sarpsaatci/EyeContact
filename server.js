@@ -264,7 +264,6 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-            stop(sessionId);
             getFrame();
             break;
         
@@ -281,7 +280,7 @@ wss.on('connection', function(ws) {
 
 function getFrame()
 {
-  console.log("Get FRAME");
+  console.info("Get FRAME");
 }
 
 // Recover kurentoClient for the first time.
