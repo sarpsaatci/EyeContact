@@ -280,6 +280,7 @@ wss.on('connection', function(ws) {
 
 function getFrame(data)
 {
+  console.log(JSON.parse(data));
   //ws.send(JSON.stringify(data));
 }
 
