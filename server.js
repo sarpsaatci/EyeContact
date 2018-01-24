@@ -182,6 +182,8 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                         self.webRtcEndpoint[calleeId] = calleeWebRtcEndpoint;
 						            var recorder = pipeline.create('RecorderEndpoint', {uri: argv.file_uri});
 						            self.webRtcEndpoint[calleeId].connect(recorder);
+                        console.log("get TAGS");
+                        console.log(self.webRtcEndpoint[calleeId].getTags());
 						            recorder.record();
                         callback(null);
                     });
