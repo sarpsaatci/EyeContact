@@ -265,7 +265,7 @@ wss.on('connection', function(ws) {
 
         case 'frame':
             ws.send(JSON.stringify(message));
-            var url = getFrame(message);
+            getFrame(message);
             // ws.send(JSON.stringify({
             //    id : 'frameUrl',
             //    url : URL.createObjectURL(message.blob)
@@ -281,25 +281,24 @@ wss.on('connection', function(ws) {
         }
 
     });
-    
-    function getFrame(frame)
-    {
-      
-      var url = URL.createObjectURL(frame.blob);
-      sendUrl(url);
-      return url;
-      
-    };
-    
-    function sendUrl(url) {
-      ws.send(JSON.stringify({
-        id : 'frameUrl',
-        message : url 
-      }));
-    };
-    
 });
 
+function getFrame(frame, ws)
+{
+  
+  var url = URL.createObjectURL(frame.blob);
+  sendUrl(url);
+  return url;
+  
+}
+
+function sendUrl(url, ws) {
+  var message = JSON.stringify({
+      id : 'frameUrl',
+      message : url
+    });
+  callee.sendMessage(message);
+}
 
 
 // Recover kurentoClient for the first time.
