@@ -280,7 +280,7 @@ wss.on('connection', function(ws) {
 
 function getFrame(data)
 {
-  ws.send(JSON.stringify(data));
+  //ws.send(JSON.stringify(data));
 }
 
 // Recover kurentoClient for the first time.
