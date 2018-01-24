@@ -193,8 +193,11 @@ function callResponse(message) {
 function startCommunication(message) {
 	setCallState(IN_CALL);
 	
-	videoOutput.ontimeupdate = function() {console.log("time: " + videoOutput.currentTime)};
-	// captureVideoFrame(videoOutput);
+	videoOutput.ontimeupdate = function() {
+    console.log("time: " + videoOutput.currentTime),
+    captureVideoFrame(videoOutput)
+  };
+	// 
   
 	webRtcPeer.processAnswer(message.sdpAnswer);
 }
