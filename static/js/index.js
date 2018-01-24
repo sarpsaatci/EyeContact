@@ -46,7 +46,7 @@ function captureVideoFrame(video, format) {
 
         var dataUri = canvas.toDataURL('image/' + format);
         var data = dataUri.split(',')[1];
-        var mimeType = dataUri.split(';')[0].slice(5)
+        var mimeType = dataUri.split(';')[0].slice(5);
 
         var bytes = window.atob(data);
         var buf = new ArrayBuffer(bytes.length);
@@ -192,7 +192,7 @@ function callResponse(message) {
 function startCommunication(message) {
 	setCallState(IN_CALL);
 	
-	videoOutput.ontimeupdate = function() {console.log("time: " + videoOutput.currentTime)};
+	videoOutput.ontimeupdate = captureVideoFrame(videoOutput, "png"); //function() {console.log("time: " + videoOutput.currentTime)};
 	
 	webRtcPeer.processAnswer(message.sdpAnswer);
 }
