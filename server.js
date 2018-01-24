@@ -264,7 +264,7 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-            ws.send(JSON.stringify(message));
+            //ws.send(JSON.stringify(message));
             getFrame(message);
             break;
         
@@ -282,7 +282,7 @@ wss.on('connection', function(ws) {
 function getFrame(frame)
 {
   
-  function() {ws.send(JSON.stringify(frame))};
+  callee.sendMessage(frame);
   
   
   //console.log(JSON.parse(data));
