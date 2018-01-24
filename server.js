@@ -284,9 +284,8 @@ function getFrame(message)
   var frame = JSON.parse(message);
   
   ws.send(JSON.stringify({
-    id : 'frameResponse',
-    message : 'Frame gathered',
-    data : message
+      id : 'error',
+      message : 'Invalid message ' + message
   }));
   
   //console.log(JSON.parse(data));

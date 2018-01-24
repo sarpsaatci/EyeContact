@@ -169,6 +169,9 @@ ws.onmessage = function(message) {
   case 'frame':
     console.log("Get FRAME");
     break;
+  case 'error':
+    console.log("ERROR");
+    break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
 	}
