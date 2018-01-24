@@ -377,7 +377,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                     var message = {
                         id: 'startCommunication',
                         sdpAnswer: calleeSdpAnswer,
-                        caller: caller,
                         callee: callee
                     };
                     callee.sendMessage(message);
@@ -385,9 +384,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                     message = {
                         id: 'callResponse',
                         response : 'accepted',
-                        sdpAnswer: callerSdpAnswer,
-                        caller: caller,
-                        callee: callee
+                        sdpAnswer: callerSdpAnswer
                     };
                     caller.sendMessage(message);
                 });
