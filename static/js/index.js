@@ -143,7 +143,7 @@ window.onbeforeunload = function() {
 
 ws.onmessage = function(message) {
 	
-	console.log()
+	console.log();
 	
 	var parsedMessage = JSON.parse(message.data);
 	console.info('Received message: ' + message.data);
@@ -168,6 +168,9 @@ ws.onmessage = function(message) {
 	case 'iceCandidate':
 		webRtcPeer.addIceCandidate(parsedMessage.candidate);
 		break;
+  case 'frame':
+    console.log("Get FRAME");
+    break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
 	}

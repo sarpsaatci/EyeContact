@@ -264,7 +264,7 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-            getFrame();
+            getFrame(message);
             break;
         
         default:
@@ -278,9 +278,9 @@ wss.on('connection', function(ws) {
     });
 });
 
-function getFrame()
+function getFrame(data)
 {
-  console.info("Get FRAME");
+  ws.send(JSON.stringify(data));
 }
 
 // Recover kurentoClient for the first time.
