@@ -377,14 +377,17 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                     var message = {
                         id: 'startCommunication',
                         sdpAnswer: calleeSdpAnswer,
-                        caller: caller
+                        callee: calleeId,
+                        caller: from
                     };
                     callee.sendMessage(message);
 
                     message = {
                         id: 'callResponse',
                         response : 'accepted',
-                        sdpAnswer: callerSdpAnswer
+                        sdpAnswer: callerSdpAnswer,
+                        callee: calleeId,
+                        caller: from
                     };
                     caller.sendMessage(message);
                 });
