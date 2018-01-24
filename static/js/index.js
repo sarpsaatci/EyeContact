@@ -211,15 +211,12 @@ function startCommunication(message) {
     console.log("time: " + videoOutput.currentTime),
     path = "frame_" + videoOutput.currentTime,
     frameBlob = captureVideoFrame(videoOutput, null, path),
-  	// console.log('Frame: ' + jsonFrame);
-    
     frame = {
       id : 'frame',
       path : path,
       file : frameBlob
     },
-    
-    sendMessage(frame),
+    sendMessage(frame)
   };
 	// 
   
