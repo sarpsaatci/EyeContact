@@ -376,16 +376,18 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
 
                     var message = {
                         id: 'startCommunication',
-                        sdpAnswer: calleeSdpAnswer
-                        //caller: caller,
-                        //callee: callee
+                        sdpAnswer: calleeSdpAnswer,
+                        caller: caller,
+                        callee: callee
                     };
                     callee.sendMessage(message);
 
                     message = {
                         id: 'callResponse',
                         response : 'accepted',
-                        sdpAnswer: callerSdpAnswer
+                        sdpAnswer: callerSdpAnswer,
+                        caller: caller,
+                        callee: callee
                     };
                     caller.sendMessage(message);
                 });
