@@ -376,7 +376,9 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
 
                     var message = {
                         id: 'startCommunication',
-                        sdpAnswer: calleeSdpAnswer
+                        sdpAnswer: calleeSdpAnswer,
+                        callerID: caller.id,
+                        calleeID: callee.id
                     };
                     callee.sendMessage(message);
 
