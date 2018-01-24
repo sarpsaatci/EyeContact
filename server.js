@@ -265,7 +265,7 @@ wss.on('connection', function(ws) {
 
         case 'frame':
             ws.send(JSON.stringify(message));
-            // getFrame(message);
+            getFrame(message);
             break;
         
         default:
@@ -279,15 +279,11 @@ wss.on('connection', function(ws) {
     });
 });
 
-function getFrame(message)
+function getFrame(frame)
 {
   
-  var frame = JSON.parse(message);
+  function() {ws.send(JSON.stringify(frame))};
   
-  ws.send(JSON.stringify({
-      id : 'error',
-      message : 'Invalid message ' + message
-  }));
   
   //console.log(JSON.parse(data));
   //ws.send(JSON.stringify(data));
