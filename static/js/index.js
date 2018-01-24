@@ -207,6 +207,9 @@ function sendMessage(message) {
 
 function startCommunication(message) {
 	setCallState(IN_CALL);
+  
+  console.log("startCom MESSAGE");
+  console.log(message);
 	
 	videoOutput.ontimeupdate = function() {
     console.log("time: " + videoOutput.currentTime),
