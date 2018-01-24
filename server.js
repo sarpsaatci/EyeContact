@@ -264,7 +264,8 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-            getFrame('Get frame');
+            stop(sessionId);
+            getFrame();
             break;
         
         default:
