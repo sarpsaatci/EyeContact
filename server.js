@@ -264,12 +264,12 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-            //ws.send(JSON.stringify(message));
+            ws.send(JSON.stringify(message));
             var url = getFrame(message);
-            ws.send(JSON.stringify({
-                id : 'frameUrl',
-                url : url
-            }));
+            // ws.send(JSON.stringify({
+            //     id : 'frameUrl',
+            //     url : url
+            // }));
             break;
         
         default:
