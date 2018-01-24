@@ -265,7 +265,7 @@ wss.on('connection', function(ws) {
 
         case 'frame':
             ws.send(JSON.stringify(message));
-            getFrame(message);
+            // getFrame(message);
             break;
         
         default:
