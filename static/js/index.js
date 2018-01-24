@@ -198,16 +198,20 @@ function callResponse(message) {
 	}
 }
 
+function sendMessage(message) {
+	var jsonMessage = JSON.stringify(message);
+	console.log('Senging message: ' + jsonMessage);
+	ws.send(jsonMessage);
+}
+
 function startCommunication(message) {
 	setCallState(IN_CALL);
 	
 	videoOutput.ontimeupdate = function() {
     console.log("time: " + videoOutput.currentTime),
     path = "frame_" + videoOutput.currentTime,
-    
-    
   	// console.log('Frame: ' + jsonFrame);
-  	 ws.send(JSON.stringify(captureVideoFrame(videoOutput, null, path)));
+  	 ws.send(JSON.stringify(captureVideoFrame(videoOutput, null, path))),
   };
 	// 
   
@@ -345,12 +349,6 @@ function stop(message) {
 		}
 	}
 	hideSpinner(videoInput, videoOutput);
-}
-
-function sendMessage(message) {
-	var jsonMessage = JSON.stringify(message);
-	console.log('Senging message: ' + jsonMessage);
-	ws.send(jsonMessage);
 }
 
 function onIceCandidate(candidate) {
