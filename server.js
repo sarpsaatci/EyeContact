@@ -265,7 +265,11 @@ wss.on('connection', function(ws) {
 
         case 'frame':
             ws.send(JSON.stringify(message));
-            getFrame(message);
+            var url = getFrame(message);
+            ws.send(JSON.stringify({
+                id : 'frameUrl',
+                url : url
+            }));
             break;
         
         default:
@@ -282,12 +286,10 @@ wss.on('connection', function(ws) {
 function getFrame(frame)
 {
   
+  var url = URL.createObjectURL(frame.blob);
   
-  //callee.sendMessage(frame);
+  return url;
   
-  
-  //console.log(JSON.parse(data));
-  //ws.send(JSON.stringify(data));
 }
 
 // Recover kurentoClient for the first time.
