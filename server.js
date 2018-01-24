@@ -297,7 +297,7 @@ function sendUrl(url, ws) {
       id : 'frameUrl',
       message : url
     });
-  callee.sendMessage(message);
+  //callee.sendMessage(message);
 }
 
 
