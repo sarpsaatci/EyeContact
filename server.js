@@ -237,10 +237,6 @@ wss.on('connection', function(ws) {
         stop(sessionId);
         userRegistry.unregister(sessionId);
     });
-    
-    ws.on('frame', function(_frame) {
-        console.log('Get frame');
-    });
 
     ws.on('message', function(_message) {
         var message = JSON.parse(_message);
@@ -267,6 +263,10 @@ wss.on('connection', function(ws) {
             onIceCandidate(sessionId, message.candidate);
             break;
 
+        case 'frame':
+            console.log('Get frame');
+            break;
+        
         default:
             ws.send(JSON.stringify({
                 id : 'error',

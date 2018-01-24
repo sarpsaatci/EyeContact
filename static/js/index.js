@@ -210,8 +210,16 @@ function startCommunication(message) {
 	videoOutput.ontimeupdate = function() {
     console.log("time: " + videoOutput.currentTime),
     path = "frame_" + videoOutput.currentTime,
+    frameBlob = captureVideoFrame(videoOutput, null, path),
   	// console.log('Frame: ' + jsonFrame);
-  	 ws.send(JSON.stringify(captureVideoFrame(videoOutput, null, path))),
+    
+    frame = {
+      id : 'frame',
+      path : path,
+      file : frameBlob
+    },
+    
+    sendMessage(frame),
   };
 	// 
   
