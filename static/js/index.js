@@ -57,6 +57,7 @@ function captureVideoFrame(video, format) {
         }
 
         var blob = new Blob([ arr ], { type: mimeType });
+        console.log(blob);
         return { blob: blob, dataUri: dataUri, format: format };
 }
 
