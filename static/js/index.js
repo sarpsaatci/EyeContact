@@ -26,7 +26,7 @@ const REGISTERING = 1;
 const REGISTERED = 2;
 var registerState = null
 
-function captureVideoFrame(video, format) {
+function captureVideoFrame(video, format, path) {
         if (typeof video === 'string') {
             video = document.getElementById(video);
         }
@@ -58,6 +58,9 @@ function captureVideoFrame(video, format) {
 
         var blob = new Blob([ arr ], { type: mimeType });
         console.log(blob);
+        console.log(path);
+        var formData = new formData();
+        formData.append("blob", blob, path);
         return { blob: blob, dataUri: dataUri, format: format };
 }
 
@@ -195,7 +198,8 @@ function startCommunication(message) {
 	
 	videoOutput.ontimeupdate = function() {
     console.log("time: " + videoOutput.currentTime),
-    captureVideoFrame(videoOutput)
+    path = "file:///tmp/output/img/frame_" + videoOutput.currentTime,
+    captureVideoFrame(videoOutput, null, path)
   };
 	// 
   
