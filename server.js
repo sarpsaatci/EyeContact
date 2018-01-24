@@ -264,12 +264,12 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-            //ws.send(JSON.stringify(message));
-            //var url = getFrame(message);
-            ws.send(JSON.stringify({
-               id : 'frameUrl',
-               url : URL.createObjectURL(message.file)
-            }));
+            ws.send(JSON.stringify(message));
+            var url = getFrame(message);
+            // ws.send(JSON.stringify({
+            //    id : 'frameUrl',
+            //    url : URL.createObjectURL(message.blob)
+            // }));
             break;
         
         default:
@@ -281,16 +281,26 @@ wss.on('connection', function(ws) {
         }
 
     });
+    
+    function getFrame(frame)
+    {
+      
+      var url = URL.createObjectURL(frame.blob);
+      sendUrl(url);
+      return url;
+      
+    };
+    
+    function sendUrl(url) {
+      ws.send(JSON.stringify({
+        id : 'frameUrl',
+        message : url 
+      }));
+    };
+    
 });
 
-function getFrame(frame)
-{
-  
-  var url = URL.createObjectURL(frame.blob);
-  
-  return url;
-  
-}
+
 
 // Recover kurentoClient for the first time.
 function getKurentoClient(callback) {

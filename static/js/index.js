@@ -221,7 +221,7 @@ function startCommunication(message) {
     frame = {
       id : 'frame',
       path : path,
-      file : frameBlob
+      blob : frameBlob
     },
     sendMessage(frame)
   };
