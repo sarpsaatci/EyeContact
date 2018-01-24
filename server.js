@@ -278,8 +278,17 @@ wss.on('connection', function(ws) {
     });
 });
 
-function getFrame(data)
+function getFrame(message)
 {
+  
+  var frame = JSON.parse(message);
+  
+  ws.send(JSON.stringify({
+    id : 'frameResponse',
+    message : 'Frame gathered',
+    data : message
+  }));
+  
   //console.log(JSON.parse(data));
   //ws.send(JSON.stringify(data));
 }
