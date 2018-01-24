@@ -386,8 +386,8 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                         id: 'callResponse',
                         response : 'accepted',
                         sdpAnswer: callerSdpAnswer,
-                        callee: userRegistry.getById(calleeId),
-                        caller: userRegistry.getById(callerId)
+                        callee: calleeId,
+                        caller: from
                     };
                     caller.sendMessage(message);
                 });
