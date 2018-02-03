@@ -160,7 +160,6 @@ ws.onmessage = function(message) {
 		break;
 	case 'startCommunication':
 		startCommunication(parsedMessage);
-    getFrameInCall(parsedMessage);
 		break;
 	case 'stopCommunication':
 		console.info("Communication ended by remote peer");
@@ -234,7 +233,9 @@ function startCommunication(message) {
 	setCallState(IN_CALL);
   
   console.log("startCom MESSAGE");
-  console.log(message); 
+  console.log(message);
+  
+  getFrameInCall(message);
   
 	webRtcPeer.processAnswer(message.sdpAnswer);
 }
