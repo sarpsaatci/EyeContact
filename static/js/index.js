@@ -223,7 +223,6 @@ getFrameInCall(parsedMessage) {
   };
 }
 
-
 function startCommunication(message) {
 	setCallState(IN_CALL);
   
