@@ -234,6 +234,7 @@ function callResponse(message) {
 function sendMessage(message) {
 	var jsonMessage = JSON.stringify(message);
 	console.log('Senging message: ' + jsonMessage);
+  console.log(JSON.parse(jsonMessage));
 	ws.send(jsonMessage);
 }
 
