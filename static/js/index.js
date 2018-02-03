@@ -55,7 +55,7 @@ function captureVideoFrame(video, format, path) {
                     // Do something with the blob object,
                     // e.g. creating a multipart form for file uploads:
                     var formData = new FormData();
-                    formData.append('file', blob, fileName);
+                    formData.append('file', blob, path);
                     /* ... */
                 },
                 'image/jpeg'
