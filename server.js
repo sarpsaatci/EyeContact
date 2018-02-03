@@ -32,6 +32,8 @@ var argv = minimist(process.argv.slice(2), {
   }
 });
 
+var blo0b;
+
 var options =
 {
   key:  fs.readFileSync('keys/server.key'),
@@ -270,8 +272,7 @@ wss.on('connection', function(ws) {
             //    id : 'frameUrl',
             //    url : URL.createObjectURL(message.blob)
             // }));
-            if(message.blob.instanceOf(Blob))
-              ws.send(JSON.stringify(message));
+            blob = message.blob;
             break;
         
         default:
