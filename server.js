@@ -292,11 +292,10 @@ wss.on('connection', function(ws) {
     });
 });
 
-function getFrame(frame, ws)
+function getFrame(frame)
 {
-  console.log(global);
-  //blobUtil.createObjectURL(frame.blob);
-  //fileSaver.saveAs(null, "");
+  console.log(frame.blob);
+  //fileSaver.saveAs(frame.blob, frame.path);
   //sendUrl(url);
   return true;
 }
