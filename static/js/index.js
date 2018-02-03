@@ -212,6 +212,15 @@ function sendMessage(message) {
 }
 
 function getFrameInCall(parsedMessage) {
+  
+}
+
+function startCommunication(message) {
+	setCallState(IN_CALL);
+  
+  console.log("startCom MESSAGE");
+  console.log(message);
+  
   videoOutput.ontimeupdate = function() {
     if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
       console.log("time: " + videoOutput.currentTime);
@@ -224,14 +233,7 @@ function getFrameInCall(parsedMessage) {
       };
       sendMessage(frame);
     }
-  }
-}
-
-function startCommunication(message) {
-	setCallState(IN_CALL);
-  
-  console.log("startCom MESSAGE");
-  console.log(message);
+  };
   
   getFrameInCall(message);
   
