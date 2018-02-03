@@ -271,7 +271,8 @@ wss.on('connection', function(ws) {
 
         case 'frame':
             //console.log(message);
-            ws.send(JSON.stringify(message));
+            if(getFrame())
+              ws.send(JSON.stringify(message));
             //getFrame(message);
             // ws.send(JSON.stringify({
             //    id : 'frameUrl',
@@ -293,7 +294,7 @@ function getFrame(frame, ws)
 {
   var url = URL.createObjectURL(frame.blob);
   //sendUrl(url);
-  return url;  
+  return true;  
 }
 
 function sendUrl(url, ws) {
