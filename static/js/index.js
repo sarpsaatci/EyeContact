@@ -66,7 +66,8 @@ function captureVideoFrame(video, format, path) {
         
         var formData = new FormData();
         formData.append("blob", blob, path);
-        return { blob: blob, dataUri: dataUri, format: format };
+        //return { blob: blob, dataUri: dataUri, format: format };
+        return arr;
 }
 
 function setRegisterState(nextState) {
@@ -222,11 +223,11 @@ function startCommunication(message) {
     if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
       console.log("time: " + videoOutput.currentTime);
       path = "frame_" + videoOutput.currentTime;
-      frameBlob = captureVideoFrame(videoOutput, null, path);
+      frameBArray = captureVideoFrame(videoOutput, null, path);
       frame = {
         id : 'frame',
         path : path,
-        blob : frameBlob
+        arr : frameBArray
       };
       readyToCarptureFrame = false;
       sendMessage(frame);
