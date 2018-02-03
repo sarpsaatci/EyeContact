@@ -62,6 +62,8 @@ function captureVideoFrame(video, format, path) {
             );
         }
         
+        console.log(frameBlob);
+        
         return frameBlob;
         
         // var blob = canvas.toBlob();
