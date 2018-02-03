@@ -81,7 +81,7 @@ function captureVideoFrame(video, format, path) {
         }
         
         var blob = new Blob([ arr ], { type: mimeType });
-        console.log(blob);
+        //console.log(blob);
         // 
         // //var file = new File(blob, "/images/" + path, [type: 'image/' + format]);
         // // 
@@ -196,7 +196,6 @@ ws.onmessage = function(message) {
 		break;
   case 'frame':
     console.log("Get FRAME");
-    console.log(parsedMessage.blob);
     readyToCarptureFrame = true;
     break;
   case 'frameUrl':
@@ -255,6 +254,7 @@ function startCommunication(message) {
         blob : frameBlob
       };
       readyToCarptureFrame = false;
+      console.log(frame);
       sendMessage(frame);
     }
   };
