@@ -270,7 +270,7 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-            console.log(message);
+            //console.log(message);
             //ws.send(JSON.stringify(message));
             //getFrame(message);
             // ws.send(JSON.stringify({
