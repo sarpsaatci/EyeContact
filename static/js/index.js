@@ -66,7 +66,7 @@ function captureVideoFrame(video, format, path) {
         // 
         // return frameBlob;
         
-        var blob = canvas.toBlob();
+        //var blob = canvas.toBlob();
         
         var dataUri = canvas.toDataURL('image/' + format);
         var data = dataUri.split(',')[1];
