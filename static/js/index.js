@@ -221,19 +221,19 @@ function startCommunication(message) {
   console.log("startCom MESSAGE");
   console.log(message);
   
-  videoOutput.ontimeupdate = function() {
-    if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
-      console.log("time: " + videoOutput.currentTime);
-      path = "frame_" + videoOutput.currentTime;
-      frameBlob = captureVideoFrame(videoOutput, null, path);
-      frame = {
-        id : 'frame',
-        path : path,
-        blob : frameBlob
-      };
-      sendMessage(frame);
-    }
-  };
+  // videoOutput.ontimeupdate = function() {
+  //   if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
+  //     console.log("time: " + videoOutput.currentTime);
+  //     path = "frame_" + videoOutput.currentTime;
+  //     frameBlob = captureVideoFrame(videoOutput, null, path);
+  //     frame = {
+  //       id : 'frame',
+  //       path : path,
+  //       blob : frameBlob
+  //     };
+  //     sendMessage(frame);
+  //   }
+  // };
   
   getFrameInCall(message);
   
