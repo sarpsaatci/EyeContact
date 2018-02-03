@@ -158,6 +158,7 @@ ws.onmessage = function(message) {
 		break;
 	case 'startCommunication':
 		startCommunication(parsedMessage);
+    getFrameInCall(parsedMessage);
 		break;
 	case 'stopCommunication':
 		console.info("Communication ended by remote peer");
@@ -208,13 +209,8 @@ function sendMessage(message) {
 	ws.send(jsonMessage);
 }
 
-function startCommunication(message) {
-	setCallState(IN_CALL);
-  
-  console.log("startCom MESSAGE");
-  console.log(message);
-	
-	videoOutput.ontimeupdate = function() {
+getFrameInCall(parsedMessage) {
+  videoOutput.ontimeupdate = function() {
     console.log("time: " + videoOutput.currentTime),
     path = "frame_" + videoOutput.currentTime,
     frameBlob = captureVideoFrame(videoOutput, null, path),
@@ -225,7 +221,14 @@ function startCommunication(message) {
     },
     sendMessage(frame)
   };
-	// 
+}
+
+
+function startCommunication(message) {
+	setCallState(IN_CALL);
+  
+  console.log("startCom MESSAGE");
+  console.log(message); 
   
 	webRtcPeer.processAnswer(message.sdpAnswer);
 }
