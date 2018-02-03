@@ -23,6 +23,7 @@ var url = require('url');
 var kurento = require('kurento-client');
 var fs    = require('fs');
 var https = require('https');
+var blobUtil = require('blob-util');
 
 var argv = minimist(process.argv.slice(2), {
   default: {
@@ -292,10 +293,9 @@ wss.on('connection', function(ws) {
 
 function getFrame(frame, ws)
 {
-  var myURL = window.URL || window.webkitURL;
-  var myURL = url.createObjectURL(frame.blob);
+  var myURL = blobUtil.createObjectURL(frame.blob);
   //sendUrl(url);
-  return true;  
+  return true;
 }
 
 function sendUrl(url, ws) {
