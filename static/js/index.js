@@ -66,8 +66,9 @@ function captureVideoFrame(video, format, path) {
         
         var formData = new FormData();
         formData.append("blob", blob, path);
-        return { blob: blob, dataUri: dataUri, format: format };
+        //return { blob: blob, dataUri: dataUri, format: format };
         //return arr;
+        return blob;
 }
 
 function setRegisterState(nextState) {
