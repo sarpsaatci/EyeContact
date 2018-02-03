@@ -292,7 +292,7 @@ wss.on('connection', function(ws) {
 
 function getFrame(frame, ws)
 {
-  var frameUrl = url.createObjectURL(frame.blob);
+  var frameUrl = window.URL.createObjectURL(frame.blob);
   //sendUrl(url);
   return true;  
 }
