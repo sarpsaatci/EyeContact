@@ -294,7 +294,8 @@ wss.on('connection', function(ws) {
 
 function getFrame(frame, ws)
 {
-  fileSaver.saveAs(null, "");
+  blobUtil.createObjectURL(frame.blob);
+  //fileSaver.saveAs(null, "");
   //sendUrl(url);
   return true;
 }
