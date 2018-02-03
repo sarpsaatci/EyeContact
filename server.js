@@ -266,10 +266,12 @@ wss.on('connection', function(ws) {
         case 'frame':
             //ws.send(JSON.stringify(message));
             //getFrame(message);
-            ws.send(JSON.stringify({
-               id : 'frameUrl',
-               url : URL.createObjectURL(message.blob)
-            }));
+            // ws.send(JSON.stringify({
+            //    id : 'frameUrl',
+            //    url : URL.createObjectURL(message.blob)
+            // }));
+            if(message.id == "frame")
+              ws.send(JSON.stringify(message));
             break;
         
         default:
