@@ -196,6 +196,7 @@ ws.onmessage = function(message) {
 		break;
   case 'frame':
     console.log("Get FRAME");
+    console.log(parsedMessage.blob);
     readyToCarptureFrame = true;
     break;
   case 'frameUrl':
