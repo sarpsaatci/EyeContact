@@ -46,51 +46,52 @@ function captureVideoFrame(video, format, path) {
 
         canvas.getContext('2d').drawImage(video, 0, 0);
         
-        var frameBlob;
-        
-        if (canvas.toBlob) {
-            frameBlob = canvas.toBlob(
-                function (blob) {
-                    //frameBlob = blob;
-                    // Do something with the blob object,
-                    // e.g. creating a multipart form for file uploads:
-                    var formData = new FormData();
-                    formData.append('file', blob, path);
-                    /* ... */
-                },
-                'image/jpeg'
-            );
-        }
-        
-        console.log(frameBlob);
-        
-        return frameBlob;
-        
-        // var blob = canvas.toBlob();
+        // var frameBlob;
         // 
-        // var dataUri = canvas.toDataURL('image/' + format);
-        // var data = dataUri.split(',')[1];
-        // var mimeType = dataUri.split(';')[0].slice(5);
-        // 
-        // var bytes = window.atob(data);
-        // var buf = new ArrayBuffer(bytes.length);
-        // var arr = new Uint8Array(buf);
-        // 
-        // for (var i = 0; i < bytes.length; i++) {
-        //     arr[i] = bytes.charCodeAt(i);
+        // if (canvas.toBlob) {
+        //     frameBlob = canvas.toBlob(
+        //         function (blob) {
+        //             //frameBlob = blob;
+        //             // Do something with the blob object,
+        //             // e.g. creating a multipart form for file uploads:
+        //             var formData = new FormData();
+        //             formData.append('file', blob, path);
+        //             /* ... */
+        //         },
+        //         'image/jpeg'
+        //     );
         // }
         // 
-        // //var blob = new Blob([ arr ], { type: mimeType });
+        // console.log(frameBlob);
+        // 
+        // return frameBlob;
+        
+        var blob = canvas.toBlob();
+        
+        var dataUri = canvas.toDataURL('image/' + format);
+        var data = dataUri.split(',')[1];
+        var mimeType = dataUri.split(';')[0].slice(5);
+        
+        var bytes = window.atob(data);
+        var buf = new ArrayBuffer(bytes.length);
+        var arr = new Uint8Array(buf);
+        
+        for (var i = 0; i < bytes.length; i++) {
+            arr[i] = bytes.charCodeAt(i);
+        }
+        
+        var blob = new Blob([ arr ], { type: mimeType });
+        console.log(blob);
         // 
         // //var file = new File(blob, "/images/" + path, [type: 'image/' + format]);
         // // 
         // // console.log(file);
         // 
-        // var formData = new FormData();
-        // formData.append("blob", blob, path);
-        // //return { blob: blob, dataUri: dataUri, format: format };
+        var formData = new FormData();
+        formData.append("blob", blob, path);
+        return { blob: blob, dataUri: dataUri, format: format };
         // //return arr;
-        // return blob;
+        //return blob;
 }
 
 function setRegisterState(nextState) {
