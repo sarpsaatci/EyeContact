@@ -234,7 +234,7 @@ function callResponse(message) {
 function sendMessage(message) {
 	var jsonMessage = JSON.stringify(message);
 	console.log('Senging message: ' + jsonMessage);
-  console.log(JSON.parse(jsonMessage));
+  console.log(JSON.parse(jsonMessage)); // stringify ederken blobu kaybediyoruz
 	ws.send(jsonMessage);
 }
 
