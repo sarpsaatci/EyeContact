@@ -211,22 +211,20 @@ function sendMessage(message) {
 	ws.send(jsonMessage);
 }
 
-function captureFrameInCall(parsedMessage) {
-  if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
-    console.log("time: " + videoOutput.currentTime);
-    path = "frame_" + videoOutput.currentTime;
-    frameBlob = captureVideoFrame(videoOutput, null, path);
-    frame = {
-      id : 'frame',
-      path : path,
-      blob : frameBlob
-    };
-    sendMessage(frame);
-  }
-}
-
 function getFrameInCall(parsedMessage) {
-  videoOutput.ontimeupdate = captureFrameInCall(parsedMessage);
+  videoOutput.ontimeupdate = function() {
+    if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
+      console.log("time: " + videoOutput.currentTime);
+      path = "frame_" + videoOutput.currentTime;
+      frameBlob = captureVideoFrame(videoOutput, null, path);
+      frame = {
+        id : 'frame',
+        path : path,
+        blob : frameBlob
+      };
+      sendMessage(frame);
+    }
+  }
 }
 
 function startCommunication(message) {
