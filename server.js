@@ -270,7 +270,7 @@ wss.on('connection', function(ws) {
             //    id : 'frameUrl',
             //    url : URL.createObjectURL(message.blob)
             // }));
-            if(message.id == "frame")
+            if(message.blob.instanceOf(Blob))
               ws.send(JSON.stringify(message));
             break;
         
