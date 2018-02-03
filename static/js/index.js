@@ -45,7 +45,9 @@ function captureVideoFrame(video, format, path) {
         canvas.height = video.videoHeight;
 
         canvas.getContext('2d').drawImage(video, 0, 0);
-
+        
+        var blob = canvas.toBlob();
+        
         var dataUri = canvas.toDataURL('image/' + format);
         var data = dataUri.split(',')[1];
         var mimeType = dataUri.split(';')[0].slice(5);
@@ -58,7 +60,7 @@ function captureVideoFrame(video, format, path) {
             arr[i] = bytes.charCodeAt(i);
         }
 
-        var blob = new Blob([ arr ], { type: mimeType });
+        //var blob = new Blob([ arr ], { type: mimeType });
         
         //var file = new File(blob, "/images/" + path, [type: 'image/' + format]);
         // 
