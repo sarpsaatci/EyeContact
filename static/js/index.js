@@ -211,10 +211,6 @@ function sendMessage(message) {
 	ws.send(jsonMessage);
 }
 
-function getFrameInCall(parsedMessage) {
-  
-}
-
 function startCommunication(message) {
 	setCallState(IN_CALL);
   
@@ -234,9 +230,7 @@ function startCommunication(message) {
   //     sendMessage(frame);
   //   }
   // };
-  
-  getFrameInCall(message);
-  
+    
 	webRtcPeer.processAnswer(message.sdpAnswer);
 }
 
