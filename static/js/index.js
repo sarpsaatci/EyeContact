@@ -211,7 +211,7 @@ function sendMessage(message) {
 	ws.send(jsonMessage);
 }
 
-function captureFrameInCall() {
+function captureFrameInCall(parsedMessage) {
   if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
     console.log("time: " + videoOutput.currentTime);
     path = "frame_" + videoOutput.currentTime;
@@ -226,7 +226,7 @@ function captureFrameInCall() {
 }
 
 function getFrameInCall(parsedMessage) {
-  videoOutput.ontimeupdate = captureFrameInCall;
+  videoOutput.ontimeupdate = captureFrameInCall(parsedMessage);
 }
 
 function startCommunication(message) {
