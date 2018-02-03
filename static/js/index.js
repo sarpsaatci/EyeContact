@@ -209,7 +209,7 @@ function sendMessage(message) {
 	ws.send(jsonMessage);
 }
 
-getFrameInCall(parsedMessage) {
+function getFrameInCall(parsedMessage) {
   videoOutput.ontimeupdate = function() {
     console.log("time: " + videoOutput.currentTime),
     path = "frame_" + videoOutput.currentTime,
