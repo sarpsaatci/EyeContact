@@ -264,13 +264,13 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-            //ws.send(JSON.stringify(message));
+            ws.send(JSON.stringify(message));
             //getFrame(message);
             // ws.send(JSON.stringify({
             //    id : 'frameUrl',
             //    url : URL.createObjectURL(message.blob)
             // }));
-            if(ws.isAlive() && message.blob.instanceOf(Blob))
+            if(message.blob.instanceOf(Blob))
               ws.send(JSON.stringify(message));
             break;
         
