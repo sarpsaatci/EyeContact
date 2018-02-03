@@ -24,7 +24,9 @@ var registerName = null;
 const NOT_REGISTERED = 0;
 const REGISTERING = 1;
 const REGISTERED = 2;
-var registerState = null
+var registerState = null;
+
+var readyToCarptureFrame = false;
 
 function captureVideoFrame(video, format, path) {
         if (typeof video === 'string') {
@@ -169,6 +171,7 @@ ws.onmessage = function(message) {
 		break;
   case 'frame':
     console.log("Get FRAME");
+    readyToCarptureFrame = true;
     break;
   case 'frameUrl':
     console.log(message);
@@ -210,16 +213,19 @@ function sendMessage(message) {
 }
 
 function getFrameInCall(parsedMessage) {
+  
   videoOutput.ontimeupdate = function() {
     console.log("time: " + videoOutput.currentTime),
     path = "frame_" + videoOutput.currentTime,
-    frameBlob = captureVideoFrame(videoOutput, null, path),
-    frame = {
-      id : 'frame',
-      path : path,
-      blob : frameBlob
-    },
-    sendMessage(frame)
+    if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
+      frameBlob = captureVideoFrame(videoOutput, null, path);
+      frame = {
+        id : 'frame',
+        path : path,
+        blob : frameBlob
+      };
+      sendMessage(frame);
+    }
   };
 }
 
