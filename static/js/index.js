@@ -49,9 +49,9 @@ function captureVideoFrame(video, format, path) {
         var frameBlob;
         
         if (canvas.toBlob) {
-            canvas.toBlob(
+            frameBlob = canvas.toBlob(
                 function (blob) {
-                    frameBlob = blob;
+                    //frameBlob = blob;
                     // Do something with the blob object,
                     // e.g. creating a multipart form for file uploads:
                     var formData = new FormData();
