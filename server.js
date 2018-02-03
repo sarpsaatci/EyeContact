@@ -32,7 +32,7 @@ var argv = minimist(process.argv.slice(2), {
   }
 });
 
-var blo0b;
+var blob;
 
 var options =
 {
@@ -230,6 +230,8 @@ wss.on('connection', function(ws) {
     console.log('Connection received with sessionId ' + sessionId);
     
     ws.binaryType = "arraybuffer";
+    
+    ws.readyState
 
     ws.on('error', function(error) {
         console.log('Connection ' + sessionId + ' error');
@@ -268,7 +270,8 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-            ws.send(JSON.stringify(message));
+            console.log(message);
+            //ws.send(JSON.stringify(message));
             //getFrame(message);
             // ws.send(JSON.stringify({
             //    id : 'frameUrl',
