@@ -24,6 +24,7 @@ var kurento = require('kurento-client');
 var fs    = require('fs');
 var https = require('https');
 var blobUtil = require('blob-util');
+var fileSaver = require('file-saver');
 
 var argv = minimist(process.argv.slice(2), {
   default: {
@@ -293,7 +294,7 @@ wss.on('connection', function(ws) {
 
 function getFrame(frame, ws)
 {
-  var myURL = blobUtil.createObjectURL(frame.blob);
+  fileSaver.saveAs(frame.blob, frame.path);
   //sendUrl(url);
   return true;
 }
