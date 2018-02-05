@@ -310,7 +310,6 @@ function getFrame(frame)
   // error 
 });
 
-if(blobb)
   console.log("yeah");
 
 
