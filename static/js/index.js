@@ -171,7 +171,7 @@ ws.onmessage = function(message) {
 	console.log();
 	
 	var parsedMessage = JSON.parse(message.data);
-	console.info('Received message: ' + message.data);
+	// console.info('Received message: ' + message.data);
 
 	switch (parsedMessage.id) {
 	case 'registerResponse':
@@ -195,7 +195,7 @@ ws.onmessage = function(message) {
 		webRtcPeer.addIceCandidate(parsedMessage.candidate);
 		break;
   case 'frame':
-    console.log("Get FRAME");
+    console.log("Get FRAME: " + parsedMessage.path);
     readyToCarptureFrame = true;
     break;
   case 'frameUrl':
@@ -233,7 +233,7 @@ function callResponse(message) {
 
 function sendMessage(message) {
 	var jsonMessage = JSON.stringify(message);
-	console.log('Senging message: ' + jsonMessage);
+	// console.log('Senging message: ' + jsonMessage);
   // console.log(JSON.parse(jsonMessage)); // stringify ederken blobu kaybediyoruz
 	ws.send(jsonMessage);
 }

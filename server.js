@@ -248,7 +248,7 @@ wss.on('connection', function(ws) {
 
     ws.on('message', function(_message) {
         var message = JSON.parse(_message);
-        console.log('Connection ' + sessionId + ' received message ', message);
+        // console.log('Connection ' + sessionId + ' received message ', message);
 
         switch (message.id) {
         case 'register':
@@ -294,7 +294,8 @@ wss.on('connection', function(ws) {
 
 function getFrame(frame)
 {
-  console.log(frame.blob);
+  console.log(frame.path);
+  // console.log(frame.uIntArray);
   //fileSaver.saveAs(frame.blob, frame.path);
   //sendUrl(url);
   return true;
