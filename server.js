@@ -26,7 +26,7 @@ var https = require('https');
 // var blobUtil = require('blob-util');
 var fileSaver = require('file-saver');
 var toBuffer = require('typedarray-to-buffer');
-var Buffer = require('buffer/').Buffer;
+var Buffer = require('buffer/');
 
 var argv = minimist(process.argv.slice(2), {
   default: {
