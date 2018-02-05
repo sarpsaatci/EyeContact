@@ -298,7 +298,7 @@ function getFrame(frame)
 {
   console.log(frame.path);
   
-  var buff = Buffer.from(frame.buf);
+  var buff = Buffer.from(frame.buf.buf);
   var blob = new Blob([ buff ], { type: frame.buf.type });
   
   console.log(blob);
