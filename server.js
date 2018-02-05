@@ -302,10 +302,9 @@ function getFrame(frame)
   //var buff = Buffer.from(frame.buf.buf);
   // var blob = new Blob([ frame.buf.buf ], { type: frame.buf.type });
   blobUtil.arrayBufferToBlob(frame.buf.buf, frame.buf.type).then(function (blob) {
-  // success 
-  blobb = blob;
-  console.log("yeah");
-  // console.log(blob);
+    console.log("yeah");
+    blobb = blob;
+    // console.log(blob);
 }).catch(function (err) {
   // error 
 });
