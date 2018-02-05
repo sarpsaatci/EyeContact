@@ -27,6 +27,7 @@ var blobUtil = require('blob-util');
 var fileSaver = require('file-saver');
 var toBuffer = require('typedarray-to-buffer');
 var Buffer = require('buffer/').Buffer;
+var imageDataURI = require('image-data-uri');
 
 
 var argv = minimist(process.argv.slice(2), {
@@ -298,21 +299,26 @@ wss.on('connection', function(ws) {
 function getFrame(frame)
 {
   console.log(frame.path);
-  console.log(frame.buf);
   var blobb;
   //var buff = Buffer.from(frame.buf.buf);
   // var blob = new Blob([ frame.buf.buf ], { type: frame.buf.type });
-  blobUtil.arrayBufferToBlob(frame.buf.buf, frame.buf.type).then(function (blob) {
-    console.log("yeah");
-    // blobb = blob;
-    // console.log(blob);
-}).catch(function (err) {
-  // error 
-});
-
-
-
+  // blobUtil.arrayBufferToBlob(frame.buf.buf, frame.buf.type).then(function (blob) {
+  //   console.log("yeah");
+  //   // blobb = blob;
+  //   // console.log(blob);
+  //   }).catch(function (err) {
+  // // error 
+  // });
   
+  let dataURI = frame.buf.dataUri;
+ 
+  // It will create the full path in case it doesn't exist
+  // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
+  let filePath = './out/path/' + frame.path;
+   
+  // Returns a Promise
+  imageDataURI.outputFile(dataURI, filePath).then(res => console.log('res'));
+   
   
   // console.log(frame.uIntArray);
   //fileSaver.saveAs(frame.blob, frame.path);
