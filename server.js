@@ -317,7 +317,7 @@ function getFrame(frame)
   let filePath = './out/path/' + frame.path;
    
   // Returns a Promise
-  imageDataURI.outputFile(dataURI, filePath).then(res => console.log('res'));
+  imageDataURI.outputFile(dataURI, filePath).then(res => console.log(res));
    
   
   // console.log(frame.uIntArray);
