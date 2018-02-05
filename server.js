@@ -58,8 +58,8 @@ var pipelines = {};
 var candidatesQueue = {};
 var idCounter = 0;
 
-var calleeName '';
-var callerName '';
+var calleeName = '';
+var callerName = '';
 
 
 function nextUniqueId() {
