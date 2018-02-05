@@ -76,21 +76,21 @@ function captureVideoFrame(video, format, path) {
         var buf = new ArrayBuffer(bytes.length);
         var arr = new Uint8Array(buf);
         
-        for (var i = 0; i < bytes.length; i++) {
-            arr[i] = bytes.charCodeAt(i);
-        }
+        // for (var i = 0; i < bytes.length; i++) {
+        //     arr[i] = bytes.charCodeAt(i);
+        // }
         
-        var blob = new Blob([ arr ], { type: mimeType });
+        // var blob = new Blob([ arr ], { type: mimeType });
         //console.log(blob);
         // 
         // //var file = new File(blob, "/images/" + path, [type: 'image/' + format]);
         // // 
         // // console.log(file);
         // 
-        var formData = new FormData();
-        formData.append("blob", blob, path);
-        return { blob: blob, dataUri: dataUri, format: format };
-        // //return arr;
+        // var formData = new FormData();
+        // formData.append("blob", blob, path);
+        //return { blob: blob, dataUri: dataUri, format: format };
+        return arr;
         //return blob;
 }
 
@@ -234,7 +234,7 @@ function callResponse(message) {
 function sendMessage(message) {
 	var jsonMessage = JSON.stringify(message);
 	console.log('Senging message: ' + jsonMessage);
-  console.log(JSON.parse(jsonMessage)); // stringify ederken blobu kaybediyoruz
+  // console.log(JSON.parse(jsonMessage)); // stringify ederken blobu kaybediyoruz
 	ws.send(jsonMessage);
 }
 
@@ -248,14 +248,14 @@ function startCommunication(message) {
     if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
       console.log("time: " + videoOutput.currentTime);
       path = "frame_" + videoOutput.currentTime;
-      frameBlob = captureVideoFrame(videoOutput, null, path);
+      frameUIntArray = captureVideoFrame(videoOutput, null, path);
       frame = {
         id : 'frame',
         path : path,
-        blob : frameBlob
+        uIntArray : frameUIntArray
       };
       readyToCarptureFrame = false;
-      console.log(frame);
+      // console.log(frame);
       sendMessage(frame);
     }
   };
