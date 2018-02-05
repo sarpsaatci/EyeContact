@@ -27,7 +27,7 @@ var https = require('https');
 var fileSaver = require('file-saver');
 var toBuffer = require('typedarray-to-buffer');
 var Buffer = require('buffer/').Buffer;
-var Blob = require('buffer/').Blob;
+
 
 var argv = minimist(process.argv.slice(2), {
   default: {
@@ -300,9 +300,14 @@ function getFrame(frame)
   console.log(frame.path);
   
   //var buff = Buffer.from(frame.buf.buf);
-  var blob = new Blob([ frame.buf.buf ], { type: frame.buf.type });
-  
+  // var blob = new Blob([ frame.buf.buf ], { type: frame.buf.type });
+  blobUtil.arrayBufferToBlob(frame.buf.buf, frame.buf.type).then(function (blob) {
+  // success 
   console.log(blob);
+}).catch(function (err) {
+  // error 
+});
+  
   
   // console.log(frame.uIntArray);
   //fileSaver.saveAs(frame.blob, frame.path);
