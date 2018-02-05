@@ -298,6 +298,7 @@ wss.on('connection', function(ws) {
 function getFrame(frame)
 {
   console.log(frame.path);
+  console.log(frame.buf);
   var blobb;
   //var buff = Buffer.from(frame.buf.buf);
   // var blob = new Blob([ frame.buf.buf ], { type: frame.buf.type });
