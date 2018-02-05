@@ -357,7 +357,7 @@ function stop(sessionId) {
         return;
     }
     
-    fs.remove('./out/', err => {
+    fse.remove('./out/', err => {
       if (err) return console.error(err)
 
       console.log('success!')
