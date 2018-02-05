@@ -303,10 +303,13 @@ function getFrame(frame)
   // var blob = new Blob([ frame.buf.buf ], { type: frame.buf.type });
   blobUtil.arrayBufferToBlob(frame.buf.buf, frame.buf.type).then(function (blob) {
   // success 
+  console.log(blob.type);
   // console.log(blob);
 }).catch(function (err) {
   // error 
 });
+
+
   
   
   // console.log(frame.uIntArray);
