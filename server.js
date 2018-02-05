@@ -357,11 +357,11 @@ function stop(sessionId) {
         return;
     }
     
-    fse.remove('./out/', err => {
-      if (err) return console.error(err)
-
-      console.log('success!')
-    });
+    // fse.remove('./out/', err => {
+    //   if (err) return console.error(err)
+    // 
+    //   console.log('success!')
+    // });
 
     var pipeline = pipelines[sessionId];
     delete pipelines[sessionId];
