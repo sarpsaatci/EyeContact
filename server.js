@@ -304,13 +304,12 @@ function getFrame(frame)
   blobUtil.arrayBufferToBlob(frame.buf.buf, frame.buf.type).then(function (blob) {
   // success 
   blobb = blob;
-  // console.log(blob.type);
+  console.log("yeah");
   // console.log(blob);
 }).catch(function (err) {
   // error 
 });
 
-  console.log("yeah");
 
 
   
