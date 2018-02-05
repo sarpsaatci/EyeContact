@@ -28,6 +28,7 @@ var fileSaver = require('file-saver');
 var toBuffer = require('typedarray-to-buffer');
 var Buffer = require('buffer/').Buffer;
 var imageDataURI = require('image-data-uri');
+var fse = require('fs-extra')
 
 
 var argv = minimist(process.argv.slice(2), {
@@ -38,7 +39,6 @@ var argv = minimist(process.argv.slice(2), {
   }
 });
 
-var blob;
 
 var options =
 {
@@ -314,7 +314,7 @@ function getFrame(frame)
  
   // It will create the full path in case it doesn't exist
   // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
-  let filePath = './out/path/' + frame.path;
+  let filePath = './out/path/' + frame.path + '.jpg';
    
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res => console.log(res));
@@ -356,6 +356,12 @@ function stop(sessionId) {
     if (!pipelines[sessionId]) {
         return;
     }
+    
+    fs.remove('./out/', err => {
+      if (err) return console.error(err)
+
+      console.log('success!')
+    });
 
     var pipeline = pipelines[sessionId];
     delete pipelines[sessionId];
