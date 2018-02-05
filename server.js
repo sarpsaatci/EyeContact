@@ -23,8 +23,10 @@ var url = require('url');
 var kurento = require('kurento-client');
 var fs    = require('fs');
 var https = require('https');
-var blobUtil = require('blob-util');
+// var blobUtil = require('blob-util');
 var fileSaver = require('file-saver');
+var toBuffer = require('typedarray-to-buffer');
+var Buffer = require('buffer/').Buffer;
 
 var argv = minimist(process.argv.slice(2), {
   default: {
@@ -295,6 +297,12 @@ wss.on('connection', function(ws) {
 function getFrame(frame)
 {
   console.log(frame.path);
+  
+  var buff = Buffer.from(frame.buf);
+  var blob = new Blob([ buff ], { type: frame.buf.type });
+  
+  console.log(blob);
+  
   // console.log(frame.uIntArray);
   //fileSaver.saveAs(frame.blob, frame.path);
   //sendUrl(url);

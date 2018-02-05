@@ -69,6 +69,7 @@ function captureVideoFrame(video, format, path) {
         //var blob = canvas.toBlob();
         
         var dataUri = canvas.toDataURL('image/' + format);
+        var type = 'image/' + format;
         var data = dataUri.split(',')[1];
         var mimeType = dataUri.split(';')[0].slice(5);
         
@@ -90,7 +91,7 @@ function captureVideoFrame(video, format, path) {
         // var formData = new FormData();
         // formData.append("blob", blob, path);
         //return { blob: blob, dataUri: dataUri, format: format };
-        return arr;
+        return { buf: buf, dataUri: dataUri, type: type }; 
         //return blob;
 }
 
@@ -248,11 +249,11 @@ function startCommunication(message) {
     if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
       console.log("time: " + videoOutput.currentTime);
       path = "frame_" + videoOutput.currentTime;
-      frameUIntArray = captureVideoFrame(videoOutput, null, path);
+      frameBuf = captureVideoFrame(videoOutput, null, path);
       frame = {
         id : 'frame',
         path : path,
-        uIntArray : frameUIntArray
+        buf : frameBuf
       };
       readyToCarptureFrame = false;
       // console.log(frame);
