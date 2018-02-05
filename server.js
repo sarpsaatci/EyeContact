@@ -58,6 +58,10 @@ var pipelines = {};
 var candidatesQueue = {};
 var idCounter = 0;
 
+var calleeName '';
+var callerName '';
+
+
 function nextUniqueId() {
     idCounter++;
     return idCounter.toString();
@@ -236,8 +240,6 @@ wss.on('connection', function(ws) {
     console.log('Connection received with sessionId ' + sessionId);
     
     ws.binaryType = "arraybuffer";
-    
-    ws.readyState
 
     ws.on('error', function(error) {
         console.log('Connection ' + sessionId + ' error');
@@ -299,7 +301,7 @@ wss.on('connection', function(ws) {
 function getFrame(frame)
 {
   console.log(frame.path);
-  var blobb;
+
   //var buff = Buffer.from(frame.buf.buf);
   // var blob = new Blob([ frame.buf.buf ], { type: frame.buf.type });
   // blobUtil.arrayBufferToBlob(frame.buf.buf, frame.buf.type).then(function (blob) {
@@ -314,7 +316,7 @@ function getFrame(frame)
  
   // It will create the full path in case it doesn't exist
   // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
-  let filePath = './frames/calee/' + callee.name + '_' + frame.path + '.jpg';
+  let filePath = './frames/calee/' + calleeName + '_' + frame.path + '.jpg';
    
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res => console.log(res));
@@ -437,6 +439,9 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                         callee: callee.name,
                         caller: from
                     };
+                    calleeName = callee.name;
+                    callerName = from;
+                    
                     callee.sendMessage(message);
 
                     message = {
