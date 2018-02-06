@@ -320,12 +320,10 @@ function getFrame(frame)
   // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
   let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
   
-  var ls;
+  var ls = cp.spawn('./../OpenFace/build/bin/FaceLandmarkImg', ['-f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q']);
    
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res => 
-    
-    ls = cp.spawn('./../OpenFace/build/bin/FaceLandmarkImg', ['-f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q']),
   
     ls.stdout.on('data', function(data) {
     	console.log('Message: ' + data);
