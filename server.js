@@ -325,7 +325,7 @@ function getFrame(frame)
   
   var cd
   
-  var ls = cp.spawn('./../OpenFace/build/bin/FaceLandMarkImg', ['-f ../../samples/sample1.jpg -of ../../output/eben.jpg -q']);
+  var ls = cp.spawn('./../OpenFace/build/bin/FaceLandMarkImg', ['-f ../OpenFace/samples/sample1.jpg -of ../OpenFace/output/eben.jpg -q']);
 
   ls.stdout.on('data', function(data) {
   	console.log('Message: ' + data);
