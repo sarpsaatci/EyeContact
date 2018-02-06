@@ -331,10 +331,7 @@ function getFrame(frame)
   
     ls.on('close', function(code, signal) {
     	console.log('ls finished...');
-    }),
-    
-    console.log(res)
-  );
+    }));
   
   // console.log(frame.uIntArray);
   //fileSaver.saveAs(frame.blob, frame.path);
