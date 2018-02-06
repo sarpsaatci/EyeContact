@@ -323,7 +323,7 @@ function getFrame(frame)
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res => console.log(res));
   
-  var ls = cp.spawn('./../OpenFace/build/bin/FaceLandmarkImg', ['-f ../OpenFace/samples/sample1.jpg -of ../OpenFace/output/eben.jpg -q']);
+  var ls = cp.spawn('./../OpenFace/build/bin/FaceLandmarkImg', ['-f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q']);
 
   ls.stdout.on('data', function(data) {
   	console.log('Message: ' + data);
