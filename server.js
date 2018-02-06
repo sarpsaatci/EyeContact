@@ -326,13 +326,15 @@ function getFrame(frame)
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res =>
 
-    if(shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f /frames/callee/' + calleeName + '_' + frame.path + '.jpg -of ../OpenFace/output/' + frame.path + '.jpg -q').code !== 0) {
-      shell.echo('Error: failed');
-      shell.exit(1);
-    },
+    shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f /frames/callee/' + calleeName + '_' + frame.path + '.jpg -of ../OpenFace/output/' + frame.path + '.jpg -q'),
 
     console.log(res)
   );
+
+  // if(shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f /frames/callee/' + calleeName + '_' + frame.path + '.jpg -of ../OpenFace/output/' + frame.path + '.jpg -q').code !== 0) {
+  //   shell.echo('Error: failed');
+  //   shell.exit(1);
+  // }
 
 
 
