@@ -28,7 +28,9 @@ var fileSaver = require('file-saver');
 var toBuffer = require('typedarray-to-buffer');
 var Buffer = require('buffer/').Buffer;
 var imageDataURI = require('image-data-uri');
-var fse = require('fs-extra')
+var fse = require('fs-extra');
+var cp = require('child_process');
+
 
 
 var argv = minimist(process.argv.slice(2), {
@@ -320,6 +322,16 @@ function getFrame(frame)
    
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res => console.log(res));
+  
+  var ls = cp.spawn('ls', ['-lsa']);
+
+  ls.stdout.on('data', function(data) {
+  	console.log('Message: ' + data);
+  });
+
+  ls.on('close', function(code, signal) {
+  	console.log('ls finished...');
+  });
    
   
   // console.log(frame.uIntArray);
