@@ -321,18 +321,20 @@ function getFrame(frame)
   let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
    
   // Returns a Promise
-  imageDataURI.outputFile(dataURI, filePath).then(res => console.log(res));
+  imageDataURI.outputFile(dataURI, filePath).then(res => 
+    
+    var ls = cp.spawn('./../OpenFace/build/bin/FaceLandmarkImg', ['-f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q']);
   
-  var ls = cp.spawn('./../OpenFace/build/bin/FaceLandmarkImg', ['-f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q']);
-
-  ls.stdout.on('data', function(data) {
-  	console.log('Message: ' + data);
-  });
-
-  ls.on('close', function(code, signal) {
-  	console.log('ls finished...');
-  });
-   
+    ls.stdout.on('data', function(data) {
+    	console.log('Message: ' + data);
+    });
+  
+    ls.on('close', function(code, signal) {
+    	console.log('ls finished...');
+    });
+    
+    console.log(res)
+  );
   
   // console.log(frame.uIntArray);
   //fileSaver.saveAs(frame.blob, frame.path);
