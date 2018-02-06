@@ -240,7 +240,7 @@ var wss = new ws.Server({
 wss.on('connection', function(ws) {
     var sessionId = nextUniqueId();
     console.log('Connection received with sessionId ' + sessionId);
-    
+
     ws.binaryType = "arraybuffer";
 
     ws.on('error', function(error) {
@@ -289,7 +289,7 @@ wss.on('connection', function(ws) {
             //    url : URL.createObjectURL(message.blob)
             // }));
             break;
-        
+
         default:
             ws.send(JSON.stringify({
                 id : 'error',
@@ -311,28 +311,30 @@ function getFrame(frame)
   //   // blobb = blob;
   //   // console.log(blob);
   //   }).catch(function (err) {
-  // // error 
+  // // error
   // });
-  
+
   let dataURI = frame.buf.dataUri;
- 
+
   // It will create the full path in case it doesn't exist
   // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
   let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
-  
-  var ls = cp.spawn('./../OpenFace/build/bin/FaceLandmarkImg', ['-f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q']);
-   
+
+
+
   // Returns a Promise
-  imageDataURI.outputFile(dataURI, filePath).then(res => 
-  
-    ls.stdout.on('data', function(data) {
-    	console.log('Message: ' + data);
-    }),
-  
-    ls.on('close', function(code, signal) {
-    	console.log('ls finished...');
-    }));
-  
+  imageDataURI.outputFile(dataURI, filePath).then(res => console.log(res));
+
+  var ls = cp.spawnSync('./../OpenFace/build/bin/FaceLandmarkImg', ['-f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q']);
+
+  ls.stdout.on('data', function(data) {
+    console.log('Message: ' + data);
+  });
+
+  ls.on('close', function(code, signal) {
+    console.log('ls finished...');
+  });
+
   // console.log(frame.uIntArray);
   //fileSaver.saveAs(frame.blob, frame.path);
   //sendUrl(url);
@@ -369,10 +371,10 @@ function stop(sessionId) {
     if (!pipelines[sessionId]) {
         return;
     }
-    
+
     // fse.remove('./out/', err => {
     //   if (err) return console.error(err)
-    // 
+    //
     //   console.log('success!')
     // });
 
@@ -452,7 +454,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                     };
                     calleeName = callee.name;
                     callerName = from;
-                    
+
                     callee.sendMessage(message);
 
                     message = {
