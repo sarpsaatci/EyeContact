@@ -30,6 +30,7 @@ var Buffer = require('buffer/').Buffer;
 var imageDataURI = require('image-data-uri');
 var fse = require('fs-extra');
 var cp = require('child_process');
+var shell = require('shelljs');
 
 
 
@@ -325,15 +326,20 @@ function getFrame(frame)
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res => console.log(res));
 
-  var ls = cp.spawnSync('./../OpenFace/build/bin/FaceLandmarkImg', ['-f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q']);
+  if (shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f frames/callee/ -of ../OpenFace/output/' + frame.path + '.jpg -q').code !== 0) {
+    shell.echo('Error: failed');
+    shell.exit(1);
+  }
 
-  ls.stdout.on('data', function(data) {
-    console.log('Message: ' + data);
-  });
-
-  ls.on('close', function(code, signal) {
-    console.log('ls finished...');
-  });
+  // var ls = cp.spawn('./../OpenFace/build/bin/FaceLandmarkImg', ['-f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q']);
+  //
+  // ls.stdout.on('data', function(data) {
+  //   console.log('Message: ' + data);
+  // });
+  //
+  // ls.on('close', function(code, signal) {
+  //   console.log('ls finished...');
+  // });
 
   // console.log(frame.uIntArray);
   //fileSaver.saveAs(frame.blob, frame.path);
