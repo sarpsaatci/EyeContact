@@ -248,7 +248,7 @@ function startCommunication(message) {
   videoOutput.ontimeupdate = function() {
     if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
       console.log("time: " + videoOutput.currentTime);
-      path = "frame_" + videoOutput.currentTime;
+      path = "frame_" + (videoOutput.currentTime | 0);
       frameBuf = captureVideoFrame(videoOutput, null, path);
       frame = {
         id : 'frame',
