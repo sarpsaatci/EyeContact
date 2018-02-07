@@ -324,7 +324,8 @@ function getFrame(frame)
 
 
   // Returns a Promise
-  if(imageDataURI.outputFile(dataURI, filePath).then(res => console.log(res)))
+  //if(imageDataURI.outputFile(dataURI, filePath).then(res => console.log(res)))
+  if(imageDataURI.outputFile(dataURI, filePath))
     shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q');
 
 
