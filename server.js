@@ -324,9 +324,11 @@ function getFrame(frame)
 
 
   // Returns a Promise
-  //if(imageDataURI.outputFile(dataURI, filePath).then(res => console.log(res)))
-  if(imageDataURI.outputFile(dataURI, filePath))
-    shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q');
+  imageDataURI.outputFile(dataURI, filePath).then(res => console.log(res));
+  shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f ' + '../OpenFace/samples/sample1.jpg' + ' -of ../OpenFace/output/' + frame.path + '.jpg -q');
+  
+  // if(imageDataURI.outputFile(dataURI, filePath))
+  //   shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q');
 
 
   // if(shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f /frames/callee/' + calleeName + '_' + frame.path + '.jpg -of ../OpenFace/output/' + frame.path + '.jpg -q').code !== 0) {
