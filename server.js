@@ -325,7 +325,7 @@ function getFrame(frame)
 
   // Returns a Promise
   if(imageDataURI.outputFile(dataURI, filePath).then(res => console.log(res)))
-    shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f ' + res + ' -of ../OpenFace/output/' + frame.path + '.jpg -q');
+    shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q');
 
 
   // if(shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f /frames/callee/' + calleeName + '_' + frame.path + '.jpg -of ../OpenFace/output/' + frame.path + '.jpg -q').code !== 0) {
