@@ -38,7 +38,7 @@ var argv = minimist(process.argv.slice(2), {
   default: {
       as_uri: "https://localhost:443/",
       ws_uri: "ws://localhost:8888/kurento",
-	  file_uri: "file:///tmp/output/kurento-hello-world-recording.wmv"
+	  //file_uri: "file:///tmp/output/kurento-hello-world-recording.wmv"
   }
 });
 
@@ -195,11 +195,11 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                         self.pipeline = pipeline;
                         self.webRtcEndpoint[callerId] = callerWebRtcEndpoint;
                         self.webRtcEndpoint[calleeId] = calleeWebRtcEndpoint;
-						            var recorder = pipeline.create('RecorderEndpoint', {uri: argv.file_uri});
-						            self.webRtcEndpoint[calleeId].connect(recorder);
-                        console.log("get TAGS");
-                        console.log(self.webRtcEndpoint[calleeId].getTags());
-						            recorder.record();
+						            //var recorder = pipeline.create('RecorderEndpoint', {uri: argv.file_uri});
+						            //self.webRtcEndpoint[calleeId].connect(recorder);
+                        //console.log("get TAGS");
+                        //console.log(self.webRtcEndpoint[calleeId].getTags());
+						            //recorder.record();
                         callback(null);
                     });
                 });
@@ -229,8 +229,8 @@ CallMediaPipeline.prototype.release = function() {
 var asUrl = url.parse(argv.as_uri);
 var port = asUrl.port;
 var server = https.createServer(options, app).listen(port, function() {
-    console.log('Kurento Tutorial started');
-    console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
+    // console.log('Kurento Tutorial started');
+    // console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
 });
 
 var wss = new ws.Server({
@@ -240,7 +240,7 @@ var wss = new ws.Server({
 
 wss.on('connection', function(ws) {
     var sessionId = nextUniqueId();
-    console.log('Connection received with sessionId ' + sessionId);
+    // console.log('Connection received with sessionId ' + sessionId);
 
     ws.binaryType = "arraybuffer";
 
@@ -250,7 +250,7 @@ wss.on('connection', function(ws) {
     });
 
     ws.on('close', function() {
-        console.log('Connection ' + sessionId + ' closed');
+        // console.log('Connection ' + sessionId + ' closed');
         stop(sessionId);
         userRegistry.unregister(sessionId);
     });
@@ -281,14 +281,8 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-            //console.log(message);
             if(getFrame(message))
               ws.send(JSON.stringify(message));
-            //getFrame(message);
-            // ws.send(JSON.stringify({
-            //    id : 'frameUrl',
-            //    url : URL.createObjectURL(message.blob)
-            // }));
             break;
 
         default:
@@ -303,17 +297,7 @@ wss.on('connection', function(ws) {
 
 function getFrame(frame)
 {
-  console.log(frame.path);
-
-  //var buff = Buffer.from(frame.buf.buf);
-  // var blob = new Blob([ frame.buf.buf ], { type: frame.buf.type });
-  // blobUtil.arrayBufferToBlob(frame.buf.buf, frame.buf.type).then(function (blob) {
-  //   console.log("yeah");
-  //   // blobb = blob;
-  //   // console.log(blob);
-  //   }).catch(function (err) {
-  // // error
-  // });
+  // console.log(frame.path);
 
   let dataURI = frame.buf.dataUri;
 
@@ -321,48 +305,13 @@ function getFrame(frame)
   // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
   let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
 
-
-
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res => 
     shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
   
-  // if(imageDataURI.outputFile(dataURI, filePath))
-  //   shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q');
-
-
-  // if(shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f /frames/callee/' + calleeName + '_' + frame.path + '.jpg -of ../OpenFace/output/' + frame.path + '.jpg -q').code !== 0) {
-  //   shell.echo('Error: failed');
-  //   shell.exit(1);
-  // }
-
-
-
-  // var ls = cp.spawn('./../OpenFace/build/bin/FaceLandmarkImg', ['-f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q']);
-  //
-  // ls.stdout.on('data', function(data) {
-  //   console.log('Message: ' + data);
-  // });
-  //
-  // ls.on('close', function(code, signal) {
-  //   console.log('ls finished...');
-  // });
-
-  // console.log(frame.uIntArray);
-  //fileSaver.saveAs(frame.blob, frame.path);
-  //sendUrl(url);
   return true;
 }
-
-function sendUrl(url, ws) {
-  var message = JSON.stringify({
-      id : 'frameUrl',
-      message : url
-    });
-  //callee.sendMessage(message);
-}
-
 
 // Recover kurentoClient for the first time.
 function getKurentoClient(callback) {
@@ -386,11 +335,12 @@ function stop(sessionId) {
         return;
     }
 
-    // fse.remove('./out/', err => {
-    //   if (err) return console.error(err)
-    //
-    //   console.log('success!')
-    // });
+    // Removes saved frames when session ended.
+    fse.remove('./out/', err => {
+      if (err) return console.error(err)
+    
+      console.log('success!')
+    });
 
     var pipeline = pipelines[sessionId];
     delete pipelines[sessionId];

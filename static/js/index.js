@@ -45,29 +45,7 @@ function captureVideoFrame(video, format, path) {
         canvas.height = video.videoHeight;
 
         canvas.getContext('2d').drawImage(video, 0, 0);
-        
-        // var frameBlob;
-        // 
-        // if (canvas.toBlob) {
-        //     frameBlob = canvas.toBlob(
-        //         function (blob) {
-        //             //frameBlob = blob;
-        //             // Do something with the blob object,
-        //             // e.g. creating a multipart form for file uploads:
-        //             var formData = new FormData();
-        //             formData.append('file', blob, path);
-        //             /* ... */
-        //         },
-        //         'image/jpeg'
-        //     );
-        // }
-        // 
-        // console.log(frameBlob);
-        // 
-        // return frameBlob;
-        
-        //var blob = canvas.toBlob();
-        
+                
         var dataUri = canvas.toDataURL('image/' + format);
         var type = 'image/' + format;
         var data = dataUri.split(',')[1];
@@ -77,22 +55,7 @@ function captureVideoFrame(video, format, path) {
         var buf = new ArrayBuffer(bytes.length);
         var arr = new Uint8Array(buf);
         
-        // for (var i = 0; i < bytes.length; i++) {
-        //     arr[i] = bytes.charCodeAt(i);
-        // }
-        
-        // var blob = new Blob([ arr ], { type: mimeType });
-        //console.log(blob);
-        // 
-        // //var file = new File(blob, "/images/" + path, [type: 'image/' + format]);
-        // // 
-        // // console.log(file);
-        // 
-        // var formData = new FormData();
-        // formData.append("blob", blob, path);
-        //return { blob: blob, dataUri: dataUri, format: format };
         return { buf: buf, dataUri: dataUri, type: type }; 
-        //return blob;
 }
 
 function setRegisterState(nextState) {
@@ -169,7 +132,7 @@ window.onbeforeunload = function() {
 
 ws.onmessage = function(message) {
 	
-	console.log();
+	// console.log();
 	
 	var parsedMessage = JSON.parse(message.data);
 	// console.info('Received message: ' + message.data);
@@ -189,18 +152,15 @@ ws.onmessage = function(message) {
 		startCommunication(parsedMessage);
 		break;
 	case 'stopCommunication':
-		console.info("Communication ended by remote peer");
+		// console.info("Communication ended by remote peer");
 		stop(true);
 		break;
 	case 'iceCandidate':
 		webRtcPeer.addIceCandidate(parsedMessage.candidate);
 		break;
   case 'frame':
-    console.log("Get FRAME: " + parsedMessage.path);
+    // console.log("Get FRAME: " + parsedMessage.path);
     readyToCarptureFrame = true;
-    break;
-  case 'frameUrl':
-    console.log(message);
     break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
@@ -242,12 +202,12 @@ function sendMessage(message) {
 function startCommunication(message) {
 	setCallState(IN_CALL);
   
-  console.log("startCom MESSAGE");
-  console.log(message);
+  // console.log("startCom MESSAGE");
+  // console.log(message);
   
   videoOutput.ontimeupdate = function() {
     if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
-      console.log("time: " + videoOutput.currentTime);
+      // console.log("time: " + videoOutput.currentTime);
       path = "frame_" + (videoOutput.currentTime | 0);
       frameBuf = captureVideoFrame(videoOutput, null, path);
       frame = {
@@ -398,7 +358,7 @@ function stop(message) {
 }
 
 function onIceCandidate(candidate) {
-	console.log('Local candidate' + JSON.stringify(candidate));
+	// console.log('Local candidate' + JSON.stringify(candidate));
 
 	var message = {
 		id : 'onIceCandidate',
