@@ -23,13 +23,25 @@ var url = require('url');
 var kurento = require('kurento-client');
 var fs    = require('fs');
 var https = require('https');
+var blobUtil = require('blob-util');
+var fileSaver = require('file-saver');
+var toBuffer = require('typedarray-to-buffer');
+var Buffer = require('buffer/').Buffer;
+var imageDataURI = require('image-data-uri');
+var fse = require('fs-extra');
+var cp = require('child_process');
+var shell = require('shelljs');
+
+
 
 var argv = minimist(process.argv.slice(2), {
   default: {
-      as_uri: "https://localhost:8443/",
-      ws_uri: "ws://localhost:8888/kurento"
+      as_uri: "https://localhost:443/",
+      ws_uri: "ws://localhost:8888/kurento",
+	  //file_uri: "file:///tmp/output/kurento-hello-world-recording.wmv"
   }
 });
+
 
 var options =
 {
@@ -48,6 +60,10 @@ var userRegistry = new UserRegistry();
 var pipelines = {};
 var candidatesQueue = {};
 var idCounter = 0;
+
+var calleeName = '';
+var callerName = '';
+
 
 function nextUniqueId() {
     idCounter++;
@@ -179,6 +195,11 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                         self.pipeline = pipeline;
                         self.webRtcEndpoint[callerId] = callerWebRtcEndpoint;
                         self.webRtcEndpoint[calleeId] = calleeWebRtcEndpoint;
+						            //var recorder = pipeline.create('RecorderEndpoint', {uri: argv.file_uri});
+						            //self.webRtcEndpoint[calleeId].connect(recorder);
+                        //console.log("get TAGS");
+                        //console.log(self.webRtcEndpoint[calleeId].getTags());
+						            //recorder.record();
                         callback(null);
                     });
                 });
@@ -208,8 +229,8 @@ CallMediaPipeline.prototype.release = function() {
 var asUrl = url.parse(argv.as_uri);
 var port = asUrl.port;
 var server = https.createServer(options, app).listen(port, function() {
-    console.log('Kurento Tutorial started');
-    console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
+    // console.log('Kurento Tutorial started');
+    // console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
 });
 
 var wss = new ws.Server({
@@ -219,7 +240,9 @@ var wss = new ws.Server({
 
 wss.on('connection', function(ws) {
     var sessionId = nextUniqueId();
-    console.log('Connection received with sessionId ' + sessionId);
+    // console.log('Connection received with sessionId ' + sessionId);
+
+    ws.binaryType = "arraybuffer";
 
     ws.on('error', function(error) {
         console.log('Connection ' + sessionId + ' error');
@@ -227,14 +250,14 @@ wss.on('connection', function(ws) {
     });
 
     ws.on('close', function() {
-        console.log('Connection ' + sessionId + ' closed');
+        // console.log('Connection ' + sessionId + ' closed');
         stop(sessionId);
         userRegistry.unregister(sessionId);
     });
 
     ws.on('message', function(_message) {
         var message = JSON.parse(_message);
-        console.log('Connection ' + sessionId + ' received message ', message);
+        // console.log('Connection ' + sessionId + ' received message ', message);
 
         switch (message.id) {
         case 'register':
@@ -257,6 +280,11 @@ wss.on('connection', function(ws) {
             onIceCandidate(sessionId, message.candidate);
             break;
 
+        case 'frame':
+            if(getFrame(message))
+              ws.send(JSON.stringify(message));
+            break;
+
         default:
             ws.send(JSON.stringify({
                 id : 'error',
@@ -264,9 +292,26 @@ wss.on('connection', function(ws) {
             }));
             break;
         }
-
     });
 });
+
+function getFrame(frame)
+{
+  // console.log(frame.path);
+
+  let dataURI = frame.buf.dataUri;
+
+  // It will create the full path in case it doesn't exist
+  // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
+  let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
+
+  // Returns a Promise
+  imageDataURI.outputFile(dataURI, filePath).then(res => 
+    shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
+  );
+  
+  return true;
+}
 
 // Recover kurentoClient for the first time.
 function getKurentoClient(callback) {
@@ -289,6 +334,13 @@ function stop(sessionId) {
     if (!pipelines[sessionId]) {
         return;
     }
+
+    // Removes saved frames when session ended.
+    fse.remove('./out/', err => {
+      if (err) return console.error(err)
+    
+      console.log('success!')
+    });
 
     var pipeline = pipelines[sessionId];
     delete pipelines[sessionId];
@@ -360,14 +412,21 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
 
                     var message = {
                         id: 'startCommunication',
-                        sdpAnswer: calleeSdpAnswer
+                        sdpAnswer: calleeSdpAnswer,
+                        callee: callee.name,
+                        caller: from
                     };
+                    calleeName = callee.name;
+                    callerName = from;
+
                     callee.sendMessage(message);
 
                     message = {
                         id: 'callResponse',
                         response : 'accepted',
-                        sdpAnswer: callerSdpAnswer
+                        sdpAnswer: callerSdpAnswer,
+                        callee: callee.name,
+                        caller: from
                     };
                     caller.sendMessage(message);
                 });
