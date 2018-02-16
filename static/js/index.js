@@ -24,7 +24,76 @@ var registerName = null;
 const NOT_REGISTERED = 0;
 const REGISTERING = 1;
 const REGISTERED = 2;
-var registerState = null
+var registerState = null;
+
+var readyToCarptureFrame = false;
+
+function captureVideoFrame(video, format, path) {
+        if (typeof video === 'string') {
+            video = document.getElementById(video);
+        }
+
+        format = format || 'jpeg';
+
+        if (!video || (format !== 'png' && format !== 'jpeg')) {
+            return false;
+        }
+
+        var canvas = document.createElement("CANVAS");
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        
+        // var frameBlob;
+        // 
+        // if (canvas.toBlob) {
+        //     frameBlob = canvas.toBlob(
+        //         function (blob) {
+        //             //frameBlob = blob;
+        //             // Do something with the blob object,
+        //             // e.g. creating a multipart form for file uploads:
+        //             var formData = new FormData();
+        //             formData.append('file', blob, path);
+        //             /* ... */
+        //         },
+        //         'image/jpeg'
+        //     );
+        // }
+        // 
+        // console.log(frameBlob);
+        // 
+        // return frameBlob;
+        
+        //var blob = canvas.toBlob();
+        
+        var dataUri = canvas.toDataURL('image/' + format);
+        var type = 'image/' + format;
+        var data = dataUri.split(',')[1];
+        var mimeType = dataUri.split(';')[0].slice(5);
+        
+        var bytes = window.atob(data);
+        var buf = new ArrayBuffer(bytes.length);
+        var arr = new Uint8Array(buf);
+        
+        // for (var i = 0; i < bytes.length; i++) {
+        //     arr[i] = bytes.charCodeAt(i);
+        // }
+        
+        // var blob = new Blob([ arr ], { type: mimeType });
+        //console.log(blob);
+        // 
+        // //var file = new File(blob, "/images/" + path, [type: 'image/' + format]);
+        // // 
+        // // console.log(file);
+        // 
+        // var formData = new FormData();
+        // formData.append("blob", blob, path);
+        //return { blob: blob, dataUri: dataUri, format: format };
+        return { buf: buf, dataUri: dataUri, type: type }; 
+        //return blob;
+}
 
 function setRegisterState(nextState) {
 	switch (nextState) {
@@ -99,8 +168,11 @@ window.onbeforeunload = function() {
 }
 
 ws.onmessage = function(message) {
+	
+	console.log();
+	
 	var parsedMessage = JSON.parse(message.data);
-	console.info('Received message: ' + message.data);
+	// console.info('Received message: ' + message.data);
 
 	switch (parsedMessage.id) {
 	case 'registerResponse':
@@ -113,6 +185,7 @@ ws.onmessage = function(message) {
 		incomingCall(parsedMessage);
 		break;
 	case 'startCommunication':
+    readyToCarptureFrame = true;
 		startCommunication(parsedMessage);
 		break;
 	case 'stopCommunication':
@@ -120,8 +193,15 @@ ws.onmessage = function(message) {
 		stop(true);
 		break;
 	case 'iceCandidate':
-		webRtcPeer.addIceCandidate(parsedMessage.candidate)
+		webRtcPeer.addIceCandidate(parsedMessage.candidate);
 		break;
+  case 'frame':
+    console.log("Get FRAME: " + parsedMessage.path);
+    readyToCarptureFrame = true;
+    break;
+  case 'frameUrl':
+    console.log(message);
+    break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
 	}
@@ -152,8 +232,35 @@ function callResponse(message) {
 	}
 }
 
+function sendMessage(message) {
+	var jsonMessage = JSON.stringify(message);
+	// console.log('Senging message: ' + jsonMessage);
+  // console.log(JSON.parse(jsonMessage)); // stringify ederken blobu kaybediyoruz
+	ws.send(jsonMessage);
+}
+
 function startCommunication(message) {
 	setCallState(IN_CALL);
+  
+  console.log("startCom MESSAGE");
+  console.log(message);
+  
+  videoOutput.ontimeupdate = function() {
+    if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
+      console.log("time: " + videoOutput.currentTime);
+      path = "frame_" + (videoOutput.currentTime | 0);
+      frameBuf = captureVideoFrame(videoOutput, null, path);
+      frame = {
+        id : 'frame',
+        path : path,
+        buf : frameBuf
+      };
+      readyToCarptureFrame = false;
+      // console.log(frame);
+      sendMessage(frame);
+    }
+  };
+    
 	webRtcPeer.processAnswer(message.sdpAnswer);
 }
 
@@ -239,6 +346,7 @@ function call() {
 	}
 
 	setCallState(PROCESSING_CALL);
+	
 
 	showSpinner(videoInput, videoOutput);
 
@@ -247,6 +355,8 @@ function call() {
 		remoteVideo : videoOutput,
 		onicecandidate : onIceCandidate
 	}
+	
+	
 
 	webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(options, function(
 			error) {
@@ -269,7 +379,6 @@ function call() {
 			sendMessage(message);
 		});
 	});
-
 }
 
 function stop(message) {
@@ -286,12 +395,6 @@ function stop(message) {
 		}
 	}
 	hideSpinner(videoInput, videoOutput);
-}
-
-function sendMessage(message) {
-	var jsonMessage = JSON.stringify(message);
-	console.log('Senging message: ' + jsonMessage);
-	ws.send(jsonMessage);
 }
 
 function onIceCandidate(candidate) {
