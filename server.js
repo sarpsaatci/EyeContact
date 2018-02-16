@@ -324,13 +324,11 @@ function getFrame(frame)
   var image = imageDataURI.decode(dataURI);
   
   console.log(image);
-  
-  
 
   // Returns a Promise
-  imageDataURI.outputFile(dataURI, filePath).then(res => 
-    //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
-  );
+  // imageDataURI.outputFile(dataURI, filePath).then(res => 
+  //   shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
+  // );
   
   // if(imageDataURI.outputFile(dataURI, filePath))
   //   shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q');
