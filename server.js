@@ -36,7 +36,7 @@ var shell = require('shelljs');
 
 var argv = minimist(process.argv.slice(2), {
   default: {
-      as_uri: "http://localhost:80/",
+      as_uri: "https://localhost:443/",
       ws_uri: "ws://localhost:8888/kurento",
 	  file_uri: "file:///tmp/output/kurento-hello-world-recording.wmv"
   }
