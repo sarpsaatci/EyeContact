@@ -36,7 +36,7 @@ var shell = require('shelljs');
 
 var argv = minimist(process.argv.slice(2), {
   default: {
-      as_uri: "https://localhost:443/",
+      as_uri: "http://localhost:443/",
       ws_uri: "ws://localhost:8888/kurento",
 	  file_uri: "file:///tmp/output/kurento-hello-world-recording.wmv"
   }
@@ -322,14 +322,14 @@ function getFrame(frame)
   let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
 
   var image = imageDataURI.decode(dataURI);
-  
+
   console.log(image);
 
   // Returns a Promise
-  // imageDataURI.outputFile(dataURI, filePath).then(res => 
+  // imageDataURI.outputFile(dataURI, filePath).then(res =>
   //   shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   // );
-  
+
   // if(imageDataURI.outputFile(dataURI, filePath))
   //   shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q');
 
