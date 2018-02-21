@@ -321,14 +321,16 @@ function getFrame(frame)
   // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
   let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
 
-  var image = imageDataURI.decode(dataURI);
+  // var image = imageDataURI.decode(dataURI);
+  // 
+  // console.log(image);
 
-  console.log(image);
+  var u8array = frame.buf.arr;
 
   // Returns a Promise
-  // imageDataURI.outputFile(dataURI, filePath).then(res =>
-  //   shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
-  // );
+  imageDataURI.outputFile(dataURI, filePath).then(res =>
+    shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
+  );
 
   // if(imageDataURI.outputFile(dataURI, filePath))
   //   shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q');

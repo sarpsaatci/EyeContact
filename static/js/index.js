@@ -91,7 +91,7 @@ function captureVideoFrame(video, format, path) {
         // var formData = new FormData();
         // formData.append("blob", blob, path);
         //return { blob: blob, dataUri: dataUri, format: format };
-        return { buf: buf, dataUri: dataUri, type: type }; 
+        return { buf: buf, dataUri: dataUri, arr: arr, type: type }; 
         //return blob;
 }
 
@@ -347,7 +347,6 @@ function call() {
 
 	setCallState(PROCESSING_CALL);
 	
-
 	showSpinner(videoInput, videoOutput);
 
 	var options = {
@@ -355,8 +354,6 @@ function call() {
 		remoteVideo : videoOutput,
 		onicecandidate : onIceCandidate
 	}
-	
-	
 
 	webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(options, function(
 			error) {
