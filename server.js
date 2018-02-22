@@ -31,7 +31,8 @@ var imageDataURI = require('image-data-uri');
 var fse = require('fs-extra');
 var cp = require('child_process');
 var shell = require('shelljs');
-
+var nbind = require('nbind');
+var lib = nbind.init().lib;
 
 
 var argv = minimist(process.argv.slice(2), {
@@ -261,6 +262,7 @@ wss.on('connection', function(ws) {
 
         switch (message.id) {
         case 'register':
+            lib.Greeter.sayHello('abuzer');
             register(sessionId, message.name, ws);
             break;
 
@@ -322,7 +324,7 @@ function getFrame(frame)
   let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
 
   // var image = imageDataURI.decode(dataURI);
-  // 
+  //
   // console.log(image);
 
   var u8array = frame.buf.arr;
