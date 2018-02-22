@@ -262,7 +262,8 @@ wss.on('connection', function(ws) {
 
         switch (message.id) {
         case 'register':
-            lib.Greeter.sayHello('abuzer');
+            var bool = lib.Greeter.sayHello('abuzer');
+            console.log(bool);
             register(sessionId, message.name, ws);
             break;
 
