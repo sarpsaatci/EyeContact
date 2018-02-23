@@ -262,8 +262,8 @@ wss.on('connection', function(ws) {
 
         switch (message.id) {
         case 'register':
-            var bool = lib.Greeter.sayHello('abuzer');
-            console.log(bool);
+            // var bool = lib.Greeter.sayHello('abuzer');
+            // console.log(bool);
             register(sessionId, message.name, ws);
             break;
 
@@ -331,9 +331,12 @@ function getFrame(frame)
   var u8array = frame.buf.arr;
 
   // Returns a Promise
+  var frame;
   imageDataURI.outputFile(dataURI, filePath).then(res =>
-    shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
+    console.log(res),
+    frame = res
   );
+  shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q');
 
   // if(imageDataURI.outputFile(dataURI, filePath))
   //   shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q');
