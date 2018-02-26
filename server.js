@@ -473,15 +473,17 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                     
                     callee.sendMessage(message);
                     
-                    var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir frames/callee -q']);
+                    // var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir frames/callee -q']);
                     
-                    ls.stdout.on('data', function(data) {
-                      console.log('Message: ' + data);
-                    });
+                    cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir frames/callee -q']);
                     
-                    ls.on('close', function(code, signal) {
-                      console.log('ls finished...');
-                    });
+                    // ls.stdout.on('data', function(data) {
+                    //   console.log('Message: ' + data);
+                    // });
+                    // 
+                    // ls.on('close', function(code, signal) {
+                    //   console.log('ls finished...');
+                    // });
                 });
             });
         });
