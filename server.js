@@ -330,32 +330,25 @@ function getFrame(frame)
 
   var u8array = frame.buf.arr;
 
+  var frame;
+
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res =>
-    shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
+    frame = res
+    //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
+
+
+
+  var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir frames/callee -q']);
   
-
-  // if(imageDataURI.outputFile(dataURI, filePath))
-  //   shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q');
-
-
-  // if(shell.exec('./../OpenFace/build/bin/FaceLandmarkImg -f /frames/callee/' + calleeName + '_' + frame.path + '.jpg -of ../OpenFace/output/' + frame.path + '.jpg -q').code !== 0) {
-  //   shell.echo('Error: failed');
-  //   shell.exit(1);
-  // }
-
-
-
-  // var ls = cp.spawn('./../OpenFace/build/bin/FaceLandmarkImg', ['-f ' + filePath + ' -of ../OpenFace/output/' + frame.path + '.jpg -q']);
-  //
-  // ls.stdout.on('data', function(data) {
-  //   console.log('Message: ' + data);
-  // });
-  //
-  // ls.on('close', function(code, signal) {
-  //   console.log('ls finished...');
-  // });
+  ls.stdout.on('data', function(data) {
+    console.log('Message: ' + data);
+  });
+  
+  ls.on('close', function(code, signal) {
+    console.log('ls finished...');
+  });
 
   // console.log(frame.uIntArray);
   //fileSaver.saveAs(frame.blob, frame.path);
