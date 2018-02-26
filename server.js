@@ -65,6 +65,8 @@ var idCounter = 0;
 var calleeName = '';
 var callerName = '';
 
+var incImg = 1;
+
 
 function nextUniqueId() {
     idCounter++;
@@ -285,8 +287,10 @@ wss.on('connection', function(ws) {
 
         case 'frame':
             //console.log(message);
-            if(getFrame(message))
+            if(getFrame(message)) {
+              incImg++;
               ws.send(JSON.stringify(message));
+            }
             //getFrame(message);
             // ws.send(JSON.stringify({
             //    id : 'frameUrl',
@@ -306,7 +310,7 @@ wss.on('connection', function(ws) {
 
 function getFrame(frame)
 {
-  console.log(frame.path);
+  // console.log(frame.path);
 
   //var buff = Buffer.from(frame.buf.buf);
   // var blob = new Blob([ frame.buf.buf ], { type: frame.buf.type });
@@ -322,7 +326,8 @@ function getFrame(frame)
 
   // It will create the full path in case it doesn't exist
   // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
-  let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
+  let filePath = './frames/callee/' + incImg + '.jpg';
+  // let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
 
   // var image = imageDataURI.decode(dataURI);
   //
@@ -334,7 +339,8 @@ function getFrame(frame)
 
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res =>
-    frame = res
+    frame = res,
+    console.log(filePath)
     //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
 
