@@ -340,15 +340,7 @@ function getFrame(frame)
 
 
 
-  var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir frames/callee -q']);
   
-  ls.stdout.on('data', function(data) {
-    console.log('Message: ' + data);
-  });
-  
-  ls.on('close', function(code, signal) {
-    console.log('ls finished...');
-  });
 
   // console.log(frame.uIntArray);
   //fileSaver.saveAs(frame.blob, frame.path);
@@ -470,8 +462,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                     calleeName = callee.name;
                     callerName = from;
 
-                    callee.sendMessage(message);
-
                     message = {
                         id: 'callResponse',
                         response : 'accepted',
@@ -480,6 +470,18 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                         caller: from
                     };
                     caller.sendMessage(message);
+                    
+                    callee.sendMessage(message);
+                    
+                    var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir frames/callee -q']);
+                    
+                    ls.stdout.on('data', function(data) {
+                      console.log('Message: ' + data);
+                    });
+                    
+                    ls.on('close', function(code, signal) {
+                      console.log('ls finished...');
+                    });
                 });
             });
         });
