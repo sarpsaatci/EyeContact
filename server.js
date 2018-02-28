@@ -417,10 +417,10 @@ function stop(sessionId) {
       console.log('clean frames')
     });
     
-    fse.removeSync('/root/OpenFace/outputs', err => {
+    fse.removeSync('/root/OpenFace/outputs/', err => {
       if (err) return console.error(err)
     
-      console.log('clean outputs')
+      console.log('clean outputs/')
     });
 
     var pipeline = pipelines[sessionId];
