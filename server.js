@@ -260,8 +260,6 @@ var wss = new ws.Server({
     path : '/one2one'
 });
 
-console.log(wss);
-
 wss.on('connection', function(ws) {
     var sessionId = nextUniqueId();
     console.log('Connection received with sessionId ' + sessionId);
@@ -508,7 +506,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                         sdpAnswer: calleeSdpAnswer,
                         callee: callee.name,
                         caller: from,
-                        sessionId : calleeId
                     };
                     calleeName = callee.name;
                     callerName = from;
