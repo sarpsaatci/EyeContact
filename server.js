@@ -410,18 +410,24 @@ function stop(sessionId) {
     }
 
     of.kill('SIGHUP');
-
-    fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
-      if (err) return console.error(err)
     
+    if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
       console.log('clean frames')
-    });
-    
-    fse.removeSync('/root/OpenFace/outputs/*', err => {
-      if (err) return console.error(err)
-    
+    if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
       console.log('clean outputs/*')
-    });
+    
+
+    // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
+    //   if (err) return console.error(err)
+    // 
+    //   console.log('clean frames')
+    // });
+    // 
+    // fse.removeSync('/root/OpenFace/outputs/*', err => {
+    //   if (err) return console.error(err)
+    // 
+    //   console.log('clean outputs/*')
+    // });
 
     var pipeline = pipelines[sessionId];
     delete pipelines[sessionId];
