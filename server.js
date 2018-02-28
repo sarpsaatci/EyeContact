@@ -40,7 +40,7 @@ var argv = minimist(process.argv.slice(2), {
   default: {
       as_uri: "https://localhost:443/",
       ws_uri: "ws://localhost:8888/kurento",
-	  file_uri: "file:///tmp/output/kurento-hello-world-recording.wmv"
+	  //file_uri: "file:///tmp/output/kurento-hello-world-recording.wmv"
   }
 });
 
@@ -87,7 +87,17 @@ function parseOutput(file)
 {
   console.log('********* parsing output ************' + file);
   if(file.substring(file.length-4, file.length) == '.bmp')
+  {
     console.log("\nBMP\n");
+    
+    imageDataURI.encodeFromFile(file).then(res => 
+      let message = {
+        id : 'output',
+        imgData : res
+      }
+      callee.sendMessage(JSON.stringify(message))
+    );
+  }
 }
 
 function nextUniqueId() {
@@ -220,11 +230,11 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                         self.pipeline = pipeline;
                         self.webRtcEndpoint[callerId] = callerWebRtcEndpoint;
                         self.webRtcEndpoint[calleeId] = calleeWebRtcEndpoint;
-						            var recorder = pipeline.create('RecorderEndpoint', {uri: argv.file_uri});
-						            self.webRtcEndpoint[calleeId].connect(recorder);
+						            //var recorder = pipeline.create('RecorderEndpoint', {uri: argv.file_uri});
+						            //self.webRtcEndpoint[calleeId].connect(recorder);
                         console.log("get TAGS");
                         console.log(self.webRtcEndpoint[calleeId].getTags());
-						            recorder.record();
+						            //recorder.record();
                         callback(null);
                     });
                 });

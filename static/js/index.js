@@ -202,9 +202,17 @@ ws.onmessage = function(message) {
   case 'frameUrl':
     console.log(message);
     break;
+  case 'output':
+    printOutput(message);
+    break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
 	}
+}
+
+function printOutput(message)
+{
+  console.log(JSON.parse(message));
 }
 
 function resgisterResponse(message) {
