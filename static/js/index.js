@@ -28,6 +28,8 @@ var registerState = null;
 
 var readyToCarptureFrame = false;
 
+var outImg = new Image();
+
 function captureVideoFrame(video, format, path) {
         if (typeof video === 'string') {
             video = document.getElementById(video);
@@ -214,9 +216,8 @@ ws.onmessage = function(message) {
 function printOutput(message)
 {
   console.log(message);
-  var myImage = new Image();
-  myImage.src = message.imgData;
-  document.getElementById('output').appendChild(myImage);
+  outImg.src = message.imgData;
+  document.getElementById('output').appendChild(outImg);
   //new Draggabilly(document.getElementById('output'));
 }
 
