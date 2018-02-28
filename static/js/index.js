@@ -260,6 +260,7 @@ function startCommunication(message) {
       frameBuf = captureVideoFrame(videoOutput, null, path);
       frame = {
         id : 'frame',
+        sessionId : message.sessionId,
         path : path,
         buf : frameBuf
       };

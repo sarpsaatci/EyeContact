@@ -63,35 +63,19 @@ var pipelines = {};
 var candidatesQueue = {};
 var idCounter = 0;
 
-var calleeName;
-var callerName;
+var calleeName = '';
+var callerName = '';
 
 var of = null;
 
 var incImg = 1;
 
-var watcher = fswatch.watch('/root/OpenFace/outputs', {
-  ignored: /(^|[\/\\])\../,
-  persistent: true
-});
-
-var log = console.log.bind(console);
-
-watcher
-  .on('add', path => parseOutput(path))
-  .on('change', path => parseOutput(path))
-  .on('unlink', path => log(`File ${path} has been removed`))
-  .on('addDir', path => watcher.add(path));
-
-function parseOutput(file)
+function parseOutput(file, caller, callee)
 {
   console.log('********* parsing output ************' + file);
   if(file.substring(file.length-4, file.length) == '.bmp')
   {
     console.log("\nBMP\n");
-    
-    var caller = this.usersByName[callerName];
-    var callee = this.usersByName[calleeName];
     
     imageDataURI.encodeFromFile(file).then(res => 
       message = {
@@ -374,12 +358,12 @@ function getFrame(frame)
 
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res =>
-    frame = res,
+    frame = res
     // console.log(filePath)
     //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
 
-
+  
 
   // var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir frames/callee -q']);
   // 
@@ -521,7 +505,8 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                         id: 'startCommunication',
                         sdpAnswer: calleeSdpAnswer,
                         callee: callee.name,
-                        caller: from
+                        caller: from,
+                        sessionId : calleeId
                     };
                     calleeName = callee.name;
                     callerName = from;
@@ -557,6 +542,20 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     of.on('close', function(code, signal) {
       console.log('ls finished...');
     });
+    
+    var watcher = fswatch.watch('/root/OpenFace/outputs', {
+      ignored: /(^|[\/\\])\../,
+      persistent: true
+    });
+    
+    var log = console.log.bind(console);
+    
+    watcher
+      .on('add', path => parseOutput(path))
+      .on('change', path => parseOutput(path))
+      .on('unlink', path => log(`File ${path} has been removed`))
+      .on('addDir', path => watcher.add(path, caller, callee));
+    
 }
 
 function call(callerId, to, from, sdpOffer) {
