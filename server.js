@@ -78,11 +78,14 @@ var watcher = fswatch.watch('/root/OpenFace/outputs/deneme.csv', {
 var log = console.log.bind(console);
 
 watcher
-  .on('add', path => log(`File ${path} has been added`))
-  // .on('change', path => log(`File ${path} has been changed`))
+  .on('add', path => parseOutput(path))
+  .on('change', path => parseOutput(path))
   .on('unlink', path => log(`File ${path} has been removed`));
 
-
+function parseOutput(file)
+{
+  console.log('********* parsing output ************');
+}
 
 function nextUniqueId() {
     idCounter++;
