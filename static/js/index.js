@@ -215,7 +215,7 @@ ws.onmessage = function(message) {
 
 function printOutput(message)
 {
-  console.log(message);
+  // console.log(message);
   outImg.src = message.imgData;
   document.getElementById('output').appendChild(outImg);
   //new Draggabilly(document.getElementById('output'));
