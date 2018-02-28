@@ -501,6 +501,16 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         };
         caller.sendMessage(decline);
     }
+    
+    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+    
+    of.stdout.on('data', function(data) {
+      console.log('Message: ' + data);
+    });
+    
+    of.on('close', function(code, signal) {
+      console.log('ls finished...');
+    });
 }
 
 function call(callerId, to, from, sdpOffer) {
@@ -529,16 +539,6 @@ function call(callerId, to, from, sdpOffer) {
         message: rejectCause
     };
     caller.sendMessage(message);
-    
-    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
-    
-    of.stdout.on('data', function(data) {
-      console.log('Message: ' + data);
-    });
-    
-    of.on('close', function(code, signal) {
-      console.log('ls finished...');
-    });
 }
 
 function register(id, name, ws, callback) {
