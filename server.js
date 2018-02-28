@@ -93,6 +93,9 @@ function parseOutput(file)
   {
     console.log("\nBMP\n");
     
+    var caller = this.usersByName(callerName);
+    var callee = this.usersByName(calleeName);
+    
     imageDataURI.encodeFromFile(file).then(res => 
       message = {
         id : 'output',
