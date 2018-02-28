@@ -82,7 +82,7 @@ function parseOutput(file, caller, callee)
       //   id : 'output',
       //   imgData : res
       // }),
-      console.log(res);
+      console.log(res)
     );
   }
 }
