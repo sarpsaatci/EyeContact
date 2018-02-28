@@ -78,10 +78,10 @@ function parseOutput(file, caller, callee)
     console.log("\nBMP\n");
     
     imageDataURI.encodeFromFile(file).then(res => 
-      callee.sendMessage(JSON.stringify({
+      callee.sendMessage({
         id : 'output',
         imgData : res
-      }))
+      })
     );
   }
 }
