@@ -45,9 +45,9 @@ function captureVideoFrame(video, format, path) {
         canvas.height = video.videoHeight;
 
         canvas.getContext('2d').drawImage(video, 0, 0);
-        
+
         // var frameBlob;
-        // 
+        //
         // if (canvas.toBlob) {
         //     frameBlob = canvas.toBlob(
         //         function (blob) {
@@ -61,37 +61,37 @@ function captureVideoFrame(video, format, path) {
         //         'image/jpeg'
         //     );
         // }
-        // 
+        //
         // console.log(frameBlob);
-        // 
+        //
         // return frameBlob;
-        
+
         //var blob = canvas.toBlob();
-        
+
         var dataUri = canvas.toDataURL('image/' + format);
         var type = 'image/' + format;
         var data = dataUri.split(',')[1];
         var mimeType = dataUri.split(';')[0].slice(5);
-        
+
         var bytes = window.atob(data);
         var buf = new ArrayBuffer(bytes.length);
         var arr = new Uint8Array(buf);
-        
+
         // for (var i = 0; i < bytes.length; i++) {
         //     arr[i] = bytes.charCodeAt(i);
         // }
-        
+
         // var blob = new Blob([ arr ], { type: mimeType });
         //console.log(blob);
-        // 
+        //
         // //var file = new File(blob, "/images/" + path, [type: 'image/' + format]);
-        // // 
+        // //
         // // console.log(file);
-        // 
+        //
         // var formData = new FormData();
         // formData.append("blob", blob, path);
         //return { blob: blob, dataUri: dataUri, format: format };
-        return { buf: buf, dataUri: dataUri, arr: arr, type: type }; 
+        return { buf: buf, dataUri: dataUri, arr: arr, type: type };
         //return blob;
 }
 
@@ -168,9 +168,9 @@ window.onbeforeunload = function() {
 }
 
 ws.onmessage = function(message) {
-	
+
 	console.log();
-	
+
 	var parsedMessage = JSON.parse(message.data);
 	// console.info('Received message: ' + message.data);
 
@@ -250,10 +250,10 @@ function sendMessage(message) {
 
 function startCommunication(message) {
 	setCallState(IN_CALL);
-  
+
   console.log("startCom MESSAGE");
   console.log(message);
-  
+
   videoOutput.ontimeupdate = function() {
     if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
       console.log("time: " + videoOutput.currentTime);
@@ -270,7 +270,7 @@ function startCommunication(message) {
       sendMessage(frame);
     }
   };
-    
+
 	webRtcPeer.processAnswer(message.sdpAnswer);
 }
 
@@ -356,7 +356,7 @@ function call() {
 	}
 
 	setCallState(PROCESSING_CALL);
-	
+
 	showSpinner(videoInput, videoOutput);
 
 	var options = {
