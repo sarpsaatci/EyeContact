@@ -214,6 +214,10 @@ ws.onmessage = function(message) {
 function printOutput(message)
 {
   console.log(message);
+  var myImage = new Image();
+  myImage.src = message.imgData;
+  document.getElementById(output).appendChild(myImage);
+  var drag = new Draggabilly(document.getElementById('output'));
 }
 
 function resgisterResponse(message) {
