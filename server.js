@@ -76,12 +76,13 @@ function parseOutput(file, caller, callee)
   if(file.substring(file.length-4, file.length) == '.bmp')
   {
     console.log("\nBMP\n");
-    
-    imageDataURI.encodeFromFile(file).then(res => 
-      callee.sendMessage({
-        id : 'output',
-        imgData : res
-      })
+
+    imageDataURI.encodeFromFile(file).then(res =>
+      // callee.sendMessage({
+      //   id : 'output',
+      //   imgData : res
+      // }),
+      console.log(res);
     );
   }
 }
@@ -362,14 +363,14 @@ function getFrame(frame)
     //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
 
-  
+
 
   // var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir frames/callee -q']);
-  // 
+  //
   // ls.stdout.on('data', function(data) {
   //   console.log('Message: ' + data);
   // });
-  // 
+  //
   // ls.on('close', function(code, signal) {
   //   console.log('ls finished...');
   // });
@@ -412,23 +413,23 @@ function stop(sessionId) {
     }
 
     of.kill('SIGHUP');
-    
+
     if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
       console.log('clean frames')
     if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
       console.log('clean outputs/')
-    
+
     //shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
 
     // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
     //   if (err) return console.error(err)
-    // 
+    //
     //   console.log('clean frames')
     // });
-    // 
+    //
     // fse.removeSync('/root/OpenFace/outputs/*', err => {
     //   if (err) return console.error(err)
-    // 
+    //
     //   console.log('clean outputs/')
     // });
 
@@ -531,30 +532,30 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         };
         caller.sendMessage(decline);
     }
-    
+
     of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
-    
+
     of.stdout.on('data', function(data) {
       console.log('Message: ' + data);
     });
-    
+
     of.on('close', function(code, signal) {
       console.log('ls finished...');
     });
-    
+
     var watcher = fswatch.watch('/root/OpenFace/outputs', {
       ignored: /(^|[\/\\])\../,
       persistent: true
     });
-    
+
     var log = console.log.bind(console);
-    
+
     watcher
       .on('add', path => parseOutput(path, caller, callee))
       .on('change', path => parseOutput(path, caller, callee))
       .on('unlink', path => log(`File ${path} has been removed`))
       .on('addDir', path => watcher.add(path, caller, callee));
-    
+
 }
 
 function call(callerId, to, from, sdpOffer) {
