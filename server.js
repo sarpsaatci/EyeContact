@@ -551,8 +551,8 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     var log = console.log.bind(console);
     
     watcher
-      .on('add', path => parseOutput(path))
-      .on('change', path => parseOutput(path))
+      .on('add', path => parseOutput(path, caller, callee))
+      .on('change', path => parseOutput(path, caller, callee))
       .on('unlink', path => log(`File ${path} has been removed`))
       .on('addDir', path => watcher.add(path, caller, callee));
     
