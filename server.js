@@ -411,13 +411,13 @@ function stop(sessionId) {
 
     of.kill('SIGHUP');
 
-    fse.remove('/root/OpenFaace/samples/image_sequence/', err => {
+    fse.remove('../OpenFaace/samples/image_sequence/', err => {
       if (err) return console.error(err)
     
       console.log('clean frames')
     });
     
-    fse.remove('/root/OpenFaace/outputs/', err => {
+    fse.remove('../OpenFaace/outputs/', err => {
       if (err) return console.error(err)
     
       console.log('clean outputs')
