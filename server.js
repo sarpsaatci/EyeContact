@@ -77,8 +77,8 @@ var watcher = fswatch.watch('/root/OpenFace/outputs', {
 
 var log = console.log.bind(console);
 
-var caller = userRegistry.getByName(callerName);
-var callee = userRegistry.getByName(calleeName);
+var caller = UserRegistry.getByName(callerName);
+var callee = UserRegistry.getByName(calleeName);
 
 watcher
   .on('add', path => parseOutput(path))
