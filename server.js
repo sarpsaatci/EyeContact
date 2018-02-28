@@ -70,7 +70,7 @@ var of = null;
 
 var incImg = 1;
 
-var watcher = fswatch.watch('/root/OpenFace/outputs/deneme_alligned', {
+var watcher = fswatch.watch('/root/OpenFace/outputs', {
   ignored: /(^|[\/\\])\../,
   persistent: true
 });
@@ -80,7 +80,8 @@ var log = console.log.bind(console);
 watcher
   .on('add', path => parseOutput(path))
   .on('change', path => parseOutput(path))
-  .on('unlink', path => log(`File ${path} has been removed`));
+  .on('unlink', path => log(`File ${path} has been removed`))
+  .on('addDir', path => watcher.add(path));
 
 function parseOutput(file)
 {
