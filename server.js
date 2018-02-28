@@ -70,7 +70,7 @@ var of = null;
 
 var incImg = 1;
 
-var watcher = fswatch.watch('/root/OpenFace/outputs/deneme.csv', {
+var watcher = fswatch.watch('/root/OpenFace/outputs/', {
   ignored: /(^|[\/\\])\../,
   persistent: true
 });
@@ -85,6 +85,7 @@ watcher
 function parseOutput(file)
 {
   console.log('********* parsing output ************');
+  
 }
 
 function nextUniqueId() {
