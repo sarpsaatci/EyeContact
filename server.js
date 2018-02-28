@@ -84,7 +84,7 @@ watcher
 
 function parseOutput(file)
 {
-  console.log('********* parsing output ************' + file);
+  console.log('********* parsing output ************');
 }
 
 function nextUniqueId() {
@@ -417,7 +417,7 @@ function stop(sessionId) {
     if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
       console.log('clean frames')
     if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
-      console.log('clean outputs/*')
+      console.log('clean outputs/')
     
 
     // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
@@ -429,7 +429,7 @@ function stop(sessionId) {
     // fse.removeSync('/root/OpenFace/outputs/*', err => {
     //   if (err) return console.error(err)
     // 
-    //   console.log('clean outputs/*')
+    //   console.log('clean outputs/')
     // });
 
     var pipeline = pipelines[sessionId];
