@@ -203,8 +203,8 @@ ws.onmessage = function(message) {
     console.log(message);
     break;
   case 'output':
-    //console.log("aha aha aha");
-    printOutput(parsedMessage);
+    console.log("aha aha aha");
+    //printOutput(message);
     break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
@@ -213,7 +213,7 @@ ws.onmessage = function(message) {
 
 function printOutput(message)
 {
-  console.log(message.id));
+  console.log(JSON.parse(message));
 }
 
 function resgisterResponse(message) {
