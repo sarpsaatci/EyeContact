@@ -409,7 +409,7 @@ function stop(message) {
 
 
   var element = document.getElementById('output');
-  element.remove();
+  outImg.remove();
 	hideSpinner(videoInput, videoOutput);
 }
 
