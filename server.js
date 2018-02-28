@@ -70,7 +70,7 @@ var of = null;
 
 var incImg = 1;
 
-var watcher = fswatch.watch('/root/OpenFace/outputs/', {
+var watcher = fswatch.watch('/root/OpenFace/outputs/deneme_alligned', {
   ignored: /(^|[\/\\])\../,
   persistent: true
 });
@@ -84,8 +84,7 @@ watcher
 
 function parseOutput(file)
 {
-  console.log('********* parsing output ************');
-  
+  console.log('********* parsing output ************' + path);
 }
 
 function nextUniqueId() {
