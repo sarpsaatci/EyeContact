@@ -94,7 +94,7 @@ function parseOutput(file)
       message = {
         id : 'output',
         imgData : res
-      }
+      },
       callee.sendMessage(JSON.stringify(message))
     );
   }
