@@ -498,7 +498,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         caller.sendMessage(decline);
     }
     
-    var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', ' ../OpenFace/samples/image_sequence' , ' -q']);
+    var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-q']);
     
     ls.stdout.on('data', function(data) {
       console.log('Message: ' + data);
