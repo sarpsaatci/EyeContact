@@ -203,8 +203,8 @@ ws.onmessage = function(message) {
     console.log(message);
     break;
   case 'output':
-    console.log(JSON.parse(message));
-    //printOutput(message);
+    //console.log(JSON.parse(message));
+    printOutput(message);
     break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
