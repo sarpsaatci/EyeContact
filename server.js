@@ -65,6 +65,8 @@ var idCounter = 0;
 var calleeName = '';
 var callerName = '';
 
+var of = null;
+
 var incImg = 1;
 
 
@@ -393,6 +395,8 @@ function stop(sessionId) {
         return;
     }
 
+    of.kill('SIGHUP');
+
     fse.remove('/OpenFaace/samples/image_sequence/', err => {
       if (err) return console.error(err)
     
@@ -497,16 +501,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         };
         caller.sendMessage(decline);
     }
-    
-    var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
-    
-    ls.stdout.on('data', function(data) {
-      console.log('Message: ' + data);
-    });
-    
-    ls.on('close', function(code, signal) {
-      console.log('ls finished...');
-    });
 }
 
 function call(callerId, to, from, sdpOffer) {
@@ -535,6 +529,16 @@ function call(callerId, to, from, sdpOffer) {
         message: rejectCause
     };
     caller.sendMessage(message);
+    
+    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+    
+    of.stdout.on('data', function(data) {
+      console.log('Message: ' + data);
+    });
+    
+    of.on('close', function(code, signal) {
+      console.log('ls finished...');
+    });
 }
 
 function register(id, name, ws, callback) {
