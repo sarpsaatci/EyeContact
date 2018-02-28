@@ -86,6 +86,8 @@ watcher
 function parseOutput(file)
 {
   console.log('********* parsing output ************' + file);
+  if(file.substring(file.length-4, file.length) == '.bmp')
+    console.log("\nBMP\n");
 }
 
 function nextUniqueId() {
