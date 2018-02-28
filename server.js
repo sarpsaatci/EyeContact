@@ -91,7 +91,7 @@ function parseOutput(file)
     console.log("\nBMP\n");
     
     imageDataURI.encodeFromFile(file).then(res => 
-      let message = {
+      message = {
         id : 'output',
         imgData : res
       }
