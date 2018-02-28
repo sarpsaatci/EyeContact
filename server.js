@@ -84,7 +84,7 @@ watcher
 
 function parseOutput(file)
 {
-  console.log('********* parsing output ************' + path);
+  console.log('********* parsing output ************' + file);
 }
 
 function nextUniqueId() {
