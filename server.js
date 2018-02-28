@@ -260,11 +260,13 @@ var wss = new ws.Server({
     path : '/one2one'
 });
 
+console.log(wss);
+
 wss.on('connection', function(ws) {
     var sessionId = nextUniqueId();
     console.log('Connection received with sessionId ' + sessionId);
 
-    //ws.binaryType = "arraybuffer";
+    ws.binaryType = "arraybuffer";
 
     ws.on('error', function(error) {
         console.log('Connection ' + sessionId + ' error');
