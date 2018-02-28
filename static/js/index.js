@@ -216,7 +216,7 @@ function printOutput(message)
   console.log(message);
   var myImage = new Image();
   myImage.src = message.imgData;
-  document.getElementById(output).appendChild(myImage);
+  document.getElementById('output').appendChild(myImage);
   var dragOut = new Draggabilly(document.getElementById('output'));
 }
 
