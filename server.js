@@ -33,6 +33,7 @@ var cp = require('child_process');
 var shell = require('shelljs');
 var nbind = require('nbind');
 var lib = nbind.init().lib;
+var fswatch = require('chokidar');
 
 
 var argv = minimist(process.argv.slice(2), {
@@ -68,6 +69,19 @@ var callerName = '';
 var of = null;
 
 var incImg = 1;
+
+var watcher = fswatch.watch('/root/OpenFace/outputs/deneme.csv', {
+  ignored: /(^|[\/\\])\../,
+  persistent: true
+});
+
+var log = console.log.bind(console);
+
+watcher
+  .on('add', path => log(`File ${path} has been added`))
+  .on('change', path => log(`File ${path} has been changed`))
+  .on('unlink', path => log(`File ${path} has been removed`));
+
 
 
 function nextUniqueId() {
@@ -400,7 +414,13 @@ function stop(sessionId) {
     fse.remove('/OpenFaace/samples/image_sequence/', err => {
       if (err) return console.error(err)
     
-      console.log('success!')
+      console.log('clean frames')
+    });
+    
+    fse.remove('/OpenFaace/outputs/', err => {
+      if (err) return console.error(err)
+    
+      console.log('clean outputs')
     });
 
     var pipeline = pipelines[sessionId];
