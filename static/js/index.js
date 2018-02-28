@@ -406,6 +406,10 @@ function stop(message) {
 			sendMessage(message);
 		}
 	}
+
+
+  var element = document.getElementById('output');
+  element.removeChild('outImg');
 	hideSpinner(videoInput, videoOutput);
 }
 
