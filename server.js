@@ -72,10 +72,10 @@ var incImg = 1;
 
 function parseOutput(file, caller, callee)
 {
-  console.log('********* parsing output ************' + file);
+  // console.log('********* parsing output ************' + file);
   if(file.substring(file.length-4, file.length) == '.bmp')
   {
-    console.log("\nBMP\n");
+    // console.log("\nBMP\n");
 
     imageDataURI.encodeFromFile(file).then(res =>
       callee.sendMessage({
@@ -414,9 +414,9 @@ function stop(sessionId) {
     of.kill('SIGHUP');
 
     if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
-      console.log('clean frames')
+      console.log('clean frames');
     if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
-      console.log('clean outputs/')
+      console.log('clean outputs/');
 
     //shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
 
