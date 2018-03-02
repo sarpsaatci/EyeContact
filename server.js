@@ -81,10 +81,10 @@ function parseOutput(file, caller, callee)
     //     imgData : res
     //   }),
     // );
-    callee.sendMessage({
-      id : 'output',
-      imgData : file
-    });
+    // callee.sendMessage({
+    //   id : 'output',
+    //   imgData : file
+    // });
   }
 }
 
