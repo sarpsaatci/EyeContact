@@ -67,11 +67,11 @@ var of = null;
 
 var incImg = 1;
 
-function parseOutput(file, caller, callee)
+function parseOutput(file, callerName, calleeName)
 {
   
-  var callee = userRegistry.getById(callee);
-  var caller = userRegistry.getById(caller);
+  var callee = userRegistry.getByName(calleeName);
+  var caller = userRegistry.getByName(callerName);
   
   // console.log('********* parsing output ************' + file);
   if(file.substring(file.length-4, file.length) == '.bmp')
@@ -483,10 +483,10 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     var log = console.log.bind(console);
     
     watcher
-      .on('add', path => parseOutput(path, caller, callee))
-      .on('change', path => parseOutput(path, caller, callee))
+      .on('add', path => parseOutput(path, caller.name, callee.name))
+      .on('change', path => parseOutput(path, caller.ame, callee.name))
       .on('unlink', path => log(`File ${path} has been removed`))
-      .on('addDir', path => watcher.add(path, caller, callee));
+      .on('addDir', path => watcher.add(path, caller.name, callee.name));
     
     of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
     
