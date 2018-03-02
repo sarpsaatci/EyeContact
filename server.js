@@ -63,9 +63,6 @@ var pipelines = {};
 var candidatesQueue = {};
 var idCounter = 0;
 
-var calleeName = '';
-var callerName = '';
-
 var of = null;
 
 var incImg = 1;
@@ -305,9 +302,9 @@ wss.on('connection', function(ws) {
 
         case 'frame':
             //console.log(message);
-            if(getFrame(message)) {
+            if(getFrame(message, sessionId)) {
               incImg++;
-              ws.send(JSON.stringify(message));
+              // ws.send(JSON.stringify(message));
             }
             //getFrame(message);
             // ws.send(JSON.stringify({
@@ -326,7 +323,7 @@ wss.on('connection', function(ws) {
     });
 });
 
-function getFrame(frame)
+function getFrame(frame, sessionId)
 {
   // console.log(frame.path);
 
@@ -345,22 +342,23 @@ function getFrame(frame)
   // It will create the full path in case it doesn't exist
   // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
   let filePath = '../OpenFace/samples/image_sequence/' + incImg + '.jpg';
-  // let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
 
   // var image = imageDataURI.decode(dataURI);
   //
   // console.log(image);
 
-  var u8array = frame.buf.arr;
+  // var u8array = frame.buf.arr;
 
   var frame;
 
+  imageDataURI.outputFile(dataURI, filePath);
+
   // Returns a Promise
-  imageDataURI.outputFile(dataURI, filePath).then(res =>
-    frame = res
-    // console.log(filePath)
-    //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
-  );
+  // imageDataURI.outputFile(dataURI, filePath).then(res =>
+  //   console.log(res);
+  //   // console.log(filePath)
+  //   //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
+  // );
 
 
 
@@ -506,8 +504,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                         callee: callee.name,
                         caller: from,
                     };
-                    calleeName = callee.name;
-                    callerName = from;
 
                     callee.sendMessage(message);
 
