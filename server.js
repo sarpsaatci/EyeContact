@@ -532,28 +532,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         caller.sendMessage(decline);
     }
 
-    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
-
-    of.stdout.on('data', function(data) {
-      console.log('Message: ' + data);
-    });
-
-    of.on('close', function(code, signal) {
-      console.log('ls finished...');
-    });
-
-    var watcher = fswatch.watch('/root/OpenFace/outputs', {
-      ignored: /(^|[\/\\])\../,
-      persistent: true
-    });
-
-    var log = console.log.bind(console);
-
-    watcher
-      .on('add', path => parseOutput(path, caller, callee))
-      .on('change', path => parseOutput(path, caller, callee))
-      .on('unlink', path => log(`File ${path} has been removed`))
-      .on('addDir', path => watcher.add(path, caller, callee));
+    
 
 }
 
@@ -583,6 +562,29 @@ function call(callerId, to, from, sdpOffer) {
         message: rejectCause
     };
     caller.sendMessage(message);
+    
+    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+
+    of.stdout.on('data', function(data) {
+      console.log('Message: ' + data);
+    });
+
+    of.on('close', function(code, signal) {
+      console.log('ls finished...');
+    });
+
+    var watcher = fswatch.watch('/root/OpenFace/outputs', {
+      ignored: /(^|[\/\\])\../,
+      persistent: true
+    });
+
+    var log = console.log.bind(console);
+
+    watcher
+      .on('add', path => parseOutput(path, from, to))
+      .on('change', path => parseOutput(path, caller, callee))
+      .on('unlink', path => log(`File ${path} has been removed`))
+      .on('addDir', path => watcher.add(path, from, to));
 }
 
 function register(id, name, ws, callback) {
