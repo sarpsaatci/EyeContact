@@ -67,11 +67,11 @@ var of = null;
 
 var incImg = 1;
 
-function parseOutput(file, sessionId)
+function parseOutput(file, callerId, calleeName)
 {
   
-  var caller = userRegistry.getById(sessionId);
-  var callee = caller.peer;
+  var caller = userRegistry.getById(callerId);
+  var callee = userRegistry.getByName(calleeName);
   
   // console.log('********* parsing output ************' + file);
   if(file.substring(file.length-4, file.length) == '.bmp')
@@ -560,10 +560,10 @@ function call(callerId, to, from, sdpOffer) {
         var log = console.log.bind(console);
     
         watcher
-          .on('add', path => parseOutput(path, callerId))
-          .on('change', path => parseOutput(path, callerId))
+          .on('add', path => parseOutput(path, callerId, to))
+          .on('change', path => parseOutput(path, callerId, to))
           .on('unlink', path => log(`File ${path} has been removed`))
-          .on('addDir', path => watcher.add(path, callerId));
+          .on('addDir', path => watcher.add(path, callerId, to));
         
         try{
             return callee.sendMessage(message);
