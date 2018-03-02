@@ -569,10 +569,10 @@ function call(callerId, to, from, sdpOffer) {
         var log = console.log.bind(console);
     
         watcher
-          .on('add', path => parseOutput(path, from, to))
+          .on('add', path => parseOutput(path, caller, callee))
           .on('change', path => parseOutput(path, caller, callee))
           .on('unlink', path => log(`File ${path} has been removed`))
-          .on('addDir', path => watcher.add(path, from, to));
+          .on('addDir', path => watcher.add(path, caller, callee));
         
         try{
             return callee.sendMessage(message);
