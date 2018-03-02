@@ -67,11 +67,8 @@ var of = null;
 
 var incImg = 1;
 
-function parseOutput(file, callerId, calleeName)
+function parseOutput(file, caller, callee)
 {
-  
-  var caller = userRegistry.getById(callerId);
-  var callee = caller.peer;
   
   // console.log('********* parsing output ************' + file);
   if(file.substring(file.length-4, file.length) == '.bmp')
@@ -478,6 +475,29 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         var pipeline = new CallMediaPipeline();
         pipelines[caller.id] = pipeline;
         pipelines[callee.id] = pipeline;
+        
+        of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+    
+        of.stdout.on('data', function(data) {
+          console.log('Message: ' + data);
+        });
+    
+        of.on('close', function(code, signal) {
+          console.log('ls finished...');
+        });
+    
+        var watcher = fswatch.watch('/root/OpenFace/outputs', {
+          ignored: /(^|[\/\\])\../,
+          persistent: true
+        });
+    
+        var log = console.log.bind(console);
+    
+        watcher
+          .on('add', path => parseOutput(path, caller, callee))
+          .on('change', path => parseOutput(path, caller, callee))
+          .on('unlink', path => log(`File ${path} has been removed`))
+          .on('addDir', path => watcher.add(path, caller, callee));
 
         pipeline.createPipeline(caller.id, callee.id, ws, function(error) {
             if (error) {
