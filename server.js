@@ -468,21 +468,12 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         callee.sendMessage(calleeMessage);
     }
 
-    let callee = userRegistry.getById(calleeId);
+    var callee = userRegistry.getById(calleeId);
     if (!from || !userRegistry.getByName(from)) {
         return onError(null, 'unknown from = ' + from);
     }
-    let caller = userRegistry.getByName(from);
+    var caller = userRegistry.getByName(from);
     
-    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
-    
-    of.stdout.on('data', function(data) {
-      console.log('Message: ' + data);
-    });
-    
-    of.on('close', function(code, signal) {
-      console.log('ls finished...');
-    });
     
     var watcher = fswatch.watch('/root/OpenFace/outputs', {
       ignored: /(^|[\/\\])\../,
@@ -496,7 +487,18 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
       .on('change', path => parseOutput(path, caller, callee))
       .on('unlink', path => log(`File ${path} has been removed`))
       .on('addDir', path => watcher.add(path, caller, callee));
-
+    
+    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+    
+    of.stdout.on('data', function(data) {
+      console.log('Message: ' + data);
+    });
+    
+    of.on('close', function(code, signal) {
+      console.log('ls finished...');
+    });
+    
+    
 
     if (callResponse === 'accept') {
         var pipeline = new CallMediaPipeline();
