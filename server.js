@@ -70,6 +70,9 @@ var incImg = 1;
 function parseOutput(file, caller, callee)
 {
   
+  var callee = userRegistry.getById(callee);
+  var caller = userRegistry.getById(caller);
+  
   // console.log('********* parsing output ************' + file);
   if(file.substring(file.length-4, file.length) == '.bmp')
   {
@@ -81,10 +84,10 @@ function parseOutput(file, caller, callee)
     //     imgData : res
     //   }),
     // );
-    // callee.sendMessage({
-    //   id : 'output',
-    //   imgData : file
-    // });
+    callee.sendMessage({
+      id : 'output',
+      imgData : file
+    });
   }
 }
 
