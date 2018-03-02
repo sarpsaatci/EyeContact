@@ -468,11 +468,11 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         callee.sendMessage(calleeMessage);
     }
 
-    var callee = userRegistry.getById(calleeId);
+    let callee = userRegistry.getById(calleeId);
     if (!from || !userRegistry.getByName(from)) {
         return onError(null, 'unknown from = ' + from);
     }
-    var caller = userRegistry.getByName(from);
+    let caller = userRegistry.getByName(from);
     
     of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
     
