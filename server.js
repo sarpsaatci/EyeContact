@@ -74,12 +74,16 @@ function parseOutput(file, caller, callee)
   {
     // console.log("\nBMP\n");
 
-    imageDataURI.encodeFromFile(file).then(res =>
-      callee.sendMessage({
-        id : 'output',
-        imgData : res
-      }),
-    );
+    // imageDataURI.encodeFromFile(file).then(res =>
+    //   callee.sendMessage({
+    //     id : 'output',
+    //     imgData : res
+    //   }),
+    // );
+    callee.sendMessage({
+      id : 'output',
+      imgData : file
+    }),
   }
 }
 
