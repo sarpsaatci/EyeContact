@@ -351,14 +351,12 @@ function getFrame(frame, sessionId)
 
   var frame;
 
-  imageDataURI.outputFile(dataURI, filePath);
-
   // Returns a Promise
-  // imageDataURI.outputFile(dataURI, filePath).then(res =>
-  //   console.log(res);
-  //   // console.log(filePath)
-  //   //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
-  // );
+  imageDataURI.outputFile(dataURI, filePath).then(res =>
+    console.log(res);
+    // console.log(filePath)
+    //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
+  );
 
 
 
