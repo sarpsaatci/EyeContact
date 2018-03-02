@@ -71,7 +71,7 @@ function parseOutput(file, callerId, calleeName)
 {
   
   var caller = userRegistry.getById(callerId);
-  var callee = userRegistry.getByName(calleeName);
+  var callee = caller.peer;
   
   // console.log('********* parsing output ************' + file);
   if(file.substring(file.length-4, file.length) == '.bmp')
