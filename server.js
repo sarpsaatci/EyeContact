@@ -83,7 +83,7 @@ function parseOutput(file, caller, callee)
     callee.sendMessage({
       id : 'output',
       imgData : file
-    }),
+    });
   }
 }
 
