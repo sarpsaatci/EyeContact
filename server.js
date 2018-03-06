@@ -70,8 +70,8 @@ var incImg = 1;
 function parseOutput(file, callerName, calleeName)
 {
   
-  var callee = userRegistry.getByName(calleeName);
-  var caller = userRegistry.getByName(callerName);
+  let callee = userRegistry.getByName(calleeName);
+  let caller = userRegistry.getByName(callerName);
   
   // console.log('********* parsing output ************' + file);
   if(file.substring(file.length-4, file.length) == '.bmp')
@@ -468,19 +468,19 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         callee.sendMessage(calleeMessage);
     }
 
-    var callee = userRegistry.getById(calleeId);
+    let callee = userRegistry.getById(calleeId);
     if (!from || !userRegistry.getByName(from)) {
         return onError(null, 'unknown from = ' + from);
     }
-    var caller = userRegistry.getByName(from);
+    let caller = userRegistry.getByName(from);
     
     
-    var watcher = fswatch.watch('/root/OpenFace/outputs', {
+    let watcher = fswatch.watch('/root/OpenFace/outputs', {
       ignored: /(^|[\/\\])\../,
       persistent: true
     });
     
-    var log = console.log.bind(console);
+    let log = console.log.bind(console);
     
     watcher
       .on('add', path => parseOutput(path, caller.name, callee.name))
