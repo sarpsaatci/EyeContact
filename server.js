@@ -419,6 +419,8 @@ function stop(sessionId) {
         return;
     }    
     incImg = 0;
+    
+    of.kill('SIGHUP');
 
     if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
       console.log('clean frames');
