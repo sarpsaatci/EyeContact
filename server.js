@@ -301,6 +301,7 @@ wss.on('connection', function(ws) {
             break;
 
         case 'stop':
+            of.kill('SIGHUP');
             stop(sessionId);
             break;
 
@@ -416,11 +417,8 @@ function getKurentoClient(callback) {
 function stop(sessionId) {
     if (!pipelines[sessionId]) {
         return;
-    }
-    
+    }    
     incImg = 0;
-
-    of.kill('SIGHUP');
 
     if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
       console.log('clean frames');
