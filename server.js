@@ -371,7 +371,7 @@ function getFrame(frame)
 
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res =>
-    console.log(res)
+    console.log(res),
 
     frame = res
     // console.log(filePath)
