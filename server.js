@@ -321,9 +321,7 @@ wss.on('connection', function(ws) {
                 id : 'frame',
                 imgCount : incImg
               }));
-=======
               ws.send(JSON.stringify(message));
->>>>>>> parent of b63dbe0... opt
             }
             //getFrame(message);
             // ws.send(JSON.stringify({
@@ -373,11 +371,9 @@ function getFrame(frame)
 
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res =>
-<<<<<<< HEAD
     console.log(res)
-=======
+
     frame = res
->>>>>>> parent of b63dbe0... opt
     // console.log(filePath)
     //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
