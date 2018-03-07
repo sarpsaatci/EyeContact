@@ -417,6 +417,8 @@ function stop(sessionId) {
     if (!pipelines[sessionId]) {
         return;
     }
+    
+    incImg = 0;
 
     of.kill('SIGHUP');
 
