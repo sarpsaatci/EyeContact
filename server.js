@@ -316,7 +316,7 @@ wss.on('connection', function(ws) {
             //console.log(message);
             if(getFrame(message)) {
               incImg++;
-<<<<<<< HEAD
+              
               ws.send(JSON.stringify({
                 id : 'frame',
                 imgCount : incImg
