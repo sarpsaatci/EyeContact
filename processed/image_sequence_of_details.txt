@@ -1,6 +1,0 @@
-Input:../OpenFace/samples/image_sequence
-Input full path:/root/OpenFace/samples/image_sequence
-Camera parameters:500,500,320,240
-Output HOG:image_sequence.hog
-Output video:image_sequence.avi
-Output aligned directory:image_sequence_aligned
