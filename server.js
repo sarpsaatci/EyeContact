@@ -316,12 +316,11 @@ wss.on('connection', function(ws) {
             //console.log(message);
             if(getFrame(message)) {
               incImg++;
-              
               ws.send(JSON.stringify({
                 id : 'frame',
                 imgCount : incImg
               }));
-              ws.send(JSON.stringify(message));
+              //ws.send(JSON.stringify(message));
             }
             //getFrame(message);
             // ws.send(JSON.stringify({
