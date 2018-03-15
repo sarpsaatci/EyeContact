@@ -482,18 +482,18 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     let caller = userRegistry.getByName(from);
     
     
-    var watcher = fswatch.watch('/root/OpenFace/outputs', {
-      ignored: /(^|[\/\\])\../,
-      persistent: true
-    });
-    
-    let log = console.log.bind(console);
-    
-    watcher
-      .on('add', path => parseOutput(path, caller.name, callee.name))
-      .on('change', path => parseOutput(path, caller.ame, callee.name))
-      .on('unlink', path => log(`File ${path} has been removed`))
-      .on('addDir', path => watcher.add(path, caller.name, callee.name));
+    // var watcher = fswatch.watch('/root/OpenFace/outputs', {
+    //   ignored: /(^|[\/\\])\../,
+    //   persistent: true
+    // });
+    // 
+    // let log = console.log.bind(console);
+    // 
+    // watcher
+    //   .on('add', path => parseOutput(path, caller.name, callee.name))
+    //   .on('change', path => parseOutput(path, caller.ame, callee.name))
+    //   .on('unlink', path => log(`File ${path} has been removed`))
+    //   .on('addDir', path => watcher.add(path, caller.name, callee.name));
     
     of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
     
