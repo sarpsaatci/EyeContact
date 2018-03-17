@@ -196,14 +196,14 @@ ws.onmessage = function(message) {
 		startCommunication(parsedMessage);
 		break;
 	case 'stopCommunication':
-		// console.info("Communication ended by remote peer");
+		console.info("Communication ended by remote peer");
 		stop(true);
 		break;
 	case 'iceCandidate':
 		webRtcPeer.addIceCandidate(parsedMessage.candidate);
 		break;
   case 'frame':
-    // console.log("Get FRAME: " + parsedMessage.path);
+    console.log("Get FRAME: " + parsedMessage.path);
     readyToCarptureFrame = true;
     break;
   case 'frameUrl':
@@ -260,10 +260,9 @@ function sendMessage(message) {
 
 function startCommunication(message) {
 	setCallState(IN_CALL);
-<<<<<<< HEAD
   
-  // console.log("startCom MESSAGE");
-  // console.log(message);
+  console.log("startCom MESSAGE");
+  console.log(message);
   
 
   console.log("startCom MESSAGE");
