@@ -307,18 +307,13 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-            if(getFrame(message))
-              ws.send(JSON.stringify(message));
-            //console.log(message);
             if(getFrame(message)) {
+              ws.send(JSON.stringify({
+                id : 'frame',
+                imgCount : incImg
+              }));
               incImg++;
-              ws.send(JSON.stringify(message));
             }
-            //getFrame(message);
-            // ws.send(JSON.stringify({
-            //    id : 'frameUrl',
-            //    url : URL.createObjectURL(message.blob)
-            // }));
             break;
 
         default:
