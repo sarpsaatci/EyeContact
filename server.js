@@ -293,11 +293,11 @@ wssf.on('connection', function(wsf) {
           case 'frame':
               // console.log(message.id);
               if(getFrame(message)) {
-                incImg++;
                 wsf.send(JSON.stringify({
                   id : 'frame',
                   imgCount : incImg
                 }));
+                incImg++;
               }
               break;
           default:
