@@ -313,7 +313,7 @@ wss.on('connection', function(ws) {
     var sessionId = nextUniqueId();
     console.log('Connection received with sessionId ' + sessionId);
 
-    ws.binaryType = "arraybuffer";
+    // ws.binaryType = "arraybuffer";
 
     ws.on('error', function(error) {
         console.log('Connection ' + sessionId + ' error');
