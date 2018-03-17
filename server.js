@@ -263,11 +263,6 @@ var server = https.createServer(options, app).listen(port, function() {
     console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
 });
 
-var framePort = (url.parse("https://localhost:8443/")).port;
-var frameServer = https.createServer(options, app).listen(framePort, function() {
-    console.log('Frame server started');
-});
-
 var wssf = new ws.Server({
     server : server,
     path : '/frames'
@@ -280,6 +275,8 @@ var wss = new ws.Server({
 
 wssf.on('connection', function(wsf) {
     console.log('Frame Connection received');
+    
+    ws.binaryType = "arraybuffer";
     
     wsf.on('error', function(error) {
         console.log('Frame Connection error');
@@ -294,13 +291,13 @@ wssf.on('connection', function(wsf) {
         
         switch (message.id) {
           case 'frame':
-              console.log(message.id);
+              // console.log(message.id);
               if(getFrame(message)) {
                 incImg++;
-                // wsf.send(JSON.stringify({
-                //   id : 'frame',
-                //   imgCount : incImg
-                // }));
+                wsf.send(JSON.stringify({
+                  id : 'frame',
+                  imgCount : incImg
+                }));
               }
               break;
           default:
