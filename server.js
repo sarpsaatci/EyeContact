@@ -304,6 +304,7 @@ wss.on('connection', function(ws) {
             break;
 
         case 'stop':
+            console.log('xxxxxxxxxxxxxxxxxx');
             stop(sessionId);
             break;
 
@@ -420,7 +421,6 @@ function getKurentoClient(callback) {
 
 function stop(sessionId) {
     if (!pipelines[sessionId]) {
-        console.log('xxxxxxxxxxxxxxxxxx');
         return;
     }
     incImg = 0;
