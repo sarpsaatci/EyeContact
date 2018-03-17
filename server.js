@@ -263,7 +263,7 @@ var wss = new ws.Server({
 
 wss.on('connection', function(ws) {
     var sessionId = nextUniqueId();
-    // console.log('Connection received with sessionId ' + sessionId);
+    console.log('Connection received with sessionId ' + sessionId);
 
     ws.binaryType = "arraybuffer";
 
@@ -273,7 +273,7 @@ wss.on('connection', function(ws) {
     });
 
     ws.on('close', function() {
-        // console.log('Connection ' + sessionId + ' closed');
+        console.log('Connection ' + sessionId + ' closed');
         stop(sessionId);
         userRegistry.unregister(sessionId);
     });
@@ -361,8 +361,7 @@ function getFrame(frame)
 
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res =>
-    frame = res
-    // console.log(filePath)
+    console.log(res)
     //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
   
@@ -420,7 +419,7 @@ function stop(sessionId) {
     if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
       console.log('clean outputs/');
 
-    //shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
+    shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
 
     // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
     //   if (err) return console.error(err)
