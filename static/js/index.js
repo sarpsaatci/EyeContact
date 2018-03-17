@@ -394,6 +394,7 @@ function call() {
 
 function stop(message) {
 	setCallState(NO_CALL);
+  console.log("NO_CALL");
 	if (webRtcPeer) {
 		webRtcPeer.dispose();
 		webRtcPeer = null;
