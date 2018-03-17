@@ -551,15 +551,15 @@ function call(callerId, to, from, sdpOffer) {
             from: from
         };
         
-        of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
-    
-        of.stdout.on('data', function(data) {
-          console.log('Message: ' + data);
-        });
-    
-        of.on('close', function(code, signal) {
-          console.log('ls finished...');
-        });
+        // of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+        // 
+        // of.stdout.on('data', function(data) {
+        //   console.log('Message: ' + data);
+        // });
+        // 
+        // of.on('close', function(code, signal) {
+        //   console.log('ls finished...');
+        // });
     
         // var watcher = fswatch.watch('/root/OpenFace/outputs', {
         //   ignored: /(^|[\/\\])\../,
