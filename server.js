@@ -291,7 +291,6 @@ wssf.on('connection', function(wsf) {
         
         switch (message.id) {
           case 'frame':
-              // console.log(message.id);
               if(getFrame(message)) {
                 wsf.send(JSON.stringify({
                   id : 'frame',
@@ -355,8 +354,6 @@ wss.on('connection', function(ws) {
             onIceCandidate(sessionId, message.candidate);
             break;
 
-        
-
         default:
             ws.send(JSON.stringify({
                 id : 'error',
@@ -368,58 +365,18 @@ wss.on('connection', function(ws) {
 });
 
 function getFrame(frame)
-{
-  // console.log(frame.path);
-
-  //var buff = Buffer.from(frame.buf.buf);
-  // var blob = new Blob([ frame.buf.buf ], { type: frame.buf.type });
-  // blobUtil.arrayBufferToBlob(frame.buf.buf, frame.buf.type).then(function (blob) {
-  //   console.log("yeah");
-  //   // blobb = blob;
-  //   // console.log(blob);
-  //   }).catch(function (err) {
-  // // error
-  // });
-  
+{  
   console.log("wsf");
 
   var dataURI = frame.buf.dataUri;
-
-  // It will create the full path in case it doesn't exist
-  // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
+  
   var filePath = '../OpenFace/samples/image_sequence/' + incImg + '.jpg';
-  // let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
-
-  // var image = imageDataURI.decode(dataURI);
-  //
-  // console.log(image);
-
-  var u8array = frame.buf.arr;
-
-  var frame;
 
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res =>
     console.log(res)
-    // console.log(filePath)
-    //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
 
-
-
-  // var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir frames/callee -q']);
-  //
-  // ls.stdout.on('data', function(data) {
-  //   console.log('Message: ' + data);
-  // });
-  //
-  // ls.on('close', function(code, signal) {
-  //   console.log('ls finished...');
-  // });
-
-  // console.log(frame.uIntArray);
-  //fileSaver.saveAs(frame.blob, frame.path);
-  //sendUrl(url);
   return true;
 }
 
