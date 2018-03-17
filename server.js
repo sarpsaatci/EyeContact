@@ -297,17 +297,11 @@ wssf.on('connection', function(wsf) {
               console.log(message.id);
               if(getFrame(message)) {
                 incImg++;
-                wsf.send(JSON.stringify({
-                  id : 'frame',
-                  imgCount : incImg
-                }));
-                //ws.send(JSON.stringify(message));
+                // wsf.send(JSON.stringify({
+                //   id : 'frame',
+                //   imgCount : incImg
+                // }));
               }
-              //getFrame(message);
-              // ws.send(JSON.stringify({
-              //    id : 'frameUrl',
-              //    url : URL.createObjectURL(message.blob)
-              // }));
               break;
           default:
               wsf.send(JSON.stringify({
