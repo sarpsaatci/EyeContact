@@ -295,7 +295,7 @@ wssf.on('connection', function(wsf) {
 
         switch (message.id) {
           case 'frame':
-              //console.log(message);
+              console.log(message.id);
               if(getFrame(message)) {
                 incImg++;
                 wsf.send(JSON.stringify({
