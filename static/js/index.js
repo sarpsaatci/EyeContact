@@ -399,10 +399,10 @@ function stop(message) {
 		webRtcPeer = null;
 
 		if (!message) {
-      console.log("NO_CALL");
 			var message = {
 				id : 'stop'
 			}
+      console.log(message);
 			sendMessage(message);
 		}
 	}
