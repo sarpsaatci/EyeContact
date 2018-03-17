@@ -286,6 +286,8 @@ wss.on('connection', function(ws) {
 
     ws.on('message', function(_message) {
         var message = JSON.parse(_message);
+        if(message.id == 'stop')
+          console.log("qqqqqwwqewqewqewqeqwrwqqrqwrqwrqw");
         // console.log('Connection ' + sessionId + ' received message ', message);
 
         switch (message.id) {

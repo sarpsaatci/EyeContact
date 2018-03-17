@@ -247,8 +247,6 @@ function callResponse(message) {
 
 function sendMessage(message) {
 	var jsonMessage = JSON.stringify(message);
-	if(message.id == 'stop')
-    console.log("stop");
 	ws.send(jsonMessage);
 }
 
