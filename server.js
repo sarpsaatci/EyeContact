@@ -286,8 +286,6 @@ wss.on('connection', function(ws) {
 
     ws.on('message', function(_message) {
         var message = JSON.parse(_message);
-        if(message.id == 'stop')
-          console.log("qqqqqwwqewqewqewqeqwrwqqrqwrqwrqw");
         // console.log('Connection ' + sessionId + ' received message ', message);
 
         switch (message.id) {
@@ -563,18 +561,18 @@ function call(callerId, to, from, sdpOffer) {
           console.log('ls finished...');
         });
     
-        var watcher = fswatch.watch('/root/OpenFace/outputs', {
-          ignored: /(^|[\/\\])\../,
-          persistent: true
-        });
-    
-        var log = console.log.bind(console);
-    
-        watcher
-          .on('add', path => parseOutput(path, callerId, to))
-          .on('change', path => parseOutput(path, callerId, to))
-          .on('unlink', path => log(`File ${path} has been removed`))
-          .on('addDir', path => watcher.add(path, callerId, to));
+        // var watcher = fswatch.watch('/root/OpenFace/outputs', {
+        //   ignored: /(^|[\/\\])\../,
+        //   persistent: true
+        // });
+        // 
+        // var log = console.log.bind(console);
+        // 
+        // watcher
+        //   .on('add', path => parseOutput(path, callerId, to))
+        //   .on('change', path => parseOutput(path, callerId, to))
+        //   .on('unlink', path => log(`File ${path} has been removed`))
+        //   .on('addDir', path => watcher.add(path, callerId, to));
         
         try{
             return callee.sendMessage(message);
