@@ -31,7 +31,9 @@ var imageDataURI = require('image-data-uri');
 var fse = require('fs-extra');
 var cp = require('child_process');
 var shell = require('shelljs');
-
+var nbind = require('nbind');
+var lib = nbind.init().lib;
+var fswatch = require('chokidar');
 
 
 var argv = minimist(process.argv.slice(2), {
@@ -64,6 +66,25 @@ var idCounter = 0;
 var calleeName = '';
 var callerName = '';
 
+var of = null;
+
+var incImg = 1;
+
+function parseOutput(file, caller, callee)
+{
+  // console.log('********* parsing output ************' + file);
+  if(file.substring(file.length-4, file.length) == '.bmp')
+  {
+    // console.log("\nBMP\n");
+
+    imageDataURI.encodeFromFile(file).then(res =>
+      callee.sendMessage({
+        id : 'output',
+        imgData : res
+      }),
+    );
+  }
+}
 
 function nextUniqueId() {
     idCounter++;
@@ -197,8 +218,13 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                         self.webRtcEndpoint[calleeId] = calleeWebRtcEndpoint;
 						            //var recorder = pipeline.create('RecorderEndpoint', {uri: argv.file_uri});
 						            //self.webRtcEndpoint[calleeId].connect(recorder);
+<<<<<<< HEAD
                         //console.log("get TAGS");
                         //console.log(self.webRtcEndpoint[calleeId].getTags());
+=======
+                        console.log("get TAGS");
+                        console.log(self.webRtcEndpoint[calleeId].getTags());
+>>>>>>> test
 						            //recorder.record();
                         callback(null);
                     });
@@ -261,6 +287,8 @@ wss.on('connection', function(ws) {
 
         switch (message.id) {
         case 'register':
+            // var bool = lib.Greeter.sayHello('abuzer');
+            // console.log(bool);
             register(sessionId, message.name, ws);
             break;
 
@@ -281,8 +309,21 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
+<<<<<<< HEAD
             if(getFrame(message))
               ws.send(JSON.stringify(message));
+=======
+            //console.log(message);
+            if(getFrame(message)) {
+              incImg++;
+              ws.send(JSON.stringify(message));
+            }
+            //getFrame(message);
+            // ws.send(JSON.stringify({
+            //    id : 'frameUrl',
+            //    url : URL.createObjectURL(message.blob)
+            // }));
+>>>>>>> test
             break;
 
         default:
@@ -298,18 +339,64 @@ wss.on('connection', function(ws) {
 function getFrame(frame)
 {
   // console.log(frame.path);
+<<<<<<< HEAD
+=======
+
+  //var buff = Buffer.from(frame.buf.buf);
+  // var blob = new Blob([ frame.buf.buf ], { type: frame.buf.type });
+  // blobUtil.arrayBufferToBlob(frame.buf.buf, frame.buf.type).then(function (blob) {
+  //   console.log("yeah");
+  //   // blobb = blob;
+  //   // console.log(blob);
+  //   }).catch(function (err) {
+  // // error
+  // });
+>>>>>>> test
 
   let dataURI = frame.buf.dataUri;
 
   // It will create the full path in case it doesn't exist
   // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
-  let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
+  let filePath = '../OpenFace/samples/image_sequence/' + incImg + '.jpg';
+  // let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
 
+<<<<<<< HEAD
+=======
+  // var image = imageDataURI.decode(dataURI);
+  //
+  // console.log(image);
+
+  var u8array = frame.buf.arr;
+
+  var frame;
+
+>>>>>>> test
   // Returns a Promise
-  imageDataURI.outputFile(dataURI, filePath).then(res => 
-    shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
+  imageDataURI.outputFile(dataURI, filePath).then(res =>
+    frame = res
+    // console.log(filePath)
+    //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
+<<<<<<< HEAD
   
+=======
+
+
+
+  // var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir frames/callee -q']);
+  //
+  // ls.stdout.on('data', function(data) {
+  //   console.log('Message: ' + data);
+  // });
+  //
+  // ls.on('close', function(code, signal) {
+  //   console.log('ls finished...');
+  // });
+
+  // console.log(frame.uIntArray);
+  //fileSaver.saveAs(frame.blob, frame.path);
+  //sendUrl(url);
+>>>>>>> test
   return true;
 }
 
@@ -335,12 +422,35 @@ function stop(sessionId) {
         return;
     }
 
+<<<<<<< HEAD
     // Removes saved frames when session ended.
     fse.remove('./out/', err => {
       if (err) return console.error(err)
     
       console.log('success!')
     });
+=======
+    of.kill('SIGHUP');
+
+    if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
+      console.log('clean frames');
+    if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
+      console.log('clean outputs/');
+
+    //shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
+
+    // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
+    //   if (err) return console.error(err)
+    //
+    //   console.log('clean frames')
+    // });
+    //
+    // fse.removeSync('/root/OpenFace/outputs/*', err => {
+    //   if (err) return console.error(err)
+    //
+    //   console.log('clean outputs/')
+    // });
+>>>>>>> test
 
     var pipeline = pipelines[sessionId];
     delete pipelines[sessionId];
@@ -414,7 +524,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                         id: 'startCommunication',
                         sdpAnswer: calleeSdpAnswer,
                         callee: callee.name,
-                        caller: from
+                        caller: from,
                     };
                     calleeName = callee.name;
                     callerName = from;
@@ -440,6 +550,30 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         };
         caller.sendMessage(decline);
     }
+
+    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+
+    of.stdout.on('data', function(data) {
+      console.log('Message: ' + data);
+    });
+
+    of.on('close', function(code, signal) {
+      console.log('ls finished...');
+    });
+
+    var watcher = fswatch.watch('/root/OpenFace/outputs', {
+      ignored: /(^|[\/\\])\../,
+      persistent: true
+    });
+
+    var log = console.log.bind(console);
+
+    watcher
+      .on('add', path => parseOutput(path, caller, callee))
+      .on('change', path => parseOutput(path, caller, callee))
+      .on('unlink', path => log(`File ${path} has been removed`))
+      .on('addDir', path => watcher.add(path, caller, callee));
+
 }
 
 function call(callerId, to, from, sdpOffer) {

@@ -3,16 +3,24 @@
   "version": "6.6.2-dev",
   "private": true,
   "scripts": {
-    "postinstall": "cd static && bower install"
+    "autogypi": "autogypi",
+    "node-gyp": "node-gyp",
+    "emcc-path": "emcc-path",
+    "copyasm": "copyasm",
+    "ndts": "ndts"
   },
   "dependencies": {
+    "autogypi": "^0.2.2",
     "blob-util": "^1.3.0",
     "buffer": "^5.0.8",
+    "chokidar": "^2.0.2",
     "express": "~4.12.4",
     "file-saver": "^1.3.3",
     "image-data-uri": "^1.0.1",
     "kurento-client": "Kurento/kurento-client-js",
     "minimist": "^1.1.1",
+    "nbind": "^0.3.14",
+    "node-gyp": "^3.6.2",
     "shelljs": "^0.8.1",
     "typedarray-to-buffer": "^3.1.2",
     "ws": "~1.0.1"

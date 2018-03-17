@@ -28,6 +28,8 @@ var registerState = null;
 
 var readyToCarptureFrame = false;
 
+var outImg = new Image();
+
 function captureVideoFrame(video, format, path) {
         if (typeof video === 'string') {
             video = document.getElementById(video);
@@ -45,17 +47,63 @@ function captureVideoFrame(video, format, path) {
         canvas.height = video.videoHeight;
 
         canvas.getContext('2d').drawImage(video, 0, 0);
+<<<<<<< HEAD
                 
+=======
+
+        // var frameBlob;
+        //
+        // if (canvas.toBlob) {
+        //     frameBlob = canvas.toBlob(
+        //         function (blob) {
+        //             //frameBlob = blob;
+        //             // Do something with the blob object,
+        //             // e.g. creating a multipart form for file uploads:
+        //             var formData = new FormData();
+        //             formData.append('file', blob, path);
+        //             /* ... */
+        //         },
+        //         'image/jpeg'
+        //     );
+        // }
+        //
+        // console.log(frameBlob);
+        //
+        // return frameBlob;
+
+        //var blob = canvas.toBlob();
+
+>>>>>>> test
         var dataUri = canvas.toDataURL('image/' + format);
         var type = 'image/' + format;
         var data = dataUri.split(',')[1];
         var mimeType = dataUri.split(';')[0].slice(5);
-        
+
         var bytes = window.atob(data);
         var buf = new ArrayBuffer(bytes.length);
         var arr = new Uint8Array(buf);
+<<<<<<< HEAD
         
         return { buf: buf, dataUri: dataUri, type: type }; 
+=======
+
+        // for (var i = 0; i < bytes.length; i++) {
+        //     arr[i] = bytes.charCodeAt(i);
+        // }
+
+        // var blob = new Blob([ arr ], { type: mimeType });
+        //console.log(blob);
+        //
+        // //var file = new File(blob, "/images/" + path, [type: 'image/' + format]);
+        // //
+        // // console.log(file);
+        //
+        // var formData = new FormData();
+        // formData.append("blob", blob, path);
+        //return { blob: blob, dataUri: dataUri, format: format };
+        return { buf: buf, dataUri: dataUri, arr: arr, type: type };
+        //return blob;
+>>>>>>> test
 }
 
 function setRegisterState(nextState) {
@@ -131,9 +179,15 @@ window.onbeforeunload = function() {
 }
 
 ws.onmessage = function(message) {
+<<<<<<< HEAD
 	
 	// console.log();
 	
+=======
+
+	console.log();
+
+>>>>>>> test
 	var parsedMessage = JSON.parse(message.data);
 	// console.info('Received message: ' + message.data);
 
@@ -162,9 +216,27 @@ ws.onmessage = function(message) {
     // console.log("Get FRAME: " + parsedMessage.path);
     readyToCarptureFrame = true;
     break;
+<<<<<<< HEAD
+=======
+  case 'frameUrl':
+    console.log(message);
+    break;
+  case 'output':
+    // console.log("aha aha aha");
+    printOutput(parsedMessage);
+    break;
+>>>>>>> test
 	default:
 		console.error('Unrecognized message', parsedMessage);
 	}
+}
+
+function printOutput(message)
+{
+  // console.log(message);
+  outImg.src = message.imgData;
+  document.getElementById('output').appendChild(outImg);
+  //new Draggabilly(document.getElementById('output'));
 }
 
 function resgisterResponse(message) {
@@ -201,10 +273,17 @@ function sendMessage(message) {
 
 function startCommunication(message) {
 	setCallState(IN_CALL);
+<<<<<<< HEAD
   
   // console.log("startCom MESSAGE");
   // console.log(message);
   
+=======
+
+  console.log("startCom MESSAGE");
+  console.log(message);
+
+>>>>>>> test
   videoOutput.ontimeupdate = function() {
     if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
       // console.log("time: " + videoOutput.currentTime);
@@ -212,6 +291,7 @@ function startCommunication(message) {
       frameBuf = captureVideoFrame(videoOutput, null, path);
       frame = {
         id : 'frame',
+        sessionId : message.sessionId,
         path : path,
         buf : frameBuf
       };
@@ -220,7 +300,7 @@ function startCommunication(message) {
       sendMessage(frame);
     }
   };
-    
+
 	webRtcPeer.processAnswer(message.sdpAnswer);
 }
 
@@ -306,7 +386,6 @@ function call() {
 	}
 
 	setCallState(PROCESSING_CALL);
-	
 
 	showSpinner(videoInput, videoOutput);
 
@@ -315,8 +394,6 @@ function call() {
 		remoteVideo : videoOutput,
 		onicecandidate : onIceCandidate
 	}
-	
-	
 
 	webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(options, function(
 			error) {
@@ -354,6 +431,10 @@ function stop(message) {
 			sendMessage(message);
 		}
 	}
+
+
+  var element = document.getElementById('output');
+  outImg.src = "";
 	hideSpinner(videoInput, videoOutput);
 }
 
