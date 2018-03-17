@@ -292,7 +292,7 @@ wssf.on('connection', function(wsf) {
         switch (message.id) {
           case 'frame':
               if(getFrame(message)) {
-                wsf.send(JSON.stringify({
+                ws.send(JSON.stringify({
                   id : 'frame',
                   imgCount : incImg
                 }));
@@ -300,7 +300,7 @@ wssf.on('connection', function(wsf) {
               }
               break;
           default:
-              wsf.send(JSON.stringify({
+              ws.send(JSON.stringify({
                   id : 'error',
                   message : 'Invalid message ' + message
               }));
