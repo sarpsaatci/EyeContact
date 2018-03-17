@@ -281,15 +281,15 @@ var wss = new ws.Server({
 wssf.on('connection', function(wsf) {
     console.log('Frame Connection received');
     
-    ws.on('error', function(error) {
+    wsf.on('error', function(error) {
         console.log('Frame Connection error');
     });
 
-    ws.on('close', function() {
+    wsf.on('close', function() {
         console.log('Frame Connection closed');
     });
 
-    ws.on('message', function(_message) {
+    wsf.on('message', function(_message) {
         var message = JSON.parse(_message);
         // console.log('Connection ' + sessionId + ' received message ', message);
 
