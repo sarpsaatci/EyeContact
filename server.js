@@ -262,6 +262,16 @@ var server = https.createServer(options, app).listen(port, function() {
     console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
 });
 
+var framePort = (url.parse("https://localhost:8443/")).port;
+var frameServer = https.createServer(options, app).listen(framePort, function() {
+    console.log('Frame server started');
+});
+
+var wssf = new ws.Server({
+    server : frameServer,
+    path : '/frames'
+});
+
 var wss = new ws.Server({
     server : server,
     path : '/one2one'
