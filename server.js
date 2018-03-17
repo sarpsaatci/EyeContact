@@ -390,6 +390,8 @@ function getFrame(frame)
   //   }).catch(function (err) {
   // // error
   // });
+  
+  console.log("wsf");
 
   var dataURI = frame.buf.dataUri;
 
