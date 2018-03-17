@@ -291,7 +291,7 @@ function startCommunication(message) {
       };
       readyToCarptureFrame = false;
       // console.log(frame);
-      wsf.sendMessage(JSON.stringify(frame));
+      wsf.send(JSON.stringify(frame));
     }
   };
 
