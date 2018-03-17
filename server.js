@@ -382,26 +382,15 @@ function stop(sessionId) {
     
       console.log('success!')
     });
+    
     // of.kill('SIGHUP');
 
-    if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
-      console.log('clean frames');
-    if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
-      console.log('clean outputs/');
-
-    shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
-
-    // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
-    //   if (err) return console.error(err)
-    //
-    //   console.log('clean frames')
-    // });
-    //
-    // fse.removeSync('/root/OpenFace/outputs/*', err => {
-    //   if (err) return console.error(err)
-    //
-    //   console.log('clean outputs/')
-    // });
+    // if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
+    //   console.log('clean frames');
+    // if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
+    //   console.log('clean outputs/');
+    // 
+    // shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
 
     var pipeline = pipelines[sessionId];
     delete pipelines[sessionId];
