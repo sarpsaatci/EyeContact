@@ -420,8 +420,9 @@ function getKurentoClient(callback) {
 
 function stop(sessionId) {
     if (!pipelines[sessionId]) {
+        console.log('xxxxxxxxxxxxxxxxxx');
         return;
-    }    
+    }
     incImg = 0;
     
     of.kill('SIGHUP');
