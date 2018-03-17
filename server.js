@@ -285,8 +285,6 @@ wss.on('connection', function(ws) {
 
         switch (message.id) {
         case 'register':
-            // var bool = lib.Greeter.sayHello('abuzer');
-            // console.log(bool);
             register(sessionId, message.name, ws);
             break;
 
@@ -345,38 +343,14 @@ function getFrame(frame)
   // It will create the full path in case it doesn't exist
   // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
   let filePath = '../OpenFace/samples/image_sequence/' + incImg + '.jpg';
-  // let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
 
-  // var image = imageDataURI.decode(dataURI);
-  //
-  // console.log(image);
-
-  var u8array = frame.buf.arr;
-
-  var frame;
 
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res =>
     console.log(res)
     //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
-  
 
-
-
-  // var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir frames/callee -q']);
-  //
-  // ls.stdout.on('data', function(data) {
-  //   console.log('Message: ' + data);
-  // });
-  //
-  // ls.on('close', function(code, signal) {
-  //   console.log('ls finished...');
-  // });
-
-  // console.log(frame.uIntArray);
-  //fileSaver.saveAs(frame.blob, frame.path);
-  //sendUrl(url);
   return true;
 }
 
