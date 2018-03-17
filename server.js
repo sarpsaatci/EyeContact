@@ -273,7 +273,7 @@ var wss = new ws.Server({
     path : '/one2one'
 });
 
-wssf.on('connection', function(wsf) {
+wssf.on('connection', function(wsf, ws) {
     console.log('Frame Connection received');
     
     wsf.binaryType = "arraybuffer";
