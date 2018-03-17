@@ -475,12 +475,11 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         callee.sendMessage(calleeMessage);
     }
 
-    let callee = userRegistry.getById(calleeId);
+    var callee = userRegistry.getById(calleeId);
     if (!from || !userRegistry.getByName(from)) {
         return onError(null, 'unknown from = ' + from);
     }
-    let caller = userRegistry.getByName(from);
-    
+    var caller = userRegistry.getByName(from);
     
     // var watcher = fswatch.watch('/root/OpenFace/outputs', {
     //   ignored: /(^|[\/\\])\../,
