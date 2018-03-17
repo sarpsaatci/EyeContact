@@ -214,6 +214,27 @@ ws.onmessage = function(message) {
 	}
 }
 
+wsf.onmessage = function(message) {
+
+	console.log();
+
+	var parsedMessage = JSON.parse(message.data);
+	// console.info('Received message: ' + message.data);
+
+	switch (parsedMessage.id) {
+  case 'frame':
+    console.log("Get FRAME: " + parsedMessage.imgCount);
+    readyToCarptureFrame = true;
+    break;
+  case 'output':
+    // console.log("aha aha aha");
+    printOutput(parsedMessage);
+    break;
+	default:
+		console.error('Unrecognized message', parsedMessage);
+	}
+}
+
 function printOutput(message)
 {
   console.log("xxxxxxxxxxxxxxxxxx");
