@@ -304,7 +304,7 @@ wss.on('connection', function(ws) {
             break;
 
         case 'stop':
-            console.log('xxxxxxxxxxxxxxxxxx');
+            console.log(sessionId);
             stop(sessionId);
             break;
 
