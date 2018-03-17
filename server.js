@@ -34,7 +34,6 @@ var shell = require('shelljs');
 var nbind = require('nbind');
 var lib = nbind.init().lib;
 var fswatch = require('chokidar');
-var wsf = require('ws');
 
 
 var argv = minimist(process.argv.slice(2), {
@@ -71,27 +70,20 @@ var of = null;
 
 var incImg = 1;
 
-function parseOutput(file, callerName, calleeName)
+function parseOutput(file, caller, callee)
 {
-  
-  var callee = userRegistry.getByName(calleeName);
-  var caller = userRegistry.getByName(callerName);
-  
   // console.log('********* parsing output ************' + file);
   if(file.substring(file.length-4, file.length) == '.bmp')
   {
     // console.log("\nBMP\n");
 
-    // imageDataURI.encodeFromFile(file).then(res =>
-    //   callee.sendMessage({
-    //     id : 'output',
-    //     imgData : res
-    //   }),
-    // );
-    callee.sendMessage({
-      id : 'output',
-      imgData : file
-    });
+    imageDataURI.encodeFromFile(file).then(res =>
+      callee.sendMessage({
+        id : 'output',
+        imgData : res,
+        fileName : file
+      }),
+    );
   }
 }
 
@@ -227,6 +219,8 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                         self.webRtcEndpoint[calleeId] = calleeWebRtcEndpoint;
 						            //var recorder = pipeline.create('RecorderEndpoint', {uri: argv.file_uri});
 						            //self.webRtcEndpoint[calleeId].connect(recorder);
+                        //console.log("get TAGS");
+                        //console.log(self.webRtcEndpoint[calleeId].getTags());
                         console.log("get TAGS");
                         console.log(self.webRtcEndpoint[calleeId].getTags());
 						            //recorder.record();
@@ -263,57 +257,16 @@ var server = https.createServer(options, app).listen(port, function() {
     console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
 });
 
-var wssf = new wsf.Server({
-    server : server,
-    path : '/frames'
-});
-
 var wss = new ws.Server({
     server : server,
     path : '/one2one'
-});
-
-wssf.on('connection', function(wsf) {
-    console.log('Frame Connection received');
-    
-    wsf.binaryType = "arraybuffer";
-    
-    wsf.on('error', function(error) {
-        console.log('Frame Connection error');
-    });
-
-    wsf.on('close', function() {
-        console.log('Frame Connection closed');
-    });
-
-    wsf.on('message', function(_message) {
-        var message = JSON.parse(_message);
-        
-        switch (message.id) {
-          case 'frame':
-              if(getFrame(message)) {
-                wsf.send(JSON.stringify({
-                  id : 'frame',
-                  imgCount : incImg
-                }));
-                incImg++;
-              }
-              break;
-          default:
-              wsf.send(JSON.stringify({
-                  id : 'error',
-                  message : 'Invalid message ' + message
-              }));
-              break;
-        }
-    });
 });
 
 wss.on('connection', function(ws) {
     var sessionId = nextUniqueId();
     console.log('Connection received with sessionId ' + sessionId);
 
-    // ws.binaryType = "arraybuffer";
+    ws.binaryType = "arraybuffer";
 
     ws.on('error', function(error) {
         console.log('Connection ' + sessionId + ' error');
@@ -346,12 +299,26 @@ wss.on('connection', function(ws) {
             break;
 
         case 'stop':
-            console.log(sessionId);
             stop(sessionId);
             break;
 
         case 'onIceCandidate':
             onIceCandidate(sessionId, message.candidate);
+            break;
+
+        case 'frame':
+            if(getFrame(message))
+              ws.send(JSON.stringify(message));
+            //console.log(message);
+            if(getFrame(message)) {
+              incImg++;
+              ws.send(JSON.stringify(message));
+            }
+            //getFrame(message);
+            // ws.send(JSON.stringify({
+            //    id : 'frameUrl',
+            //    url : URL.createObjectURL(message.blob)
+            // }));
             break;
 
         default:
@@ -365,29 +332,58 @@ wss.on('connection', function(ws) {
 });
 
 function getFrame(frame)
-{  
-  console.log("wsf");
+{
+  // console.log(frame.path);
 
-  var dataURI = frame.buf.dataUri;
-  
-  var filePath = '../OpenFace/samples/image_sequence/' + incImg + '.jpg';
+  //var buff = Buffer.from(frame.buf.buf);
+  // var blob = new Blob([ frame.buf.buf ], { type: frame.buf.type });
+  // blobUtil.arrayBufferToBlob(frame.buf.buf, frame.buf.type).then(function (blob) {
+  //   console.log("yeah");
+  //   // blobb = blob;
+  //   // console.log(blob);
+  //   }).catch(function (err) {
+  // // error
+  // });
+
+  let dataURI = frame.buf.dataUri;
+
+  // It will create the full path in case it doesn't exist
+  // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
+  let filePath = '../OpenFace/samples/image_sequence/' + incImg + '.jpg';
+  // let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
+
+  // var image = imageDataURI.decode(dataURI);
+  //
+  // console.log(image);
+
+  var u8array = frame.buf.arr;
+
+  var frame;
 
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res =>
     console.log(res)
+    //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
+  
 
+
+
+  // var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir frames/callee -q']);
+  //
+  // ls.stdout.on('data', function(data) {
+  //   console.log('Message: ' + data);
+  // });
+  //
+  // ls.on('close', function(code, signal) {
+  //   console.log('ls finished...');
+  // });
+
+  // console.log(frame.uIntArray);
+  //fileSaver.saveAs(frame.blob, frame.path);
+  //sendUrl(url);
   return true;
 }
-
-function sendUrl(url, ws) {
-  var message = JSON.stringify({
-      id : 'frameUrl',
-      message : url
-    });
-  //callee.sendMessage(message);
-}
-
 
 // Recover kurentoClient for the first time.
 function getKurentoClient(callback) {
@@ -410,15 +406,33 @@ function stop(sessionId) {
     if (!pipelines[sessionId]) {
         return;
     }
-    incImg = 1;
+
+    // Removes saved frames when session ended.
+    fse.remove('./out/', err => {
+      if (err) return console.error(err)
     
-    // of.kill('SIGHUP');
+      console.log('success!')
+    });
+    of.kill('SIGHUP');
 
     if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
       console.log('clean frames');
     if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
       console.log('clean outputs/');
 
+    shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
+
+    // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
+    //   if (err) return console.error(err)
+    //
+    //   console.log('clean frames')
+    // });
+    //
+    // fse.removeSync('/root/OpenFace/outputs/*', err => {
+    //   if (err) return console.error(err)
+    //
+    //   console.log('clean outputs/')
+    // });
 
     var pipeline = pipelines[sessionId];
     delete pipelines[sessionId];
@@ -467,13 +481,12 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         return onError(null, 'unknown from = ' + from);
     }
     var caller = userRegistry.getByName(from);
-    
+
     if (callResponse === 'accept') {
         var pipeline = new CallMediaPipeline();
         pipelines[caller.id] = pipeline;
         pipelines[callee.id] = pipeline;
-        
-        
+
         pipeline.createPipeline(caller.id, callee.id, ws, function(error) {
             if (error) {
                 return onError(error, error);
@@ -508,8 +521,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
                         caller: from
                     };
                     caller.sendMessage(message);
-                    
-                    
                 });
             });
         });
@@ -521,6 +532,30 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         };
         caller.sendMessage(decline);
     }
+
+    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+
+    of.stdout.on('data', function(data) {
+      console.log('Message: ' + data);
+    });
+
+    of.on('close', function(code, signal) {
+      console.log('ls finished...');
+    });
+
+    var watcher = fswatch.watch('/root/OpenFace/outputs', {
+      ignored: /(^|[\/\\])\../,
+      persistent: true
+    });
+
+    var log = console.log.bind(console);
+
+    watcher
+      .on('add', path => parseOutput(path, caller, callee))
+      .on('change', path => parseOutput(path, caller, callee))
+      .on('unlink', path => log(`File ${path} has been removed`))
+      .on('addDir', path => watcher.add(path, caller, callee));
+
 }
 
 function call(callerId, to, from, sdpOffer) {
@@ -537,30 +572,6 @@ function call(callerId, to, from, sdpOffer) {
             id: 'incomingCall',
             from: from
         };
-        
-        // of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
-        // 
-        // of.stdout.on('data', function(data) {
-        //   console.log('Message: ' + data);
-        // });
-        // 
-        // of.on('close', function(code, signal) {
-        //   console.log('ls finished...');
-        // });
-    
-        // var watcher = fswatch.watch('/root/OpenFace/outputs', {
-        //   ignored: /(^|[\/\\])\../,
-        //   persistent: true
-        // });
-        // 
-        // var log = console.log.bind(console);
-        // 
-        // watcher
-        //   .on('add', path => parseOutput(path, callerId, to))
-        //   .on('change', path => parseOutput(path, callerId, to))
-        //   .on('unlink', path => log(`File ${path} has been removed`))
-        //   .on('addDir', path => watcher.add(path, callerId, to));
-        
         try{
             return callee.sendMessage(message);
         } catch(exception) {

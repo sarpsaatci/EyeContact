@@ -16,7 +16,6 @@
  */
 
 var ws = new WebSocket('wss://' + location.host + '/one2one');
-var wsf = new WebSocket('wss://' + location.host + '/frames');
 var videoInput;
 var videoOutput;
 var webRtcPeer;
@@ -79,6 +78,8 @@ function captureVideoFrame(video, format, path) {
         var bytes = window.atob(data);
         var buf = new ArrayBuffer(bytes.length);
         var arr = new Uint8Array(buf);
+        
+        return { buf: buf, dataUri: dataUri, type: type }; 
 
         // for (var i = 0; i < bytes.length; i++) {
         //     arr[i] = bytes.charCodeAt(i);
@@ -171,6 +172,9 @@ window.onbeforeunload = function() {
 }
 
 ws.onmessage = function(message) {
+	
+	// console.log();
+	
 
 	console.log();
 
@@ -199,7 +203,7 @@ ws.onmessage = function(message) {
 		webRtcPeer.addIceCandidate(parsedMessage.candidate);
 		break;
   case 'frame':
-    console.log("Get FRAME: " + parsedMessage.imgCount);
+    console.log("Get FRAME: " + parsedMessage.path);
     readyToCarptureFrame = true;
     break;
   case 'frameUrl':
@@ -214,31 +218,10 @@ ws.onmessage = function(message) {
 	}
 }
 
-wsf.onmessage = function(message) {
-
-	console.log();
-
-	var parsedMessage = JSON.parse(message.data);
-	// console.info('Received message: ' + message.data);
-
-	switch (parsedMessage.id) {
-  case 'frame':
-    console.log("Get FRAME: " + parsedMessage.imgCount);
-    readyToCarptureFrame = true;
-    break;
-  case 'output':
-    // console.log("aha aha aha");
-    printOutput(parsedMessage);
-    break;
-	default:
-		console.error('Unrecognized message', parsedMessage);
-	}
-}
-
 function printOutput(message)
 {
-  console.log("xxxxxxxxxxxxxxxxxx");
-  // outImg.src = message.imgData;
+  console.log(message.fileName);
+  outImg.src = message.imgData;
   // document.getElementById('output').appendChild(outImg);
 }
 
@@ -269,11 +252,17 @@ function callResponse(message) {
 
 function sendMessage(message) {
 	var jsonMessage = JSON.stringify(message);
+	// console.log('Senging message: ' + jsonMessage);
+  // console.log(JSON.parse(jsonMessage)); // stringify ederken blobu kaybediyoruz
 	ws.send(jsonMessage);
 }
 
 function startCommunication(message) {
 	setCallState(IN_CALL);
+  
+  console.log("startCom MESSAGE");
+  console.log(message);
+  
 
   console.log("startCom MESSAGE");
   console.log(message);
@@ -283,15 +272,14 @@ function startCommunication(message) {
       console.log("time: " + videoOutput.currentTime);
       path = "frame_" + (videoOutput.currentTime | 0);
       frameBuf = captureVideoFrame(videoOutput, null, path);
-      var frame = {
+      frame = {
         id : 'frame',
         sessionId : message.sessionId,
         path : path,
         buf : frameBuf
       };
       readyToCarptureFrame = false;
-      // console.log(frame);
-      wsf.send(JSON.stringify(frame));
+      sendMessage(frame);
     }
   };
 
@@ -433,7 +421,7 @@ function stop(message) {
 }
 
 function onIceCandidate(candidate) {
-	console.log('Local candidate' + JSON.stringify(candidate));
+	// console.log('Local candidate' + JSON.stringify(candidate));
 
 	var message = {
 		id : 'onIceCandidate',
