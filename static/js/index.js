@@ -94,7 +94,7 @@ function captureVideoFrame(video, format, path) {
         // var formData = new FormData();
         // formData.append("blob", blob, path);
         //return { blob: blob, dataUri: dataUri, format: format };
-        return { buf: buf, dataUri: dataUri, arr: arr, type: type };
+        return { dataUri: dataUri, type: type };
         //return blob;
 }
 
@@ -283,7 +283,7 @@ function startCommunication(message) {
       console.log("time: " + videoOutput.currentTime);
       path = "frame_" + (videoOutput.currentTime | 0);
       frameBuf = captureVideoFrame(videoOutput, null, path);
-      frame = {
+      var frame = {
         id : 'frame',
         sessionId : message.sessionId,
         path : path,
