@@ -43,10 +43,10 @@ function captureVideoFrame(video, format, path) {
 
         var canvas = document.createElement("CANVAS");
 
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
+        canvas.width = video.videoWidth/2;
+        canvas.height = video.videoHeight/2;
 
-        canvas.getContext('2d').drawImage(video, 0, 0);
+        canvas.getContext('2d').drawImage(video, 0, 0, video.videoHeight/2, video.videoWidth/2);
 
         // var frameBlob;
         //
@@ -259,9 +259,6 @@ function sendMessage(message) {
 
 function startCommunication(message) {
 	setCallState(IN_CALL);
-  
-  console.log("startCom MESSAGE");
-  console.log(message);
   
 
   console.log("startCom MESSAGE");
