@@ -353,11 +353,11 @@ function getFrame(frame)
   // // error
   // });
 
-  let dataURI = frame.buf.dataUri;
+  var dataURI = frame.buf.dataUri;
 
   // It will create the full path in case it doesn't exist
   // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
-  let filePath = '../OpenFace/samples/image_sequence/' + incImg + '.jpg';
+  var filePath = '../OpenFace/samples/image_sequence/' + incImg + '.jpg';
   // let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
 
   // var image = imageDataURI.decode(dataURI);
@@ -423,7 +423,7 @@ function stop(sessionId) {
     if (!pipelines[sessionId]) {
         return;
     }
-    incImg = 0;
+    incImg = 1;
     
     of.kill('SIGHUP');
 
@@ -494,15 +494,15 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     //   .on('unlink', path => log(`File ${path} has been removed`))
     //   .on('addDir', path => watcher.add(path, caller.name, callee.name));
     
-    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
-    
-    of.stdout.on('data', function(data) {
-      console.log('Message: ' + data);
-    });
-    
-    of.on('close', function(code, signal) {
-      console.log('ls finished...');
-    });
+    // of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+    // 
+    // of.stdout.on('data', function(data) {
+    //   console.log('Message: ' + data);
+    // });
+    // 
+    // of.on('close', function(code, signal) {
+    //   console.log('ls finished...');
+    // });
     
     
 
