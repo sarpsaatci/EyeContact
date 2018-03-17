@@ -73,8 +73,8 @@ var incImg = 1;
 function parseOutput(file, callerName, calleeName)
 {
   
-  let callee = userRegistry.getByName(calleeName);
-  let caller = userRegistry.getByName(callerName);
+  var callee = userRegistry.getByName(calleeName);
+  var caller = userRegistry.getByName(callerName);
   
   // console.log('********* parsing output ************' + file);
   if(file.substring(file.length-4, file.length) == '.bmp')
