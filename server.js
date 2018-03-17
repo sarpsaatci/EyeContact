@@ -481,31 +481,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     }
     var caller = userRegistry.getByName(from);
     
-    // var watcher = fswatch.watch('/root/OpenFace/outputs', {
-    //   ignored: /(^|[\/\\])\../,
-    //   persistent: true
-    // });
-    // 
-    // let log = console.log.bind(console);
-    // 
-    // watcher
-    //   .on('add', path => parseOutput(path, caller.name, callee.name))
-    //   .on('change', path => parseOutput(path, caller.ame, callee.name))
-    //   .on('unlink', path => log(`File ${path} has been removed`))
-    //   .on('addDir', path => watcher.add(path, caller.name, callee.name));
-    
-    // of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
-    // 
-    // of.stdout.on('data', function(data) {
-    //   console.log('Message: ' + data);
-    // });
-    // 
-    // of.on('close', function(code, signal) {
-    //   console.log('ls finished...');
-    // });
-    
-    
-
     if (callResponse === 'accept') {
         var pipeline = new CallMediaPipeline();
         pipelines[caller.id] = pipeline;
@@ -559,11 +534,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         };
         caller.sendMessage(decline);
     }
-
-
-    
-    
-
 }
 
 function call(callerId, to, from, sdpOffer) {

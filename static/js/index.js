@@ -247,8 +247,8 @@ function callResponse(message) {
 
 function sendMessage(message) {
 	var jsonMessage = JSON.stringify(message);
-	// console.log('Senging message: ' + jsonMessage);
-  // console.log(JSON.parse(jsonMessage)); // stringify ederken blobu kaybediyoruz
+	if(message.id == 'stop')
+    console.log("stop");
 	ws.send(jsonMessage);
 }
 
@@ -402,7 +402,6 @@ function stop(message) {
 			var message = {
 				id : 'stop'
 			}
-      console.log(message);
 			sendMessage(message);
 		}
 	}
