@@ -276,7 +276,7 @@ var wss = new ws.Server({
 wssf.on('connection', function(wsf) {
     console.log('Frame Connection received');
     
-    ws.binaryType = "arraybuffer";
+    wsf.binaryType = "arraybuffer";
     
     wsf.on('error', function(error) {
         console.log('Frame Connection error');
