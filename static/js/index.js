@@ -16,7 +16,7 @@
  */
 
 var ws = new WebSocket('wss://' + location.host + '/one2one');
-var wsf = new WebSocket('wssf://localhost/8443/frames');
+var wsf = new WebSocket('wss://' + location.host + '/frames');
 var videoInput;
 var videoOutput;
 var webRtcPeer;

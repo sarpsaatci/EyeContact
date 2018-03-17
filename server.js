@@ -269,7 +269,7 @@ var frameServer = https.createServer(options, app).listen(framePort, function() 
 });
 
 var wssf = new ws.Server({
-    server : frameServer,
+    server : server,
     path : '/frames'
 });
 
