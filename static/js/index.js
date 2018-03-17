@@ -95,7 +95,7 @@ function captureVideoFrame(video, format, path) {
         // var formData = new FormData();
         // formData.append("blob", blob, path);
         //return { blob: blob, dataUri: dataUri, format: format };
-        return { buf: buf, dataUri: dataUri, arr: arr, type: type };
+        return { dataUri: dataUri, type: type };
         //return blob;
 }
 
@@ -220,10 +220,9 @@ ws.onmessage = function(message) {
 
 function printOutput(message)
 {
-  // console.log(message);
+  console.log(message.fileName);
   outImg.src = message.imgData;
-  document.getElementById('output').appendChild(outImg);
-  //new Draggabilly(document.getElementById('output'));
+  // document.getElementById('output').appendChild(outImg);
 }
 
 function resgisterResponse(message) {
@@ -270,7 +269,7 @@ function startCommunication(message) {
 
   videoOutput.ontimeupdate = function() {
     if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
-      // console.log("time: " + videoOutput.currentTime);
+      console.log("time: " + videoOutput.currentTime);
       path = "frame_" + (videoOutput.currentTime | 0);
       frameBuf = captureVideoFrame(videoOutput, null, path);
       frame = {
@@ -280,7 +279,6 @@ function startCommunication(message) {
         buf : frameBuf
       };
       readyToCarptureFrame = false;
-      // console.log(frame);
       sendMessage(frame);
     }
   };

@@ -80,7 +80,8 @@ function parseOutput(file, caller, callee)
     imageDataURI.encodeFromFile(file).then(res =>
       callee.sendMessage({
         id : 'output',
-        imgData : res
+        imgData : res,
+        fileName : file
       }),
     );
   }
