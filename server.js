@@ -408,7 +408,7 @@ function stop(sessionId) {
     
       console.log('success!')
     });
-    of.kill('SIGHUP');
+    // of.kill('SIGHUP');
 
     if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
       console.log('clean frames');
@@ -528,7 +528,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         caller.sendMessage(decline);
     }
 
-    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+    // of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
 
     of.stdout.on('data', function(data) {
       console.log('Message: ' + data);
