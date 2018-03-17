@@ -304,7 +304,6 @@ wss.on('connection', function(ws) {
             break;
 
         case 'stop':
-            of.kill('SIGHUP');
             stop(sessionId);
             break;
 
