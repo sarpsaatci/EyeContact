@@ -263,7 +263,7 @@ var server = https.createServer(options, app).listen(port, function() {
     console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
 });
 
-var wssf = new ws.Server({
+var wssf = new wsf.Server({
     server : server,
     path : '/frames'
 });
@@ -273,7 +273,7 @@ var wss = new ws.Server({
     path : '/one2one'
 });
 
-wssf.on('connection', function(wsf, ws) {
+wssf.on('connection', function(wsf) {
     console.log('Frame Connection received');
     
     wsf.binaryType = "arraybuffer";
@@ -292,7 +292,7 @@ wssf.on('connection', function(wsf, ws) {
         switch (message.id) {
           case 'frame':
               if(getFrame(message)) {
-                ws.send(JSON.stringify({
+                wsf.send(JSON.stringify({
                   id : 'frame',
                   imgCount : incImg
                 }));
@@ -300,7 +300,7 @@ wssf.on('connection', function(wsf, ws) {
               }
               break;
           default:
-              ws.send(JSON.stringify({
+              wsf.send(JSON.stringify({
                   id : 'error',
                   message : 'Invalid message ' + message
               }));
