@@ -16,6 +16,7 @@
  */
 
 var ws = new WebSocket('wss://' + location.host + '/one2one');
+var wsf = new WebSocket('wss://localhost/8443/frames');
 var videoInput;
 var videoOutput;
 var webRtcPeer;
@@ -269,7 +270,7 @@ function startCommunication(message) {
       };
       readyToCarptureFrame = false;
       // console.log(frame);
-      sendMessage(frame);
+      wsf.sendMessage(JSON.stringify(frame));
     }
   };
 

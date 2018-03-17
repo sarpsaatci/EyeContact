@@ -34,6 +34,7 @@ var shell = require('shelljs');
 var nbind = require('nbind');
 var lib = nbind.init().lib;
 var fswatch = require('chokidar');
+var wsf = require('ws');
 
 
 var argv = minimist(process.argv.slice(2), {
@@ -277,6 +278,48 @@ var wss = new ws.Server({
     path : '/one2one'
 });
 
+wssf.on('connection', function(wsf) {
+    console.log('Frame Connection received');
+    
+    ws.on('error', function(error) {
+        console.log('Frame Connection error');
+    });
+
+    ws.on('close', function() {
+        console.log('Frame Connection closed');
+    });
+
+    ws.on('message', function(_message) {
+        var message = JSON.parse(_message);
+        // console.log('Connection ' + sessionId + ' received message ', message);
+
+        switch (message.id) {
+          case 'frame':
+              //console.log(message);
+              if(getFrame(message)) {
+                incImg++;
+                wsf.send(JSON.stringify({
+                  id : 'frame',
+                  imgCount : incImg
+                }));
+                //ws.send(JSON.stringify(message));
+              }
+              //getFrame(message);
+              // ws.send(JSON.stringify({
+              //    id : 'frameUrl',
+              //    url : URL.createObjectURL(message.blob)
+              // }));
+              break;
+          default:
+              wsf.send(JSON.stringify({
+                  id : 'error',
+                  message : 'Invalid message ' + message
+              }));
+              break;
+        }
+    });
+});
+
 wss.on('connection', function(ws) {
     var sessionId = nextUniqueId();
     console.log('Connection received with sessionId ' + sessionId);
@@ -322,22 +365,7 @@ wss.on('connection', function(ws) {
             onIceCandidate(sessionId, message.candidate);
             break;
 
-        case 'frame':
-            //console.log(message);
-            if(getFrame(message)) {
-              incImg++;
-              ws.send(JSON.stringify({
-                id : 'frame',
-                imgCount : incImg
-              }));
-              //ws.send(JSON.stringify(message));
-            }
-            //getFrame(message);
-            // ws.send(JSON.stringify({
-            //    id : 'frameUrl',
-            //    url : URL.createObjectURL(message.blob)
-            // }));
-            break;
+        
 
         default:
             ws.send(JSON.stringify({
