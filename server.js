@@ -218,13 +218,10 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                         self.webRtcEndpoint[calleeId] = calleeWebRtcEndpoint;
 						            //var recorder = pipeline.create('RecorderEndpoint', {uri: argv.file_uri});
 						            //self.webRtcEndpoint[calleeId].connect(recorder);
-<<<<<<< HEAD
                         //console.log("get TAGS");
                         //console.log(self.webRtcEndpoint[calleeId].getTags());
-=======
                         console.log("get TAGS");
                         console.log(self.webRtcEndpoint[calleeId].getTags());
->>>>>>> test
 						            //recorder.record();
                         callback(null);
                     });
@@ -309,10 +306,8 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-<<<<<<< HEAD
             if(getFrame(message))
               ws.send(JSON.stringify(message));
-=======
             //console.log(message);
             if(getFrame(message)) {
               incImg++;
@@ -323,7 +318,6 @@ wss.on('connection', function(ws) {
             //    id : 'frameUrl',
             //    url : URL.createObjectURL(message.blob)
             // }));
->>>>>>> test
             break;
 
         default:
@@ -339,8 +333,6 @@ wss.on('connection', function(ws) {
 function getFrame(frame)
 {
   // console.log(frame.path);
-<<<<<<< HEAD
-=======
 
   //var buff = Buffer.from(frame.buf.buf);
   // var blob = new Blob([ frame.buf.buf ], { type: frame.buf.type });
@@ -351,7 +343,6 @@ function getFrame(frame)
   //   }).catch(function (err) {
   // // error
   // });
->>>>>>> test
 
   let dataURI = frame.buf.dataUri;
 
@@ -360,8 +351,6 @@ function getFrame(frame)
   let filePath = '../OpenFace/samples/image_sequence/' + incImg + '.jpg';
   // let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
 
-<<<<<<< HEAD
-=======
   // var image = imageDataURI.decode(dataURI);
   //
   // console.log(image);
@@ -370,16 +359,13 @@ function getFrame(frame)
 
   var frame;
 
->>>>>>> test
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res =>
     frame = res
     // console.log(filePath)
     //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
-<<<<<<< HEAD
   
-=======
 
 
 
@@ -396,7 +382,6 @@ function getFrame(frame)
   // console.log(frame.uIntArray);
   //fileSaver.saveAs(frame.blob, frame.path);
   //sendUrl(url);
->>>>>>> test
   return true;
 }
 
@@ -422,14 +407,12 @@ function stop(sessionId) {
         return;
     }
 
-<<<<<<< HEAD
     // Removes saved frames when session ended.
     fse.remove('./out/', err => {
       if (err) return console.error(err)
     
       console.log('success!')
     });
-=======
     of.kill('SIGHUP');
 
     if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
@@ -450,7 +433,6 @@ function stop(sessionId) {
     //
     //   console.log('clean outputs/')
     // });
->>>>>>> test
 
     var pipeline = pipelines[sessionId];
     delete pipelines[sessionId];

@@ -47,9 +47,6 @@ function captureVideoFrame(video, format, path) {
         canvas.height = video.videoHeight;
 
         canvas.getContext('2d').drawImage(video, 0, 0);
-<<<<<<< HEAD
-                
-=======
 
         // var frameBlob;
         //
@@ -73,7 +70,6 @@ function captureVideoFrame(video, format, path) {
 
         //var blob = canvas.toBlob();
 
->>>>>>> test
         var dataUri = canvas.toDataURL('image/' + format);
         var type = 'image/' + format;
         var data = dataUri.split(',')[1];
@@ -82,10 +78,8 @@ function captureVideoFrame(video, format, path) {
         var bytes = window.atob(data);
         var buf = new ArrayBuffer(bytes.length);
         var arr = new Uint8Array(buf);
-<<<<<<< HEAD
         
         return { buf: buf, dataUri: dataUri, type: type }; 
-=======
 
         // for (var i = 0; i < bytes.length; i++) {
         //     arr[i] = bytes.charCodeAt(i);
@@ -103,7 +97,6 @@ function captureVideoFrame(video, format, path) {
         //return { blob: blob, dataUri: dataUri, format: format };
         return { buf: buf, dataUri: dataUri, arr: arr, type: type };
         //return blob;
->>>>>>> test
 }
 
 function setRegisterState(nextState) {
@@ -179,15 +172,12 @@ window.onbeforeunload = function() {
 }
 
 ws.onmessage = function(message) {
-<<<<<<< HEAD
 	
 	// console.log();
 	
-=======
 
 	console.log();
 
->>>>>>> test
 	var parsedMessage = JSON.parse(message.data);
 	// console.info('Received message: ' + message.data);
 
@@ -216,8 +206,6 @@ ws.onmessage = function(message) {
     // console.log("Get FRAME: " + parsedMessage.path);
     readyToCarptureFrame = true;
     break;
-<<<<<<< HEAD
-=======
   case 'frameUrl':
     console.log(message);
     break;
@@ -225,7 +213,6 @@ ws.onmessage = function(message) {
     // console.log("aha aha aha");
     printOutput(parsedMessage);
     break;
->>>>>>> test
 	default:
 		console.error('Unrecognized message', parsedMessage);
 	}
@@ -278,12 +265,10 @@ function startCommunication(message) {
   // console.log("startCom MESSAGE");
   // console.log(message);
   
-=======
 
   console.log("startCom MESSAGE");
   console.log(message);
 
->>>>>>> test
   videoOutput.ontimeupdate = function() {
     if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
       // console.log("time: " + videoOutput.currentTime);
