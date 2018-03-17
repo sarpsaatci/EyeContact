@@ -291,7 +291,6 @@ wssf.on('connection', function(wsf) {
 
     wsf.on('message', function(_message) {
         var message = JSON.parse(_message);
-        console.log(_message);
         
         switch (message.id) {
           case 'frame':
