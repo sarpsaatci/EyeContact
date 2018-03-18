@@ -34,6 +34,7 @@ var shell = require('shelljs');
 var nbind = require('nbind');
 var lib = nbind.init().lib;
 var fswatch = require('chokidar');
+var firebase = require('firebase');
 
 var argv = minimist(process.argv.slice(2), {
   default: {
