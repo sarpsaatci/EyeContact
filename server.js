@@ -34,6 +34,8 @@ var shell = require('shelljs');
 var nbind = require('nbind');
 var lib = nbind.init().lib;
 var fswatch = require('chokidar');
+var firebase = require('firebase');
+var firebaseui = require('firebaseui');
 
 
 var argv = minimist(process.argv.slice(2), {
@@ -379,17 +381,17 @@ function stop(sessionId) {
     // Removes saved frames when session ended.
     fse.remove('./out/', err => {
       if (err) return console.error(err)
-    
+
       console.log('success!')
     });
-    
+
     // of.kill('SIGHUP');
 
     // if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
     //   console.log('clean frames');
     // if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
     //   console.log('clean outputs/');
-    // 
+    //
     // shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
 
     var pipeline = pipelines[sessionId];
@@ -496,7 +498,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     // of.stdout.on('data', function(data) {
     //   console.log('Message: ' + data);
     // });
-    // 
+    //
     // of.on('close', function(code, signal) {
     //   console.log('ls finished...');
     // });
