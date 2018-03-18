@@ -34,17 +34,6 @@ var shell = require('shelljs');
 var nbind = require('nbind');
 var lib = nbind.init().lib;
 var fswatch = require('chokidar');
-var firebase = require('firebase');
-
-var config = {
-  apiKey: "AIzaSyAJi_z-4RcZfQHfOLLEvO9gUx0z7YIDuxU",
-  authDomain: "eyecontact-fe41b.firebaseapp.com",
-  databaseURL: "https://eyecontact-fe41b.firebaseio.com",
-  projectId: "eyecontact-fe41b",
-  storageBucket: "",
-  messagingSenderId: "687000785034"
-};
-firebase.initializeApp(config);
 
 var argv = minimist(process.argv.slice(2), {
   default: {
