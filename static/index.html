@@ -1,100 +1,29 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
-    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="687000785034-s3579vi7cc0f38jdkh087qkni1cnpca4.apps.googleusercontent.com">
 
-    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyAJi_z-4RcZfQHfOLLEvO9gUx0z7YIDuxU",
-        authDomain: "eyecontact-fe41b.firebaseapp.com",
-        databaseURL: "https://eyecontact-fe41b.firebaseio.com",
-        projectId: "eyecontact-fe41b",
-        storageBucket: "eyecontact-fe41b.appspot.com",
-        messagingSenderId: "687000785034"
-
-        clientId: "1071651886018-uk7ovomu9u5kaunh954sn182b5p4omi5.apps.googleusercontent.com"
-
-        scopes: [
-             "email",
-             "profile",
-             "https://www.googleapis.com/auth/contacts.readonly"
-        ],
-        discoveryDocs: [
-            "https://people.googleapis.com/$discovery/rest?version=v1"
-        ]
-      };
-      firebase.initializeApp(config);
-
-      var uiConfig = {
-        signInSuccessUrl: “call.html”,
-        signInOptions: [{
-          provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-          scopes: config.scopes
-        }],
-        // Terms of service url.
-        tosUrl: “call.html”
-      };
-
-      firebase.auth().onAuthStateChanged(function(user) {
-        console.log(user)
-        // Make sure there is a valid user object
-        if (user) {
-          var script = document.createElement("script");
-          script.type = "text/javascript";
-          script.src = "https://apis.google.com/js/api.js";
-          // Once the Google API Client is loaded, you can run your code
-          script.onload = function(e) {
-            // Initialize the Google API Client with the config object
-            gapi.client
-              .init({
-                apiKey: config.apiKey,
-                clientId: config.clientID,
-                discoveryDocs: config.discoveryDocs,
-                scope: config.scopes.join(" ")
-              })
-              // Loading is finished, so start the app
-              .then(function() {
-                // Make sure the Google API Client is properly signed in
-                if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
-                  startApp(user);
-                } else {
-                  firebase.auth().signOut(); // Something went wrong, sign out
-                }
-              });
-          };
-          // Add to the document
-          document.getElementsByTagName("head")[0].appendChild(script);
-        }
-      });
-
-      // function startApp(user) {
-      //   console.log(user);
-      //
-      //   // Make sure to refresh the Auth Token in case it expires!
-      //   firebase.auth().currentUser.getToken()
-      //   .then(function(){
-      //    return gapi.client.calendar.events
-      //     .list({
-      //       calendarId: "primary",
-      //       timeMin: new Date().toISOString(),
-      //       showDeleted: false,
-      //       singleEvents: true,
-      //       maxResults: 10,
-      //       orderBy: "startTime"
-      //     })
-      //   })
-      //   .then(function(response) {
-      //     console.log(response);
-      //   });
-      // }
-    </script>
   </head>
 
   <body>
-    <h1>aaaa</h1>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <script>
+      function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      }
+    </script>
+    <a href="#" onclick="signOut();">Sign out</a>
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+      }
+    </script>
   </body>
 </html>
