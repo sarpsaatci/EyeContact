@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
 
-    <!-- Leave out Storage -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-storage.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
     <script>
       // Initialize Firebase
       var config = {
@@ -17,32 +13,84 @@
         authDomain: "eyecontact-fe41b.firebaseapp.com",
         databaseURL: "https://eyecontact-fe41b.firebaseio.com",
         projectId: "eyecontact-fe41b",
-        storageBucket: "",
+        storageBucket: "eyecontact-fe41b.appspot.com",
         messagingSenderId: "687000785034"
+
+        clientId: "1071651886018-uk7ovomu9u5kaunh954sn182b5p4omi5.apps.googleusercontent.com"
+
+        scopes: [
+             "email",
+             "profile",
+             "https://www.googleapis.com/auth/contacts.readonly"
+        ],
+        discoveryDocs: [
+            "https://people.googleapis.com/$discovery/rest?version=v1"
+        ]
       };
       firebase.initializeApp(config);
 
-      var provider = new firebase.auth.GoogleAuthProvider();
-      provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-      firebase.auth().useDeviceLanguage();
+      var uiConfig = {
+        signInSuccessUrl: “call.html”,
+        signInOptions: [{
+          provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          scopes: config.scopes
+        }],
+        // Terms of service url.
+        tosUrl: “call.html”
+      };
 
-      firebase.auth().signInWithPopup(provider).then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        // ...
-      }).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
+      firebase.auth().onAuthStateChanged(function(user) {
+        console.log(user)
+        // Make sure there is a valid user object
+        if (user) {
+          var script = document.createElement("script");
+          script.type = "text/javascript";
+          script.src = "https://apis.google.com/js/api.js";
+          // Once the Google API Client is loaded, you can run your code
+          script.onload = function(e) {
+            // Initialize the Google API Client with the config object
+            gapi.client
+              .init({
+                apiKey: config.apiKey,
+                clientId: config.clientID,
+                discoveryDocs: config.discoveryDocs,
+                scope: config.scopes.join(" ")
+              })
+              // Loading is finished, so start the app
+              .then(function() {
+                // Make sure the Google API Client is properly signed in
+                if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+                  startApp(user);
+                } else {
+                  firebase.auth().signOut(); // Something went wrong, sign out
+                }
+              });
+          };
+          // Add to the document
+          document.getElementsByTagName("head")[0].appendChild(script);
+        }
       });
 
+      // function startApp(user) {
+      //   console.log(user);
+      //
+      //   // Make sure to refresh the Auth Token in case it expires!
+      //   firebase.auth().currentUser.getToken()
+      //   .then(function(){
+      //    return gapi.client.calendar.events
+      //     .list({
+      //       calendarId: "primary",
+      //       timeMin: new Date().toISOString(),
+      //       showDeleted: false,
+      //       singleEvents: true,
+      //       maxResults: 10,
+      //       orderBy: "startTime"
+      //     })
+      //   })
+      //   .then(function(response) {
+      //     console.log(response);
+      //   });
+      // }
     </script>
   </head>
 
