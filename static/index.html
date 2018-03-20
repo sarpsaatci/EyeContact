@@ -109,7 +109,7 @@ function HandleGoogleApiLibrary() {
 				// On error
 				function(error) {
 					alert('Error : Failed to Load Library');
-					console.log(error.message);
+					console.log(error.result.error.message);
 			  	}
 			);
 		},
