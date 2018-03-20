@@ -13,7 +13,43 @@
     <link rel="stylesheet" href="bower_components/ekko-lightbox/dist/ekko-lightbox.min.css">
     <link rel="stylesheet" href="css/kurento.css">
 
+    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAJi_z-4RcZfQHfOLLEvO9gUx0z7YIDuxU",
+        authDomain: "eyecontact-fe41b.firebaseapp.com",
+        databaseURL: "https://eyecontact-fe41b.firebaseio.com",
+        projectId: "eyecontact-fe41b",
+        storageBucket: "eyecontact-fe41b.appspot.com",
+        messagingSenderId: "687000785034"
+      };
+      firebase.initializeApp(config);
 
+      function login(){
+    		function newLoginHappened(user){
+    			if(user){
+            // User is signed in
+    				app(user);
+    			}else{
+    				var provider = new firebase.auth.GoogleAuthProvider();
+    				firebase.auth().signInWithRedirect(provider);
+    			}
+    		}
+  		  firebase.auth().onAuthStateChanged(newLoginHappened);
+    	}
+
+    	function app(user) {
+        // user.displayName
+        // user.email
+        //user.photoURL
+        //user.uid
+        document.getElementById("clientName").innerHTML = user.displayName;
+    	}
+
+    	window.onload = login;
+
+    </script>
 
     <script src="bower_components/adapter.js/adapter.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -146,51 +182,3 @@
     </footer>
 
   </body>
-
-
-<!DOCTYPE html>
-  <html lang="en">
-  <head>
-  <meta charset = "UTF-8">
-  <title></title>
-  </head>
-  <body>
-  <h1>Hello<span id="clientName"></span></h1>
-  </body>
-  <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-     apiKey: "AIzaSyDV4DKuLVUcuLSWery7asweO-b6EmcLWjk",
-     authDomain: "eyecontact-c0256.firebaseapp.com",
-     databaseURL: "https://eyecontact-c0256.firebaseio.com",
-     projectId: "eyecontact-c0256",
-     storageBucket: "eyecontact-c0256.appspot.com",
-     messagingSenderId: "305322108967"
-    };
-    firebase.initializeApp(config);
-    function login(){
-  		function newLoginHappened(user){
-  			if(user){
-          // User is signed in
-  				app(user);
-  			}else{
-  				var provider = new firebase.auth.GoogleAuthProvider();
-  				firebase.auth().signInWithRedirect(provider);
-  			}
-  		}
-  		firebase.auth().onAuthStateChanged(newLoginHappened);
-  	}
-
-  	function app(user) {
-      // user.displayName
-      // user.email
-      //user.photoURL
-      //user.uid
-      document.getElementbyID("clientName").innerHTML = user.displayName;
-  	}
-
-  	window.onload = login;
-
-  </script>
-</html>
