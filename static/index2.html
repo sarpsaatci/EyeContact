@@ -35,6 +35,7 @@
         callbacks: {
           signInSuccess: function(currentUser, credential, redirectUrl) {
             // User successfully signed in.
+            activatePage();
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
             return true;
@@ -72,7 +73,14 @@
     <script src="js/index.js"></script>
     <title>Kurento Tutorial 4: Video Call 1 to 1 with WebRTC</title>
   </head>
-  <body>
+
+  <body id="authPage">
+    <h1>Welcome to My Awesome App</h1>
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
+  </body>
+
+  <body id="activePage" style="display: none">
 
     <header>
       <div class="navbar navbar-inverse navbar-fixed-top">
