@@ -78,8 +78,8 @@ function captureVideoFrame(video, format, path) {
         var bytes = window.atob(data);
         var buf = new ArrayBuffer(bytes.length);
         var arr = new Uint8Array(buf);
-        
-        return { buf: buf, dataUri: dataUri, type: type }; 
+
+        return { buf: buf, dataUri: dataUri, type: type };
 
         // for (var i = 0; i < bytes.length; i++) {
         //     arr[i] = bytes.charCodeAt(i);
@@ -172,9 +172,9 @@ window.onbeforeunload = function() {
 }
 
 ws.onmessage = function(message) {
-	
+
 	// console.log();
-	
+
 
 	console.log();
 
@@ -218,6 +218,12 @@ ws.onmessage = function(message) {
 	}
 }
 
+function activatePage()
+{
+  document.getElementById("authPage").style.display = "none";
+  document.getElementById("activePage").style.display = "block";
+}
+
 function printOutput(message)
 {
   console.log(message.fileName);
@@ -259,7 +265,7 @@ function sendMessage(message) {
 
 function startCommunication(message) {
 	setCallState(IN_CALL);
-  
+
 
   console.log("startCom MESSAGE");
   console.log(message);
