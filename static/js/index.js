@@ -218,6 +218,11 @@ ws.onmessage = function(message) {
 	}
 }
 
+function manageUser(currentUser, credential)
+{
+  
+}
+
 function activatePage()
 {
   document.getElementById("authPage").style.display = "none";

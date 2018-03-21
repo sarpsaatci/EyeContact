@@ -20,12 +20,12 @@
     <script>
       // Initialize Firebase
       var config = {
-        apiKey: "AIzaSyAJi_z-4RcZfQHfOLLEvO9gUx0z7YIDuxU",
-        authDomain: "eyecontact-fe41b.firebaseapp.com",
-        databaseURL: "https://eyecontact-fe41b.firebaseio.com",
-        projectId: "eyecontact-fe41b",
-        storageBucket: "eyecontact-fe41b.appspot.com",
-        messagingSenderId: "687000785034"
+        apiKey: "AIzaSyBmFEUbUi4GudkxuWpLbKLilEQIRY92GeU",
+        authDomain: "eyecontact-in.firebaseapp.com",
+        databaseURL: "https://eyecontact-in.firebaseio.com",
+        projectId: "eyecontact-in",
+        storageBucket: "",
+        messagingSenderId: "989889011102"
       };
       firebase.initializeApp(config);
 
@@ -35,6 +35,7 @@
         callbacks: {
           signInSuccess: function(currentUser, credential, redirectUrl) {
             // User successfully signed in.
+            manageUser(currentUser, credential);
             activatePage();
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
