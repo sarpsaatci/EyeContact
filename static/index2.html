@@ -13,7 +13,10 @@
     <link rel="stylesheet" href="bower_components/ekko-lightbox/dist/ekko-lightbox.min.css">
     <link rel="stylesheet" href="css/kurento.css">
 
-    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
     <script>
       // Initialize Firebase
       var config = {
@@ -26,28 +29,34 @@
       };
       firebase.initializeApp(config);
 
-      function login(){
-    		function newLoginHappened(user){
-    			if(user){
-            // User is signed in
-    				app(user);
-    			}else{
-    				var provider = new firebase.auth.GoogleAuthProvider();
-    				firebase.auth().signInWithRedirect(provider);
-    			}
-    		}
-  		  firebase.auth().onAuthStateChanged(newLoginHappened);
-    	}
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
-    	function app(user) {
-        // user.displayName
-        // user.email
-        //user.photoURL
-        //user.uid
-        document.getElementById("clientName").innerHTML = user.displayName;
-    	}
+      var uiConfig = {
+        callbacks: {
+          signInSuccess: function(currentUser, credential, redirectUrl) {
+            // User successfully signed in.
+            // Return type determines whether we continue the redirect automatically
+            // or whether we leave that to developer to handle.
+            return true;
+          },
+          uiShown: function() {
+            // The widget is rendered.
+            // Hide the loader.
+            document.getElementById('loader').style.display = 'none';
+          }
+        },
+        // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+        signInFlow: 'popup',
+        signInSuccessUrl: '/index2.html',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        ],
+        // Terms of service url.
+        tosUrl: 'index.html'
+      };
 
-    	window.onload = login();
+      ui.start('#firebaseui-auth-container', uiConfig);
 
     </script>
 
