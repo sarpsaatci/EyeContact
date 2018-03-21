@@ -1,175 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale = 1.0" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<style type="text/css">
+  <!-- set the character set -->
+  <meta charset="utf-8">
+  <!-- tell IE to use latest version and chrome frame if available -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-body {
-	margin: 0;
-	font-size: 14px;
-	color: #333333;
-}
+  <script src="js/main.js"></script>
 
-#login-button {
-	width: 200px;
-	margin: 50px auto;
-	display: block;
-}
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
 
-#user-information {
-	width: 400px;
-	display: none;
-	margin: 50px auto;
-}
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAJi_z-4RcZfQHfOLLEvO9gUx0z7YIDuxU",
+      authDomain: "eyecontact-fe41b.firebaseapp.com",
+      databaseURL: "https://eyecontact-fe41b.firebaseio.com",
+      projectId: "eyecontact-fe41b",
+      storageBucket: "eyecontact-fe41b.appspot.com",
+      messagingSenderId: "687000785034"
+    };
+    firebase.initializeApp(config);
 
-#user-information div {
-	margin: 0 0 20px 0;
-}
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
-#user-information div label {
-	display: inline-block;
-	vertical-align: middle;
-	width: 100px;
-	font-weight: 700;
-}
+    var uiConfig = {
+      callbacks: {
+        signInSuccess: function(currentUser, credential, redirectUrl) {
+          // User successfully signed in.
+          // Return type determines whether we continue the redirect automatically
+          // or whether we leave that to developer to handle.
+          return true;
+        },
+        uiShown: function() {
+          // The widget is rendered.
+          // Hide the loader.
+          document.getElementById('loader').style.display = 'none';
+        }
+      },
+      // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+      signInFlow: 'popup',
+      signInSuccessUrl: '</index2.html',
+      signInOptions: [
+        // Leave the lines as is for the providers you want to offer your users.
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      ],
+      // Terms of service url.
+      tosUrl: '/index.html'
+    };
 
-#user-information div span {
-	display: inline-block;
-	vertical-align: middle;
-}
+    ui.start('#firebaseui-auth-container', uiConfig);
 
-</style>
+  </script>
 
-<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDV4DKuLVUcuLSWery7asweO-b6EmcLWjk",
-    authDomain: "eyecontact-c0256.firebaseapp.com",
-    databaseURL: "https://eyecontact-c0256.firebaseio.com",
-    projectId: "eyecontact-c0256",
-    storageBucket: "eyecontact-c0256.appspot.com",
-    messagingSenderId: "305322108967"
-  };
-  firebase.initializeApp(config);
-</script>
 
+
+  <title>Text Page</title>
+
+  <!-- include basic style sheet -->
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
-
 <body>
-
-<button id="login-button" disabled>Login with Google</button>
-
-<div id="user-information">
-	<div>
-		<label>Name</label>
-		<span></span>
-	</div>
-	<div>
-		<label>ID</label>
-		<span></span>
-	</div>
-	<div>
-		<label>Gender</label>
-		<span></span>
-	</div>
-	<div>
-		<label>Picture</label>
-		<span></span>
-	</div>
-	<div>
-		<label>Email</label>
-		<span></span>
-	</div>
-</div>
-
-<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};HandleGoogleApiLibrary()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
-
-<script>
-
-// Called when Google Javascript API Javascript is loaded
-function HandleGoogleApiLibrary() {
-	// Load "client" & "auth2" libraries
-	gapi.load('client:auth2', {
-		callback: function() {
-			// Initialize client library
-			// clientId & scope is provided => automatically initializes auth2 library
-			gapi.client.init({
-		    	apiKey: 'AIzaSyAXcY9767wOyE7E7zvMXG63ws_HyLEMvEI',
-		    	clientId: '1071651886018-uk7ovomu9u5kaunh954sn182b5p4omi5',
-		    	scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me'
-			}).then(
-				// On success
-				function(success) {
-			  		// After library is successfully loaded then enable the login button
-			  		$("#login-button").removeAttr('disabled');
-				},
-				// On error
-				function(error) {
-					alert('Error : Failed to Load Library');
-					console.log(error.result.error.message);
-			  	}
-			);
-		},
-		onerror: function() {
-			// Failed to load libraries
-		}
-	});
-}
-
-// Click on login button
-$("#login-button").on('click', function() {
-	$("#login-button").attr('disabled', 'disabled');
-
-	// API call for Google login
-	gapi.auth2.getAuthInstance().signIn().then(
-		// On success
-		function(success) {
-			// API call to get user information
-			gapi.client.request({ path: 'https://www.googleapis.com/plus/v1/people/me' }).then(
-				// On success
-				function(success) {
-					console.log(success);
-					var user_info = JSON.parse(success.body);
-					console.log(user_info);
-
-
-					$("#user-information div").eq(0).find("span").text(user_info.displayName);
-					$("#user-information div").eq(1).find("span").text(user_info.id);
-					$("#user-information div").eq(2).find("span").text(user_info.gender);
-					$("#user-information div").eq(3).find("span").html('<img src="' + user_info.image.url + '" />');
-					$("#user-information div").eq(4).find("span").text(user_info.emails[0].value);
-
-					$("#user-information").show();
-					$("#login-button").hide();
-
-
-					var rootRef = firebase.database().ref().child("user");
-					var userRef = rootRef.child(user_info.id);
-					userRef.set({
-						name: user_info.displayName
-						//gender: user_info.gender
-					});
-				},
-				// On error
-				function(error) {
-					$("#login-button").removeAttr('disabled');
-					alert('Error : Failed to get user user information');
-				}
-			);
-		},
-		// On error
-		function(error) {
-			$("#login-button").removeAttr('disabled');
-			alert('Error : Login Failed');
-		}
-	);
-});
-
-</script>
-
-
+  <h1>Welcome to My Awesome App</h1>
+  <div id="firebaseui-auth-container"></div>
+  <div id="loader">Loading...</div>
 </body>
 </html>
