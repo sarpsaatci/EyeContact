@@ -3,3 +3,6 @@ test:
 
 commit-test:
 	git add .; git commit -m "commit from cloud"; git push origin; git checkout test; 
+
+commit:
+	xxx
