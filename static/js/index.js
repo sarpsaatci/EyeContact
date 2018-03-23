@@ -221,7 +221,7 @@ ws.onmessage = function(message) {
 function manageUser(currentUser, credential)
 {
   if(credential.providerId == "google.com")
-    console.log(credential);
+    console.log(currentUser);
 }
 
 function activatePage()
