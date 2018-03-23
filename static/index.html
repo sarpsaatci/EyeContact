@@ -35,7 +35,7 @@
         callbacks: {
           signInSuccess: function(currentUser, credential, redirectUrl) {
             // User successfully signed in.
-            manageUser(currentUser, credential);
+            manageUser(currentUser, credential.providerId);
             activatePage();
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
