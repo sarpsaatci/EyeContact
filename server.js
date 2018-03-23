@@ -36,13 +36,11 @@ var lib = nbind.init().lib;
 var fswatch = require('chokidar');
 var firebase = require('firebase');
 
-'use strict';
-let admin = require('firebase-admin');
-var serviceAccount = require('keys/EyeContact-78e8139899c4.json');
+const admin = require('firebase-admin');
+const serviceAccount = require('keys/eyecontact-in-firebase-adminsdk-83ghl-68946d9163.json');
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://eyecontact-in.firebaseio.com'
+    credential: admin.credential.cert(serviceAccount)
 });
 
 var db = admin.firestore();
