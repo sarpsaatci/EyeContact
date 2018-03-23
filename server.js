@@ -35,6 +35,7 @@ var nbind = require('nbind');
 var lib = nbind.init().lib;
 var fswatch = require('chokidar');
 
+'use strict';
 let admin = require('firebase-admin');
 
 var serviceAccount = require('EyeContact-78e8139899c4.json');
