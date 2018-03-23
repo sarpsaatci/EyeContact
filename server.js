@@ -313,6 +313,9 @@ wss.on('connection', function(ws) {
             }
             break;
 
+        case 'user':
+          console.log("*****************user*************");
+
         default:
             ws.send(JSON.stringify({
                 id : 'error',

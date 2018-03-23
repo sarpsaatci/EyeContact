@@ -35,7 +35,6 @@
         callbacks: {
           signInSuccess: function(currentUser, credential, redirectUrl) {
             // User successfully signed in.
-            console.log(currentUser);
             manageUser(currentUser, credential);
             activatePage();
             // Return type determines whether we continue the redirect automatically
