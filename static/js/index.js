@@ -220,7 +220,7 @@ ws.onmessage = function(message) {
 
 function manageUser(currentUser, credential)
 {
-  if(credential == "google.com")
+  if(credential.providerId == "google.com")
     console.log(credential);
 }
 
