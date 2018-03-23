@@ -35,6 +35,25 @@ var nbind = require('nbind');
 var lib = nbind.init().lib;
 var fswatch = require('chokidar');
 
+const admin = require('firebase-admin');
+
+var serviceAccount = require('EyeContact-78e8139899c4.json');
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+});
+
+var db = admin.firestore();
+
+var aTuringRef = db.collection('users').doc('aturing');
+
+var setAlan = aTuringRef.set({
+    'first': 'Alan',
+    'middle': 'Mathison',
+    'last': 'Turing',
+    'born': 1912
+});
+
 var argv = minimist(process.argv.slice(2), {
   default: {
       as_uri: "https://localhost:443/",
