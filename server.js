@@ -34,9 +34,10 @@ var shell = require('shelljs');
 var nbind = require('nbind');
 var lib = nbind.init().lib;
 var fswatch = require('chokidar');
+var firebase = require('firebase');
 
 var admin = require('firebase-admin');
-var serviceAccount = require('EyeContact-78e8139899c4.json');
+var serviceAccount = require('keys/EyeContact-78e8139899c4.json');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
