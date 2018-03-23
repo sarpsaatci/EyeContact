@@ -36,8 +36,8 @@ var lib = nbind.init().lib;
 var fswatch = require('chokidar');
 var firebase = require('firebase');
 
-// var admin = require('firebase-admin');
-import * as admin from "firebase-admin";
+'use strict':
+let admin = require('firebase-admin');
 var serviceAccount = require('keys/EyeContact-78e8139899c4.json');
 
 admin.initializeApp({
