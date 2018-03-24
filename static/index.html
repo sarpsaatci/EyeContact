@@ -98,6 +98,7 @@
               })
               // Loading is finished, so start the app
               .then(function() {
+                console.log("aaaaaaaaaaaa");
               // Make sure the Google API Client is properly signed in
                 if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
                   manageUser(currentUser, credential);
