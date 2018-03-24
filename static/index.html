@@ -69,7 +69,7 @@
                   manageUser(currentUser, credential);
                   activatePage();
                 } else {
-                  firebase.auth().signOut(); // Something went wrong, sign out
+                  return false;
                 }
               })
             }
