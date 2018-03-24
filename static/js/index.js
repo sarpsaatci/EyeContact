@@ -220,7 +220,7 @@ ws.onmessage = function(message) {
 
 function manageUser(currentUser)
 {
-  if(currentUser.providerId == 'google.com')
+  if(currentUser)
     sendMessage({
       id : 'user',
       currentUser : currentUser
