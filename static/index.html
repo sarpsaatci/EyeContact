@@ -46,7 +46,6 @@
       firebase.auth().onAuthStateChanged(function(user) {
         // Make sure there is a valid user object
         if(user){
-          console.log(user);
           var script = document.createElement('script');
           script.type = 'text/javascript';
           script.src = 'https://apis.google.com/js/api.js';
@@ -63,6 +62,7 @@
            .then(function() {
             // Make sure the Google API Client is properly signed in
             if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+              console.log(user);
               manageUser(user);
             } else {
               firebase.auth().signOut(); // Something went wrong, sign out
