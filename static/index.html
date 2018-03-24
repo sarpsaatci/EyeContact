@@ -51,8 +51,17 @@
         signInFlow: 'popup',
         // signInSuccessUrl: '/index2.html',
         signInOptions: [
-          // Leave the lines as is for the providers you want to offer your users.
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          {
+            provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            scopes: [
+              'https://www.googleapis.com/auth/contacts.readonly'
+            ],
+            customParameters: {
+              // Forces account selection even when one account
+              // is available.
+              prompt: 'select_account'
+            }
+          }
         ]
         // Terms of service url.
         // tosUrl: 'index.html'
