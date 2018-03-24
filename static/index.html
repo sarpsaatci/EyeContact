@@ -94,18 +94,12 @@
                 apiKey: config.apiKey,
                 clientId: config.clientID,
                 discoveryDocs: config.discoveryDocs,
-                scope: config.scopes.join(' '),
+                scope: config.scopes.join(' ')
               })
               // Loading is finished, so start the app
               .then(function() {
-                console.log("aaaaaaaaaaaa");
-              // Make sure the Google API Client is properly signed in
-                if (gapi.auth0.getAuthInstance().isSignedIn.get()) {
-                  manageUser(currentUser, credential);
-                  activatePage();
-                } else {
-                  return false;
-                }
+                manageUser(currentUser, credential),
+                activatePage()
               })
             }
             // Add to the document
