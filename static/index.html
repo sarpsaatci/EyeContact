@@ -46,6 +46,7 @@
       firebase.auth().onAuthStateChanged(function(user) {
         // Make sure there is a valid user object
         if(user){
+          console.log(user);
           var script = document.createElement('script');
           script.type = 'text/javascript';
           script.src = 'https://apis.google.com/js/api.js';
