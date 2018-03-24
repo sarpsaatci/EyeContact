@@ -34,7 +34,6 @@ var shell = require('shelljs');
 var nbind = require('nbind');
 var lib = nbind.init().lib;
 var fswatch = require('chokidar');
-var firebase = require('firebase');
 
 const admin = require('firebase-admin');
 const serviceAccount = require('keys/eyecontact-in-firebase-adminsdk-83ghl-68946d9163.json');
