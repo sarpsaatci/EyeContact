@@ -218,9 +218,9 @@ ws.onmessage = function(message) {
 	}
 }
 
-function manageUser(currentUser, credential)
+function manageUser(currentUser)
 {
-  if(credential.providerId == "google.com")
+  if(currentUser.providerData.providerId == "google.com")
     sendMessage({
       id : 'user',
       currentUser : currentUser

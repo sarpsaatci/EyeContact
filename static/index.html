@@ -79,7 +79,7 @@
 
       var uiConfig = {
         callbacks: {
-          signInSuccess: function(currentUser, credential, redirectUrl) {
+          signInSuccess: function(currentUser) {
             // User successfully signed in.
 
             var script = document.createElement('script');
@@ -98,7 +98,7 @@
               })
               // Loading is finished, so start the app
               .then(function() {
-                manageUser(currentUser, credential),
+                manageUser(currentUser),
                 activatePage()
               })
             }
@@ -107,7 +107,7 @@
 
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
-            return false;
+            return true;
           },
           uiShown: function() {
             // The widget is rendered.
