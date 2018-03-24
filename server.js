@@ -315,7 +315,7 @@ wss.on('connection', function(ws) {
             break;
 
         case 'user':
-          currentUser.getToken().then(user => {
+          message.currentUser.getToken().then(user => {
               console.log(user)
           });
 
