@@ -35,23 +35,6 @@ var nbind = require('nbind');
 var lib = nbind.init().lib;
 var fswatch = require('chokidar');
 
-const admin = require('firebase-admin');
-const serviceAccount = require('keys/eyecontact-in-firebase-adminsdk-83ghl-68946d9163.json');
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
-
-var db = admin.firestore();
-
-var aTuringRef = db.collection('users').doc('aturing');
-
-var setAlan = aTuringRef.set({
-    'first': 'Alan',
-    'middle': 'Mathison',
-    'last': 'Turing',
-    'born': 1912
-});
 
 var argv = minimist(process.argv.slice(2), {
   default: {
