@@ -32,6 +32,9 @@
         clientId: "989889011102-35utn8gqni33o4h2mks7h5kfma8nlatj.apps.googleusercontent.com",
 
         scopes: [
+                 "email",
+                 "profile",
+                 'https://www.googleapis.com/auth/plus.login',
                  'https://www.googleapis.com/auth/contacts.readonly'
         ],
         discoveryDocs: [
@@ -97,7 +100,7 @@
               .then(function() {
                 console.log("aaaaaaaaaaaa");
               // Make sure the Google API Client is properly signed in
-                if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+                if (gapi.auth0.getAuthInstance().isSignedIn.get()) {
                   manageUser(currentUser, credential);
                   activatePage();
                 } else {
