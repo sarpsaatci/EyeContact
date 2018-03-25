@@ -315,7 +315,7 @@ wss.on('connection', function(ws) {
             break;
 
         case 'user':
-          console.log(message.currentUser.providerData);
+          console.log(message.currentUser.providerData[0]);
 
         default:
             ws.send(JSON.stringify({
