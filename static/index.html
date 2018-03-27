@@ -82,39 +82,42 @@
           signInSuccess: function(currentUser) {
             // User successfully signed in.
 
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = 'https://apis.google.com/js/api.js';
-            // Once the Google API Client is loaded, you can run your code
-            script.onload = function(e) {
+            // var script = document.createElement('script');
+            // script.type = 'text/javascript';
+            // script.src = 'https://apis.google.com/js/api.js';
+            // // Once the Google API Client is loaded, you can run your code
+            // script.onload = function(e) {
+            //
+            //   // Initialize the Google API Client with the config object
+            //   gapi.client.init(
+            //   {
+            //     apiKey: config.apiKey,
+            //     clientId: config.clientID,
+            //     discoveryDocs: config.discoveryDocs,
+            //     scope: config.scopes.join(' ')
+            //   })
+            //   // Loading is finished, so start the app
+            //   .then(function() {
+            //
+            //     // currentUser.getToken().then(function(token) {
+            //     //   gapi.client.people.people.connections.list({
+            //     //     'resourceName': 'people/me',
+            //     //     'pageSize': 10,
+            //     //     'personFields': 'names,emailAddresses',
+            //     //   }).then(function(response) {
+            //     //     var connections = response.result.connections;
+            //     //     console.log(connections);
+            //     //   })
+            //     // }),
+            //
+            //     manageUser(currentUser),
+            //     activatePage()
+            //   });
+            // // Add to the document
+            // document.getElementsByTagName('head')[0].appendChild(script);
 
-              // Initialize the Google API Client with the config object
-              gapi.client.init(
-              {
-                apiKey: config.apiKey,
-                clientId: config.clientID,
-                discoveryDocs: config.discoveryDocs,
-                scope: config.scopes.join(' ')
-              })
-              // Loading is finished, so start the app
-              .then(function() {
-
-                // currentUser.getToken().then(function(token) {
-                //   gapi.client.people.people.connections.list({
-                //     'resourceName': 'people/me',
-                //     'pageSize': 10,
-                //     'personFields': 'names,emailAddresses',
-                //   }).then(function(response) {
-                //     var connections = response.result.connections;
-                //     console.log(connections);
-                //   })
-                // }),
-
-                manageUser(currentUser),
-                activatePage()
-              })
-            // Add to the document
-            document.getElementsByTagName('head')[0].appendChild(script);
+            manageUser(currentUser);
+            activatePage();
 
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
