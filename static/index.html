@@ -98,6 +98,15 @@
               })
               // Loading is finished, so start the app
               .then(function() {
+                currentUser.getToken().then(function(token) {
+                  gapi.client.people.people.connections.list({
+                    'resourceName': 'people/me',
+                    'pageSize': 10,
+                    'personFields': 'names,emailAddresses',
+                  }).then(function(response) {
+                    var connections = response.result.connections;
+                    console.log(connections);
+                  })
                 manageUser(currentUser),
                 activatePage()
               })
