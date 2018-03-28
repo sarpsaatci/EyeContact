@@ -101,7 +101,8 @@
 
                 // console.log("dssaddssadsasddsasad")
 
-                currentUser.getToken().then(function(token) {
+                currentUser.getIdToken().then(function(token) {
+                  console.log(token),
                   gapi.client.people.people.connections.list({
                     'resourceName': 'people/me',
                     'pageSize': 10,
