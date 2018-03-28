@@ -104,7 +104,7 @@
                 console.log(credential.idToken);
                 console.log("++++++++++++++++");
 
-                gapi.client.setToken(credential.idToken),
+                gapi.client.setToken(credential),
                 gapi.client.people.people.connections.list({
                   'resourceName': 'people/me',
                   'pageSize': 10,
