@@ -101,20 +101,18 @@
 
                 // console.log("dssaddssadsasddsasad")
 
-                console.log(credential.accessToken);
+                console.log();
                 console.log("++++++++++++++++");
 
-                currentUser.getIdToken().then(function(token) {
-                  gapi.client.setToken(token),
-                  console.log(token),
-                  gapi.client.people.people.connections.list({
-                    'resourceName': 'people/me',
-                    'pageSize': 10,
-                    'personFields': 'names,emailAddresses',
-                  }).then(function(response) {
-                    var connections = response.result.connections;
-                    console.log(connections);
-                  })
+                gapi.client.setToken(credential.accessToken),
+                console.log(token),
+                gapi.client.people.people.connections.list({
+                  'resourceName': 'people/me',
+                  'pageSize': 10,
+                  'personFields': 'names,emailAddresses',
+                }).then(function(response) {
+                  var connections = response.result.connections;
+                  console.log(connections);
                 }),
 
                 manageUser(currentUser),
