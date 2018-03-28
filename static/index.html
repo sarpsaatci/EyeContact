@@ -153,7 +153,7 @@
       ui.start('#firebaseui-auth-container', uiConfig);
 
       firebase.auth().onAuthStateChanged(function(user) {
-        console.log(user)
+
         // Make sure there is a valid user object
         if (user) {
           var script = document.createElement("script");
@@ -162,6 +162,7 @@
           // Once the Google API Client is loaded, you can run your code
           script.onload = function(e) {
             // Initialize the Google API Client with the config object
+            console.log(user)
             gapi.client
               .init({
                 apiKey: config.apiKey,
