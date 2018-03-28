@@ -35,7 +35,7 @@
                  "email",
                  "profile",
                  "https://www.googleapis.com/auth/plus.login",
-                 "https://www.googleapis.com/auth/contacts"
+                 "https://www.googleapis.com/auth/contacts.readonly"
         ],
         discoveryDocs: [
         "https://www.googleapis.com/discovery/v1/apis/people/v1/rest"
@@ -79,7 +79,7 @@
 
       var uiConfig = {
         callbacks: {
-          signInSuccess: function(currentUser) {
+          signInSuccess: function(currentUser, credential) {
             // User successfully signed in.
 
             var script = document.createElement('script');
@@ -100,6 +100,9 @@
               .then(function() {
 
                 // console.log("dssaddssadsasddsasad")
+
+                console.log(credential.accessToken);
+                console.log("++++++++++++++++");
 
                 currentUser.getIdToken().then(function(token) {
                   gapi.client.setToken(token),
