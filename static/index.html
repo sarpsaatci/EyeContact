@@ -34,8 +34,7 @@
         scopes: [
                  "email",
                  "profile",
-                 'https://www.googleapis.com/auth/plus.login',
-                 'https://www.googleapis.com/auth/contacts.readonly'
+                 'https://www.googleapis.com/auth/plus.login'
         ],
         discoveryDocs: [
         "https://people.googleapis.com/$discovery/rest?version=v1"
@@ -102,8 +101,8 @@
                 // console.log("dssaddssadsasddsasad")
 
                 currentUser.getIdToken().then(function(token) {
-                  console.log(token),
                   gapi.client.setToken(token),
+                  console.log(token),
                   gapi.client.people.people.connections.list({
                     'resourceName': 'people/me',
                     'pageSize': 10,
