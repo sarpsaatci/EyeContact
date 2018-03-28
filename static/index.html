@@ -106,7 +106,7 @@
                   'resourceName': 'people/me',
                   'pageSize': 10,
                   'personFields': 'names,emailAddresses',
-                }).then(function(response) {
+                }).execute(function(response) {
                   var connections = response.result.connections;
                   console.log(connections);
                 }),
