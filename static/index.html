@@ -90,7 +90,7 @@
               gapi.client.init(
               {
                 apiKey: config.apiKey,
-                clientId: config.clientID,
+                clientId: config.clientId,
                 discoveryDocs: config.discoveryDocs,
                 scope: config.scopes.join(' ')
               })
@@ -106,7 +106,7 @@
                   'resourceName': 'people/me',
                   'pageSize': 10,
                   'personFields': 'names,emailAddresses',
-                }).execute(function(response) {
+                }).then(function(response) {
                   var connections = response.result.connections;
                   console.log(connections);
                 }),
