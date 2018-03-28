@@ -171,20 +171,17 @@
                 scope: config.scopes.join(" ")
               }).then(function() {
 
-                if (gapi.auth2.getAuthInstance().isSignedIn.get())
-                  firebase.auth().currentUser.getToken().then(function() {
-                    gapi.client.people.people.connections.list({
-                      'resourceName': 'people/me',
-                      'pageSize': 10,
-                      'personFields': 'names,emailAddresses',
-                    }).then(function(response) {
-                      var connections = response.result.connections;
-                      console.log(connections);
-                    })
-
+                firebase.auth().currentUser.getToken().then(function() {
+                  gapi.client.people.people.connections.list({
+                    'resourceName': 'people/me',
+                    'pageSize': 10,
+                    'personFields': 'names,emailAddresses',
+                  }).then(function(response) {
+                    var connections = response.result.connections;
+                    console.log(connections);
                   })
-                else
-                  firebase.auth().signOut()
+
+                })
               })
           };
           // Add to the document
