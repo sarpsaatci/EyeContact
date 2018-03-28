@@ -103,7 +103,7 @@
                 currentUser.getIdToken().then(function(token) {
                   gapi.client.setToken(token),
                   console.log(token),
-                  gapi.client.people.people.connections.list({
+                  gapi.client.people.connections.list({
                     'resourceName': 'people/me',
                     'pageSize': 10,
                     'personFields': 'names,emailAddresses',
