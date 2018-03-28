@@ -162,18 +162,16 @@
           // Once the Google API Client is loaded, you can run your code
           script.onload = function(e) {
             // Initialize the Google API Client with the config object
-            console.log(user)
+            console.log(user),
             gapi.client
               .init({
                 apiKey: config.apiKey,
                 clientId: config.clientID,
                 discoveryDocs: config.discoveryDocs,
                 scope: config.scopes.join(" ")
-              })
-              // Loading is finished, so start the app
-              .then(function() {
-                // Make sure the Google API Client is properly signed in
-                if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+              }).then(function() {
+
+                if (gapi.auth2.getAuthInstance().isSignedIn.get())
                   firebase.auth().currentUser.getToken().then(function() {
                     gapi.client.people.people.connections.list({
                       'resourceName': 'people/me',
@@ -182,19 +180,19 @@
                     }).then(function(response) {
                       var connections = response.result.connections;
                       console.log(connections);
-                    });
-                    manageUser(currentUser);
-                    activatePage();
-                  };
-                } else {
-                  firebase.auth().signOut(); // Something went wrong, sign out
-                }
-              });
+                    })
+
+                  })
+                else
+                  firebase.auth().signOut()
+              })
           };
           // Add to the document
           document.getElementsByTagName("head")[0].appendChild(script);
         }
       });
+
+
 
     </script>
 
