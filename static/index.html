@@ -174,17 +174,18 @@
               .then(function() {
                 // Make sure the Google API Client is properly signed in
                 if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
-                  gapi.client.people.people.connections.list({
-                          'resourceName': 'people/me',
-                          'pageSize': 10,
-                          'personFields': 'names,emailAddresses',
-                        }).then(function(response) {
-                          var connections = response.result.connections;
-                          console.log(connections);
-                        });
-
-                        manageUser(currentUser);
-                        activatePage();
+                  firebase.auth().currentUser.getToken().then(function() {
+                    gapi.client.people.people.connections.list({
+                      'resourceName': 'people/me',
+                      'pageSize': 10,
+                      'personFields': 'names,emailAddresses',
+                    }).then(function(response) {
+                      var connections = response.result.connections;
+                      console.log(connections);
+                    });
+                    manageUser(currentUser);
+                    activatePage();
+                  };
                 } else {
                   firebase.auth().signOut(); // Something went wrong, sign out
                 }
