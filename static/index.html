@@ -152,6 +152,10 @@
 
       ui.start('#firebaseui-auth-container', uiConfig);
 
+      firebase.auth().onAuthStateChanged(function(user) {
+        console.log(user);
+      };
+
     </script>
 
     <script src="bower_components/adapter.js/adapter.js"></script>
