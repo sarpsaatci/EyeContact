@@ -252,7 +252,7 @@ CallMediaPipeline.prototype.release = function() {
 
 var asUrl = url.parse(argv.as_uri);
 var port = asUrl.port;
-var server = https.createServer(options, app).listen(port, function() {
+var server = http.createServer(app).listen(port, function() {
     console.log('Kurento Tutorial started');
     console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
 });
