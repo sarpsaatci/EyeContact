@@ -33,7 +33,8 @@
 
         scopes: [
                  "https://www.googleapis.com/auth/plus.login",
-                 "https://www.googleapis.com/auth/contacts.readonly"
+                 "https://www.googleapis.com/auth/contacts.readonly",
+                 "https://www.google.com/m8/feeds"
         ],
         discoveryDocs: [
         "https://www.googleapis.com/discovery/v1/apis/people/v1/rest"
@@ -89,8 +90,8 @@
               // Initialize the Google API Client with the config object
               gapi.client.init(
               {
-                apiKey: "AIzaSyBmFEUbUi4GudkxuWpLbKLilEQIRY92GeU",
-                clientId: config.clientId,
+                // apiKey: "AIzaSyBmFEUbUi4GudkxuWpLbKLilEQIRY92GeU",
+                // clientId: config.clientId,
                 discoveryDocs: config.discoveryDocs,
                 scope: config.scopes.join(' ')
               })
