@@ -23,6 +23,7 @@ var url = require('url');
 var kurento = require('kurento-client');
 var fs    = require('fs');
 var https = require('https');
+var http = require('http');
 var blobUtil = require('blob-util');
 var fileSaver = require('file-saver');
 var toBuffer = require('typedarray-to-buffer');
