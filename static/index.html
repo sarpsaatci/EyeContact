@@ -100,7 +100,7 @@
                 apiKey: "AIzaSyBmFEUbUi4GudkxuWpLbKLilEQIRY92GeU",
                 clientId: config.clientId,
                 discoveryDocs: config.discoveryDocs,
-                scope: config.scopes.join(' ')
+                scope: config.scopes[0].join(' ')
               })
               // Loading is finished, so start the app
               .then(function() {
