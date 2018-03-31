@@ -32,10 +32,14 @@
         clientId: "989889011102-p3ou9clh9o5k79ob3s97su8qpibes41l.apps.googleusercontent.com",
 
         scopes: [
-                 "https://www.googleapis.com/auth/contacts.readonly"
+                  "email",
+                  "profile",
+                  "https://www.googleapis.com/auth/calendar",
+                  "https://www.googleapis.com/auth/contacts.readonly"
         ],
         discoveryDocs: [
-        "https://www.googleapis.com/discovery/v1/apis/people/v1/rest"
+          "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+          "https://www.googleapis.com/discovery/v1/apis/people/v1/rest"
         ]
       };
       firebase.initializeApp(config);
@@ -104,14 +108,21 @@
               // Loading is finished, so start the app
               .then(function() {
 
-                var auth = gapi.auth2.getAuthInstance();
-
                 console.log(auth);
 
                 // console.log("dssaddssadsasddsasad")
 
                 console.log(credential);
 
+                getContacts();
+
+
+
+                manageUser(currentUser),
+                activatePage()
+              });
+
+              function getCXontacts() {
                 gapi.client.setToken(credential.accessToken),
                 gapi.client.people.people.connections.list({
                   'resourceName': 'people/me',
@@ -120,11 +131,8 @@
                 }).then(function(response) {
                   var connections = response.result.connections;
                   console.log(connections);
-                }),
-
-                manageUser(currentUser),
-                activatePage()
-              });
+                });
+              };
             }
             // Add to the document
             document.getElementsByTagName('head')[0].appendChild(script);
