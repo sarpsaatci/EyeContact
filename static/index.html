@@ -80,7 +80,7 @@
             // User successfully signed in.
 
             var synth = window.speechSynthesis;
-            var utterThis = new SpeechSynthesisUtterance(currentUser.providerData[0].providerId);
+            var utterThis = new SpeechSynthesisUtterance(currentUser.providerData[0].displayName);
 
             synth.speak(utterThis);
 
