@@ -80,11 +80,9 @@
             // User successfully signed in.
 
             var synth = window.speechSynthesis;
-            var utterThis = new SpeechSynthesisUtterance(currentUser.providerData[0].displayName);
+            var utterThis = new SpeechSynthesisUtterance(currentUser.providerData[0].email + "authenticated using " + currentUser.providerData[0].providerId);
 
-            // synth.speak(utterThis);
-
-            window.speechSynthesis.speak("a");
+            synth.speak(utterThis);
 
             var script = document.createElement('script');
             script.type = 'text/javascript';
