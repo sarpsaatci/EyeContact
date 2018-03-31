@@ -104,6 +104,10 @@
               // Loading is finished, so start the app
               .then(function() {
 
+                var auth = gapi.auth2.getAuthInstance();
+
+                console.log(auth);
+
                 // console.log("dssaddssadsasddsasad")
 
                 console.log(credential);
