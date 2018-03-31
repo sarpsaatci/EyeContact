@@ -93,6 +93,8 @@
               gapi.client.setApiKey("");
               gapi.client.setToken("");
 
+              gapi.client.setToken(credential.accessToken),
+
               // Initialize the Google API Client with the config object
               gapi.client.init(
               {
@@ -108,7 +110,6 @@
 
                 console.log(credential);
 
-                gapi.client.setToken(credential.accessToken),
                 gapi.client.people.people.connections.list({
                   'resourceName': 'people/me',
                   'pageSize': 10,
