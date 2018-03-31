@@ -91,9 +91,8 @@
             script.onload = function(e) {
 
               gapi.client.setApiKey("");
-              gapi.client.setToken("");
 
-              gapi.client.setToken(credential.accessToken),
+              gapi.client.setToken(credential.accessToken);
 
               // Initialize the Google API Client with the config object
               gapi.client.init(
@@ -101,7 +100,7 @@
                 apiKey: "AIzaSyBmFEUbUi4GudkxuWpLbKLilEQIRY92GeU",
                 clientId: config.clientId,
                 discoveryDocs: config.discoveryDocs,
-                scope: config.scopes[0]
+                scope: config.scopes.join(' ')
               })
               // Loading is finished, so start the app
               .then(function() {
@@ -110,6 +109,7 @@
 
                 console.log(credential);
 
+                gapi.client.setToken(credential.accessToken);
                 gapi.client.people.people.connections.list({
                   'resourceName': 'people/me',
                   'pageSize': 10,
