@@ -306,6 +306,9 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
+            if(getFrame(message))
+              ws.send(JSON.stringify(message));
+            //console.log(message);
             if(getFrame(message)) {
               ws.send(JSON.stringify({
                 id : 'frame',
@@ -355,6 +358,7 @@ function getFrame(frame)
     console.log(res)
     //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
+  
 
   return true;
 }
@@ -384,7 +388,8 @@ function stop(sessionId) {
     // Removes saved frames when session ended.
     fse.remove('./out/', err => {
       if (err) return console.error(err)
-
+      console.log('success!')
+    });    
       console.log('success!')
     });
 
@@ -396,6 +401,18 @@ function stop(sessionId) {
       console.log('clean outputs/');
 
     shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
+
+    // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
+    //   if (err) return console.error(err)
+    //
+    //   console.log('clean frames')
+    // });
+    //
+    // fse.removeSync('/root/OpenFace/outputs/*', err => {
+    //   if (err) return console.error(err)
+    //
+    //   console.log('clean outputs/')
+    // });
 
     var pipeline = pipelines[sessionId];
     delete pipelines[sessionId];

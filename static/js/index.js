@@ -78,6 +78,8 @@ function captureVideoFrame(video, format, path) {
         var bytes = window.atob(data);
         var buf = new ArrayBuffer(bytes.length);
         var arr = new Uint8Array(buf);
+        
+        return { buf: buf, dataUri: dataUri, type: type }; 
 
         return { buf: buf, dataUri: dataUri, type: type };
 
@@ -172,6 +174,9 @@ window.onbeforeunload = function() {
 }
 
 ws.onmessage = function(message) {
+	
+	// console.log();
+	
 
 	// console.log();
 
@@ -283,6 +288,10 @@ function sendMessage(message) {
 
 function startCommunication(message) {
 	setCallState(IN_CALL);
+  
+  console.log("startCom MESSAGE");
+  console.log(message);
+  
 
 
   console.log("startCom MESSAGE");
