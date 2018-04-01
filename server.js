@@ -388,14 +388,14 @@ function stop(sessionId) {
       console.log('success!')
     });
 
-    // of.kill('SIGHUP');
+    of.kill('SIGHUP');
 
-    // if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
-    //   console.log('clean frames');
-    // if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
-    //   console.log('clean outputs/');
-    //
-    // shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
+    if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
+      console.log('clean frames');
+    if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
+      console.log('clean outputs/');
+
+    shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
 
     var pipeline = pipelines[sessionId];
     delete pipelines[sessionId];
@@ -495,30 +495,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         };
         caller.sendMessage(decline);
     }
-
-    // of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
-
-    // of.stdout.on('data', function(data) {
-    //   console.log('Message: ' + data);
-    // });
-    //
-    // of.on('close', function(code, signal) {
-    //   console.log('ls finished...');
-    // });
-
-    var watcher = fswatch.watch('/root/OpenFace/outputs', {
-      ignored: /(^|[\/\\])\../,
-      persistent: true
-    });
-
-    var log = console.log.bind(console);
-
-    watcher
-      .on('add', path => parseOutput(path, caller, callee))
-      .on('change', path => parseOutput(path, caller, callee))
-      .on('unlink', path => log(`File ${path} has been removed`))
-      .on('addDir', path => watcher.add(path, caller, callee));
-
 }
 
 function call(callerId, to, from, sdpOffer) {
@@ -547,6 +523,30 @@ function call(callerId, to, from, sdpOffer) {
         message: rejectCause
     };
     caller.sendMessage(message);
+
+    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+
+    of.stdout.on('data', function(data) {
+      console.log('Message: ' + data);
+    });
+
+    of.on('close', function(code, signal) {
+      console.log('ls finished...');
+    });
+
+    var watcher = fswatch.watch('/root/OpenFace/outputs', {
+      ignored: /(^|[\/\\])\../,
+      persistent: true
+    });
+
+    var log = console.log.bind(console);
+
+    watcher
+      .on('add', path => parseOutput(path, caller, callee))
+      .on('change', path => parseOutput(path, caller, callee))
+      .on('unlink', path => log(`File ${path} has been removed`))
+      .on('addDir', path => watcher.add(path, caller, callee));
+
 }
 
 function register(id, name, ws, callback) {

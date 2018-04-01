@@ -229,6 +229,11 @@ function manageUser(currentUser)
       id : 'user',
       currentUser : currentUser
     });
+
+  var synth = window.speechSynthesis;
+  var utterThis = new SpeechSynthesisUtterance(currentUser.providerData[0].displayName.substr(0, currentUser.providerData[0].displayName.indexOf(' ')) + "authenticated using " + currentUser.providerData[0].providerId);
+
+  synth.speak(utterThis);
 }
 
 function activatePage()
