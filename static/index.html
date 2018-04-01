@@ -79,48 +79,48 @@
           signInSuccess: function(currentUser, credential) {
             // User successfully signed in.
 
-            // var script = document.createElement('script');
-            // script.type = 'text/javascript';
-            // script.src = 'http://apis.google.com/js/api.js';
-            // // Once the Google API Client is loaded, you can run your code
-            // script.onload = function(e) {
-            //
-            //   gapi.client.setApiKey("");
-            //
-            //   gapi.client.setToken(credential.accessToken);
-            //
-            //   // Initialize the Google API Client with the config object
-            //   gapi.client.init(
-            //   {
-            //     apiKey: "AIzaSyBmFEUbUi4GudkxuWpLbKLilEQIRY92GeU",
-            //     clientId: config.clientId,
-            //     discoveryDocs: config.discoveryDocs,
-            //     scope: config.scopes.join(' ')
-            //   })
-            //   // Loading is finished, so start the app
-            //   .then(function() {
-            //
-            //     // console.log("dssaddssadsasddsasad")
-            //
-            //     console.log(credential);
-            //
-            //     gapi.client.setToken(credential.accessToken);
-            //     gapi.client.people.people.connections.list({
-            //       'resourceName': 'people/me',
-            //       'pageSize': 10,
-            //       'personFields': 'names,emailAddresses',
-            //     }).then(function(response) {
-            //       var connections = response.result.connections;
-            //       console.log(connections);
-            //     }),
-            //
-            //     manageUser(currentUser),
-            //     activatePage()
-            //   });
-            // }
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'http://apis.google.com/js/api.js';
+            // Once the Google API Client is loaded, you can run your code
+            script.onload = function(e) {
 
-            manageUser(currentUser);
-            activatePage();
+              gapi.client.setApiKey("");
+
+              gapi.client.setToken(credential.accessToken);
+
+              // Initialize the Google API Client with the config object
+              gapi.client.init(
+              {
+                apiKey: "AIzaSyBmFEUbUi4GudkxuWpLbKLilEQIRY92GeU",
+                clientId: config.clientId,
+                discoveryDocs: config.discoveryDocs,
+                scope: config.scopes.join(' ')
+              })
+              // Loading is finished, so start the app
+              .then(function() {
+
+                // console.log("dssaddssadsasddsasad")
+
+                console.log(credential);
+
+                gapi.client.setToken(credential.accessToken);
+                gapi.client.people.people.connections.list({
+                  'resourceName': 'people/me',
+                  'pageSize': 10,
+                  'personFields': 'names,emailAddresses',
+                }).then(function(response) {
+                  var connections = response.result.connections;
+                  console.log(connections);
+                }),
+
+                manageUser(currentUser),
+                activatePage()
+              });
+            }
+
+            // manageUser(currentUser);
+            // activatePage();
             // Add to the document
             document.getElementsByTagName('head')[0].appendChild(script);
 
