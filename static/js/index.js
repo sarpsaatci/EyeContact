@@ -15,7 +15,7 @@
  *
  */
 
-var ws = new WebSocket('wss://' + location.host + '/one2one');
+var ws = new WebSocket('ws://' + location.host + '/one2one');
 var videoInput;
 var videoOutput;
 var webRtcPeer;
@@ -43,10 +43,10 @@ function captureVideoFrame(video, format, path) {
 
         var canvas = document.createElement("CANVAS");
 
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
+        canvas.width = video.videoWidth/2;
+        canvas.height = video.videoHeight/2;
 
-        canvas.getContext('2d').drawImage(video, 0, 0);
+        canvas.getContext('2d').drawImage(video, 0, 0, video.videoHeight/2, video.videoWidth/2);
 
         // var frameBlob;
         //
@@ -80,6 +80,8 @@ function captureVideoFrame(video, format, path) {
         var arr = new Uint8Array(buf);
         
         return { buf: buf, dataUri: dataUri, type: type }; 
+
+        return { buf: buf, dataUri: dataUri, type: type };
 
         // for (var i = 0; i < bytes.length; i++) {
         //     arr[i] = bytes.charCodeAt(i);
@@ -176,6 +178,9 @@ ws.onmessage = function(message) {
 	// console.log();
 	
 
+	// console.log();
+
+
 	console.log();
 
 	var parsedMessage = JSON.parse(message.data);
@@ -203,7 +208,7 @@ ws.onmessage = function(message) {
 		webRtcPeer.addIceCandidate(parsedMessage.candidate);
 		break;
   case 'frame':
-    console.log("Get FRAME: " + parsedMessage.path);
+    console.log("Get FRAME: " + parsedMessage.imgCount);
     readyToCarptureFrame = true;
     break;
   case 'frameUrl':
@@ -213,9 +218,33 @@ ws.onmessage = function(message) {
     // console.log("aha aha aha");
     printOutput(parsedMessage);
     break;
+  case 'user':
+    // console.log(parsedMessage);
+    document.getElementById('name').value = parsedMessage.currentUser.displayName.substr(0, parsedMessage.currentUser.displayName.indexOf(' '));
+    break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
 	}
+}
+
+function manageUser(currentUser)
+{
+  if(currentUser.providerData[0].providerId == 'google.com')
+    sendMessage({
+      id : 'user',
+      currentUser : currentUser
+    });
+
+  var synth = window.speechSynthesis;
+  var utterThis = new SpeechSynthesisUtterance( "Hello" + currentUser.providerData[0].displayName.substr(0, currentUser.providerData[0].displayName.indexOf(' ')) + ", welcome to EyeContact");
+
+  synth.speak(utterThis);
+}
+
+function activatePage()
+{
+  document.getElementById("authPage").style.display = "none";
+  document.getElementById("activePage").style.display = "block";
 }
 
 function printOutput(message)
@@ -263,6 +292,7 @@ function startCommunication(message) {
   console.log("startCom MESSAGE");
   console.log(message);
   
+
 
   console.log("startCom MESSAGE");
   console.log(message);

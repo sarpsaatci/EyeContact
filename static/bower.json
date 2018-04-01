@@ -25,6 +25,7 @@
     "demo-console": "1.5.1",
     "ekko-lightbox": "~3.3.0",
     "kurento-utils": "master",
-    "blueimp-canvas-to-blob": "^3.14.0"
+    "blueimp-canvas-to-blob": "^3.14.0",
+    "firebaseui": "^2.6.3"
   }
 }

@@ -1,0 +1,10 @@
+/* call log collection */
+
+{
+  "id" : "",
+  "date" : "date object",
+  "caller" : "callerId",
+  "callee" : "calleeId",
+  "calleeAUavg" : "smile",
+  "callerAUavg" : "sad"
+}

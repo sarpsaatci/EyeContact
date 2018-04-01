@@ -1,0 +1,13 @@
+/* users collection */
+
+{
+  "id" : "",
+  "name" : "username",
+  "age" : 0,
+  "gender" : "male",
+  "0auth" : "0auth(google auth json object)",
+  "contacts" : "contacts json object",
+  "isVisuallyImpaired" : "true",
+  "settings" : "settings json object",
+  "calls" : "call log json for the user"
+}

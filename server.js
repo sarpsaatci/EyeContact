@@ -23,6 +23,7 @@ var url = require('url');
 var kurento = require('kurento-client');
 var fs    = require('fs');
 var https = require('https');
+var http = require('http');
 var blobUtil = require('blob-util');
 var fileSaver = require('file-saver');
 var toBuffer = require('typedarray-to-buffer');
@@ -38,7 +39,7 @@ var fswatch = require('chokidar');
 
 var argv = minimist(process.argv.slice(2), {
   default: {
-      as_uri: "https://localhost:443/",
+      as_uri: "http://localhost:80/",
       ws_uri: "ws://localhost:8888/kurento",
 	  //file_uri: "file:///tmp/output/kurento-hello-world-recording.wmv"
   }
@@ -252,7 +253,7 @@ CallMediaPipeline.prototype.release = function() {
 
 var asUrl = url.parse(argv.as_uri);
 var port = asUrl.port;
-var server = https.createServer(options, app).listen(port, function() {
+var server = http.createServer(app).listen(port, function() {
     console.log('Kurento Tutorial started');
     console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
 });
@@ -285,8 +286,6 @@ wss.on('connection', function(ws) {
 
         switch (message.id) {
         case 'register':
-            // var bool = lib.Greeter.sayHello('abuzer');
-            // console.log(bool);
             register(sessionId, message.name, ws);
             break;
 
@@ -311,15 +310,17 @@ wss.on('connection', function(ws) {
               ws.send(JSON.stringify(message));
             //console.log(message);
             if(getFrame(message)) {
+              ws.send(JSON.stringify({
+                id : 'frame',
+                imgCount : incImg
+              }));
               incImg++;
-              ws.send(JSON.stringify(message));
             }
-            //getFrame(message);
-            // ws.send(JSON.stringify({
-            //    id : 'frameUrl',
-            //    url : URL.createObjectURL(message.blob)
-            // }));
             break;
+
+        case 'user':
+          // console.log(message.currentUser.providerData[0]);
+          ws.send(JSON.stringify(message));
 
         default:
             ws.send(JSON.stringify({
@@ -350,15 +351,7 @@ function getFrame(frame)
   // It will create the full path in case it doesn't exist
   // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
   let filePath = '../OpenFace/samples/image_sequence/' + incImg + '.jpg';
-  // let filePath = './frames/callee/' + calleeName + '_' + frame.path + '.jpg';
 
-  // var image = imageDataURI.decode(dataURI);
-  //
-  // console.log(image);
-
-  var u8array = frame.buf.arr;
-
-  var frame;
 
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath).then(res =>
@@ -367,21 +360,6 @@ function getFrame(frame)
   );
   
 
-
-
-  // var ls = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir frames/callee -q']);
-  //
-  // ls.stdout.on('data', function(data) {
-  //   console.log('Message: ' + data);
-  // });
-  //
-  // ls.on('close', function(code, signal) {
-  //   console.log('ls finished...');
-  // });
-
-  // console.log(frame.uIntArray);
-  //fileSaver.saveAs(frame.blob, frame.path);
-  //sendUrl(url);
   return true;
 }
 
@@ -410,9 +388,11 @@ function stop(sessionId) {
     // Removes saved frames when session ended.
     fse.remove('./out/', err => {
       if (err) return console.error(err)
-    
+      console.log('success!')
+    });    
       console.log('success!')
     });
+
     of.kill('SIGHUP');
 
     if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
@@ -532,30 +512,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         };
         caller.sendMessage(decline);
     }
-
-    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
-
-    of.stdout.on('data', function(data) {
-      console.log('Message: ' + data);
-    });
-
-    of.on('close', function(code, signal) {
-      console.log('ls finished...');
-    });
-
-    var watcher = fswatch.watch('/root/OpenFace/outputs', {
-      ignored: /(^|[\/\\])\../,
-      persistent: true
-    });
-
-    var log = console.log.bind(console);
-
-    watcher
-      .on('add', path => parseOutput(path, caller, callee))
-      .on('change', path => parseOutput(path, caller, callee))
-      .on('unlink', path => log(`File ${path} has been removed`))
-      .on('addDir', path => watcher.add(path, caller, callee));
-
 }
 
 function call(callerId, to, from, sdpOffer) {
@@ -584,6 +540,30 @@ function call(callerId, to, from, sdpOffer) {
         message: rejectCause
     };
     caller.sendMessage(message);
+
+    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+
+    of.stdout.on('data', function(data) {
+      console.log('Message: ' + data);
+    });
+
+    of.on('close', function(code, signal) {
+      console.log('ls finished...');
+    });
+
+    var watcher = fswatch.watch('/root/OpenFace/outputs', {
+      ignored: /(^|[\/\\])\../,
+      persistent: true
+    });
+
+    var log = console.log.bind(console);
+
+    watcher
+      .on('add', path => parseOutput(path, caller, callee))
+      .on('change', path => parseOutput(path, caller, callee))
+      .on('unlink', path => log(`File ${path} has been removed`))
+      .on('addDir', path => watcher.add(path, caller, callee));
+
 }
 
 function register(id, name, ws, callback) {
