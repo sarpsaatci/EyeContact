@@ -92,7 +92,7 @@
               // Initialize the Google API Client with the config object
               gapi.client.init(
               {
-                apiKey: "AcRWs9ybvV3WLiyZeaJkbFOq",
+                apiKey: "AIzaSyBmFEUbUi4GudkxuWpLbKLilEQIRY92GeU",
                 clientId: config.clientId,
                 discoveryDocs: config.discoveryDocs,
                 scope: config.scopes.join(' ')
@@ -213,8 +213,32 @@
   <body>
     <div id="authPage">
       <h1>Welcome to My Awesome App</h1>
-      <div id="firebaseui-auth-container"></div>
-      <div id="loader">Loading...</div>
+
+      <div>
+        <script type="text/javascript">
+          var clientId = '305322108967-k7ian7t2ck7tfsh7clpdjt4geogvrhvi';
+          var apiKey = 'd8-9jSITrfliR7bP5uq1h8BJ';
+          var scopes = 'https://www.googleapis.com/auth/contacts.readonly';
+          $(document).on("click",".googleContactsButton", function(){
+            gapi.client.setApiKey(apiKey);
+            window.setTimeout(authorize);
+          });
+          function authorize() {
+            gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthorization);
+          }
+          function handleAuthorization(authorizationResult) {
+            if (authorizationResult && !authorizationResult.error) {
+              $.get("https://www.google.com/m8/feeds/contacts/default/thin?alt=json&access_token=" + authorizationResult.access_token + "&max-results=500&v=3.0",
+                function(response){
+                  //process the response here
+                  console.log(response);
+                });
+            }
+          }
+        </script>
+        <script src="https://apis.google.com/js/client.js"></script>
+        <button class="googleContactsButton">Get my contacts</button>
+      </div>
     </div>
 
     <div id="activePage" style="display:none">
