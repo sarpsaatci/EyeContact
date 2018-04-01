@@ -14,7 +14,7 @@
             window.setTimeout(authorize);
           });
           function authorize() {
-            console.log(clientId)
+            console.log(clientId);
             gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthorization);
           }
           function handleAuthorization(authorizationResult) {
