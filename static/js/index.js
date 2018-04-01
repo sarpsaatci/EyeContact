@@ -213,6 +213,8 @@ ws.onmessage = function(message) {
     // console.log("aha aha aha");
     printOutput(parsedMessage);
     break;
+  case 'user':
+    console.log(message);
 	default:
 		console.error('Unrecognized message', parsedMessage);
 	}
