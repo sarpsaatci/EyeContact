@@ -358,7 +358,7 @@ function getFrame(frame)
     console.log(res)
     //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   );
-  
+
 
   return true;
 }
@@ -388,8 +388,6 @@ function stop(sessionId) {
     // Removes saved frames when session ended.
     fse.remove('./out/', err => {
       if (err) return console.error(err)
-      console.log('success!')
-    });    
       console.log('success!')
     });
 
