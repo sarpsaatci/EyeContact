@@ -214,7 +214,8 @@ ws.onmessage = function(message) {
     printOutput(parsedMessage);
     break;
   case 'user':
-    console.log(message);
+    console.log(parsedMessage);
+    break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
 	}
