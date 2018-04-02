@@ -237,8 +237,8 @@
                 $.get("https://www.google.com/m8/feeds/contacts/default/thin?alt=json&access_token=" + authorizationResult.access_token + "&max-results=500&v=3.0",
                   function(response){
                     //process the response here
-                    console.log(response.feed.entry.length);
-                    console.log(response.feed.entry[0].title.$t);
+                    for(var i = 0; i < response.feed.entry.length; i++)
+                      console.log(response.feed.entry[0].title.$t);
                   });
               }
             }
