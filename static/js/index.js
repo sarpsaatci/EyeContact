@@ -78,8 +78,8 @@ function captureVideoFrame(video, format, path) {
         var bytes = window.atob(data);
         var buf = new ArrayBuffer(bytes.length);
         var arr = new Uint8Array(buf);
-        
-        return { buf: buf, dataUri: dataUri, type: type }; 
+
+        return { buf: buf, dataUri: dataUri, type: type };
 
         return { buf: buf, dataUri: dataUri, type: type };
 
@@ -174,9 +174,9 @@ window.onbeforeunload = function() {
 }
 
 ws.onmessage = function(message) {
-	
+
 	// console.log();
-	
+
 
 	// console.log();
 
@@ -229,16 +229,15 @@ ws.onmessage = function(message) {
 
 function manageUser(currentUser)
 {
-  if(currentUser.providerData[0].providerId == 'google.com')
-    sendMessage({
-      id : 'user',
-      currentUser : currentUser
-    });
+  sendMessage({
+    id : 'user',
+    currentUser : currentUser
+  });
 
-  var synth = window.speechSynthesis;
-  var utterThis = new SpeechSynthesisUtterance( "Hello" + currentUser.providerData[0].displayName.substr(0, currentUser.providerData[0].displayName.indexOf(' ')) + ", welcome to EyeContact");
-
-  synth.speak(utterThis);
+  // var synth = window.speechSynthesis;
+  // var utterThis = new SpeechSynthesisUtterance( "Hello" + currentUser.providerData[0].displayName.substr(0, currentUser.providerData[0].displayName.indexOf(' ')) + ", welcome to EyeContact");
+  //
+  // synth.speak(utterThis);
 }
 
 function activatePage()
@@ -288,10 +287,10 @@ function sendMessage(message) {
 
 function startCommunication(message) {
 	setCallState(IN_CALL);
-  
+
   console.log("startCom MESSAGE");
   console.log(message);
-  
+
 
 
   console.log("startCom MESSAGE");
