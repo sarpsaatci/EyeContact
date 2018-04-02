@@ -227,8 +227,15 @@ ws.onmessage = function(message) {
 	}
 }
 
-function manageUser(currentUser)
+function manageUser(userData)
 {
+
+  // Current user full name with (currentUser.name.$t)
+  var currentUser = userData.feed.author[0];
+
+  //contacts array (get each contact as string  with contacts[0].title.$t)
+  var contacts = userData.feed.entry;
+
   sendMessage({
     id : 'user',
     currentUser : currentUser
