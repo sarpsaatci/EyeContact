@@ -18,7 +18,7 @@
 
     <script src="http://apis.google.com/js/client:plusone.js" type="text/javascript"></script>
 
-    <script src="http://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    <!-- <script src="http://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
     <script>
       // Initialize Firebase
       var config = {
@@ -197,7 +197,9 @@
 
 
 
-    </script>
+    </script> -->
+
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 
     <script src="bower_components/adapter.js/adapter.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -218,34 +220,31 @@
       <div id="loader">Loading...</div>
     </div>
 
-    <!-- <div id="authPage">
-      <h1>Welcome to My Awesome App</h1>
-      <div>
-        <script type="text/javascript">
-          var clientId = '305322108967-k7ian7t2ck7tfsh7clpdjt4geogvrhvi';
-          var apiKey = 'd8-9jSITrfliR7bP5uq1h8BJ';
-          var scopes = 'https://www.googleapis.com/auth/contacts.readonly';
-          $(document).on("click",".googleContactsButton", function(){
-            gapi.client.setApiKey(apiKey);
-            window.setTimeout(authorize);
-          });
-          function authorize() {
-            gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthorization);
-          }
-          function handleAuthorization(authorizationResult) {
-            if (authorizationResult && !authorizationResult.error) {
-              $.get("https://www.google.com/m8/feeds/contacts/default/thin?alt=json&access_token=" + authorizationResult.access_token + "&max-results=500&v=3.0",
-                function(response){
-                  //process the response here
-                  console.log(response);
-                });
+    <div id="authPage">
+      <script type="text/javascript">
+            var clientId = '305322108967-q02bfmg9l082jftr9e45vgd5ffje0klf';
+            var apiKey = 'Y61ZxG-SKMrHqwrD5dp6BqPd';
+            var scopes = 'https://www.googleapis.com/auth/contacts.readonly';
+            $(document).on("click",".googleContactsButton", function(){
+              gapi.client.setApiKey(apiKey);
+              window.setTimeout(authorize);
+            });
+            function authorize() {
+              gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthorization);
             }
-          }
-        </script>
-        <script src="https://apis.google.com/js/client.js"></script>
-        <button class="googleContactsButton">Get my contacts</button>
-      </div>
-    </div> -->
+            function handleAuthorization(authorizationResult) {
+              if (authorizationResult && !authorizationResult.error) {
+                $.get("https://www.google.com/m8/feeds/contacts/default/thin?alt=json&access_token=" + authorizationResult.access_token + "&max-results=500&v=3.0",
+                  function(response){
+                    //process the response here
+                    console.log(response);
+                  });
+              }
+            }
+          </script>
+          <script src="https://apis.google.com/js/client.js"></script>
+          <button class="googleContactsButton">Get my contacts</button>
+    </div>
 
 
     <div id="activePage" style="display:none">
