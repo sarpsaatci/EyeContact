@@ -220,7 +220,7 @@ ws.onmessage = function(message) {
     break;
   case 'user':
     // console.log(parsedMessage);
-    document.getElementById('name').value = parsedMessage.currentUser.displayName.substr(0, parsedMessage.currentUser.displayName.indexOf(' '));
+    document.getElementById('name').value = parsedMessage.currentUser.name.$t.substr(0, parsedMessage.currentUser.name.$t.indexOf(' '));
     break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
