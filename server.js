@@ -37,14 +37,14 @@ var lib = nbind.init().lib;
 var fswatch = require('chokidar');
 var follow = require('text-file-follower');
 
-// var follower = follow('/root/OpenFace/outputFile.txt');
-//
-// ollower.on('line', function(filename, line) {
-//   console.log('Got a new line from '+filename+': '+line);
-// });
-//
-// // ... and then eventually:
-// follower.close();
+var follower = follow('/root/OpenFace/outputFile.txt', {catchup: true});
+
+ollower.on('line', function(filename, line) {
+  console.log('Got a new line from '+filename+': '+line);
+});
+
+// ... and then eventually:
+follower.close();
 
 
 
