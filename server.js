@@ -39,7 +39,7 @@ var follow = require('text-file-follower');
 
 var follower = follow('/root/OpenFace/outputFile.txt', {catchup: true});
 
-ollower.on('line', function(filename, line) {
+follower.on('line', function(filename, line) {
   console.log('Got a new line from '+filename+': '+line);
 });
 
