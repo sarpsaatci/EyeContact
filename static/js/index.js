@@ -242,7 +242,7 @@ function manageUser(userData)
   });
 
   var synth = window.speechSynthesis;
-  var utterThis = new SpeechSynthesisUtterance( "Hello" + currentUser.providerData[0].displayName.substr(0, currentUser.providerData[0].displayName.indexOf(' ')) + ", welcome to EyeContact");
+  var utterThis = new SpeechSynthesisUtterance( "Hello" + currentUser.substr(0, currentUser.indexOf(' ')) + ", welcome to EyeContact");
 
   synth.speak(utterThis);
 }
