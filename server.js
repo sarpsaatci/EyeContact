@@ -51,7 +51,7 @@ var follow = require('text-file-follower');
 
 var argv = minimist(process.argv.slice(2), {
   default: {
-      as_uri: "http://localhost:80/",
+      as_uri: "https://localhost:80/",
       ws_uri: "ws://localhost:8888/kurento",
 	  //file_uri: "file:///tmp/output/kurento-hello-world-recording.wmv"
   }
@@ -79,7 +79,7 @@ var idCounter = 0;
 var calleeName = '';
 var callerName = '';
 
-var of = null;
+var of
 
 var incImg = 1;
 
@@ -265,7 +265,7 @@ CallMediaPipeline.prototype.release = function() {
 
 var asUrl = url.parse(argv.as_uri);
 var port = asUrl.port;
-var server = http.createServer(app).listen(port, function() {
+var server = https.createServer(app, options).listen(port, function() {
     console.log('Kurento Tutorial started');
     console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
 });
