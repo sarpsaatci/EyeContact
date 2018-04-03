@@ -35,6 +35,18 @@ var shell = require('shelljs');
 var nbind = require('nbind');
 var lib = nbind.init().lib;
 var fswatch = require('chokidar');
+var follow = require('text-file-follower');
+
+// var follower = follow('/root/OpenFace/outputFile.txt');
+//
+// ollower.on('line', function(filename, line) {
+//   console.log('Got a new line from '+filename+': '+line);
+// });
+//
+// // ... and then eventually:
+// follower.close();
+
+
 
 
 var argv = minimist(process.argv.slice(2), {
