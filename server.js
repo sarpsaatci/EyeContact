@@ -37,17 +37,11 @@ var lib = nbind.init().lib;
 var fswatch = require('chokidar');
 var follow = require('text-file-follower');
 
-var follower = follow('/root/OpenFace/outputFile.txt', {catchup: true});
+var follower = follow('/root/OpenFace/outputFile.txt', {persistent: true, catchup: true});
 
 follower.on('line', function(filename, line) {
   console.log('Got a new line from '+filename+': '+line);
 });
-
-// ... and then eventually:
-follower.close();
-
-
-
 
 var argv = minimist(process.argv.slice(2), {
   default: {
@@ -404,6 +398,8 @@ function stop(sessionId) {
     });
 
     of.kill('SIGHUP');
+
+    follower.close();
 
     if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
       console.log('clean frames');
