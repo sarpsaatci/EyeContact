@@ -238,9 +238,9 @@
                   function(response){
                     var currentUser = response;
                     //process the response here
-                    for(var i = 0; i < response.feed.entry.length; i++)
-                      console.log(response.feed.entry[i].title.$t);
-                    console.log(currentUser);
+                    // for(var i = 0; i < response.feed.entry.length; i++)
+                    //   console.log(response.feed.entry[i].title.$t);
+                    // console.log(currentUser);
                     manageUser(currentUser);
                     activatePage();
                   });

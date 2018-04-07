@@ -236,6 +236,8 @@ function manageUser(userData)
   // contacts array (get each contact as string  with contacts[0].title.$t)
   var contacts = userData.feed.entry;
 
+  console.log(contacts);
+
   sendMessage({
     id : 'user',
     currentUser : currentUser
