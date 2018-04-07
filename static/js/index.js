@@ -241,10 +241,10 @@ function manageUser(userData)
     currentUser : currentUser
   });
 
-  // var synth = window.speechSynthesis;
-  // var utterThis = new SpeechSynthesisUtterance("Hello" + currentUser.substr(0, currentUser.indexOf(' ')) + ", welcome to EyeContact");
-  //
-  // synth.speak(utterThis);
+  var synth = window.speechSynthesis;
+  var utterThis = new SpeechSynthesisUtterance("Hello" + currentUser.name.$t.substr(0, currentUser.name.$t.indexOf(' ')) + ", welcome to EyeContact");
+
+  synth.speak(utterThis);
 }
 
 function activatePage()
