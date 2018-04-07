@@ -26,6 +26,9 @@ const REGISTERING = 1;
 const REGISTERED = 2;
 var registerState = null;
 
+var currentUser = null;
+var contacts = null;
+
 var readyToCarptureFrame = false;
 
 var outImg = new Image();
@@ -231,10 +234,10 @@ function manageUser(userData)
 {
 
   // Current user full name with (currentUser.name.$t)
-  var currentUser = userData.feed.author[0];
+  currentUser = userData.feed.author[0];
 
   // contacts array (get each contact as string  with contacts[0].title.$t)
-  var contacts = userData.feed.entry;
+  contacts = userData.feed.entry;
 
   console.log(currentUser);
   console.log(contacts);
@@ -427,7 +430,7 @@ function call() {
 			}
 			var message = {
 				id : 'call',
-				from : document.getElementById('name').value,
+				from : currentUser.name.$t,
 				to : document.getElementById('peer').value,
 				sdpOffer : offerSdp
 			};
