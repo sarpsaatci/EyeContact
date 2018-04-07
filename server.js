@@ -360,10 +360,11 @@ function getFrame(frame)
 
 
   // Returns a Promise
-  imageDataURI.outputFile(dataURI, filePath).then(res =>
-    console.log(res)
-    //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
-  );
+  imageDataURI.outputFile(dataURI, filePath)
+  // .then(res =>
+  //   // console.log(res)
+  //   //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
+  // );
 
 
   return true;
@@ -524,7 +525,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
 
     of.stdout.on('data', function(data) {
-      console.log('Message: ' + data);
+      // console.log('Message: ' + data);
     });
 
     of.on('close', function(code, signal) {
