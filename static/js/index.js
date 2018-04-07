@@ -156,11 +156,11 @@ window.onload = function() {
 	var drag = new Draggabilly(document.getElementById('videoSmall'));
 	videoInput = document.getElementById('videoInput');
 	videoOutput = document.getElementById('videoOutput');
-	document.getElementById('name').focus();
+	// document.getElementById('name').focus();
 
-	document.getElementById('register').addEventListener('click', function() {
-		register();
-	});
+	// document.getElementById('register').addEventListener('click', function() {
+	// 	register();
+	// });
 	document.getElementById('call').addEventListener('click', function() {
 		call();
 	});
@@ -236,6 +236,7 @@ function manageUser(userData)
   // contacts array (get each contact as string  with contacts[0].title.$t)
   var contacts = userData.feed.entry;
 
+  console.log(currentUser);
   console.log(contacts);
 
   sendMessage({
@@ -253,6 +254,7 @@ function activatePage()
 {
   document.getElementById("authPage").style.display = "none";
   document.getElementById("activePage").style.display = "block";
+  register();
 }
 
 function printOutput(message)
@@ -383,17 +385,12 @@ function incomingCall(message) {
 }
 
 function register() {
-	var name = document.getElementById('name').value;
-	if (name == '') {
-		window.alert("You must insert your user name");
-		return;
-	}
 
 	setRegisterState(REGISTERING);
 
 	var message = {
 		id : 'register',
-		name : name
+		currentUserser : currentUser
 	};
 	sendMessage(message);
 	document.getElementById('peer').focus();

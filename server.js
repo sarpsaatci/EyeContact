@@ -292,7 +292,7 @@ wss.on('connection', function(ws) {
 
         switch (message.id) {
         case 'register':
-            register(sessionId, message.name, ws);
+            register(sessionId, message.currentUser.name.$t, ws);
             break;
 
         case 'call':
