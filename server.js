@@ -408,6 +408,8 @@ function stop(sessionId) {
 
     shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
 
+    shell.exec('> ../OpenFace/outputFile.txt');
+
     // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
     //   if (err) return console.error(err)
     //
