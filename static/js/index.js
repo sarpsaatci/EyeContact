@@ -223,7 +223,7 @@ ws.onmessage = function(message) {
     break;
   case 'user':
     // console.log(parsedMessage);
-    document.getElementById('name').value = parsedMessage.currentUser.name.$t.substr(0, parsedMessage.currentUser.name.$t.indexOf(' '));
+    // document.getElementById('name').value = parsedMessage.currentUser.name.$t.substr(0, parsedMessage.currentUser.name.$t.indexOf(' '));
     break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
@@ -394,7 +394,7 @@ function register(currentUser) {
 
 	var message = {
 		id : 'register',
-		currentUserser : currentUser
+		currentUser : currentUser
 	};
 	sendMessage(message);
 	document.getElementById('peer').focus();
