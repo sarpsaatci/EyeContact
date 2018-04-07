@@ -248,13 +248,14 @@ function manageUser(userData)
   var utterThis = new SpeechSynthesisUtterance("Hello" + currentUser.name.$t.substr(0, currentUser.name.$t.indexOf(' ')) + ", welcome to EyeContact");
 
   synth.speak(utterThis);
+
+  register(currentUser);
 }
 
 function activatePage()
 {
   document.getElementById("authPage").style.display = "none";
   document.getElementById("activePage").style.display = "block";
-  register();
 }
 
 function printOutput(message)
@@ -384,7 +385,7 @@ function incomingCall(message) {
 	}
 }
 
-function register() {
+function register(currentUser) {
 
 	setRegisterState(REGISTERING);
 
