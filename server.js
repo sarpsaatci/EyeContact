@@ -532,18 +532,18 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
       console.log('ls finished...');
     });
 
-    var watcher = fswatch.watch('/root/OpenFace/outputs', {
-      ignored: /(^|[\/\\])\../,
-      persistent: true
-    });
-
-    var log = console.log.bind(console);
-
-    watcher
-      .on('add', path => parseOutput(path, caller, callee))
-      .on('change', path => parseOutput(path, caller, callee))
-      .on('unlink', path => log(`File ${path} has been removed`))
-      .on('addDir', path => watcher.add(path, caller, callee));
+    // var watcher = fswatch.watch('/root/OpenFace/outputs', {
+    //   ignored: /(^|[\/\\])\../,
+    //   persistent: true
+    // });
+    //
+    // var log = console.log.bind(console);
+    //
+    // watcher
+    //   .on('add', path => parseOutput(path, caller, callee))
+    //   .on('change', path => parseOutput(path, caller, callee))
+    //   .on('unlink', path => log(`File ${path} has been removed`))
+    //   .on('addDir', path => watcher.add(path, caller, callee));
 
 }
 
