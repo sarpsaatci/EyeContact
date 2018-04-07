@@ -43,10 +43,10 @@ function captureVideoFrame(video, format, path) {
 
         var canvas = document.createElement("CANVAS");
 
-        canvas.width = video.videoWidth/2;
-        canvas.height = video.videoHeight/2;
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
 
-        canvas.getContext('2d').drawImage(video, 0, 0, video.videoHeight/2, video.videoWidth/2);
+        canvas.getContext('2d').drawImage(video, 0, 0, video.videoHeight, video.videoWidth);
 
         // var frameBlob;
         //
@@ -81,7 +81,7 @@ function captureVideoFrame(video, format, path) {
 
         return { buf: buf, dataUri: dataUri, type: type };
 
-        return { buf: buf, dataUri: dataUri, type: type };
+        // return { buf: buf, dataUri: dataUri, type: type };
 
         // for (var i = 0; i < bytes.length; i++) {
         //     arr[i] = bytes.charCodeAt(i);
@@ -97,7 +97,7 @@ function captureVideoFrame(video, format, path) {
         // var formData = new FormData();
         // formData.append("blob", blob, path);
         //return { blob: blob, dataUri: dataUri, format: format };
-        return { dataUri: dataUri, type: type };
+        // return { dataUri: dataUri, type: type };
         //return blob;
 }
 
