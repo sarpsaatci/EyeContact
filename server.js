@@ -37,19 +37,6 @@ var lib = nbind.init().lib;
 var fswatch = require('chokidar');
 var follow = require('text-file-follower');
 
-var follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
-
-follower.on('line', function(filename, line) {
-  console.log('OpenFace: '+line);
-  if(line == '$modelLoaded')
-  {
-    console.log('----------------');
-    wss.send(JSON.stringify({
-      id: 'capture'
-    }));
-  }
-});
-
 var argv = minimist(process.argv.slice(2), {
   default: {
       as_uri: "https://localhost:443/",
@@ -524,6 +511,19 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         };
         caller.sendMessage(decline);
     }
+
+    var follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
+
+    follower.on('line', function(filename, line) {
+      console.log('OpenFace: '+line);
+      if(line == '$modelLoaded')
+      {
+        console.log('----------------');
+        callee.sendMessage({
+          id: 'capture'
+        });
+      }
+    });
 
     of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
 
