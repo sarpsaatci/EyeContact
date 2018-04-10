@@ -41,10 +41,13 @@ var follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: tr
 
 follower.on('line', function(filename, line) {
   console.log('OpenFace: '+line);
-  if(line.substr(0, 1) == '_')
+  if(line == '_modelLoaded\n')
+  {
+    console.log('----------------');
     ws.send(JSON.stringify({
       id: 'capture'
     }));
+  }
 });
 
 var argv = minimist(process.argv.slice(2), {
