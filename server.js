@@ -41,6 +41,10 @@ var follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: tr
 
 follower.on('line', function(filename, line) {
   console.log('OpenFace: '+line);
+  if(line.substr(0, 1) == '_')
+    ws.send(JSON.stringify({
+      id: 'capture'
+    }));
 });
 
 var argv = minimist(process.argv.slice(2), {
@@ -392,24 +396,9 @@ function stop(sessionId) {
         return;
     }
 
-    // Removes saved frames when session ended.
-    fse.remove('./out/', err => {
-      if (err) return console.error(err)
-      console.log('success!')
-    });
-
     of.kill('SIGHUP');
 
     follower.close();
-
-    if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
-      console.log('clean frames');
-    if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
-      console.log('clean outputs/');
-
-    shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
-
-    shell.exec('> ../OpenFace/outputFile.txt');
 
     // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
     //   if (err) return console.error(err)
@@ -441,6 +430,17 @@ function stop(sessionId) {
     }
 
     clearCandidatesQueue(sessionId);
+
+    if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
+      console.log('clean frames');
+    if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
+      console.log('clean outputs');
+
+    shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
+
+    if(shell.exec('> ../OpenFace/outputFile.txt'))
+      console.log("outputFile cleared");
+
 }
 
 function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {

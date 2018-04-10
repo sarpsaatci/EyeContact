@@ -200,7 +200,6 @@ ws.onmessage = function(message) {
 		incomingCall(parsedMessage);
 		break;
 	case 'startCommunication':
-    readyToCarptureFrame = true;
 		startCommunication(parsedMessage);
 		break;
 	case 'stopCommunication':
@@ -211,7 +210,7 @@ ws.onmessage = function(message) {
 		webRtcPeer.addIceCandidate(parsedMessage.candidate);
 		break;
   case 'frame':
-    console.log("Get FRAME: " + parsedMessage.imgCount);
+    // console.log("Get FRAME: " + parsedMessage.imgCount);
     readyToCarptureFrame = true;
     break;
   case 'frameUrl':
@@ -225,9 +224,31 @@ ws.onmessage = function(message) {
     // console.log(parsedMessage);
     // document.getElementById('name').value = parsedMessage.currentUser.name.$t.substr(0, parsedMessage.currentUser.name.$t.indexOf(' '));
     break;
+  case 'capture':
+    readyToCaptureImage = true;
+    break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
 	}
+}
+
+function getFrame()
+{
+  videoOutput.ontimeupdate = function() {
+    if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
+      console.log("time: " + videoOutput.currentTime);
+      path = "frame_" + (videoOutput.currentTime | 0);
+      frameBuf = captureVideoFrame(videoOutput, null, path);
+      frame = {
+        id : 'frame',
+        sessionId : sessionId,
+        path : path,
+        buf : frameBuf
+      };
+      readyToCarptureFrame = false;
+      sendMessage(frame);
+    }
+  };
 }
 
 function manageUser(userData)
@@ -306,26 +327,7 @@ function startCommunication(message) {
   console.log("startCom MESSAGE");
   console.log(message);
 
-
-
-  console.log("startCom MESSAGE");
-  console.log(message);
-
-  videoOutput.ontimeupdate = function() {
-    if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
-      console.log("time: " + videoOutput.currentTime);
-      path = "frame_" + (videoOutput.currentTime | 0);
-      frameBuf = captureVideoFrame(videoOutput, null, path);
-      frame = {
-        id : 'frame',
-        sessionId : message.sessionId,
-        path : path,
-        buf : frameBuf
-      };
-      readyToCarptureFrame = false;
-      sendMessage(frame);
-    }
-  };
+  var sessionId = message.sessionId;
 
 	webRtcPeer.processAnswer(message.sdpAnswer);
 }
