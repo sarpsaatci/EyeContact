@@ -41,7 +41,7 @@ var follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: tr
 
 follower.on('line', function(filename, line) {
   console.log('OpenFace: '+line);
-  if(line == '_modelLoaded\n')
+  if(line == 'modelLoaded\n')
   {
     console.log('----------------');
     ws.send(JSON.stringify({
