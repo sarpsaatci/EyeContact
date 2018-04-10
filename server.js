@@ -44,7 +44,7 @@ follower.on('line', function(filename, line) {
   if(line == '$modelLoaded')
   {
     console.log('----------------');
-    this.ws.send(JSON.stringify({
+    wss.send(JSON.stringify({
       id: 'capture'
     }));
   }
