@@ -49,7 +49,7 @@ function captureVideoFrame(video, format, path) {
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
 
-        canvas.getContext('2d').drawImage(video, 0, 0, video.videoHeight, video.videoWidth);
+        canvas.getContext('2d').drawImage(video, 0, 0);
 
         // var frameBlob;
         //
