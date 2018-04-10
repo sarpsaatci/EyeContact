@@ -39,9 +39,9 @@ var follow = require('text-file-follower');
 
 var follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
 
-// follower.on('line', function(filename, line) {
-//   console.log('Got a new line from '+filename+': '+line);
-// });
+follower.on('line', function(filename, line) {
+  console.log('OpenFace: '+line);
+});
 
 var argv = minimist(process.argv.slice(2), {
   default: {
@@ -524,9 +524,9 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
 
     of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
 
-    of.stdout.on('data', function(data) {
-      console.log('--------- ' + data);
-    });
+    // of.stdout.on('data', function(data) {
+    //   console.log('--------- ' + data);
+    // });
 
     of.on('close', function(code, signal) {
       console.log('ls finished...');
