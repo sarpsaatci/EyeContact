@@ -215,8 +215,9 @@ autocomplete(document.getElementById("myInput"), countries);
         console.log(e.results[0][0].transcript);
         document.getElementById('transcript').value
                                  = e.results[0][0].transcript;
+
+        document.getElementById('myInput').value = e.results[0][0].transcript;
         recognition.stop();
-        document.getElementById('labnol').submit();
       };
 
       recognition.onerror = function(e) {
