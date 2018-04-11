@@ -219,6 +219,7 @@ autocomplete(document.getElementById("myInput"), countries);
       recognition.onresult = function(e) {
         console.log(e.results[0][0].transcript);
         document.getElementById('myInput').value = e.results[0][0].transcript;
+        document.getElementById('myInput').trigger('input');
         recognition.stop();
       };
 
