@@ -65,12 +65,17 @@ input[type=submit] {
 <p>Start typing:</p>
 
 <!--Make sure the form has the autocomplete function switched off:-->
-<form autocomplete="off" action="/action_page.php">
+<!-- <form autocomplete="off" action="#">
   <div class="autocomplete" style="width:300px;">
     <input id="myInput" type="text" name="myCountry" placeholder="Country">
   </div>
   <input type="submit">
-</form>
+</form> -->
+
+<div class="autocomplete" style="width:300px;">
+  <input id="myInput" type="text" name="myCountry" placeholder="Country">
+</div>
+<input type="submit">
 
 <script>
 function autocomplete(inp, arr) {
@@ -213,9 +218,6 @@ autocomplete(document.getElementById("myInput"), countries);
 
       recognition.onresult = function(e) {
         console.log(e.results[0][0].transcript);
-        document.getElementById('transcript').value
-                                 = e.results[0][0].transcript;
-
         document.getElementById('myInput').value = e.results[0][0].transcript;
         recognition.stop();
       };
