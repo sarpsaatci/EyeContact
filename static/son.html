@@ -185,14 +185,17 @@ autocomplete(document.getElementById("myInput"), countries);
 </style>
 
 <!-- Search Form -->
-<form id="labnol" onsubmit="(function(transcript) {
+<!-- <form id="labnol" onsubmit="(function(transcript) {
   console.log(transcript.value);
 })();">
   <div class="speech">
     <input type="text" name="q" id="transcript" placeholder="Speak" />
     <img onclick="startDictation()" src="//i.imgur.com/cHidSVu.gif" />
   </div>
-</form>
+</form> -->
+
+<input type="text" name="q" id="transcript" placeholder="Speak" />
+<button onclick="startDictation()">Speak</button>
 
 <!-- HTML5 Speech Recognition API -->
 <script>
@@ -209,6 +212,7 @@ autocomplete(document.getElementById("myInput"), countries);
       recognition.start();
 
       recognition.onresult = function(e) {
+        console.log(e.results[0][0].transcript);
         document.getElementById('transcript').value
                                  = e.results[0][0].transcript;
         recognition.stop();
