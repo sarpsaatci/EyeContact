@@ -195,8 +195,8 @@ autocomplete(document.getElementById("myInput"), countries);
   </div>
 </form> -->
 
-<input type="text" name="q" id="transcript" placeholder="Speak" />
-<button onclick="startDictation()">Speak</button>
+<!-- <input type="text" name="q" id="transcript" placeholder="Speak" />
+<button onclick="startDictation()">Speak</button> -->
 
 <!-- HTML5 Speech Recognition API -->
 <script>
@@ -213,7 +213,6 @@ autocomplete(document.getElementById("myInput"), countries);
       recognition.start();
 
       recognition.onresult = function(e) {
-        console.log(e.results[0][0].transcript);
         document.getElementById('myInput').value = e.results[0][0].transcript;
         document.getElementById('myInput').trigger('input');
         recognition.stop();
