@@ -244,7 +244,6 @@ function getFrames()
 
       frame = {
         id : 'frame',
-        sessionId : sessionId,
         path : path,
         buf : frameBuf
       };
