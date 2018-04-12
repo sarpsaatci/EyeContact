@@ -67,7 +67,9 @@ var idCounter = 0;
 var calleeName = '';
 var callerName = '';
 
-var of
+var of = null;
+
+var follower = null;
 
 var incImg = 1;
 
@@ -512,7 +514,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         caller.sendMessage(decline);
     }
 
-    var follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
+    follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
 
     follower.on('line', function(filename, line) {
       console.log('OpenFace: '+line);
