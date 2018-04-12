@@ -308,7 +308,7 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-            //console.log(message);
+            console.log(message.id);
             if(getFrame(message)) {
               ws.send(JSON.stringify({
                 id : 'frame',
