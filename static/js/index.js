@@ -329,8 +329,6 @@ function startCommunication(message) {
   console.log("startCom MESSAGE");
   console.log(message);
 
-  var sessionId = message.sessionId;
-
 	webRtcPeer.processAnswer(message.sdpAnswer);
 }
 
