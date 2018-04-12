@@ -523,6 +523,12 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
           id: 'capture'
         });
       }
+      else {
+        callee.sendMessage({
+          id: 'openFace',
+          data: line
+        });
+      }
     });
 
     of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
