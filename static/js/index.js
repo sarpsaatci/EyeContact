@@ -202,7 +202,7 @@ ws.onmessage = function(message) {
 	case 'startCommunication':
 		startCommunication(parsedMessage);
     readyToCarptureFrame = true;
-    getFrame();
+    getFrames();
 		break;
 	case 'stopCommunication':
 		console.info("Communication ended by remote peer");
@@ -234,7 +234,7 @@ ws.onmessage = function(message) {
 	}
 }
 
-function getFrame()
+function getFrames()
 {
   videoOutput.ontimeupdate = function() {
     if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
