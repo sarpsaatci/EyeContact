@@ -514,25 +514,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         caller.sendMessage(decline);
     }
 
-    follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
-
-    follower.on('line', function(filename, line) {
-      console.log('OpenFace: '+line);
-      if(line == '$modelLoaded')
-      {
-        console.log('----------------');
-        callee.sendMessage({
-          id: 'capture'
-        });
-      }
-      else {
-        callee.sendMessage({
-          id: 'openFace',
-          data: line
-        });
-      }
-    });
-
     of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
 
     // of.stdout.on('data', function(data) {
@@ -555,6 +536,26 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     //   .on('change', path => parseOutput(path, caller, callee))
     //   .on('unlink', path => log(`File ${path} has been removed`))
     //   .on('addDir', path => watcher.add(path, caller, callee));
+
+    follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
+
+    follower.on('line', function(filename, line) {
+      console.log('OpenFace: '+line);
+      if(line == '$modelLoaded')
+      {
+        console.log('----------------');
+        callee.sendMessage({
+          id: 'capture'
+        });
+      }
+      else {
+        callee.sendMessage({
+          id: 'openFace',
+          data: line
+        });
+      }
+    });
+
 
 }
 
