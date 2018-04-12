@@ -201,7 +201,7 @@ ws.onmessage = function(message) {
 		break;
 	case 'startCommunication':
 		startCommunication(parsedMessage);
-    readyToCarptureFrame = true;
+    // readyToCarptureFrame = true;
     getFrames();
 		break;
 	case 'stopCommunication':
@@ -229,6 +229,9 @@ ws.onmessage = function(message) {
   case 'capture':
     readyToCaptureImage = true;
     break;
+  case 'openFace':
+    console.log(parsedMessage.data);
+    break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
 	}
@@ -248,7 +251,6 @@ function getFrames()
         buf : frameBuf
       };
       readyToCarptureFrame = false;
-      console.log("----------");
       sendMessage(frame);
     }
   };
