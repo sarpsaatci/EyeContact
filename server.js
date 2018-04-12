@@ -355,10 +355,10 @@ function getFrame(frame)
 
   // Returns a Promise
   imageDataURI.outputFile(dataURI, filePath)
-  // .then(res =>
+  .then(res =>
     console.log(res)
-  //   //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
-  // );
+    //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
+  );
 
 
   return true;

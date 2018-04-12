@@ -212,7 +212,7 @@ ws.onmessage = function(message) {
 		webRtcPeer.addIceCandidate(parsedMessage.candidate);
 		break;
   case 'frame':
-    // console.log("Get FRAME: " + parsedMessage.imgCount);
+    console.log("Get FRAME: " + parsedMessage.imgCount);
     readyToCarptureFrame = true;
     break;
   case 'frameUrl':
