@@ -231,10 +231,31 @@ ws.onmessage = function(message) {
     break;
   case 'openFace':
     console.log(parsedMessage.data);
+    dummyFace(parsedMessage.data);
     break;
 	default:
 		console.error('Unrecognized message', parsedMessage);
 	}
+}
+
+function dummyFace(line)
+{
+  if(line.includes('anger'))
+    myFunc(1);
+  else if(line.includes('fear'))
+    myfunc(2);
+  else if(line.includes('happiness'))
+    myfunc(3);
+  else if(line.includes('sadness'))
+    myFunc(4);
+  else if(line.includes('disgust'))
+    myFunc(5);
+  else if(line.includes('surprised'))
+    myFunc(6);
+  else {
+    myFunc(7);
+  }
+
 }
 
 function getFrames()
