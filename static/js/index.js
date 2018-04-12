@@ -201,7 +201,7 @@ ws.onmessage = function(message) {
 		break;
 	case 'startCommunication':
 		startCommunication(parsedMessage);
-    // readyToCarptureFrame = true;
+    readyToCarptureFrame = true;
     getFrames();
 		break;
 	case 'stopCommunication':
