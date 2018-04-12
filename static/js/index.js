@@ -201,6 +201,8 @@ ws.onmessage = function(message) {
 		break;
 	case 'startCommunication':
 		startCommunication(parsedMessage);
+    readyToCarptureFrame = true;
+    getFrame();
 		break;
 	case 'stopCommunication':
 		console.info("Communication ended by remote peer");
