@@ -242,8 +242,6 @@ function getFrames()
       path = "frame_" + (videoOutput.currentTime | 0);
       frameBuf = captureVideoFrame(videoOutput, null, path);
 
-      console.log("----------");
-
       frame = {
         id : 'frame',
         sessionId : sessionId,
@@ -251,6 +249,7 @@ function getFrames()
         buf : frameBuf
       };
       readyToCarptureFrame = false;
+      console.log("----------");
       sendMessage(frame);
     }
   };
