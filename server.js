@@ -38,11 +38,6 @@ var fswatch = require('chokidar');
 var follow = require('text-file-follower');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://eyecontact:123abcd1@ds239029.mlab.com:39029/eyecontact');
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-
 var argv = minimist(process.argv.slice(2), {
   default: {
       as_uri: "https://localhost:443/",
@@ -605,7 +600,11 @@ function register(id, userName, contacts, name, ws, callback) {
         return onError("User " + name + " is already registered");
     }
 
-    userRegistry.register(new UserSession(id, name, ws));
+    mongoose.connect('mongodb://eyecontact:123abcd1@ds239029.mlab.com:39029/eyecontact');
+
+    var db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+
     db.once('open', function() {
       // we're connected!
 
@@ -640,6 +639,9 @@ function register(id, userName, contacts, name, ws, callback) {
         console.log(users);
       });
     });
+
+    userRegistry.register(new UserSession(id, name, ws));
+
     try {
       ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted'}));
     } catch(exception) {
