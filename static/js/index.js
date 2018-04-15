@@ -286,9 +286,6 @@ function manageUser(userData)
   // contacts array (get each contact as string  with contacts[0].title.$t)
   contacts = userData.feed.entry;
 
-  console.log(currentUser);
-  console.log(contacts);
-
   contacts.forEach(function(element) {
     if(!element.gd$email || element.title.$t == "")
       contacts.splice(contacts.indexOf(element), 1);
@@ -299,7 +296,10 @@ function manageUser(userData)
       console.log(contact.title.$t);
       console.log(contact.gd$email[0].address);
     }
-  })
+  });
+
+  console.log(currentUser);
+  console.log(contacts);
 
   sendMessage({
     id : 'userLogin',
