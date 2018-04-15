@@ -294,6 +294,11 @@ function manageUser(userData)
       contacts.splice(contacts.indexOf(element), 1);
   });
 
+  contacts.forEach(function(contact) {
+    console.log(contact.title.$t);
+    console.log(contact.gd$email[0].adress);
+  })
+
   sendMessage({
     id : 'userLogin',
     currentUser : currentUser,
