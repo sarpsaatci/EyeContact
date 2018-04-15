@@ -607,6 +607,8 @@ function register(id, userName, contacts, name, ws, callback) {
     userRegistry.register(new UserSession(id, name, ws));
     try {
 
+      ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted'}));
+
       db.once('open', function() {
         // we're connected!
 
@@ -624,9 +626,6 @@ function register(id, userName, contacts, name, ws, callback) {
           email: 'newuser@example.com',
           contacts: {}
         });
-
-        ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted'}));
-
         newUser.save(function (err, newUser) {
           if (err) {
             console.error(err);
