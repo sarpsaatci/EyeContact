@@ -52,7 +52,7 @@ db.once('open', function() {
   });
   userSchema.index({ email: 1}, { unique: true });
 
-  var user = mongoose.model('User', userSchema);
+  var User = mongoose.model('User', userSchema);
 
   var newUser = new User({
     name: 'new user',
@@ -65,7 +65,7 @@ db.once('open', function() {
     console.log(newUser + ' added to db');
   });
 
-  user.find(function(err, users) {
+  User.find(function(err, users) {
     if (err) return console.error(err);
     console.log(kittens);
   });
