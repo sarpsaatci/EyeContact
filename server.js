@@ -38,6 +38,15 @@ var fswatch = require('chokidar');
 var follow = require('text-file-follower');
 const mongoose = require('mongoose');
 
+var userSchema = mongoose.Schema({
+  name: String,
+  email: String,
+  contacts: Object
+});
+userSchema.index({ email: 1}, { unique: true });
+
+var User = mongoose.model('User', userSchema);
+
 var argv = minimist(process.argv.slice(2), {
   default: {
       as_uri: "https://localhost:443/",
@@ -607,15 +616,6 @@ function register(id, userName, contacts, name, ws, callback) {
 
     db.once('open', function() {
       // we're connected!
-
-      var userSchema = mongoose.Schema({
-        name: String,
-        email: String,
-        contacts: Object
-      });
-      userSchema.index({ email: 1}, { unique: true });
-
-      var User = mongoose.model('User', userSchema);
 
       var newUser = new User({
         name: userName,
