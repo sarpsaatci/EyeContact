@@ -290,7 +290,7 @@ function manageUser(userData)
   console.log(contacts);
 
   contacts.forEach(function(element) {
-    if(!element.gd$email || contact.title.$t == "")
+    if(!element.gd$email || element.title.$t == "")
       contacts.splice(contacts.indexOf(element), 1);
   });
 
