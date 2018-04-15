@@ -291,7 +291,8 @@ function manageUser(userData)
 
   sendMessage({
     id : 'user',
-    currentUser : currentUser
+    currentUser : currentUser,
+    contacts : contacts
   });
 
   var synth = window.speechSynthesis;
