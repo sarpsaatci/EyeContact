@@ -290,8 +290,8 @@ function manageUser(userData)
   console.log(contacts);
 
   contacts.forEach(function(element) {
-    if(element.title.$t == 'Doruk Ozdemir')
-      console.log(element.gd$email[0].address);
+    if(element.gd$email[0])
+      console.log(element.gd$email[0]);
   });
 
   sendMessage({
