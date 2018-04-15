@@ -299,7 +299,7 @@ function manageUser(userData)
 
   synth.speak(utterThis);
 
-  register(currentUser);
+  register(currentUser, contacts);
 }
 
 function activatePage()
@@ -414,13 +414,14 @@ function incomingCall(message) {
 	}
 }
 
-function register(currentUser) {
+function register(currentUser, contacts) {
 
 	setRegisterState(REGISTERING);
 
 	var message = {
 		id : 'register',
-		currentUser : currentUser
+		currentUser : currentUser,
+    contacts : contacts
 	};
 	sendMessage(message);
 	document.getElementById('peer').focus();
