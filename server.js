@@ -67,7 +67,7 @@ db.once('open', function() {
 
   User.find(function(err, users) {
     if (err) return console.error(err);
-    console.log(kittens);
+    console.log(users);
   });
 
 });
