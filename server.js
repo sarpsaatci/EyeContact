@@ -322,9 +322,10 @@ wss.on('connection', function(ws) {
             }
             break;
 
-        case 'userRegister':
+        case 'userLogin':
           console.log(message.currentUser);
           ws.send(JSON.stringify(message));
+          break;
 
         default:
             ws.send(JSON.stringify({
