@@ -12,7 +12,32 @@
 }
 body {
   font: 16px Arial;
+  height: 100%;
 }
+body::after {
+  content: "";
+  background: url(3.jpg);
+  background-size:cover;
+	background-position: center;
+	   background-repeat: no-repeat;
+opacity: 1.0;
+filter: brightness(130%);
+
+  z-index: -1;
+
+   min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .autocomplete {
   /*the container must be positioned relative:*/
   position: relative;
@@ -73,7 +98,8 @@ input[type=submit] {
   </div>
   <input type="submit">
 </form> -->
-
+<div align="center" style="position:relative; top:300px; left:25px; height:500px ">
+<form autocomplete="off" action="/action_page.php">
 <div class="row col-lg-12 col-centered" align="center" style="position:relative">
   <div class="autocomplete" style="width:700px; height:80px">
     <input id="myInput" type="text" name="myCountry" placeholder="Country">
@@ -234,7 +260,7 @@ autocomplete(document.getElementById("myInput"), countries);
   }
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(drawChart);
 
@@ -260,6 +286,6 @@ autocomplete(document.getElementById("myInput"), countries);
 </script>
 
 <div class="row col-lg-12" id="curve_chart" style="width: 900px; height: 500px"></div>
-
+ -->
 </body>
 </html>
