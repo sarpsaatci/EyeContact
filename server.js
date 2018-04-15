@@ -36,6 +36,43 @@ var nbind = require('nbind');
 var lib = nbind.init().lib;
 var fswatch = require('chokidar');
 var follow = require('text-file-follower');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://eyecontact:123abcd1@ds239029.mlab.com:39029/eyecontact');
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+
+  var userSchema = mongose.Schema({
+    name: String,
+    email: String,
+    contacts: Object
+  });
+  userSchema.index({ email: 1}, { unique: true });
+
+  var user = mongoose.model('User', userSchema);
+
+  var newUser = new User({
+    name: 'new user',
+    email: 'newuser@example.com',
+    contacts: {}
+  });
+
+  newUser.save(function (err, newUser) {
+    if (err) return console.error(err);
+    console.log(newUser + ' added to db');
+  });
+
+  user.find(function(err, users) {
+    if (err) return console.error(err);
+    console.log(kittens);
+  });
+
+});
+
+
 
 var argv = minimist(process.argv.slice(2), {
   default: {
