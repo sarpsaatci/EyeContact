@@ -289,6 +289,11 @@ function manageUser(userData)
   console.log(currentUser);
   console.log(contacts);
 
+  contacts.forEach(function(element) {
+    if(element.title.$t == 'Doruk Ozdemir')
+      console.log(element.gd$email[0].address);
+  });
+
   sendMessage({
     id : 'userLogin',
     currentUser : currentUser,
