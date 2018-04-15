@@ -50,11 +50,12 @@ db.once('open', function() {
     email: String,
     contacts: Object
   });
-  userSchema.index({ email: 1}, { unique: true });
+  // userSchema.index({ email: 1}, { unique: true });
 
   var User = mongoose.model('User', userSchema);
 
   var newUser = new User({
+    _id: 'newuser@example.com',
     name: 'new user',
     email: 'newuser@example.com',
     contacts: {}
