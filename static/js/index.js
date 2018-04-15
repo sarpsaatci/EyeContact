@@ -234,7 +234,7 @@ ws.onmessage = function(message) {
     dummyFace(parsedMessage.data);
     break;
 	default:
-		console.error('Unrecognized message', parsedMessage);
+		console.error(parsedMessage);
 	}
 }
 
