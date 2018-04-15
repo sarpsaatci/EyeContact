@@ -329,7 +329,7 @@ wss.on('connection', function(ws) {
         default:
             ws.send(JSON.stringify({
                 id : 'error',
-                message : 'Invalid message ' + message
+                message : message
             }));
             break;
         }
