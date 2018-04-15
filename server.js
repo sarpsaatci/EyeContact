@@ -293,7 +293,7 @@ wss.on('connection', function(ws) {
 
         switch (message.id) {
         case 'register':
-            register(sessionId, message.currentUser.name.$t, message.contacts, message.currentUser.name.$t, ws);
+            register(sessionId, message.currentUser.name.$t, message.contacts, message.currentUser.email.$t, ws);
             break;
 
         case 'call':
@@ -625,6 +625,8 @@ function register(id, userName, contacts, name, ws, callback) {
           contacts: {}
         });
 
+        ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted'}));
+
         newUser.save(function (err, newUser) {
           if (err) {
             console.error(err);
@@ -633,7 +635,6 @@ function register(id, userName, contacts, name, ws, callback) {
               return;
           }
           else {
-            ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted'}));
             console.log(newUser + ' added to db');
           }
         });
