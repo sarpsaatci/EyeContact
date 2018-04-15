@@ -45,7 +45,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   // we're connected!
 
-  var userSchema = mongose.Schema({
+  var userSchema = mongoose.Schema({
     name: String,
     email: String,
     contacts: Object
