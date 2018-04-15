@@ -458,7 +458,7 @@ function call() {
 			}
 			var message = {
 				id : 'call',
-				from : currentUser.name.$t,
+				from : currentUser.email.$t,
 				to : document.getElementById('peer').value,
 				sdpOffer : offerSdp
 			};

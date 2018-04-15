@@ -16,8 +16,8 @@ body {
 }
 body::after {
   content: "";
-  background: url(3.jpg);
-  background-size:cover;
+  background: url(blur-close-up-focus-1006113.jpg);
+  background-size:100% 100%;
 	background-position: center;
 	   background-repeat: no-repeat;
 opacity: 1.0;
@@ -33,7 +33,7 @@ filter: brightness(130%);
   height: auto;
 
   /* Set up positioning */
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
 }
@@ -98,13 +98,12 @@ input[type=submit] {
   </div>
   <input type="submit">
 </form> -->
-<div align="center" style="position:relative; top:300px; left:25px; height:500px ">
 <form autocomplete="off" action="/action_page.php">
-<div class="row col-lg-12 col-centered" align="center" style="position:relative">
-  <div class="autocomplete" style="width:700px; height:80px">
-    <input id="myInput" type="text" name="myCountry" placeholder="Country">
+<div class="row align="center" style="position:relative">
+  <div class="row co-lg-12 autocomplete" style="position:fixed; left:50%; top:50%; transform: translate(-50%, -50%)">
+    <input id="myInput" type="text" name="myCountry" placeholder="Country" style="width:700px">
+    <i onclick="startDictation()" class="fas fa-2x fa-microphone" style="padding-left: 0.15em; padding-top: 0.4em"></i>
   </div>
-  <i onclick="startDictation()" class="fas fa-microphone" style="background-color: #f2f2f2"></i>
 </div>
 
 <script>
