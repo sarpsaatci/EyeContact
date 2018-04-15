@@ -295,7 +295,7 @@ function manageUser(userData)
   });
 
   contacts.forEach(function(contact) {
-    if(contact.gd$email || contact.title.$t == '') {
+    if(contact.gd$email || contact.title.$t == "") {
       console.log(contact.title.$t);
       console.log(contact.gd$email[0].address);
     }
