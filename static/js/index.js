@@ -290,7 +290,7 @@ function manageUser(userData)
   console.log(contacts);
 
   sendMessage({
-    id : 'user',
+    id : 'userLogin',
     currentUser : currentUser,
     contacts : contacts
   });
