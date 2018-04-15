@@ -290,8 +290,8 @@ function manageUser(userData)
   console.log(contacts);
 
   contacts.forEach(function(element) {
-    if(element.gd$email)
-      console.log(element.gd$email[0].address);
+    if(!element.gd$email)
+      contacts.splice(indexOf(element), 1);
   });
 
   sendMessage({
