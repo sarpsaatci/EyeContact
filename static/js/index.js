@@ -295,8 +295,10 @@ function manageUser(userData)
   });
 
   contacts.forEach(function(contact) {
-    console.log(contact.title.$t);
-    console.log(contact.gd$email[0].adress);
+    if(!element.gd$email) {
+      console.log(contact.title.$t);
+      console.log(contact.gd$email[0].adress);
+    }
   })
 
   sendMessage({
