@@ -43,6 +43,19 @@ mongoose.connect('mongodb://eyecontact:123abcd1@ds239029.mlab.com:39029/eyeconta
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
+db.once('open', function() {
+  // we're connected!
+
+  var userSchema = mongoose.Schema({
+    name: String,
+    email: String,
+    contacts: Object
+  });
+  userSchema.index({ email: 1}, { unique: true });
+
+  var User = mongoose.model('User', userSchema);
+});
+
 var argv = minimist(process.argv.slice(2), {
   default: {
       as_uri: "https://localhost:443/",
@@ -607,44 +620,30 @@ function register(id, userName, contacts, name, ws, callback) {
 
     userRegistry.register(new UserSession(id, name, ws));
     try {
-
       ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted'}));
 
-      // db.once('open', function() {
-      //   // we're connected!
-      //
-      //   var userSchema = mongoose.Schema({
-      //     name: String,
-      //     email: String,
-      //     contacts: Object
-      //   });
-      //   userSchema.index({ email: 1}, { unique: true });
-      //
-      //   var User = mongoose.model('User', userSchema);
-      //
-      //   var newUser = new User({
-      //     name: 'new user',
-      //     email: 'newuser@example.com',
-      //     contacts: {}
-      //   });
-      //   newUser.save(function (err, newUser) {
-      //     if (err) {
-      //       console.error(err);
-      //       if(err.code == 11000)
-      //         console.log('User already exists.');
-      //         return;
-      //     }
-      //     else {
-      //       console.log(newUser + ' added to db');
-      //     }
-      //   });
-      //
-      //   User.find(function(err, users) {
-      //     if (err) return console.error(err);
-      //     console.log(users);
-      //   });
-      //
-      // });
+      var newUser = new User({
+        name: userName,
+        email: name,
+        contacts: contacts
+      });
+      newUser.save(function (err, newUser) {
+        if (err) {
+          console.error(err);
+          if(err.code == 11000)
+            console.log('User already exists.');
+            return;
+        }
+        else {
+          console.log(newUser + ' added to db');
+        }
+      });
+
+      User.find(function(err, users) {
+        if (err) return console.error(err);
+        console.log(users);
+      });
+
     } catch(exception) {
         onError(exception);
     }
