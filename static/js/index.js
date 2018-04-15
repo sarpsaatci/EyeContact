@@ -291,7 +291,7 @@ function manageUser(userData)
 
   contacts.forEach(function(element) {
     if(!element.gd$email)
-      contacts.splice(indexOf(element), 1);
+      contacts.splice(contacts.indexOf(element), 1);
   });
 
   sendMessage({
