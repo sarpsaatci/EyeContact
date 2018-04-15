@@ -318,6 +318,7 @@ function manageUser(userData)
 function activatePage()
 {
   document.getElementById("authPage").style.display = "none";
+  document.getElementById("authBtn").style.display = "none";
   document.getElementById("activePage").style.display = "block";
 }
 
