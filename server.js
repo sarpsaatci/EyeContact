@@ -626,7 +626,7 @@ function register(id, userName, contacts, name, ws, callback) {
         if (err) {
           console.error(err);
           if(err.code == 11000)
-            console.log('User already exists.');
+            console.log('User' + newUser + 'already exists.');
             return;
         }
         else {
@@ -636,7 +636,6 @@ function register(id, userName, contacts, name, ws, callback) {
 
       User.find(function(err, users) {
         if (err) return console.error(err);
-        console.log(users);
       });
     });
 
