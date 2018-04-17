@@ -201,7 +201,7 @@ ws.onmessage = function(message) {
 		break;
 	case 'startCommunication':
 		startCommunication(parsedMessage);
-    readyToCarptureFrame = true;
+    // readyToCarptureFrame = true;
     getFrames();
 		break;
 	case 'stopCommunication':
@@ -213,7 +213,7 @@ ws.onmessage = function(message) {
 		break;
   case 'frame':
     console.log("Get FRAME: " + parsedMessage.imgCount);
-    // readyToCarptureFrame = true;
+    readyToCarptureFrame = true;
     break;
   case 'frameUrl':
     console.log(message);
