@@ -312,7 +312,7 @@ function manageUser(userData)
 
   contacts.forEach(function(contact) {
     if(contact.title && contact.gd$email)
-      contactNames.push('' + contact.title.$t + ' [' + contact.gd$email[0].address + ']');
+      contactNames.push('' + contact.title.$t + ' [' + contact.gd$email[0].address + ']$');
   });
 
   sendMessage({
