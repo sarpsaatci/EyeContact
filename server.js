@@ -548,7 +548,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
 
     follower.on('line', function(filename, line) {
       console.log('OpenFace: '+line);
-      if(line == '$modelLoaded')
+      if(line.includes('$modelLoaded'))
       {
         console.log('----------------');
         callee.sendMessage({
