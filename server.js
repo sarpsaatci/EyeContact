@@ -548,19 +548,19 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
 
     follower.on('line', function(filename, line) {
       console.log('OpenFace: '+line);
-      // if(line.includes('$modelLoaded'))
-      // {
-      //   console.log('----------------');
-      //   callee.sendMessage({
-      //     id: 'capture'
-      //   });
-      // }
-      // else {
-      //   callee.sendMessage({
-      //     id: 'openFace',
-      //     data: line
-      //   });
-      // }
+      if(line == '$modelLoaded')
+      {
+        console.log('----------------');
+        callee.sendMessage({
+          id: 'capture'
+        });
+      }
+      else {
+        callee.sendMessage({
+          id: 'openFace',
+          data: line
+        });
+      }
     });
 
 
