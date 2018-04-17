@@ -225,7 +225,7 @@
                 /*and simulate a click on the "active" item:*/
                 if (x) {
                   x[currentFocus].click();
-
+                  makeCall(document.getElementById('myInput').value.substr(document.getElementById('myInput').value.indexOf('(')+1, document.getElementById('myInput').value.indexOf('(')-1));
                 }
               }
             }

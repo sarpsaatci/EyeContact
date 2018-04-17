@@ -260,6 +260,13 @@ function dummyFace(line)
 
 }
 
+function makeCall(peerEmail)
+{
+  document.getElementById('callPage').style.display = "none";
+  document.getElementById('activePage').style.display = "block";
+  call(peerEmail);
+}
+
 function getFrames()
 {
   videoOutput.ontimeupdate = function() {
@@ -329,7 +336,6 @@ function manageUser(userData)
 function activatePage()
 {
   document.getElementById("authPage").style.display = "none";
-  document.getElementById("authBtn").style.display = "none";
   document.getElementById("callPage").style.display = "block";
   document.getElementById("myInput").focus();
 }
@@ -453,11 +459,7 @@ function register(currentUser, contacts) {
 	document.getElementById('peer').focus();
 }
 
-function call() {
-	if (document.getElementById('peer').value == '') {
-		window.alert("You must specify the peer name");
-		return;
-	}
+function call(peerEmail) {
 
 	setCallState(PROCESSING_CALL);
 
@@ -484,7 +486,7 @@ function call() {
 			var message = {
 				id : 'call',
 				from : currentUser.email.$t,
-				to : document.getElementById('peer').value,
+				to : peerEmail,
 				sdpOffer : offerSdp
 			};
 			sendMessage(message);
