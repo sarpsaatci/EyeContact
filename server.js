@@ -551,9 +551,9 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
       if(line == '$modelLoaded')
       {
         console.log('----------------');
-        // callee.sendMessage({
-        //   id: 'capture'
-        // });
+        callee.sendMessage({
+          id: 'capture'
+        });
       }
       else {
         callee.sendMessage({

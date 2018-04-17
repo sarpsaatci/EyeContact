@@ -213,7 +213,7 @@ ws.onmessage = function(message) {
 		break;
   case 'frame':
     console.log("Get FRAME: " + parsedMessage.imgCount);
-    readyToCarptureFrame = true;
+    // readyToCarptureFrame = true;
     break;
   case 'frameUrl':
     console.log(message);
