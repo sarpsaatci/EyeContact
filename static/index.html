@@ -294,6 +294,7 @@
               document.getElementById('myInput').contentEditable = "true";
               document.getElementById('myInput').value = e.results[0][0].transcript;
               document.getElementById('myInput').dispatchEvent(evt);
+              document.getElementById('myInput').focus();
               recognition.stop();
             };
 
