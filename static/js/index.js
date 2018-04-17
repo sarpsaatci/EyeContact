@@ -389,7 +389,11 @@ function startCommunication(message) {
 }
 
 function incomingCall(message) {
-	// If bussy just reject without disturbing user
+
+  document.getElementById('callPage').style.display = "none";
+  document.getElementById('activePage').style.display = "block";
+
+  // If bussy just reject without disturbing user
 	if (callState != NO_CALL) {
 		var response = {
 			id : 'incomingCallResponse',
