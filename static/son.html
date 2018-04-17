@@ -42,30 +42,23 @@ body::after {
   position: relative;
   display: inline-block;
 }
-input {
+
+.auto-complete-input {
   border: 1px solid transparent;
-  background-color: #f1f1f1;
   padding: 10px;
-}
-input[type=text] {
   background-color: white;
   border-width: 2px;
   border-color: #f2f2f2;
 }
-input[type=submit] {
-  background-color: DodgerBlue;
-  color: #fff;
-  cursor: pointer;
-}
 .autocomplete-items {
   position: center;
-  border: 1px solid #d4d4d4;
+  /* border: 1px solid #d4d4d4; */
   border-bottom: none;
   border-top: none;
   z-index: 99;
   /*position the autocomplete items to be the same width as the container:*/
   top: 100%;
-  width: 30%;
+  width: 100%;
 }
 .autocomplete-items div {
   text-align: left;
@@ -102,10 +95,10 @@ input[type=submit] {
 <!--  -->
 <!-- logo height: 20% width: 27% -->
 <!--  -->
-<form autocomplete="off" action="/action_page.php">
+<form autocomplete="off" action="#">
 <div class="row">
   <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
-  <div class="col-lg-4 col-md-8 col-sm-8 col-xs-10" style="padding: 3.5%; padding-top: 7.5%; padding-bottom: 4.5%">
+  <div class="col-lg-4 col-md-8 col-sm-8 col-xs-10" style="padding-bottom: 4%; padding-top: 6%">
     <img src="logo.png" style="height: auto; width: 100%">
   </div>
   <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
@@ -113,11 +106,12 @@ input[type=submit] {
 <div class="row">
   <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
   <div class="col-lg-4 col-md-8 col-sm-8 col-xs-10">
-    <input id="myInput" type="text" name="myCall" placeholder="Call User" style="width:90%">
+    <input id="myInput" type="text" class="auto-complete-input" name="myCall" placeholder="Call User" style="width:90%">
     <i onclick="startDictation()" class="fas fa-2x fa-microphone" style="width: 10% padding-left: 0.15em; padding-top: 0.4em; color: white"></i>
   </div>
   <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
 </div>
+
 
 <script>
 function autocomplete(inp, arr) {
