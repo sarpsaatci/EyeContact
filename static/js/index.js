@@ -227,7 +227,7 @@ ws.onmessage = function(message) {
     // document.getElementById('name').value = parsedMessage.currentUser.name.$t.substr(0, parsedMessage.currentUser.name.$t.indexOf(' '));
     break;
   case 'capture':
-    console.log(message.id);
+    console.log(parsedMessage.id);
     readyToCaptureImage = true;
     break;
   case 'openFace':
