@@ -166,7 +166,7 @@
         the text field element and an array of possible autocompleted values:*/
         var currentFocus;
         /*execute a function when someone writes in the text field:*/
-        inp.oninput() {
+        inp.addEventListener("input", function(e) {
             var a, b, i, val = this.value;
             /*close any already open lists of autocompleted values*/
             closeAllLists();
@@ -201,7 +201,7 @@
                 a.appendChild(b);
               }
             }
-        }
+        });
         /*execute a function presses a key on the keyboard:*/
         inp.addEventListener("keydown", function(e) {
             var x = document.getElementById(this.id + "autocomplete-list");
@@ -289,9 +289,12 @@
             recognition.start();
 
             recognition.onresult = function(e) {
+              var evt = document.createEvent('HTMLEvents');
+              evt.initEvent('input', true, true);
               document.getElementById('myInput').contentEditable = "true";
               document.getElementById('myInput').value = e.results[0][0].transcript;
-              document.getElementById('myInput').trigger('input');
+              document.getElementById('myInput').trigger("input");
+              document.getElementById('myInput').dispatchEvent(evt);
               recognition.stop();
             };
 
