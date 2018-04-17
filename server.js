@@ -596,17 +596,17 @@ function call(callerId, to, from, sdpOffer) {
 
 }
 
-function register(id, userName, contacts, name, ws, callback) {
+function register(id, userName, contacts, email, ws, callback) {
     function onError(error) {
         ws.send(JSON.stringify({id:'registerResponse', response : 'rejected ', message: error}));
     }
 
-    if (!name) {
+    if (!email) {
         return onError("empty user name");
     }
 
-    if (userRegistry.getByName(name)) {
-        return onError("User " + name + " is already registered");
+    if (userRegistry.getByName(email)) {
+        return onError("User " + userName + " is already registered");
     }
 
     mongoose.connect('mongodb://eyecontact:123abcd1@ds239029.mlab.com:39029/eyecontact');
@@ -619,18 +619,18 @@ function register(id, userName, contacts, name, ws, callback) {
 
       var newUser = new User({
         name: userName,
-        email: name,
+        email: email,
         contacts: contacts
       });
       newUser.save(function (err, newUser) {
         if (err) {
           console.error(err);
           if(err.code == 11000)
-            console.log('User' + newUser + 'already exists.');
+            console.log('User ' + userName + ' already exists.');
             return;
         }
         else {
-          console.log(newUser + ' added to db');
+          console.log(userName + ' added to db');
         }
       });
 
@@ -639,7 +639,7 @@ function register(id, userName, contacts, name, ws, callback) {
       });
     });
 
-    userRegistry.register(new UserSession(id, name, ws));
+    userRegistry.register(new UserSession(id, email, ws));
 
     try {
       ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted'}));
