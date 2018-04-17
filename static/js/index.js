@@ -28,6 +28,7 @@ var registerState = null;
 
 var currentUser = null;
 var contacts = null;
+var contactNames = new Array();
 
 var readyToCaptureFrame = false;
 
@@ -302,6 +303,10 @@ function manageUser(userData)
   console.log(currentUser);
   console.log(contacts);
 
+  contacts.forEach(function(contact) {
+    contactNames.push('' + contact.title.$t + '(' + contact.gd$email[0].address + ')');
+  });
+
   sendMessage({
     id : 'userLogin',
     currentUser : currentUser,
@@ -316,13 +321,15 @@ function manageUser(userData)
   synth.speak(utterThis);
 
   register(currentUser, contacts);
+
+
 }
 
 function activatePage()
 {
   document.getElementById("authPage").style.display = "none";
   document.getElementById("authBtn").style.display = "none";
-  document.getElementById("activePage").style.display = "block";
+  document.getElementById("callPage").style.display = "block";
 }
 
 function printOutput(message)
