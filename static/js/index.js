@@ -304,6 +304,7 @@ function manageUser(userData)
   console.log(contacts);
 
   contacts.forEach(function(contact) {
+    if(contact.title && contact.gd$email)
     contactNames.push('' + contact.title.$t + '(' + contact.gd$email[0].address + ')');
   });
 
