@@ -29,7 +29,7 @@ var registerState = null;
 var currentUser = null;
 var contacts = null;
 
-var readyToCarptureFrame = false;
+var readyToCaptureFrame = false;
 
 var outImg = new Image();
 
@@ -201,7 +201,7 @@ ws.onmessage = function(message) {
 		break;
 	case 'startCommunication':
 		startCommunication(parsedMessage);
-    // readyToCarptureFrame = true;
+    // readyToCaptureFrame = true;
     getFrames();
 		break;
 	case 'stopCommunication':
@@ -213,7 +213,7 @@ ws.onmessage = function(message) {
 		break;
   case 'frame':
     console.log("Get FRAME: " + parsedMessage.imgCount);
-    readyToCarptureFrame = true;
+    readyToCaptureFrame = true;
     break;
   case 'frameUrl':
     console.log(message);
@@ -262,7 +262,7 @@ function dummyFace(line)
 function getFrames()
 {
   videoOutput.ontimeupdate = function() {
-    if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
+    if(videoOutput.currentTime != 0 && readyToCaptureFrame) {
       console.log("time: " + videoOutput.currentTime);
       path = "frame_" + (videoOutput.currentTime | 0);
       frameBuf = captureVideoFrame(videoOutput, null, path);
@@ -272,7 +272,7 @@ function getFrames()
         path : path,
         buf : frameBuf
       };
-      readyToCarptureFrame = false;
+      readyToCaptureFrame = false;
       sendMessage(frame);
     }
   };
