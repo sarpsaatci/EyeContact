@@ -289,7 +289,7 @@
             recognition.start();
 
             recognition.onresult = function(e) {
-              document.getElementById('myInput').contentEditable = true;
+              document.getElementById('myInput').contentEditable = "true";
               document.getElementById('myInput').value = e.results[0][0].transcript;
               document.getElementById('myInput').trigger('input');
               recognition.stop();
