@@ -310,6 +310,8 @@ function manageUser(userData)
   var synth = window.speechSynthesis;
   var utterThis = new SpeechSynthesisUtterance("Hello" + currentUser.name.$t.substr(0, currentUser.name.$t.indexOf(' ')) + ", welcome to EyeContact");
 
+  synth.style.voice-balance = -100;
+
   synth.speak(utterThis);
 
   register(currentUser, contacts);
