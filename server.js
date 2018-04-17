@@ -626,11 +626,11 @@ function register(id, userName, contacts, name, ws, callback) {
         if (err) {
           console.error(err);
           if(err.code == 11000)
-            console.log('User' + newUser.name + 'already exists.');
+            console.log('User' + newUser + 'already exists.');
             return;
         }
         else {
-          console.log(newUser.name + ' added to db');
+          console.log(newUser + ' added to db');
         }
       });
 
