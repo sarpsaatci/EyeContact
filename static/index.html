@@ -226,7 +226,7 @@
                 if (x) {
                   x[currentFocus].click();
                   let peer = inp.value;
-                  makeCall(peer.substr(peer.indexOf('-')+1, peer.indexOf('-')-1));
+                  makeCall(peer.substring(peer.indexOf('-')+1, peer.indexOf('-')-1));
                 }
               }
             }
