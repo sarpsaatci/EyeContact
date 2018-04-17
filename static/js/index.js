@@ -228,7 +228,7 @@ ws.onmessage = function(message) {
     break;
   case 'capture':
     console.log(parsedMessage.id);
-    readyToCaptureImage = true;
+    readyToCaptureFrame = true;
     break;
   case 'openFace':
     console.log(parsedMessage.data);
