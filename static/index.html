@@ -720,33 +720,34 @@
       </div>
 
       <div class="row col-lg-12">
+
         <div id="container">
-      		<div id="box1">
-            <image src= "img/neutral.png">
+      		<div class="box" id="box1">
+      			<image src= "neutral.png">
       		</div>
 
-      		<div id="box2">
-            <image id="angry" src= "img/angry.png">
+      		<div class="box" id="box2">
+      			<image id="myImage" src= "angry.png">
       		</div>
 
-          <div id="box3">
-            <image id="fear" src= "img/fear.png">
+      		<div class="box" id="box3">
+      			<image id="myImage" src= "fear.png">
       		</div>
 
-          <div id="box4">
-            <image id="happiness" src= "img/happiness.png">
+      		<div class="box" id="box4">
+      			<image id="myImage" src= "happiness.png">
       		</div>
 
-          <div id="box5">
-            <image id="sadness" src= "img/sadness.png">
+      		<div class="box" id="box5">
+      			<image id="myImage" src= "sadness.png">
       		</div>
 
-          <div id="box6">
-            <image id="disgust" src= "img/disgust.png">
+      		<div class="box" id="box6">
+      			<image id="myImage" src= "disgust.png">
       		</div>
 
-          <div id="box7">
-            <image id="surprised" src= "img/surprised.png">
+      		<div class="box" id="box7">
+      			<image id="myImage" src= "surprised.png">
       		</div>
       	</div>
       </div>
@@ -886,44 +887,37 @@
         height:100%;
   }
 
+
   </style>
 	<script>
-		$("#box2").hide()
-    $("#box3").hide()
-    $("#box4").hide()
-    $("#box5").hide()
-    $("#box6").hide()
-    $("#box7").hide()
-	   function myfunc(p1){
-       if(p1 == "1"){
-         document.getElementById("angry").src="img/angry.png";
-         $("#box2").fadeIn(2000);
-       }
-       if(p1 == "2"){
-         document.getElementById("fear").src="img/fear.png";
-         $("#box3").fadeIn(2000);
-       }
-      if(p1 == "3"){
-         document.getElementById("happiness").src="img/happiness.png";
-         $("#box4").fadeIn(2000);
-       }
-       if(p1 == "4"){
-         document.getElementById("sadness").src="img/sadness.png";
-         $("#box5").fadeIn(2000);
-       }
-       if(p1 == "5"){
-         document.getElementById("disgust").src="img/disgust.png";
-         $("#box6").fadeIn(2000);
-       }
-       if(p1 == "6"){
-         document.getElementById("surprised").src="img/surprised.png";
-         $("#box7").fadeIn(2000);
-       }
-       if(p1 == "7"){
-         document.getElementById("neutral").src="img/neutral.png";
-         $("#box1").fadeIn(2000);
-       }
+  
+  $("#box2").hide()
+  $("#box3").hide()
+  $("#box4").hide()
+  $("#box5").hide()
+  $("#box6").hide()
+  $("#box7").hide()
+
+function myfunc(p1){
+     if(p1 == "1"){
+       $("#box2").fadeIn(2000);
      }
+     if(p1 == "2"){
+       $("#box3").fadeIn(2000);
+     }
+    if(p1 == "3"){
+       $("#box4").fadeIn(2000);
+     }
+     if(p1 == "4"){
+       $("#box5").fadeIn(2000);
+     }
+     if(p1 == "5"){
+       $("#box6").fadeIn(2000);
+     }
+     if(p1 == "6"){
+       $("#box7").fadeIn(2000);
+     }
+   }
 
 	</script>
   </body>
