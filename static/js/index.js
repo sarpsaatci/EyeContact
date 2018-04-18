@@ -202,7 +202,7 @@ ws.onmessage = function(message) {
 		break;
 	case 'startCommunication':
 		startCommunication(parsedMessage);
-    // readyToCaptureFrame = true;
+    readyToCaptureFrame = true;
     getFrames();
 		break;
 	case 'stopCommunication':
@@ -213,8 +213,11 @@ ws.onmessage = function(message) {
 		webRtcPeer.addIceCandidate(parsedMessage.candidate);
 		break;
   case 'frame':
+    if(parsedMessage.imgCount > 1)
+    {
+      readyToCaptureFrame = true;
+    }
     console.log("Get FRAME: " + parsedMessage.imgCount);
-    readyToCaptureFrame = true;
     break;
   case 'frameUrl':
     console.log(message);

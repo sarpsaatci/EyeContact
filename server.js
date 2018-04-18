@@ -78,6 +78,8 @@ var callerName = '';
 
 var of = null;
 
+var follower = null;
+
 var incImg = 1;
 
 function parseOutput(file, caller, callee)
@@ -542,7 +544,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     //   .on('unlink', path => log(`File ${path} has been removed`))
     //   .on('addDir', path => watcher.add(path, caller, callee));
 
-    let follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
+    follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
 
     follower.on('line', function(filename, line) {
       console.log('OpenFace: '+line);
