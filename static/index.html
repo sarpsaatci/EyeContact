@@ -384,104 +384,106 @@
     </div>
 
 
-        <script>
-          function openTab(evt, tabName) {
-              var i, tabcontent, tablinks;
-              tabcontent = document.getElementsByClassName("tabcontent");
-              for (i = 0; i < tabcontent.length; i++) {
-                  tabcontent[i].style.display = "none";
-              }
-              tablinks = document.getElementsByClassName("tablinks");
-              for (i = 0; i < tablinks.length; i++) {
-                  tablinks[i].className = tablinks[i].className.replace(" active", "");
-              }
-              document.getElementById(tabName).style.display = "block";
-              evt.currentTarget.className += " active";
-          }
+    <div id="callPage" style="display: none">
 
-          </script>
-
-        <div id="mySidenav" class="sidenav">
-          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-          <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'Emotions')">Emotions</button>
-          </div>
-
-          <div id="Emotions" class="tabcontent">
-
-            <form action="">
-            <input type="checkbox" name="happiness" value="Happiness">Happiness<br>
-            <input type="checkbox" name="sadness" value="Sadness">Sadness<br>
-            <input type="checkbox" name="fear" value="Fear">Fear<br>
-            <input type="checkbox" name="disgust" value="Disgust">Disgust<br>
-            <input type="checkbox" name="surprised" value="Surprised">Surprised<br>
-            <input type="checkbox" name="angry" value="Angry">Angry<br>
-            <input type="checkbox" name="neutral" value="Neutral">Neutral<br>
-            </form>
-          </div>
-
-          <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'Trashold')">Trashold</button>
-          </div>
-
-          <div id="Trashold" class="tabcontent">
-
-            <h3>Trashold</h3>
-
-            <div class="""slidecontainer">
-              <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
-              <p>Value: <span id="demo"></span></p>
-            </div>
-          </div>
-
-          <script>
-          var slider = document.getElementById("myRange");
-          var output = document.getElementById("demo");
-          output.innerHTML = slider.value;
-
-          slider.oninput = function() {
-            output.innerHTML = this.value;
-          }
-          </script>
-          <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'Sensitivity')">Sensitivity</button>
-          </div>
-            <div id="Sensitivity" class="tabcontent">
-                <h3>Emotion Sensitivity</h3>
-                <div class="btn-group">
-                  <button>Low</button>
-                  <button>Medium</button>
-                  <button>High</button>
-              </div>
-                <h3>Gaze Sensitivity</h3>
-                <div class="btn-group">
-                  <button>Low</button>
-                  <button>Medium</button>
-                  <button>High</button>
-              </div>
-            </div>
-        </div>
-
-        <div id="main">
-          <i class="fa fa-gears" style="font-size:24px"></i>
-          <span style="font-size:30px; cursor:pointer" onclick="openNav()"> Settings</span>
-        </div>
-
-        <script>
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
-            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+      <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
         }
 
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("main").style.marginLeft= "0";
-            document.body.style.backgroundColor = "white";
-        }
         </script>
 
-    <div id="callPage" style="display: none">
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="tab">
+          <button class="tablinks" onclick="openTab(event, 'Emotions')">Emotions</button>
+        </div>
+
+        <div id="Emotions" class="tabcontent">
+
+          <form action="">
+          <input type="checkbox" name="happiness" value="Happiness">Happiness<br>
+          <input type="checkbox" name="sadness" value="Sadness">Sadness<br>
+          <input type="checkbox" name="fear" value="Fear">Fear<br>
+          <input type="checkbox" name="disgust" value="Disgust">Disgust<br>
+          <input type="checkbox" name="surprised" value="Surprised">Surprised<br>
+          <input type="checkbox" name="angry" value="Angry">Angry<br>
+          <input type="checkbox" name="neutral" value="Neutral">Neutral<br>
+          </form>
+        </div>
+
+        <div class="tab">
+          <button class="tablinks" onclick="openTab(event, 'Trashold')">Trashold</button>
+        </div>
+
+        <div id="Trashold" class="tabcontent">
+
+          <h3>Trashold</h3>
+
+          <div class="""slidecontainer">
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <p>Value: <span id="demo"></span></p>
+          </div>
+        </div>
+
+        <script>
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("demo");
+        output.innerHTML = slider.value;
+
+        slider.oninput = function() {
+          output.innerHTML = this.value;
+        }
+        </script>
+        <div class="tab">
+          <button class="tablinks" onclick="openTab(event, 'Sensitivity')">Sensitivity</button>
+        </div>
+          <div id="Sensitivity" class="tabcontent">
+              <h3>Emotion Sensitivity</h3>
+              <div class="btn-group">
+                <button>Low</button>
+                <button>Medium</button>
+                <button>High</button>
+            </div>
+              <h3>Gaze Sensitivity</h3>
+              <div class="btn-group">
+                <button>Low</button>
+                <button>Medium</button>
+                <button>High</button>
+            </div>
+          </div>
+      </div>
+
+      <div id="main">
+        <i class="fa fa-gears" style="font-size:24px"></i>
+        <span style="font-size:30px; cursor:pointer" onclick="openNav()"> Settings</span>
+      </div>
+
+      <script>
+      function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+          document.getElementById("main").style.marginLeft = "250px";
+          document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+      }
+
+      function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("main").style.marginLeft= "0";
+          document.body.style.backgroundColor = "white";
+      }
+      </script>
+
+
       <form autocomplete="off" action="#">
       <div class="row">
         <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
