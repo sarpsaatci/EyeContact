@@ -108,44 +108,7 @@
     </style>
 
     <style>
-      .slidecontainer {
-          width: 100%;
-      }
 
-      .slider {
-          -webkit-appearance: none;
-          width: 100%;
-          height: 15px;
-          border-radius: 5px;
-          background: white;
-          outline: none;
-          opacity: 0.7;
-          -webkit-transition: .2s;
-          transition: opacity .2s;
-          background-color: white;
-      }
-
-      .slider:hover {
-          opacity: 1;
-      }
-
-      .slider::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          appearance: none;
-          width: 25px;
-          height: 25px;
-          border-radius: 50%;
-          background: white;
-          cursor: pointer;
-      }
-
-      .slider::-moz-range-thumb {
-          width: 25px;
-          height: 25px;
-          border-radius: 50%;
-          background: white;
-          cursor: pointer;
-      }
       .navbar {
           overflow: hidden;
           background-color: white;
@@ -245,7 +208,7 @@
       .btn-group button {
           background-color: white; /* Green background */
           border: 1px solid grey; /* Green border */
-          color: white; /* White text */
+          color: black; /* White text */
           padding: 5px 12px; /* Some padding */
           cursor: pointer; /* Pointer/hand icon */
           float: left; /* Float the buttons side by side */
@@ -298,7 +261,7 @@
       /* Style the tab content */
       .tabcontent {
           display: none;
-          color: white;
+          color: black;
           padding: 6px 12px;
           -webkit-animation: fadeEffect 1s;
           animation: fadeEffect 1s;
@@ -311,7 +274,7 @@
           z-index: 1;
           top: 0;
           left: 0;
-          background-color: white;
+          background-color: #111;
           overflow-x: hidden;
           transition: 0.5s;
           padding-top: 60px;
@@ -566,17 +529,14 @@
             } else if (e.keyCode == 13) {
               /*If the ENTER key is pressed, prevent the form from being submitted,*/
               e.preventDefault();
-              /*and simulate a click on the "active" item:*/
-              if (x) {
-                x[currentFocus].click();
-                let peer = inp.value;
-                makeCall(peer.substring(peer.indexOf('(')+1, peer.indexOf(')')));
+              if (currentFocus >= 0) {
+                /*and simulate a click on the "active" item:*/
+                if (x) {
+                  x[currentFocus].click();
+                  let peer = inp.value;
+                  makeCall(peer.substring(peer.indexOf('(')+1, peer.indexOf(')')));
+                }
               }
-              else {
-                let peer = inp.value;
-                makeCall(peer.substring(peer.indexOf('(')+1, peer.indexOf(')')));
-              }
-
             }
         });
         function addActive(x) {
