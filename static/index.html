@@ -492,7 +492,7 @@
         </div>
         <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
       </div>
-      <div class="row">
+      <div class="row col-sm-12">
         <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
         <div class="col-lg-4 col-md-8 col-sm-8 col-xs-10">
           <input id="myInput" type="text" class="auto-complete-input" name="myCall" placeholder="Call User" style="width:90%">
@@ -518,7 +518,6 @@
             a.setAttribute("id", this.id + "autocomplete-list");
             a.setAttribute("class", "autocomplete-items row col-lg-12");
             a.setAttribute("align", "center");
-            a.setAttribute("style", "overflow-y: auto");
 
             /*append the DIV element as a child of the autocomplete container:*/
             this.parentNode.appendChild(a);
