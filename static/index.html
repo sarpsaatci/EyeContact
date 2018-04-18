@@ -403,71 +403,6 @@
 
         </script>
 
-      <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div class="tab">
-          <button class="tablinks" onclick="openTab(event, 'Emotions')">Emotions</button>
-        </div>
-
-        <div id="Emotions" class="tabcontent">
-
-          <form action="">
-          <input type="checkbox" name="happiness" value="Happiness">Happiness<br>
-          <input type="checkbox" name="sadness" value="Sadness">Sadness<br>
-          <input type="checkbox" name="fear" value="Fear">Fear<br>
-          <input type="checkbox" name="disgust" value="Disgust">Disgust<br>
-          <input type="checkbox" name="surprised" value="Surprised">Surprised<br>
-          <input type="checkbox" name="angry" value="Angry">Angry<br>
-          <input type="checkbox" name="neutral" value="Neutral">Neutral<br>
-          </form>
-        </div>
-
-        <div class="tab">
-          <button class="tablinks" onclick="openTab(event, 'Trashold')">Trashold</button>
-        </div>
-
-        <div id="Trashold" class="tabcontent">
-
-          <h3>Trashold</h3>
-
-          <div class="""slidecontainer">
-            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
-            <p>Value: <span id="demo"></span></p>
-          </div>
-        </div>
-
-        <script>
-        var slider = document.getElementById("myRange");
-        var output = document.getElementById("demo");
-        output.innerHTML = slider.value;
-
-        slider.oninput = function() {
-          output.innerHTML = this.value;
-        }
-        </script>
-        <div class="tab">
-          <button class="tablinks" onclick="openTab(event, 'Sensitivity')">Sensitivity</button>
-        </div>
-          <div id="Sensitivity" class="tabcontent">
-              <h3>Emotion Sensitivity</h3>
-              <div class="btn-group">
-                <button>Low</button>
-                <button>Medium</button>
-                <button>High</button>
-            </div>
-              <h3>Gaze Sensitivity</h3>
-              <div class="btn-group">
-                <button>Low</button>
-                <button>Medium</button>
-                <button>High</button>
-            </div>
-          </div>
-      </div>
-
-      <div id="main">
-        <i class="fas fa-cogs" style="font-size:24px; color: white"></i>
-        <span style="font-size:30px; cursor:pointer; color: white" onclick="openNav()"> Settings</span>
-      </div>
 
       <script>
       function openNav() {
@@ -483,10 +418,75 @@
       }
       </script>
 
-
       <form autocomplete="off" action="#">
       <div class="row">
-        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
+        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1">
+          <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="tab">
+              <button class="tablinks" onclick="openTab(event, 'Emotions')">Emotions</button>
+            </div>
+
+            <div id="Emotions" class="tabcontent">
+
+              <form action="">
+              <input type="checkbox" name="happiness" value="Happiness">Happiness<br>
+              <input type="checkbox" name="sadness" value="Sadness">Sadness<br>
+              <input type="checkbox" name="fear" value="Fear">Fear<br>
+              <input type="checkbox" name="disgust" value="Disgust">Disgust<br>
+              <input type="checkbox" name="surprised" value="Surprised">Surprised<br>
+              <input type="checkbox" name="angry" value="Angry">Angry<br>
+              <input type="checkbox" name="neutral" value="Neutral">Neutral<br>
+              </form>
+            </div>
+
+            <div class="tab">
+              <button class="tablinks" onclick="openTab(event, 'Trashold')">Trashold</button>
+            </div>
+
+            <div id="Trashold" class="tabcontent">
+
+              <h3>Trashold</h3>
+
+              <div class="""slidecontainer">
+                <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+                <p>Value: <span id="demo"></span></p>
+              </div>
+            </div>
+
+            <script>
+            var slider = document.getElementById("myRange");
+            var output = document.getElementById("demo");
+            output.innerHTML = slider.value;
+
+            slider.oninput = function() {
+              output.innerHTML = this.value;
+            }
+            </script>
+            <div class="tab">
+              <button class="tablinks" onclick="openTab(event, 'Sensitivity')">Sensitivity</button>
+            </div>
+              <div id="Sensitivity" class="tabcontent">
+                  <h3>Emotion Sensitivity</h3>
+                  <div class="btn-group">
+                    <button>Low</button>
+                    <button>Medium</button>
+                    <button>High</button>
+                </div>
+                  <h3>Gaze Sensitivity</h3>
+                  <div class="btn-group">
+                    <button>Low</button>
+                    <button>Medium</button>
+                    <button>High</button>
+                </div>
+              </div>
+          </div>
+
+          <div id="main">
+            <i class="fas fa-cogs" style="font-size:24px; color: white"></i>
+            <span style="font-size:30px; cursor:pointer; color: white" onclick="openNav()"> Settings</span>
+          </div>
+        </div>
         <div class="col-lg-4 col-md-8 col-sm-8 col-xs-10" style="padding-bottom: 4%; padding-top: 6%">
           <img src="logo.png" style="height: auto; width: 100%">
         </div>
