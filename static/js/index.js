@@ -236,7 +236,7 @@ ws.onmessage = function(message) {
     break;
   case 'openFace':
     console.log(parsedMessage.data);
-    if(data.includes('$')) {
+    if(parsedMessage.data.includes('$')) {
       utterThis = new SpeechSynthesisUtterance("abuzer");
       synth.speak(utterThis);
     }
