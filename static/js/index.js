@@ -34,6 +34,9 @@ var readyToCaptureFrame = false;
 
 var outImg = new Image();
 
+var synth = window.speechSynthesis;
+var utterThis = null;
+
 function captureVideoFrame(video, format, path) {
         if (typeof video === 'string') {
             video = document.getElementById(video);
@@ -328,8 +331,8 @@ function manageUser(userData)
     contacts : contacts
   });
 
-  var synth = window.speechSynthesis;
-  var utterThis = new SpeechSynthesisUtterance("Hello" + currentUser.name.$t.substr(0, currentUser.name.$t.indexOf(' ')) + ", welcome to EyeContact");
+  synth = window.speechSynthesis;
+  utterThis = new SpeechSynthesisUtterance("Hello" + currentUser.name.$t.substr(0, currentUser.name.$t.indexOf(' ')) + ", welcome to EyeContact");
 
   // synth.style = -100;
 
