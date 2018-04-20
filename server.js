@@ -35,16 +35,25 @@ var shell = require('shelljs');
 var nbind = require('nbind');
 var lib = nbind.init().lib;
 var fswatch = require('chokidar');
+var follow = require('text-file-follower');
+const mongoose = require('mongoose');
 
+var userSchema = mongoose.Schema({
+  name: String,
+  email: String,
+  contacts: Object
+});
+userSchema.index({ email: 1}, { unique: true });
+
+var User = mongoose.model('User', userSchema);
 
 var argv = minimist(process.argv.slice(2), {
   default: {
-      as_uri: "http://localhost:80/",
+      as_uri: "https://localhost:443/",
       ws_uri: "ws://localhost:8888/kurento",
 	  //file_uri: "file:///tmp/output/kurento-hello-world-recording.wmv"
   }
 });
-
 
 var options =
 {
@@ -68,6 +77,8 @@ var calleeName = '';
 var callerName = '';
 
 var of = null;
+
+var follower = null;
 
 var incImg = 1;
 
@@ -253,7 +264,7 @@ CallMediaPipeline.prototype.release = function() {
 
 var asUrl = url.parse(argv.as_uri);
 var port = asUrl.port;
-var server = http.createServer(app).listen(port, function() {
+var server = https.createServer(options, app).listen(port, function() {
     console.log('Kurento Tutorial started');
     console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
 });
@@ -286,7 +297,7 @@ wss.on('connection', function(ws) {
 
         switch (message.id) {
         case 'register':
-            register(sessionId, message.name, ws);
+            register(sessionId, message.currentUser.name.$t, message.contacts, message.currentUser.email.$t, ws);
             break;
 
         case 'call':
@@ -306,26 +317,36 @@ wss.on('connection', function(ws) {
             break;
 
         case 'frame':
-            if(getFrame(message))
-              ws.send(JSON.stringify(message));
-            //console.log(message);
             if(getFrame(message)) {
               ws.send(JSON.stringify({
                 id : 'frame',
                 imgCount : incImg
               }));
+              if(incImg == 1)
+              {
+                of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '/root/OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+
+                // of.stdout.on('data', function(data) {
+                //   console.log('--------- ' + data);
+                // });
+
+                of.on('close', function(code, signal) {
+                  console.log('ls finished...');
+                });
+              }
               incImg++;
             }
             break;
 
-        case 'user':
-          // console.log(message.currentUser.providerData[0]);
+        case 'userLogin':
+          console.log(message.currentUser);
           ws.send(JSON.stringify(message));
+          break;
 
         default:
             ws.send(JSON.stringify({
                 id : 'error',
-                message : 'Invalid message ' + message
+                message : message
             }));
             break;
         }
@@ -350,15 +371,15 @@ function getFrame(frame)
 
   // It will create the full path in case it doesn't exist
   // If the extension is defined (e.g. fileName.png), it will be preserved, otherwise the lib will try to guess from the Data URI
-  let filePath = '../OpenFace/samples/image_sequence/' + incImg + '.jpg';
+  let filePath = '/root/OpenFace/samples/image_sequence/' + incImg + '.jpg';
 
 
   // Returns a Promise
-  imageDataURI.outputFile(dataURI, filePath).then(res =>
-    console.log(res)
-    //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
-  );
-  
+  imageDataURI.outputFile(dataURI, filePath)
+  // .then(res =>
+  //   console.log(res)
+  //   //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
+  // );
 
   return true;
 }
@@ -385,22 +406,9 @@ function stop(sessionId) {
         return;
     }
 
-    // Removes saved frames when session ended.
-    fse.remove('./out/', err => {
-      if (err) return console.error(err)
-      console.log('success!')
-    });    
-      console.log('success!')
-    });
-
     of.kill('SIGHUP');
 
-    if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
-      console.log('clean frames');
-    if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
-      console.log('clean outputs/');
-
-    shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
+    follower.close();
 
     // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
     //   if (err) return console.error(err)
@@ -432,6 +440,17 @@ function stop(sessionId) {
     }
 
     clearCandidatesQueue(sessionId);
+
+    if(shell.exec('rm -rf /root/OpenFace/samples/image_sequence/*'))
+      console.log('clean frames');
+    if(shell.exec('rm -rf /root/OpenFace/outputs/*'))
+      console.log('clean outputs');
+
+    shell.exec('mkdir /root/OpenFace/outputs/deneme_alligned');
+
+    if(shell.exec('> ../OpenFace/outputFile.txt'))
+      console.log("outputFile cleared");
+
 }
 
 function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
@@ -512,6 +531,40 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         };
         caller.sendMessage(decline);
     }
+
+    // var watcher = fswatch.watch('/root/OpenFace/outputs', {
+    //   ignored: /(^|[\/\\])\../,
+    //   persistent: true
+    // });
+    //
+    // var log = console.log.bind(console);
+    //
+    // watcher
+    //   .on('add', path => parseOutput(path, caller, callee))
+    //   .on('change', path => parseOutput(path, caller, callee))
+    //   .on('unlink', path => log(`File ${path} has been removed`))
+    //   .on('addDir', path => watcher.add(path, caller, callee));
+
+    follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
+
+    follower.on('line', function(filename, line) {
+      console.log('OpenFace: '+line);
+      if(line.includes('$modelLoaded'))
+      {
+        console.log('----------------');
+        callee.sendMessage({
+          id: 'capture'
+        });
+      }
+      else {
+        callee.sendMessage({
+          id: 'openFace',
+          data: line
+        });
+      }
+    });
+
+
 }
 
 function call(callerId, to, from, sdpOffer) {
@@ -541,47 +594,56 @@ function call(callerId, to, from, sdpOffer) {
     };
     caller.sendMessage(message);
 
-    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '../OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
-
-    of.stdout.on('data', function(data) {
-      console.log('Message: ' + data);
-    });
-
-    of.on('close', function(code, signal) {
-      console.log('ls finished...');
-    });
-
-    var watcher = fswatch.watch('/root/OpenFace/outputs', {
-      ignored: /(^|[\/\\])\../,
-      persistent: true
-    });
-
-    var log = console.log.bind(console);
-
-    watcher
-      .on('add', path => parseOutput(path, caller, callee))
-      .on('change', path => parseOutput(path, caller, callee))
-      .on('unlink', path => log(`File ${path} has been removed`))
-      .on('addDir', path => watcher.add(path, caller, callee));
 
 }
 
-function register(id, name, ws, callback) {
+function register(id, userName, contacts, email, ws, callback) {
     function onError(error) {
         ws.send(JSON.stringify({id:'registerResponse', response : 'rejected ', message: error}));
     }
 
-    if (!name) {
+    if (!email) {
         return onError("empty user name");
     }
 
-    if (userRegistry.getByName(name)) {
-        return onError("User " + name + " is already registered");
+    if (userRegistry.getByName(email)) {
+        return onError("User " + userName + " is already registered");
     }
 
-    userRegistry.register(new UserSession(id, name, ws));
+    mongoose.connect('mongodb://eyecontact:123abcd1@ds239029.mlab.com:39029/eyecontact');
+
+    var db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+
+    db.once('open', function() {
+      // we're connected!
+
+      var newUser = new User({
+        name: userName,
+        email: email,
+        contacts: contacts
+      });
+      newUser.save(function (err, newUser) {
+        if (err) {
+          console.error(err);
+          if(err.code == 11000)
+            console.log('User ' + userName + ' already exists.');
+            return;
+        }
+        else {
+          console.log(userName + ' added to db');
+        }
+      });
+
+      User.find(function(err, users) {
+        if (err) return console.error(err);
+      });
+    });
+
+    userRegistry.register(new UserSession(id, email, ws));
+
     try {
-        ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted'}));
+      ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted'}));
     } catch(exception) {
         onError(exception);
     }

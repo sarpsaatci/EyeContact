@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8' />
-    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-  </head>
-  <body>
+<head>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-          var clientId = '305322108967-k7ian7t2ck7tfsh7clpdjt4geogvrhvi';
-          var apiKey = 'd8-9jSITrfliR7bP5uq1h8BJ';
-          var scopes = 'https://www.googleapis.com/auth/contacts.readonly';
-          $(document).on("click",".googleContactsButton", function(){
-            gapi.client.setApiKey(apiKey);
-            window.setTimeout(authorize);
-          });
-          function authorize() {
-            gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthorization);
-          }
-          function handleAuthorization(authorizationResult) {
-            if (authorizationResult && !authorizationResult.error) {
-              $.get("https://www.google.com/m8/feeds/contacts/default/thin?alt=json&access_token=" + authorizationResult.access_token + "&max-results=500&v=3.0",
-                function(response){
-                  //process the response here
-                  console.log(response);
-                });
-            }
-          }
-        </script>
-        <script src="https://apis.google.com/js/client.js"></script>
-        <button class="googleContactsButton">Get my contacts</button>
-  </body>
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  1000,      400],
+          ['2005',  1170,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540]
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+
+      function reDraw() {
+
+        data.addRow(opt_cellArray);	
+      }
+    </script>
+
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+    <button onclick="reDraw()">Reddraw</button>
+
+</body>
 </html>

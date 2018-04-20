@@ -15,7 +15,7 @@
  *
  */
 
-var ws = new WebSocket('ws://' + location.host + '/one2one');
+var ws = new WebSocket('wss://' + location.host + '/one2one');
 var videoInput;
 var videoOutput;
 var webRtcPeer;
@@ -26,9 +26,17 @@ const REGISTERING = 1;
 const REGISTERED = 2;
 var registerState = null;
 
-var readyToCarptureFrame = false;
+var currentUser = null;
+var contacts = null;
+var contactNames = new Array();
+
+var readyToCaptureFrame = false;
 
 var outImg = new Image();
+
+var synth = window.speechSynthesis;
+var utterThis = null;
+var chime = null;
 
 function captureVideoFrame(video, format, path) {
         if (typeof video === 'string') {
@@ -43,10 +51,10 @@ function captureVideoFrame(video, format, path) {
 
         var canvas = document.createElement("CANVAS");
 
-        canvas.width = video.videoWidth/2;
-        canvas.height = video.videoHeight/2;
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
 
-        canvas.getContext('2d').drawImage(video, 0, 0, video.videoHeight/2, video.videoWidth/2);
+        canvas.getContext('2d').drawImage(video, 0, 0);
 
         // var frameBlob;
         //
@@ -78,10 +86,10 @@ function captureVideoFrame(video, format, path) {
         var bytes = window.atob(data);
         var buf = new ArrayBuffer(bytes.length);
         var arr = new Uint8Array(buf);
-        
-        return { buf: buf, dataUri: dataUri, type: type }; 
 
         return { buf: buf, dataUri: dataUri, type: type };
+
+        // return { buf: buf, dataUri: dataUri, type: type };
 
         // for (var i = 0; i < bytes.length; i++) {
         //     arr[i] = bytes.charCodeAt(i);
@@ -97,7 +105,7 @@ function captureVideoFrame(video, format, path) {
         // var formData = new FormData();
         // formData.append("blob", blob, path);
         //return { blob: blob, dataUri: dataUri, format: format };
-        return { dataUri: dataUri, type: type };
+        // return { dataUri: dataUri, type: type };
         //return blob;
 }
 
@@ -156,11 +164,11 @@ window.onload = function() {
 	var drag = new Draggabilly(document.getElementById('videoSmall'));
 	videoInput = document.getElementById('videoInput');
 	videoOutput = document.getElementById('videoOutput');
-	document.getElementById('name').focus();
+	// document.getElementById('name').focus();
 
-	document.getElementById('register').addEventListener('click', function() {
-		register();
-	});
+	// document.getElementById('register').addEventListener('click', function() {
+	// 	register();
+	// });
 	document.getElementById('call').addEventListener('click', function() {
 		call();
 	});
@@ -174,9 +182,9 @@ window.onbeforeunload = function() {
 }
 
 ws.onmessage = function(message) {
-	
+
 	// console.log();
-	
+
 
 	// console.log();
 
@@ -197,8 +205,9 @@ ws.onmessage = function(message) {
 		incomingCall(parsedMessage);
 		break;
 	case 'startCommunication':
-    readyToCarptureFrame = true;
 		startCommunication(parsedMessage);
+    readyToCaptureFrame = true;
+    getFrames();
 		break;
 	case 'stopCommunication':
 		console.info("Communication ended by remote peer");
@@ -208,8 +217,11 @@ ws.onmessage = function(message) {
 		webRtcPeer.addIceCandidate(parsedMessage.candidate);
 		break;
   case 'frame':
+    if(parsedMessage.imgCount > 1)
+    {
+      readyToCaptureFrame = true;
+    }
     console.log("Get FRAME: " + parsedMessage.imgCount);
-    readyToCarptureFrame = true;
     break;
   case 'frameUrl':
     console.log(message);
@@ -220,31 +232,125 @@ ws.onmessage = function(message) {
     break;
   case 'user':
     // console.log(parsedMessage);
-    document.getElementById('name').value = parsedMessage.currentUser.displayName.substr(0, parsedMessage.currentUser.displayName.indexOf(' '));
+    // document.getElementById('name').value = parsedMessage.currentUser.name.$t.substr(0, parsedMessage.currentUser.name.$t.indexOf(' '));
+    break;
+  case 'capture':
+    console.log(parsedMessage.id);
+    readyToCaptureFrame = true;
+    break;
+  case 'openFace':
+    console.log(parsedMessage.data);
+    if(parsedMessage.data.includes("-")) {
+      utterThis = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
+      chime = document.getElementById('chimeAudio');
+      chime.play();
+      synth.speak(utterThis);
+    }
+    dummyFace(parsedMessage.data);
     break;
 	default:
-		console.error('Unrecognized message', parsedMessage);
+		console.error(parsedMessage);
 	}
 }
 
-function manageUser(currentUser)
+function dummyFace(line)
 {
-  if(currentUser.providerData[0].providerId == 'google.com')
-    sendMessage({
-      id : 'user',
-      currentUser : currentUser
-    });
+  if(line.includes('anger'))
+    myfunc("1");
+  else if(line.includes('fear'))
+    myfunc("2");
+  else if(line.includes('happiness'))
+    myfunc("3");
+  else if(line.includes('sadness'))
+    myfunc("4");
+  else if(line.includes('disgust'))
+    myfunc("5");
+  else if(line.includes('surprised'))
+    myfunc("6");
+  else {
+    myfunc("7");
+  }
 
-  var synth = window.speechSynthesis;
-  var utterThis = new SpeechSynthesisUtterance( "Hello" + currentUser.providerData[0].displayName.substr(0, currentUser.providerData[0].displayName.indexOf(' ')) + ", welcome to EyeContact");
+}
+
+function makeCall(peerEmail)
+{
+  document.getElementById('callPage').style.display = "none";
+  document.getElementById('activePage').style.display = "block";
+  call(peerEmail);
+}
+
+function getFrames()
+{
+  videoOutput.ontimeupdate = function() {
+    if(videoOutput.currentTime != 0 && readyToCaptureFrame) {
+      console.log("time: " + videoOutput.currentTime);
+      path = "frame_" + (videoOutput.currentTime | 0);
+      frameBuf = captureVideoFrame(videoOutput, null, path);
+
+      frame = {
+        id : 'frame',
+        path : path,
+        buf : frameBuf
+      };
+      readyToCaptureFrame = false;
+      sendMessage(frame);
+    }
+  };
+}
+
+function manageUser(userData)
+{
+
+  // Current user full name with (currentUser.name.$t)
+  currentUser = userData.feed.author[0];
+
+  // contacts array (get each contact as string  with contacts[0].title.$t)
+  contacts = userData.feed.entry;
+
+  contacts.forEach(function(element) {
+    if(!element.gd$email || element.title.$t == "")
+      contacts.splice(contacts.indexOf(element), 1);
+  });
+
+  contacts.forEach(function(contact) {
+    if(contact.gd$email) {
+      console.log(contact.title.$t);
+      console.log(contact.gd$email[0].address);
+    }
+  });
+
+  console.log(currentUser);
+  console.log(contacts);
+
+  contacts.forEach(function(contact) {
+    if(contact.title && contact.gd$email)
+      contactNames.push('' + contact.title.$t + ' (' + contact.gd$email[0].address + ')');
+  });
+
+  sendMessage({
+    id : 'userLogin',
+    currentUser : currentUser,
+    contacts : contacts
+  });
+
+  synth = window.speechSynthesis;
+  utterThis = new SpeechSynthesisUtterance("Hello" + currentUser.name.$t.substr(0, currentUser.name.$t.indexOf(' ')) + ", welcome to EyeContact");
+
+  // synth.style = -100;
 
   synth.speak(utterThis);
+
+  register(currentUser, contacts);
+
+
 }
 
 function activatePage()
 {
   document.getElementById("authPage").style.display = "none";
-  document.getElementById("activePage").style.display = "block";
+  document.getElementById("callPage").style.display = "block";
+  document.getElementById("myInput").focus();
 }
 
 function printOutput(message)
@@ -288,36 +394,19 @@ function sendMessage(message) {
 
 function startCommunication(message) {
 	setCallState(IN_CALL);
-  
-  console.log("startCom MESSAGE");
-  console.log(message);
-  
-
 
   console.log("startCom MESSAGE");
   console.log(message);
-
-  videoOutput.ontimeupdate = function() {
-    if(videoOutput.currentTime != 0 && readyToCarptureFrame) {
-      console.log("time: " + videoOutput.currentTime);
-      path = "frame_" + (videoOutput.currentTime | 0);
-      frameBuf = captureVideoFrame(videoOutput, null, path);
-      frame = {
-        id : 'frame',
-        sessionId : message.sessionId,
-        path : path,
-        buf : frameBuf
-      };
-      readyToCarptureFrame = false;
-      sendMessage(frame);
-    }
-  };
 
 	webRtcPeer.processAnswer(message.sdpAnswer);
 }
 
 function incomingCall(message) {
-	// If bussy just reject without disturbing user
+
+  document.getElementById('callPage').style.display = "none";
+  document.getElementById('activePage').style.display = "block";
+
+  // If bussy just reject without disturbing user
 	if (callState != NO_CALL) {
 		var response = {
 			id : 'incomingCallResponse',
@@ -374,28 +463,20 @@ function incomingCall(message) {
 	}
 }
 
-function register() {
-	var name = document.getElementById('name').value;
-	if (name == '') {
-		window.alert("You must insert your user name");
-		return;
-	}
+function register(currentUser, contacts) {
 
 	setRegisterState(REGISTERING);
 
 	var message = {
 		id : 'register',
-		name : name
+		currentUser : currentUser,
+    contacts : contacts
 	};
 	sendMessage(message);
 	document.getElementById('peer').focus();
 }
 
-function call() {
-	if (document.getElementById('peer').value == '') {
-		window.alert("You must specify the peer name");
-		return;
-	}
+function call(peerEmail) {
 
 	setCallState(PROCESSING_CALL);
 
@@ -421,8 +502,8 @@ function call() {
 			}
 			var message = {
 				id : 'call',
-				from : document.getElementById('name').value,
-				to : document.getElementById('peer').value,
+				from : currentUser.email.$t,
+				to : peerEmail,
 				sdpOffer : offerSdp
 			};
 			sendMessage(message);
@@ -462,7 +543,7 @@ function onIceCandidate(candidate) {
 
 function showSpinner() {
 	for (var i = 0; i < arguments.length; i++) {
-		arguments[i].poster = './img/transparent-1px.png';
+		arguments[i].poster = 'img/transparent-1px.png';
 		arguments[i].style.background = 'center transparent url("./img/spinner.gif") no-repeat';
 	}
 }

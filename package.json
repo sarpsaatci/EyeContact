@@ -22,9 +22,11 @@
     "image-data-uri": "^1.0.1",
     "kurento-client": "github:Kurento/kurento-client-js",
     "minimist": "^1.1.1",
+    "mongoose": "^5.0.14",
     "nbind": "^0.3.14",
     "node-gyp": "^3.6.2",
     "shelljs": "^0.8.1",
+    "text-file-follower": "^0.1.0",
     "typedarray-to-buffer": "^3.1.2",
     "ws": "~1.0.1"
   },
