@@ -322,6 +322,18 @@ wss.on('connection', function(ws) {
                 id : 'frame',
                 imgCount : incImg
               }));
+              if(incImg == 1)
+              {
+                of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '/root/OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+
+                // of.stdout.on('data', function(data) {
+                //   console.log('--------- ' + data);
+                // });
+
+                of.on('close', function(code, signal) {
+                  console.log('ls finished...');
+                });
+              }
               incImg++;
             }
             break;
@@ -368,7 +380,6 @@ function getFrame(frame)
   //   console.log(res)
   //   //shell.exec('./../OpenFace/build/bin/FeatureExtraction -fdir ./frames/callee -of ../OpenFace/output' + res + '.txt -q')
   // );
-
 
   return true;
 }
@@ -520,16 +531,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         };
         caller.sendMessage(decline);
     }
-
-    of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '/root/OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
-
-    // of.stdout.on('data', function(data) {
-    //   console.log('--------- ' + data);
-    // });
-
-    of.on('close', function(code, signal) {
-      console.log('ls finished...');
-    });
 
     // var watcher = fswatch.watch('/root/OpenFace/outputs', {
     //   ignored: /(^|[\/\\])\../,
