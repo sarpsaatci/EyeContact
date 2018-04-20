@@ -36,8 +36,7 @@ var outImg = new Image();
 
 var synth = window.speechSynthesis;
 var utterThis = null;
-
-var chime = document.getElementById('chimeAudio');
+var chime = null;
 
 function captureVideoFrame(video, format, path) {
         if (typeof video === 'string') {
@@ -243,6 +242,7 @@ ws.onmessage = function(message) {
     console.log(parsedMessage.data);
     if(parsedMessage.data.includes("-")) {
       utterThis = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
+      chime = document.getElementById('chimeAudio');
       chime.play();
       synth.speak(utterThis);
     }
