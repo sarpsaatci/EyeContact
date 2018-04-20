@@ -37,6 +37,8 @@ var outImg = new Image();
 var synth = window.speechSynthesis;
 var utterThis = null;
 
+var chime = document.getElementById('chimeAudio');
+
 function captureVideoFrame(video, format, path) {
         if (typeof video === 'string') {
             video = document.getElementById(video);
@@ -239,8 +241,9 @@ ws.onmessage = function(message) {
     break;
   case 'openFace':
     console.log(parsedMessage.data);
-    if(parsedMessage.data.includes("$")) {
-      utterThis = new SpeechSynthesisUtterance("abuzer");
+    if(parsedMessage.data.includes("-")) {
+      utterThis = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
+      chime.play();
       synth.speak(utterThis);
     }
     dummyFace(parsedMessage.data);
