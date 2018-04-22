@@ -246,7 +246,7 @@ ws.onmessage = function(message) {
       chime.play();
       synth.speak(utterThis);
     }
-    dummyFace(parsedMessage.data);
+    // dummyFace(parsedMessage.data);
     break;
 	default:
 		console.error(parsedMessage);
@@ -256,19 +256,19 @@ ws.onmessage = function(message) {
 function dummyFace(line)
 {
   if(line.includes('anger'))
-    myfunc("1");
+    myfunc2("1");
   else if(line.includes('fear'))
-    myfunc("2");
+    myfunc2("2");
   else if(line.includes('happiness'))
-    myfunc("3");
+    myfunc2("3");
   else if(line.includes('sadness'))
-    myfunc("4");
+    myfunc2("4");
   else if(line.includes('disgust'))
-    myfunc("5");
+    myfunc2("5");
   else if(line.includes('surprised'))
-    myfunc("6");
+    myfunc2("6");
   else {
-    myfunc("7");
+    myfunc2("7");
   }
 
 }
