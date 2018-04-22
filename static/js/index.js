@@ -246,7 +246,7 @@ ws.onmessage = function(message) {
       chime.play();
       synth.speak(utterThis);
     }
-    // dummyFace(parsedMessage.data);
+    dummyFace(parsedMessage.data);
     break;
 	default:
 		console.error(parsedMessage);
