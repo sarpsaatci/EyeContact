@@ -410,6 +410,8 @@ function stop(sessionId) {
 
     follower.close();
 
+    follower = null;
+
     // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
     //   if (err) return console.error(err)
     //
@@ -563,8 +565,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         });
       }
     });
-
-
 }
 
 function call(callerId, to, from, sdpOffer) {
