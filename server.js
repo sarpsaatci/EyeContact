@@ -326,9 +326,9 @@ wss.on('connection', function(ws) {
               {
                 of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '/root/OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
 
-                of.stdout.on('data', function(data) {
-                  console.log('--------- ' + data);
-                });
+                // of.stdout.on('data', function(data) {
+                //   console.log('--------- ' + data);
+                // });
 
                 of.on('close', function(code, signal) {
                   console.log('ls finished...');
