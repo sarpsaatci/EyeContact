@@ -412,6 +412,8 @@ function stop(sessionId) {
 
     follower = null;
 
+    of = null;
+
     // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
     //   if (err) return console.error(err)
     //
