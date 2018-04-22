@@ -256,19 +256,19 @@ ws.onmessage = function(message) {
 function dummyFace(line)
 {
   if(line.includes('anger'))
-    myfunc2("1");
+    myfunc2(1);
   else if(line.includes('fear'))
-    myfunc2("2");
+    myfunc2(2);
   else if(line.includes('happiness'))
-    myfunc2("3");
+    myfunc2(3);
   else if(line.includes('sadness'))
-    myfunc2("4");
+    myfunc2(4);
   else if(line.includes('disgust'))
-    myfunc2("5");
+    myfunc2(5);
   else if(line.includes('surprised'))
-    myfunc2("6");
+    myfunc2(6);
   else {
-    myfunc2("7");
+    myfunc2(7);
   }
 
 }
