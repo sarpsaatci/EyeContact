@@ -36,6 +36,7 @@ var outImg = new Image();
 
 var synth = window.speechSynthesis;
 var utterThis = null;
+var emoUtter = null;
 var chime = null;
 var emoAudio = null;
 
@@ -251,10 +252,18 @@ ws.onmessage = function(message) {
   case 'openFace':
     console.log(parsedMessage.data);
     if(parsedMessage.data.includes("-")) {
-      utterThis = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
+      emoUtter = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
       chime = document.getElementById('chimeAudio');
       chime.play();
-      synth.speak(utterThis);
+
+      emoUtter.onend() {
+          document.getElementById('videoOutput').volume = 1.0;
+      }
+      emoUtter.onstart() {
+        document.getElementById('videoOutput').volume = 0.4;
+      }
+
+      synth.speak(emoUtter);
     }
     // dummyFace(parsedMessage.data);
     break;
