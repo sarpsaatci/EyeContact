@@ -35,7 +35,6 @@ var readyToCaptureFrame = false;
 var outImg = new Image();
 
 var synth = window.speechSynthesis;
-var utterThis = null;
 var chime = null;
 var emoAudio = null;
 
@@ -353,7 +352,7 @@ function manageUser(userData)
   });
 
   synth = window.speechSynthesis;
-  utterThis = new SpeechSynthesisUtterance("Hello" + currentUser.name.$t.substr(0, currentUser.name.$t.indexOf(' ')) + ", welcome to EyeContact");
+  let utterThis = new SpeechSynthesisUtterance("Hello" + currentUser.name.$t.substr(0, currentUser.name.$t.indexOf(' ')) + ", welcome to EyeContact");
 
   // synth.style = -100;
 
