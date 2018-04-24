@@ -254,9 +254,13 @@ ws.onmessage = function(message) {
       utterThis = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
       chime = document.getElementById('chimeAudio');
       chime.play();
-      document.getElementById('videoOutput').volume = 0.4;
       synth.speak(utterThis);
-      document.getElementById('videoOutput').volume = 1.0;
+      utterThis.onend() {
+          document.getElementById('videoOutput').volume = 1.0;
+      }
+      utterThis.onend() {
+        document.getElementById('videoOutput').volume = 0.4;
+      }
     }
     // dummyFace(parsedMessage.data);
     break;
