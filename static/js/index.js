@@ -277,13 +277,13 @@ ws.onmessage = function(message) {
         panNode2.pan.value = "-1";
         source2.connect(panNode2);
         panNode2.connect(audioCtx2.destination);
+        myAudio2.play();
 
       };
       // emoAudio = document.getElementById('emoAudio');
-      myAudio2.play();
       // synth.speak(utterThis);
     }
-    dummyFace(parsedMessage.data);
+    // dummyFace(parsedMessage.data);
     break;
 	default:
 		console.error(parsedMessage);
