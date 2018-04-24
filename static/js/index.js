@@ -35,7 +35,13 @@ var readyToCaptureFrame = false;
 var outImg = new Image();
 
 var synth = window.speechSynthesis;
-var utterThis = null;
+var utterThis = new SpeechSynthesisUtterance;
+utterThis.onend() {
+    document.getElementById('videoOutput').volume = 1.0;
+}
+utterThis.onend() {
+  document.getElementById('videoOutput').volume = 0.4;
+}
 var chime = null;
 var emoAudio = null;
 
@@ -255,12 +261,6 @@ ws.onmessage = function(message) {
       chime = document.getElementById('chimeAudio');
       chime.play();
       synth.speak(utterThis);
-      utterThis.onend() {
-          document.getElementById('videoOutput').volume = 1.0;
-      }
-      utterThis.onend() {
-        document.getElementById('videoOutput').volume = 0.4;
-      }
     }
     // dummyFace(parsedMessage.data);
     break;
