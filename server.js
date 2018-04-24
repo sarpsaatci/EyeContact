@@ -558,12 +558,12 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
       if(line.includes('$modelLoaded'))
       {
         console.log('----------------');
-        callee.sendMessage({
+        caller.sendMessage({
           id: 'capture'
         });
       }
       else {
-        callee.sendMessage({
+        caller.sendMessage({
           id: 'openFace',
           data: line
         });
