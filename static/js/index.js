@@ -256,6 +256,7 @@ ws.onmessage = function(message) {
       chime.play();
       document.getElementById('videoOutput').volume = 0.4;
       synth.speak(utterThis);
+      document.getElementById('videoOutput').volume = 1.0;
     }
     // dummyFace(parsedMessage.data);
     break;
