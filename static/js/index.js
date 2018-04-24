@@ -36,7 +36,6 @@ var outImg = new Image();
 
 var synth = window.speechSynthesis;
 var utterThis = null;
-var emoUtter = null;
 var chime = null;
 var emoAudio = null;
 
@@ -252,7 +251,7 @@ ws.onmessage = function(message) {
   case 'openFace':
     console.log(parsedMessage.data);
     if(parsedMessage.data.includes("-")) {
-      emoUtter = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
+      let emoUtter = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
       chime = document.getElementById('chimeAudio');
       chime.play();
 
