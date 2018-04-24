@@ -19,6 +19,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   	<link rel="stylesheet" type="text/css" href="style.css">
 
+
+
     <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
 
@@ -837,27 +839,28 @@
   <script>
 
     var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    var myAudio = document.getElementById('videoOutput');
-    myAudio.crossOrigin = "anonymous";
+  var myAudio = document.querySelector('#videoOutput');
+  myAudio.crossOrigin = "anonymous";
 
-    var audioCtx2 = new (window.AudioContext || window.webkitAudioContext)();
-    var myAudio2 = document.getElementById('emoAudio');
-    myAudio2.crossOrigin = "anonymous";
+  var audioCtx2 = new (window.AudioContext || window.webkitAudioContext)();
+  var myAudio2 = document.querySelector('#emoAudio');
+  myAudio2.crossOrigin = "anonymous";
 
-    var source = audioCtx.createMediaElementSource(myAudio);
-    var panNode = audioCtx.createStereoPanner();
+  var source = audioCtx.createMediaElementSource(myAudio);
+  var panNode = audioCtx.createStereoPanner();
 
-    var source2 = audioCtx2.createMediaElementSource(myAudio2);
-    var panNode2 = audioCtx2.createStereoPanner();
+  var source2 = audioCtx2.createMediaElementSource(myAudio2);
+  var panNode2 = audioCtx2.createStereoPanner();
 
 
-    panNode.pan.value = "1";
-    source.connect(panNode);
-    panNode.connect(audioCtx.destination);
+  panNode.pan.value = "1";
+  source.connect(panNode);
+  panNode.connect(audioCtx.destination);
 
-    panNode2.pan.value = "-1";
-    source2.connect(panNode2);
-    panNode2.connect(audioCtx2.destination);
+  panNode2.pan.value = "-1";
+  source2.connect(panNode2);
+  panNode2.connect(audioCtx2.destination);
+
   </script>
 
   </body>
