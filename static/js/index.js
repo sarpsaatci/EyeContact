@@ -254,12 +254,12 @@ ws.onmessage = function(message) {
       chime = document.getElementById('chimeAudio');
       chime.play();
 
-      emoUtter.onend() {
+      emoUtter.onend = function() {
           document.getElementById('videoOutput').volume = 1.0;
-      }
-      emoUtter.onstart() {
+      };
+      emoUtter.onstart = function() {
         document.getElementById('videoOutput').volume = 0.4;
-      }
+      };
 
       synth.speak(emoUtter);
     }
