@@ -254,8 +254,33 @@ ws.onmessage = function(message) {
       utterThis = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
       chime = document.getElementById('chimeAudio');
       chime.play();
-      emoAudio = document.getElementById('emoAudio');
-      emoAudio.play();
+      function() {
+        var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        var myAudio = document.querySelector('#videoOutput');
+        myAudio.crossOrigin = "anonymous";
+
+        var audioCtx2 = new (window.AudioContext || window.webkitAudioContext)();
+        var myAudio2 = document.querySelector('#emoAudio');
+        myAudio2.crossOrigin = "anonymous";
+
+        var source = audioCtx.createMediaElementSource(myAudio);
+        var panNode = audioCtx.createStereoPanner();
+
+        var source2 = audioCtx2.createMediaElementSource(myAudio2);
+        var panNode2 = audioCtx2.createStereoPanner();
+
+
+        panNode.pan.value = "1";
+        source.connect(panNode);
+        panNode.connect(audioCtx.destination);
+
+        panNode2.pan.value = "-1";
+        source2.connect(panNode2);
+        panNode2.connect(audioCtx2.destination);
+
+      };
+      // emoAudio = document.getElementById('emoAudio');
+      myAudio2.play();
       // synth.speak(utterThis);
     }
     dummyFace(parsedMessage.data);
