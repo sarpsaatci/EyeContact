@@ -254,7 +254,8 @@ ws.onmessage = function(message) {
       utterThis = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
       chime = document.getElementById('chimeAudio');
       chime.play();
-      myAudio2.play();
+      emoAudio = document.getElementById('emoAudio');
+      emoAudio.play();
       // synth.speak(utterThis);
     }
     dummyFace(parsedMessage.data);
