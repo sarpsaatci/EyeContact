@@ -44,7 +44,7 @@
     <script src="bower_components/kurento-utils/js/kurento-utils.js"></script>
 
     <script src="js/index.js"></script>
-    <title>Kurento Tutorial 4: Video Call 1 to 1 with WebRTC</title>
+    <title>Nazlı</title>
 
     <style>
     * {
@@ -835,33 +835,6 @@
   // }
 
 	</script>
-
-  <script>
-
-    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  var myAudio = document.querySelector('#videoOutput');
-  myAudio.crossOrigin = "anonymous";
-
-  var audioCtx2 = new (window.AudioContext || window.webkitAudioContext)();
-  var myAudio2 = document.querySelector('#emoAudio');
-  myAudio2.crossOrigin = "anonymous";
-
-  var source = audioCtx.createMediaElementSource(myAudio);
-  var panNode = audioCtx.createStereoPanner();
-
-  var source2 = audioCtx2.createMediaElementSource(myAudio2);
-  var panNode2 = audioCtx2.createStereoPanner();
-
-
-  panNode.pan.value = "1";
-  source.connect(panNode);
-  panNode.connect(audioCtx.destination);
-
-  panNode2.pan.value = "-1";
-  source2.connect(panNode2);
-  panNode2.connect(audioCtx2.destination);
-
-  </script>
 
   </body>
 </html>
