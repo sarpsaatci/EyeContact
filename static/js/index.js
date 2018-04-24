@@ -252,12 +252,6 @@ ws.onmessage = function(message) {
     console.log(parsedMessage.data);
     if(parsedMessage.data.includes("-")) {
       utterThis = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
-      utterThis.onend() {
-          document.getElementById('videoOutput').volume = 1.0;
-      }
-      utterThis.onstart() {
-        document.getElementById('videoOutput').volume = 0.4;
-      }
       chime = document.getElementById('chimeAudio');
       chime.play();
       synth.speak(utterThis);
