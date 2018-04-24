@@ -38,6 +38,17 @@ var synth = window.speechSynthesis;
 var utterThis = null;
 var chime = null;
 
+var settings = {
+  emotion_happiness: true,
+  emotion_sadness: true,
+  emotion_fear: true,
+  emotion_disgust: true,
+  emotion_surprised: true,
+  emotion_angry: true,
+  emotion_sensitivity: 'medium',
+  gaze_sensitivity: 'medium'
+}
+
 function captureVideoFrame(video, format, path) {
         if (typeof video === 'string') {
             video = document.getElementById(video);
@@ -206,8 +217,6 @@ ws.onmessage = function(message) {
 		break;
 	case 'startCommunication':
 		startCommunication(parsedMessage);
-    readyToCaptureFrame = true;
-    getFrames();
 		break;
 	case 'stopCommunication':
 		console.info("Communication ended by remote peer");
@@ -382,6 +391,9 @@ function callResponse(message) {
 	} else {
 		setCallState(IN_CALL);
 		webRtcPeer.processAnswer(message.sdpAnswer);
+
+    readyToCaptureFrame = true;
+    getFrames();
 	}
 }
 
