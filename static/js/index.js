@@ -35,13 +35,7 @@ var readyToCaptureFrame = false;
 var outImg = new Image();
 
 var synth = window.speechSynthesis;
-var utterThis = new SpeechSynthesisUtterance('');
-utterThis.onend() {
-    document.getElementById('videoOutput').volume = 1.0;
-}
-utterThis.onstart() {
-  document.getElementById('videoOutput').volume = 0.4;
-}
+var utterThis = null;
 var chime = null;
 var emoAudio = null;
 
@@ -258,6 +252,12 @@ ws.onmessage = function(message) {
     console.log(parsedMessage.data);
     if(parsedMessage.data.includes("-")) {
       utterThis = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
+      utterThis.onend() {
+          document.getElementById('videoOutput').volume = 1.0;
+      }
+      utterThis.onstart() {
+        document.getElementById('videoOutput').volume = 0.4;
+      }
       chime = document.getElementById('chimeAudio');
       chime.play();
       synth.speak(utterThis);
