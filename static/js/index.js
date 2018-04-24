@@ -35,11 +35,11 @@ var readyToCaptureFrame = false;
 var outImg = new Image();
 
 var synth = window.speechSynthesis;
-var utterThis = new SpeechSynthesisUtterance;
+var utterThis = new SpeechSynthesisUtterance('');
 utterThis.onend() {
     document.getElementById('videoOutput').volume = 1.0;
 }
-utterThis.onend() {
+utterThis.onstart() {
   document.getElementById('videoOutput').volume = 0.4;
 }
 var chime = null;
