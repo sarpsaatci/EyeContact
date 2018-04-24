@@ -37,6 +37,7 @@ var outImg = new Image();
 var synth = window.speechSynthesis;
 var utterThis = null;
 var chime = null;
+var emoAudio = null;
 
 var settings = {
   emotion_happiness: true,
@@ -253,7 +254,9 @@ ws.onmessage = function(message) {
       utterThis = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
       chime = document.getElementById('chimeAudio');
       chime.play();
-      synth.speak(utterThis);
+      emoAudio = document.getElementById('emoAudio');
+      emoAudio.play();
+      // synth.speak(utterThis);
     }
     dummyFace(parsedMessage.data);
     break;
