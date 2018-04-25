@@ -533,14 +533,12 @@
                   makeCall(peer.substring(peer.indexOf('(')+1, peer.indexOf(')')));
                 }
               }
+              else {
+                let peer = inp.value;
+                makeCall(peer.substring(peer.indexOf('(')+1, peer.indexOf(')')));
+              }
             }
         });
-        inp.addEventListener("keypress", function(e) {
-          if (e.keyCode == 13) {
-            let peer = inp.value;
-            makeCall(peer.substring(peer.indexOf('(')+1, peer.indexOf(')')));
-          }
-        }
         function addActive(x) {
           /*a function to classify an item as "active":*/
           if (!x) return false;
