@@ -436,7 +436,6 @@ function incomingCall(message) {
 			from : message.from,
 			callResponse : 'reject',
 			message : 'bussy'
-
 		};
 		return sendMessage(response);
 	}
