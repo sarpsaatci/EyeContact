@@ -498,6 +498,8 @@
                 b.addEventListener("click", function(e) {
                     /*insert the value for the autocomplete text field:*/
                     inp.value = this.getElementsByTagName("input")[0].value;
+                    let peer = inp.value;
+                    makeCall(peer.substring(peer.indexOf('(')+1, peer.indexOf(')')));
                     /*close the list of autocompleted values,
                     (or any other open lists of autocompleted values:*/
                     closeAllLists();
@@ -565,11 +567,8 @@
         }
         /*execute a function when someone clicks in the document:*/
         document.addEventListener("click", function (e) {
-            if(closeAllLists(e.target)) {
-              let peer = inp.value;
-              makeCall(peer.substring(peer.indexOf('(')+1, peer.indexOf(')')));
-            }
-          });
+            closeAllLists(e.target);
+        });
       }
 
       /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
