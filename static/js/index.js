@@ -292,8 +292,6 @@ function dummyFace(line)
 
 function makeCall(peerEmail)
 {
-  document.getElementById('callPage').style.display = "none";
-  document.getElementById('activePage').style.display = "block";
   call(peerEmail);
 }
 
@@ -400,6 +398,11 @@ function callResponse(message) {
 		setCallState(IN_CALL);
 		webRtcPeer.processAnswer(message.sdpAnswer);
 
+    document.getElementById('callPage').style.display = "none";
+    document.getElementById('activePage').style.display = "block";
+
+    showSpinner(videoInput, videoOutput);
+
     readyToCaptureFrame = true;
     getFrames();
 	}
@@ -499,8 +502,6 @@ function register(currentUser, contacts) {
 function call(peerEmail) {
 
 	setCallState(PROCESSING_CALL);
-
-	showSpinner(videoInput, videoOutput);
 
 	var options = {
 		localVideo : videoInput,
