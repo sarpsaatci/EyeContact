@@ -527,7 +527,7 @@
             } else if (e.keyCode == 13) {
               /*If the ENTER key is pressed, prevent the form from being submitted,*/
               e.preventDefault();
-              if (currentFocus > 0) {
+              if (currentFocus >= 0) {
                 /*and simulate a click on the "active" item:*/
                 if (x) {
                   x[currentFocus].click();
@@ -535,7 +535,6 @@
                   var clkevt = document.createEvent('HTMLEvents');
                   clkevt.initEvent('click', true, true);
                   document.getElementById('myInput').dispatchEvent(clkevt);
-
                   x[currentFocus]
                 }
               }
