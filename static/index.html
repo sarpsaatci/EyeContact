@@ -531,6 +531,12 @@
                 /*and simulate a click on the "active" item:*/
                 if (x) {
                   x[currentFocus].click();
+
+                  var clkevt = document.createEvent('HTMLEvents');
+                  clkevt.initEvent('click', true, true);
+                  document.getElementById('myInput').dispatchEvent(clkevt);
+
+                  x[currentFocus]
                 }
               }
               else {
