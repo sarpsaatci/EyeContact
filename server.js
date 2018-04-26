@@ -636,6 +636,7 @@ function register(id, userName, contacts, email, settings, ws, callback) {
           if(err.code == 11000) {
             if(console.log('User ' + userName + ' already exists.')) {
               changeSettings = true;
+              console.log(changeSettings);
               if(changeSettings) {
                 newUser.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
                   if(error){
