@@ -663,7 +663,7 @@ function register(id, userName, contacts, email, settings, ws, callback) {
       //   }
       // });
 
-      User.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true}, function(error, result) {
+      User.findOneAndUpdate({email: newUser.email}, newUser, {upsert: true}, function(error, result) {
         if(error){
           console.log("Something wrong when updating data!");
           console.log(error);
