@@ -634,20 +634,19 @@ function register(id, userName, contacts, email, settings, ws, callback) {
       newUser.save(function (err, newUser) {
         if (err) {
           if(err.code == 11000) {
-            if(console.log('User ' + userName + ' already exists.')) {
-              changeSettings = true;
-              console.log(changeSettings);
-              if(changeSettings) {
-                newUser.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
-                  if(error){
-                    console.log("Something wrong when updating data!");
-                  }
+            console.log('User ' + userName + ' already exists.');
+            changeSettings = true;
+            console.log(changeSettings);
+            if(changeSettings) {
+              newUser.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
+                if(error){
+                  console.log("Something wrong when updating data!");
+                }
 
-                  console.log(result);
+                console.log(result);
 
-                  changeSettings = false;
-                });
-              }
+                changeSettings = false;
+              });
             }
           }
         }
