@@ -641,6 +641,7 @@ function register(id, userName, contacts, email, settings, ws, callback) {
               console.log(result);
             });
             return;
+          }
         }
         else {
           console.log(userName + ' added to db');
