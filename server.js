@@ -82,6 +82,8 @@ var follower = null;
 
 var incImg = 1;
 
+var changeSettings = false;
+
 function parseOutput(file, caller, callee)
 {
   // console.log('********* parsing output ************' + file);
@@ -633,13 +635,7 @@ function register(id, userName, contacts, email, settings, ws, callback) {
           console.error(err);
           if(err.code == 11000) {
             console.log('User ' + userName + ' already exists.');
-            newUser.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
-              if(error){
-                console.log("Something wrong when updating data!");
-              }
-
-              console.log(result);
-            });
+            changeSettings = true;
             return;
           }
         }
@@ -648,9 +644,18 @@ function register(id, userName, contacts, email, settings, ws, callback) {
         }
       });
 
-      User.find(function(err, users) {
-        if (err) return console.error(err);
-      });
+      if(changeSettings) {
+        newUser.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
+          if(error){
+            console.log("Something wrong when updating data!");
+          }
+
+          console.log(result);
+
+          changeSettings = false;
+        });
+      }
+
     });
 
     userRegistry.register(new UserSession(id, email, ws));
