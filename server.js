@@ -632,7 +632,9 @@ function register(id, userName, contacts, email, settings, ws, callback) {
         settings: settings
       });
 
-      delete newUser._id;
+      var editUser = {};
+      editUser = Object.assign(editUser, newUser._doc);
+      delete editUser._id;
 
       // newUser.save(function (err, newUser) {
       //   if (err) {
@@ -665,7 +667,7 @@ function register(id, userName, contacts, email, settings, ws, callback) {
       //   }
       // });
 
-      User.findOneAndUpdate({email: newUser.email}, newUser, {upsert: true}, function(error, result) {
+      User.findOneAndUpdate({email: newUser.email}, editUser, {upsert: true}, function(error, result) {
         if(error){
           console.log("Something wrong when updating data!");
           console.log(error);
