@@ -345,15 +345,21 @@ function manageUser(userData)
   console.log(currentUser);
   console.log(contacts);
 
+  let dbcontacts = new Array();
+
   contacts.forEach(function(contact) {
     if(contact.title && contact.gd$email)
       contactNames.push('' + contact.title.$t + ' (' + contact.gd$email[0].address + ')');
+      dbcontacts.push({
+        name: contact.title.$t,
+        email: contact.gd$email[0].address
+      });
   });
 
   sendMessage({
     id : 'userLogin',
     currentUser : currentUser,
-    contacts : contacts,
+    contacts : dbcontacts,
     settings: settings
   });
 
@@ -364,7 +370,7 @@ function manageUser(userData)
 
   synth.speak(utterThis);
 
-  register(currentUser, contacts);
+  register(currentUser, dbcontacts);
 
 
 }
