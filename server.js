@@ -641,21 +641,22 @@ function register(id, userName, contacts, email, settings, ws, callback) {
         else {
           console.log(userName + ' added to db');
         }
-      }))
+      })) {
         console.log(changeSettings);
+        if(changeSettings) {
+          console.log("************");
+          newUser.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
+            if(error){
+              console.log("Something wrong when updating data!");
+            }
 
-      if(changeSettings) {
-        console.log("************");
-        newUser.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
-          if(error){
-            console.log("Something wrong when updating data!");
-          }
+            console.log(result);
 
-          console.log(result);
-
-          changeSettings = false;
-        });
+            changeSettings = false;
+          });
+        }
       }
+
 
     });
 
