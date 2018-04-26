@@ -643,6 +643,8 @@ function register(id, userName, contacts, email, settings, ws, callback) {
         }
       });
 
+      console.log(changeSettings);
+
       if(changeSettings) {
         console.log("************");
         newUser.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
