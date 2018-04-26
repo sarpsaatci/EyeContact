@@ -641,7 +641,9 @@ function register(id, userName, contacts, email, settings, ws, callback) {
         else {
           console.log(userName + ' added to db');
         }
-      })) {
+      }) {
+        return true;
+      }) {
         console.log(changeSettings);
         if(changeSettings) {
           console.log("************");
