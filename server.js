@@ -41,7 +41,8 @@ const mongoose = require('mongoose');
 var userSchema = mongoose.Schema({
   name: String,
   email: String,
-  contacts: Object
+  contacts: Object,
+  settings: Object
 });
 userSchema.index({ email: 1}, { unique: true });
 
@@ -644,7 +645,7 @@ function register(id, userName, contacts, email, settings, ws, callback) {
                 contacts: contacts,
                 settings: settings
               });
-              editUser.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
+              editUser.findOneAndUpdate({email: editUser.email}, editUser, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
                 if(error){
                   console.log("Something wrong when updating data!");
                 }
