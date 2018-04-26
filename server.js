@@ -631,7 +631,7 @@ function register(id, userName, contacts, email, settings, ws, callback) {
         settings: settings
       });
 
-      if(newUser.save(function (err, newUser) {
+      newUser.save(function (err, newUser) {
         if (err) {
           if(err.code == 11000) {
             if(console.log('User ' + userName + ' already exists.'))
@@ -643,7 +643,9 @@ function register(id, userName, contacts, email, settings, ws, callback) {
         }
       }) {
         return true;
-      }) {
+      }
+
+      if(false) {
         console.log(changeSettings);
         if(changeSettings) {
           console.log("************");
