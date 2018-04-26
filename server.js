@@ -632,6 +632,8 @@ function register(id, userName, contacts, email, settings, ws, callback) {
         settings: settings
       });
 
+      delete newUser._id;
+
       // newUser.save(function (err, newUser) {
       //   if (err) {
       //     if(err.code == 11000) {
