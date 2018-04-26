@@ -39,13 +39,20 @@ var chime = null;
 var emoAudio = null;
 
 var settings = {
+  id: 'settings',
   emotion_happiness: true,
+  emotion_happiness_sensitivity: 'medium',
   emotion_sadness: true,
+  emotion_sadness_sensitivity: 'medium',
   emotion_fear: true,
+  emotion_fear_sensitivity: 'medium',
   emotion_disgust: true,
+  emotion_disgust_sensitivity: 'medium',
   emotion_surprised: true,
+  emotion_surprised_sensitivity: 'medium',
   emotion_angry: true,
-  emotion_sensitivity: 'medium',
+  emotion_angry_sensitivity: 'medium',
+  gaze: 'true',
   gaze_sensitivity: 'medium'
 }
 
@@ -346,7 +353,8 @@ function manageUser(userData)
   sendMessage({
     id : 'userLogin',
     currentUser : currentUser,
-    contacts : contacts
+    contacts : contacts,
+    settings: settings
   });
 
   synth = window.speechSynthesis;
@@ -492,7 +500,8 @@ function register(currentUser, contacts) {
 	var message = {
 		id : 'register',
 		currentUser : currentUser,
-    contacts : contacts
+    contacts : contacts,
+    settings: settings
 	};
 	sendMessage(message);
 	document.getElementById('peer').focus();

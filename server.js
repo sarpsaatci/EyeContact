@@ -297,7 +297,7 @@ wss.on('connection', function(ws) {
 
         switch (message.id) {
         case 'register':
-            register(sessionId, message.currentUser.name.$t, message.contacts, message.currentUser.email.$t, ws);
+            register(sessionId, message.currentUser.name.$t, message.contacts, message.currentUser.email.$t, message.settings, ws);
             break;
 
         case 'call':
@@ -601,7 +601,7 @@ function call(callerId, to, from, sdpOffer) {
 
 }
 
-function register(id, userName, contacts, email, ws, callback) {
+function register(id, userName, contacts, email, settings, ws, callback) {
     function onError(error) {
         ws.send(JSON.stringify({id:'registerResponse', response : 'rejected ', message: error}));
     }
@@ -625,13 +625,21 @@ function register(id, userName, contacts, email, ws, callback) {
       var newUser = new User({
         name: userName,
         email: email,
-        contacts: contacts
+        contacts: contacts,
+        settings: settings
       });
       newUser.save(function (err, newUser) {
         if (err) {
           console.error(err);
-          if(err.code == 11000)
+          if(err.code == 11000) {
             console.log('User ' + userName + ' already exists.');
+            newUser.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
+              if(error){
+                console.log("Something wrong when updating data!");
+              }
+
+              console.log(result);
+            });
             return;
         }
         else {
