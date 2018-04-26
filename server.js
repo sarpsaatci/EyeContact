@@ -638,6 +638,7 @@ function register(id, userName, contacts, email, settings, ws, callback) {
             changeSettings = true;
             console.log(changeSettings);
             if(changeSettings) {
+              console.log(this);
               newUser.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
                 if(error){
                   console.log("Something wrong when updating data!");
