@@ -632,7 +632,6 @@ function register(id, userName, contacts, email, settings, ws, callback) {
       });
       newUser.save(function (err, newUser) {
         if (err) {
-          console.error(err);
           if(err.code == 11000) {
             console.log('User ' + userName + ' already exists.');
             changeSettings = true;
