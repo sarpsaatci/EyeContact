@@ -630,19 +630,19 @@ function register(id, userName, contacts, email, settings, ws, callback) {
         contacts: contacts,
         settings: settings
       });
-      newUser.save(function (err, newUser) {
+
+      if(newUser.save(function (err, newUser) {
         if (err) {
           if(err.code == 11000) {
-            console.log('User ' + userName + ' already exists.');
-            changeSettings = true;
+            if(console.log('User ' + userName + ' already exists.'))
+              changeSettings = true;
           }
         }
         else {
           console.log(userName + ' added to db');
         }
-      });
-
-      console.log(changeSettings);
+      }))
+        console.log(changeSettings);
 
       if(changeSettings) {
         console.log("************");
