@@ -632,55 +632,46 @@ function register(id, userName, contacts, email, settings, ws, callback) {
         settings: settings
       });
 
-      newUser.save(function (err, newUser) {
-        if (err) {
-          if(err.code == 11000) {
-            console.log('User ' + userName + ' already exists.');
-            changeSettings = true;
-            console.log(changeSettings);
-            if(changeSettings) {
-              let editUser = new User({
-                name: userName,
-                email: email,
-                contacts: contacts,
-                settings: settings
-              });
-              User.findOneAndUpdate({email: editUser.email}, editUser, {new: false, upsert: false}, function(error, result) {
-                if(error){
-                  console.log("Something wrong when updating data!");
-                  console.log(err);
-                }
+      // newUser.save(function (err, newUser) {
+      //   if (err) {
+      //     if(err.code == 11000) {
+      //       console.log('User ' + userName + ' already exists.');
+      //       changeSettings = true;
+      //       console.log(changeSettings);
+      //       if(changeSettings) {
+      //         let editUser = new User({
+      //           name: userName,
+      //           email: email,
+      //           contacts: contacts,
+      //           settings: settings
+      //         });
+      //         User.findOneAndUpdate({email: editUser.email}, editUser, {new: false, upsert: false}, function(error, result) {
+      //           if(error){
+      //             console.log("Something wrong when updating data!");
+      //             console.log(err);
+      //           }
+      //
+      //           console.log(result);
+      //
+      //           changeSettings = false;
+      //         });
+      //       }
+      //     }
+      //   }
+      //   else {
+      //     console.log(userName + ' added to db');
+      //   }
+      // });
 
-                console.log(result);
+      User.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true}, function(error, result) {
+        if(error){
+          console.log("Something wrong when updating data!");
+          console.log(err);
+        }
 
-                changeSettings = false;
-              });
-            }
-          }
-        }
-        else {
-          console.log(userName + ' added to db');
-        }
+        console.log(result);
+
       });
-
-      if(false) {
-        console.log(changeSettings);
-        if(changeSettings) {
-          console.log("************");
-          newUser.findOneAndUpdate({email: newUser.email}, newUser, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
-            if(error){
-              console.log("Something wrong when updating data!");
-            }
-
-            console.log(result);
-
-            changeSettings = false;
-          });
-        }
-      }
-
-
-    });
 
     userRegistry.register(new UserSession(id, email, ws));
 
@@ -689,6 +680,8 @@ function register(id, userName, contacts, email, settings, ws, callback) {
     } catch(exception) {
         onError(exception);
     }
+
+  });
 }
 
 function clearCandidatesQueue(sessionId) {
