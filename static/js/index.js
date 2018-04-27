@@ -272,6 +272,7 @@ ws.onmessage = function(message) {
     }
     // dummyFace(parsedMessage.data);
     break;
+  casev 
 	default:
 		console.error(parsedMessage);
 	}
@@ -372,6 +373,11 @@ function manageUser(userData)
   synth.speak(utterThis);
 
   register(currentUser, dbcontacts);
+
+  sendMessage({
+    id: getSettings,
+    email: currentUser.email.$t
+  });
 
 
 }
