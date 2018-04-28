@@ -278,19 +278,12 @@ ws.onmessage = function(message) {
 	}
 }
 
-function speakAutocompleteItems(itemsCount)
+function speakAutocompleteItems(items)
 {
 
-  for(i = 0; i < itemsCount; i++) {
-    item = document.getElementById('myInput-autocomplete-item' + i);
-
-    if(item) {
-      // setTimeout(function() {
-      //   window.speechSynthesis.speak(new SpeechSynthesisUtterance("" + i + item.getElementsByTagName("input")[0].value));
-      // }, 1000);
-      console.log(item);
-    }
-  }
+  items.forEach(function(item) {
+    window.SpeechSynthesis.speak(new SpeechSynthesisUtterance(item));
+  });
 
 }
 
