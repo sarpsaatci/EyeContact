@@ -471,7 +471,7 @@
         /*execute a function when someone writes in the text field:*/
         inp.addEventListener("input", function(e) {
 
-            var autoCompleteItems = new Array;
+            // var autoCompleteItems = new Array;
             var autoCompleteItemCount = 0;
 
             var a, b, i, val = this.value;
@@ -494,7 +494,7 @@
               if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
                 /*create a DIV element for each matching element:*/
                 b = document.createElement("DIV");
-                b.setAttribute("id", this.id + "-autocomplete-item");
+                b.setAttribute("id", this.id + "-autocomplete-item" + autoCompleteItemCount);
                 /*make the matching letters bold:*/
                 autoCompleteItemCount++;
                 b.innerHTML = "" + autoCompleteItemCount + "-";
