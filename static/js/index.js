@@ -278,6 +278,20 @@ ws.onmessage = function(message) {
 	}
 }
 
+function speakAutocompleteItems(itemsCount)
+{
+
+  for(i = 0; i < itemsCount; i++) {
+    item = document.getElementById('myInput-autocomplete-item' + i);
+    if(item) {
+      setTimeout(function() {
+        window.speechSynthesis.speak(item.getElementsByTagName("input")[0].value);
+      }, 1000);
+    }
+  }
+
+}
+
 function dummyFace(line)
 {
   if(line.includes('anger'))
