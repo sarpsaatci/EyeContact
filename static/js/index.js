@@ -272,7 +272,7 @@ ws.onmessage = function(message) {
     }
     // dummyFace(parsedMessage.data);
     break;
-  casev 
+  casev
 	default:
 		console.error(parsedMessage);
 	}
@@ -375,7 +375,7 @@ function manageUser(userData)
   register(currentUser, dbcontacts);
 
   sendMessage({
-    id: getSettings,
+    id: 'getSettings',
     email: currentUser.email.$t
   });
 
