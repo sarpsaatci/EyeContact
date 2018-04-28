@@ -283,7 +283,7 @@ function speakAutocompleteItems(items)
 
   items.forEach(function(item) {
     console.log(item);
-    window.SpeechSynthesis.speak(new SpeechSynthesisUtterance(item));
+    window.speechSynthesis.speak(new SpeechSynthesisUtterance(item));
   });
 
 }
