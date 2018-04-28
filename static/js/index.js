@@ -281,11 +281,11 @@ ws.onmessage = function(message) {
 function speakAutocompleteItems(itemsCount)
 {
 
-  for(i = 0; i < itemsCount; i++) {
+  for(i = 1; i < itemsCount; i++) {
     item = document.getElementById('myInput-autocomplete-item' + i);
     if(item) {
       setTimeout(function() {
-        window.speechSynthesis.speak(new SpeechSynthesisUtterance(item.getElementsByTagName("input")[0].value));
+        window.speechSynthesis.speak(new SpeechSynthesisUtterance("" + i + item.getElementsByTagName("input")[0].value));
       }, 1000);
     }
   }
