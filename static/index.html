@@ -516,6 +516,11 @@
                 autocompleteItems.push("" + autoCompleteItemCount +  arr[i]);
               }
             }
+            this.onkeydown = function(event) {
+              if(event.keyCode == 32 && event.ctrlKey) {
+                speakAutocompleteItems(autocompleteItems);
+              }
+            }
         });
         /*execute a function presses a key on the keyboard:*/
         inp.addEventListener("keydown", function(e) {
@@ -551,9 +556,6 @@
                 let peer = inp.value;
                 makeCall(peer);
               }
-            }
-            else if(e.keyCode == 32 && e.ctrlKey) {
-              speakAutocompleteItems(autocompleteItems);
             }
         });
         function addActive(x) {
