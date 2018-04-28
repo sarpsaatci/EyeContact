@@ -467,6 +467,8 @@
         /*the autocomplete function takes two arguments,
         the text field element and an array of possible autocompleted values:*/
         var currentFocus;
+
+        var autoCompleteItems = new Array;
         /*execute a function when someone writes in the text field:*/
         inp.addEventListener("input", function(e) {
             var a, b, i, val = this.value;
@@ -491,7 +493,7 @@
                 b = document.createElement("DIV");
                 b.setAttribute("id", this.id + "-autocomplete-item");
                 /*make the matching letters bold:*/
-                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML = "" + i + "<strong>" + arr[i].substr(0, val.length) + "</strong>";
                 b.innerHTML += arr[i].substr(val.length);
                 /*insert a input field that will hold the current array item's value:*/
                 b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
@@ -506,6 +508,7 @@
                     closeAllLists();
                 });
                 a.appendChild(b);
+                autocompleteItems.push(b);
               }
             }
         });
