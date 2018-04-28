@@ -285,7 +285,7 @@ function speakAutocompleteItems(itemsCount)
     item = document.getElementById('myInput-autocomplete-item' + i);
     if(item) {
       setTimeout(function() {
-        window.speechSynthesis.speak(item.getElementsByTagName("input")[0].value);
+        window.speechSynthesis.speak(new SpeechSynthesisUtterance(item.getElementsByTagName("input")[0].value));
       }, 1000);
     }
   }
