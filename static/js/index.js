@@ -281,6 +281,8 @@ ws.onmessage = function(message) {
 function speakAutocompleteItems(items)
 {
 
+  console.log(items.length);
+
   items.forEach(function(item) {
     console.log(item);
     window.speechSynthesis.speak(new SpeechSynthesisUtterance(item));
