@@ -468,9 +468,12 @@
         the text field element and an array of possible autocompleted values:*/
         var currentFocus;
 
-        var autoCompleteItems = new Array;
         /*execute a function when someone writes in the text field:*/
         inp.addEventListener("input", function(e) {
+
+            var autoCompleteItems = new Array;
+            var autoCompleteItemCount = 0;
+
             var a, b, i, val = this.value;
             /*close any already open lists of autocompleted values*/
             closeAllLists();
@@ -493,7 +496,8 @@
                 b = document.createElement("DIV");
                 b.setAttribute("id", this.id + "-autocomplete-item");
                 /*make the matching letters bold:*/
-                b.innerHTML = "" + i + "-";
+                autoCompleteItemCount++;
+                b.innerHTML = "" + autoCompleteItemCount + "-";
                 b.innerHTML += "<strong>" + arr[i].substr(0, val.length) + "</strong>";
                 b.innerHTML += arr[i].substr(val.length);
                 /*insert a input field that will hold the current array item's value:*/
