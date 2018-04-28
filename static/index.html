@@ -515,7 +515,6 @@
                 a.appendChild(b);
                 autocompleteItems.push("" + autoCompleteItemCount +  arr[i]);
               }
-              speakAutocompleteItems(autocompleteItems);
             }
         });
         /*execute a function presses a key on the keyboard:*/
@@ -552,6 +551,9 @@
                 let peer = inp.value;
                 makeCall(peer);
               }
+            }
+            else if(e.keyCode == 32 && e.ctrlKey) {
+              speakAutocompleteItems(autocompleteItems);
             }
         });
         function addActive(x) {
