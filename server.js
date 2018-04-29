@@ -41,6 +41,10 @@ var WordToNumber = require( "word-to-number-node" );
 
 var w2n = new WordToNumber();
 
+var newSettings = null;
+
+
+
 var userSchema = mongoose.Schema({
   name: String,
   email: String,
@@ -346,7 +350,6 @@ wss.on('connection', function(ws) {
 
         case 'getSettings':
           if(getSettings(message.email)) {
-            let newSettings = getSettings(message.email);
             ws.send(JSON.stringify({
               id: 'setSettings',
               email: message.email,
@@ -378,10 +381,11 @@ function getSettings(email)
   User.find({email: email}, (err, user) => {
     if(err) {
       console.log(err);
-      return err;
+      return false;
     }
-    return user.settings;
+    newSettings = user.settings;
   });
+  return true;
 }
 
 function getFrame(frame)
