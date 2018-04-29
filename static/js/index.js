@@ -272,7 +272,8 @@ ws.onmessage = function(message) {
     }
     // dummyFace(parsedMessage.data);
     break;
-  casev
+  case 'getSettings':
+    console.log(settings);
 	default:
 		console.error(parsedMessage);
 	}
@@ -370,6 +371,11 @@ function manageUser(userData)
     }
   });
 
+  // sendMessage({
+  //   id: 'getSettings',
+  //   email: currentUser.email.$t
+  // });
+
   sendMessage({
     id : 'userLogin',
     currentUser : currentUser,
@@ -385,13 +391,6 @@ function manageUser(userData)
   synth.speak(utterThis);
 
   register(currentUser, dbcontacts);
-
-  sendMessage({
-    id: 'getSettings',
-    email: currentUser.email.$t
-  });
-
-
 }
 
 function activatePage()

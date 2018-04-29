@@ -346,6 +346,14 @@ wss.on('connection', function(ws) {
           ws.send(JSON.stringify(message));
           break;
 
+        case 'getSettings':
+          ws.send(JSON.stringify({
+            id: 'getSettings'
+            email: message.email,
+            settings: getSettings(message.email)
+          }));
+          break;
+
         default:
             ws.send(JSON.stringify({
                 id : 'error',
@@ -355,6 +363,17 @@ wss.on('connection', function(ws) {
         }
     });
 });
+
+function getSettings(email)
+{
+  User.find({email: email}, (err, user) => {
+    if(err) {
+      console.log(err);
+      return err;
+    },
+    return user.settings;
+  });
+}
 
 function getFrame(frame)
 {
