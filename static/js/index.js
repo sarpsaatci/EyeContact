@@ -386,13 +386,6 @@ function manageUser(userData)
   });
 
   sendMessage({
-    id : 'userLogin',
-    currentUser : currentUser,
-    contacts : dbcontacts,
-    settings: settings
-  });
-
-  sendMessage({
     id: 'getSettings',
     email: currentUser.email.$t
   });

@@ -344,11 +344,6 @@ wss.on('connection', function(ws) {
             }
             break;
 
-        case 'userLogin':
-          console.log(message.currentUser);
-          ws.send(JSON.stringify(message));
-          break;
-
         case 'getSettings':
           ws.send(JSON.stringify({
             id: 'setSettings',
