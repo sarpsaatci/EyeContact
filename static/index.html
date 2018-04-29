@@ -513,7 +513,7 @@
                     closeAllLists();
                 });
                 a.appendChild(b);
-                autocompleteItems.push("" + autoCompleteItemCount +  arr[i]);
+                autocompleteItems.push("" + autoCompleteItemCount + "," + arr[i]);
               }
             }
             this.onkeydown = function(event) {
@@ -534,14 +534,14 @@
                   recognition.onresult = function(e) {
                     console.log(e.results[0][0].transcript);
                     let number = parseInt(e.results[0][0].transcript);
-                    console.log(number);
                     recognition.stop();
+                    let peer = autocompleteItems[number-1];
+                    makeCall(peer.substring(peer.indexOf('(')+1, peer.indexOf(')')));
                   };
 
                   recognition.onerror = function(e) {
                     recognition.stop();
                   }
-
                 }
               }
             }

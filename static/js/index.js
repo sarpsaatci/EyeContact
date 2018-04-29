@@ -291,7 +291,6 @@ function speakAutocompleteItems(items)
     console.log(item);
     window.speechSynthesis.speak(new SpeechSynthesisUtterance(item));
   });
-
 }
 
 function dummyFace(line)
