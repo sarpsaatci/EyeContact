@@ -378,14 +378,23 @@ wss.on('connection', function(ws) {
 
 function getSettings(email)
 {
-  User.find({email: email}, (err, user) => {
-    if(err) {
-      console.log(err);
-      return false;
-    }
-    newSettings = user.settings;
-    console.log(user.settings);
+
+  mongoose.connect('mongodb://eyecontact:123abcd1@ds239029.mlab.com:39029/eyecontact');
+
+  var db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'connection error:'));
+
+  db.once('open', function() {
+    User.find({email: email}, (err, user) => {
+      if(err) {
+        console.log(err);
+        return false;
+      }
+      newSettings = user.settings;
+      console.log(user.settings);
+    })
   });
+
   return true;
 }
 
