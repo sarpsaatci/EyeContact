@@ -362,6 +362,7 @@ wss.on('connection', function(ws) {
             id: 'speechToNum',
             num: w2n.parse(message.txt)[0]
           }));
+          console.log(w2n.parse(message.txt));
           break;
 
         default:
