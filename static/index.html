@@ -563,7 +563,7 @@
               currentFocus--;
               /*and and make the current item more visible:*/
               addActive(x);
-            } else if (e.keyCode == 13) {
+            } else if (e.keyCode == 13 && !e.ctrlKey) {
               /*If the ENTER key is pressed, prevent the form from being submitted,*/
               e.preventDefault();
               if (currentFocus >= 0) {
