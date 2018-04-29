@@ -348,7 +348,7 @@ wss.on('connection', function(ws) {
 
         case 'getSettings':
           ws.send(JSON.stringify({
-            id: 'getSettings'
+            id: 'getSettings',
             email: message.email,
             settings: getSettings(message.email)
           }));
