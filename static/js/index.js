@@ -274,6 +274,9 @@ ws.onmessage = function(message) {
     break;
   case 'getSettings':
     console.log(settings);
+  case 'speechToNum':
+    console.log(parsedMessage.num);
+    break;
 	default:
 		console.error(parsedMessage);
 	}
