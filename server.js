@@ -353,7 +353,7 @@ wss.on('connection', function(ws) {
             ws.send(JSON.stringify({
               id: 'setSettings',
               email: message.email,
-              settings: newSettings
+              settings: getSettings(message.email)
             }));
           }
           break;
@@ -385,14 +385,13 @@ function getSettings(email)
   db.on('error', console.error.bind(console, 'connection error:'));
 
   db.once('open', function() {
-    console.log("------");
     User.findOne({email: email}, function(err, user) {
       if(err) {
         console.log(err);
         return false;
       }
       newSettings = user.settings;
-      console.log(user.settings);
+      return user.settings;
     })
   });
 
