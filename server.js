@@ -386,7 +386,7 @@ function getSettings(email)
 
   db.once('open', function() {
     console.log("------");
-    User.find({email: email}, (err, user) => {
+    User.findOne({email: email}, function(err, user) {
       if(err) {
         console.log(err);
         return false;
