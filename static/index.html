@@ -532,11 +532,9 @@
                   recognition.start();
 
                   recognition.onresult = function(e) {
-                    sendMessage({
-                      id: 'speechToNum',
-                      txt: e.results[0][0].transcript
-                    });
                     console.log(e.results[0][0].transcript);
+                    let number = parseInt(e.results[0][0].transcript);
+                    console.log(number);
                     recognition.stop();
                   };
 
