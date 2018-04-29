@@ -273,7 +273,7 @@ ws.onmessage = function(message) {
     // dummyFace(parsedMessage.data);
     break;
   case 'setSettings':
-    console.log(parsedMessage.settings);
+    // console.log(parsedMessage.settings);
     settings = parsedMessage.settings;
     break;
   case 'speechToNum':
