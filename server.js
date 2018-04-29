@@ -349,13 +349,11 @@ wss.on('connection', function(ws) {
             break;
 
         case 'getSettings':
-          if(getSettings(message.email)) {
-            ws.send(JSON.stringify({
-              id: 'setSettings',
-              email: message.email,
-              settings: getSettings(message.email)
-            }));
-          }
+          ws.send(JSON.stringify({
+            id: 'setSettings',
+            email: message.email,
+            settings: getSettings(message.email)
+          }));
           break;
 
         case 'speechToNum':
