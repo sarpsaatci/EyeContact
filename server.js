@@ -385,6 +385,7 @@ function getSettings(email)
   db.on('error', console.error.bind(console, 'connection error:'));
 
   db.once('open', function() {
+    console.log("------");
     User.find({email: email}, (err, user) => {
       if(err) {
         console.log(err);
