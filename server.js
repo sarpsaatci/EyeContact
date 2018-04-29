@@ -370,7 +370,7 @@ function getSettings(email)
     if(err) {
       console.log(err);
       return err;
-    },
+    }
     return user.settings;
   });
 }
