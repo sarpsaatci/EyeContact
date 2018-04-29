@@ -349,11 +349,7 @@ wss.on('connection', function(ws) {
             break;
 
         case 'getSettings':
-          ws.send(JSON.stringify({
-            id: 'setSettings',
-            email: message.email,
-            settings: getSettings(message.email)
-          }));
+          getSettings(message.email, ws);
           break;
 
         case 'speechToNum':
@@ -374,7 +370,7 @@ wss.on('connection', function(ws) {
     });
 });
 
-function getSettings(email)
+function getSettings(email, ws)
 {
 
   mongoose.connect('mongodb://eyecontact:123abcd1@ds239029.mlab.com:39029/eyecontact');
@@ -390,8 +386,11 @@ function getSettings(email)
         console.log(err);
         return false;
       }
-      set = user.settings;
-      return user.settings;
+      ws.send(JSON.stringify({
+        id: 'setSettings',
+        email: message.email,
+        settings: user.settings
+      }))
     });
   });
 }
