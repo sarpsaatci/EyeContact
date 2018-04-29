@@ -388,7 +388,7 @@ function getSettings(email, ws)
       }
       ws.send(JSON.stringify({
         id: 'setSettings',
-        email: message.email,
+        email: email,
         settings: user.settings
       }))
     });
