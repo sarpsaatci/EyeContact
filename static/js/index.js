@@ -272,14 +272,26 @@ ws.onmessage = function(message) {
     }
     // dummyFace(parsedMessage.data);
     break;
-  case 'getSettings':
-    console.log(settings);
+  case 'setSettings':
+    console.log(parsedMessage.settings);
+    settings = parsedMessage.settings;
+    break;
   case 'speechToNum':
     console.log(parsedMessage.num);
     break;
 	default:
 		console.error(parsedMessage);
 	}
+}
+
+function applySettings(newSettings)
+{
+  settings = newSettings;
+  sendMessage({
+    id: 'applySettings',
+    user: currentUser,
+    settings: newSettings
+  });
 }
 
 function speakAutocompleteItems(items)
@@ -373,16 +385,16 @@ function manageUser(userData)
     }
   });
 
-  // sendMessage({
-  //   id: 'getSettings',
-  //   email: currentUser.email.$t
-  // });
-
   sendMessage({
     id : 'userLogin',
     currentUser : currentUser,
     contacts : dbcontacts,
     settings: settings
+  });
+
+  sendMessage({
+    id: 'getSettings',
+    email: currentUser.email.$t
   });
 
   synth = window.speechSynthesis;
