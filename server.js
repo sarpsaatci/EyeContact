@@ -394,9 +394,7 @@ function getSettings(email)
       }
       set = user.settings;
       return user.settings;
-    })
-
-    return set;
+    });
   });
 }
 
