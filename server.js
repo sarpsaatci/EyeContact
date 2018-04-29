@@ -384,8 +384,8 @@ function getSettings(email)
       return false;
     }
     newSettings = user.settings;
+    return true;
   });
-  return true;
 }
 
 function getFrame(frame)
