@@ -37,6 +37,7 @@ var lib = nbind.init().lib;
 var fswatch = require('chokidar');
 var follow = require('text-file-follower');
 const mongoose = require('mongoose');
+var WtoN = require('words-to-num');
 
 var userSchema = mongoose.Schema({
   name: String,
@@ -351,6 +352,13 @@ wss.on('connection', function(ws) {
             id: 'getSettings',
             email: message.email,
             settings: getSettings(message.email)
+          }));
+          break;
+
+        case 'speechToNum':
+          ws.send(JSON.stringify({
+            id: 'speechToNum',
+            num: WtoN.convert(message.text)
           }));
           break;
 

@@ -520,6 +520,31 @@
               if(event.keyCode == 32 && event.ctrlKey) {
                 speakAutocompleteItems(autocompleteItems);
               }
+              if(event.keyCode == 13 && event.ctrlKey) {
+                if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+                  var recognition = new webkitSpeechRecognition();
+
+                  recognition.continuous = false;
+                  recognition.interimResults = false;
+
+                  recognition.lang = "en-US";
+                  recognition.start();
+
+                  recognition.onresult = function(e) {
+                    sendMessage({
+                      id: 'speechToNum',
+                      texxt: e.results[0][0].transcript
+                    });
+                    recognition.stop();
+                  };
+
+                  recognition.onerror = function(e) {
+                    recognition.stop();
+                  }
+
+                }
+              }
             }
         });
         /*execute a function presses a key on the keyboard:*/
