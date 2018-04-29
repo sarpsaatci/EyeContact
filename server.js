@@ -349,11 +349,11 @@ wss.on('connection', function(ws) {
             break;
 
         case 'getSettings':
-          if(getSettings(message.email) && newSettings) {
+          if(getSettings(message.email)) {
             ws.send(JSON.stringify({
               id: 'setSettings',
               email: message.email,
-              settings: newSettings
+              settings: getSettings(message.email)
             }));
           }
           break;
@@ -384,17 +384,19 @@ function getSettings(email)
   var db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
 
+  let set = null;
+
   db.once('open', function() {
     User.findOne({email: email}, function(err, user) {
       if(err) {
         console.log(err);
         return false;
       }
-      newSettings = user.settings;
+      set = user.settings;
       return user.settings;
     })
 
-    return true;
+    return set;
   });
 }
 
