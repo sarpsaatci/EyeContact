@@ -360,7 +360,7 @@ wss.on('connection', function(ws) {
         case 'speechToNum':
           ws.send(JSON.stringify({
             id: 'speechToNum',
-            num: w2n.parse(message.text)
+            num: w2n.parse(message.txt)
           }));
           break;
 
