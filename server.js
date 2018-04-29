@@ -349,11 +349,11 @@ wss.on('connection', function(ws) {
             break;
 
         case 'getSettings':
-          if(getSettings(message.email)) {
+          if(getSettings(message.email) && newSettings) {
             ws.send(JSON.stringify({
               id: 'setSettings',
               email: message.email,
-              settings: getSettings(message.email)
+              settings: newSettings
             }));
           }
           break;
@@ -393,6 +393,8 @@ function getSettings(email)
       newSettings = user.settings;
       return user.settings;
     })
+
+    return true;
   });
 }
 
