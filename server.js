@@ -394,8 +394,6 @@ function getSettings(email)
       return user.settings;
     })
   });
-
-  return true;
 }
 
 function getFrame(frame)
