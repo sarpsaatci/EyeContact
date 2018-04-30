@@ -38,6 +38,9 @@ var synth = window.speechSynthesis;
 var chime = null;
 var emoAudio = null;
 
+var autocompleteItems = new Array;
+let autoCompleteItemCount = 0;
+
 var settings = {
   id: 'settings',
   emotion_happiness: true,
@@ -463,6 +466,14 @@ function speechRecognize() {
           document.getElementById('myInput').value = e.results[0][0].transcript;
           document.getElementById('myInput').dispatchEvent(evt);
           document.getElementById('myInput').focus();
+          if(autoCompleteItemCount == 0) {
+            window.speechSynthesis.speak(new SpeechSynthesisUtterance('contact cannot be found'));
+          }
+          if(autoCompleteItemCount > 0) {
+            recognition.stop();
+            speakAutocompleteItems(autocompleteItems);
+          }
+
         }
 
       };
