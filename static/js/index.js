@@ -447,11 +447,11 @@ function speechRecognize() {
       recognition.interimResults = false;
 
       recognition.lang = "en-US";
+      document.getElementById('chimeAudio').play();
+      window.speechSynthesis.speak(new SpeechSynthesisUtterance('please say the contact name to call'));
       recognition.start();
 
       recognition.onstart = function(e) {
-        document.getElementById('chimeAudio').play();
-        window.speechSynthesis.speak(new SpeechSynthesisUtterance('please say the contact name to call'));
         document.getElementById('chimeAudio').play();
       }
 
