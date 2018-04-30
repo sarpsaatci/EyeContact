@@ -473,6 +473,7 @@ function speechRecognize() {
                 window.speechSynthesis.speak(ut);
                 ut.onend = function(e) {
                     recognition.stop();
+                    speechRecognize();
                 }
               }
               if(autocompleteItems.length > 0) {
