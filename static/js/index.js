@@ -444,7 +444,7 @@ function speechRecognize() {
 
     if (window.hasOwnProperty('webkitSpeechRecognition')) {
 
-      var recognition = new webkitSpeechRecognition();
+      let recognition = new webkitSpeechRecognition();
 
       recognition.continuous = false;
       recognition.interimResults = false;
