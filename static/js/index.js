@@ -453,6 +453,7 @@ function speechRecognize() {
       let uterance = new SpeechSynthesisUtterance('please say the contact name to call');
       window.speechSynthesis.speak(uterance);
       uterance.onend = function(e) {
+          console.log("asdasdafs");
           recognition.start();
       }
 
