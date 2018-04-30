@@ -468,7 +468,7 @@ function speechRecognize() {
         document.getElementById('myInput').value = e.results[0][0].transcript;
         if(document.getElementById('myInput').dispatchEvent(evt)) {
               document.getElementById('myInput').focus();
-              if(autoCompleteItemCount == 0) {
+              if(autocompleteItems.length == 0) {
                 let ut = new SpeechSynthesisUtterance('contact cannot be found');
                 window.speechSynthesis.speak(ut);
                 ut.onend = function(e) {
