@@ -522,6 +522,11 @@ function callResponse(message) {
 		var errorMessage = message.message ? message.message
 				: 'Unknown reason for call rejection.';
 		console.log(errorMessage);
+    let utter = new SpeechSynthesisUtterance(errorMessage);
+    window.speechSynthesis.speak(utter);
+    uter.onend = function(e) {
+      speechRecognize();
+    }
 		stop(true);
 	} else {
 		setCallState(IN_CALL);
