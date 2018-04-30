@@ -456,7 +456,7 @@ function speechRecognize() {
           document.getElementById('chimeAudio').play();
       }
       document.getElementById('chimeAudio').onended = function(e) {
-          recognition.start();
+          // recognition.start();
       }
 
 
