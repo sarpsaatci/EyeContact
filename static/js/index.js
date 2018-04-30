@@ -304,7 +304,7 @@ function speakAutocompleteItems(items)
     window.speechSynthesis.speak(new SpeechSynthesisUtterance(item));
   });
 
-  if(window.speechSynthesis.speak(new SpeechSynthesisUtterance('please say your choice'))) {
+  window.speechSynthesis.speak(new SpeechSynthesisUtterance('please say your choice'))).then(function() {
     if (window.hasOwnProperty('webkitSpeechRecognition')) {
 
       var recognition = new webkitSpeechRecognition();
@@ -327,8 +327,7 @@ function speakAutocompleteItems(items)
         recognition.stop();
       }
     }
-  }
-
+  });
 }
 
 function dummyFace(line)
