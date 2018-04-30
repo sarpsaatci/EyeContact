@@ -21,10 +21,11 @@
 <script type="text/javascript">
 
 var dataPoints = [];
+var chart = null;
 
 window.onload=function(){
 
-  var chart = new CanvasJS.Chart("chartContainer", {
+  chart = new CanvasJS.Chart("chartContainer", {
     title: {
       text: " Populating chart using array "
     },
