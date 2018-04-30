@@ -20,6 +20,8 @@
 
 <script type="text/javascript">
 
+var dataPoints = [];
+
 var chart = new CanvasJS.Chart("chartContainer", {
   title: {
     text: " Populating chart using array "
@@ -34,7 +36,6 @@ window.onload=function(){
 
 var x1 = [1, 2, 3];
 var y1 = [4, 7, 4];
-var dataPoints = [];
 
 for (var i = 0; i < 3; i++) {
   dataPoints.push({
