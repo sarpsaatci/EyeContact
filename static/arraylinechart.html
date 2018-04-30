@@ -26,9 +26,13 @@ var y1 = [4, 7, 4];
 var dataPoints = [];
 
 for (var i = 0; i < 3; i++) {
+  let s = 0;
   dataPoints.push({
     x: x1[i],
-    y: y1[i]
+    y: y1.forEach(function(y) {
+      s += y[i];
+      s = s/i;
+    })
   });
 }
 var chart = new CanvasJS.Chart("chartContainer", {
