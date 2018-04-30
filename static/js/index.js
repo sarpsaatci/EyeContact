@@ -478,8 +478,9 @@ function speechRecognize() {
           }
           if(autoCompleteItemCount > 0) {
             speakAutocompleteItems(autocompleteItems);
+            recognition.stop();
           }
-
+          recognition.stop();
         }
 
       };
