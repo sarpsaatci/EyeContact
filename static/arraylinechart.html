@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script type="text/javascript" src="/js/lib/dummy.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+      <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+  <style type="text/css">
+
+  </style>
+
+  <title>Populating chart using array - CanvasJS JavaScript Charts by canvasjs</title>
+
+<script type="text/javascript">
+window.onload=function(){
+
+var x1 = [1, 2, 3];
+var y1 = [4, 7, 4];
+var dataPoints = [];
+
+for (var i = 0; i < 3; i++) {
+  dataPoints.push({
+    x: x1[i],
+    y: y1[i]
+  });
+}
+var chart = new CanvasJS.Chart("chartContainer", {
+  title: {
+    text: " Populating chart using array "
+  },
+  data: [{
+    type: "line",
+    dataPoints: dataPoints
+  }]
+});
+
+chart.render();
+
+
+}
+
+</script>
+
+</head>
+
+<body>
+  <br/>
+<!-- Just so that JSFiddle's Result label doesn't overlap the Chart -->
+<div id="chartContainer" style="height: 360px; width: 100%;"></div>
+
+  <script>
+  // tell the embed parent frame the height of the content
+  if (window.parent && window.parent.parent){
+    window.parent.parent.postMessage(["resultsFrame", {
+      height: document.body.getBoundingClientRect().height,
+      slug: "3srkbbsx"
+    }], "*")
+  }
+</script>
+
+</body>
+
+</html>
