@@ -19,22 +19,7 @@
   <title>Populating chart using array - CanvasJS JavaScript Charts by canvasjs</title>
 
 <script type="text/javascript">
-window.onload=function(){
 
-var x1 = [1, 2, 3];
-var y1 = [4, 7, 4];
-var dataPoints = [];
-
-for (var i = 0; i < 3; i++) {
-  let s = 0;
-  dataPoints.push({
-    x: x1[i],
-    y: y1.forEach(function(y) {
-      s += y[i];
-      s = s/i;
-    })
-  });
-}
 var chart = new CanvasJS.Chart("chartContainer", {
   title: {
     text: " Populating chart using array "
@@ -45,16 +30,38 @@ var chart = new CanvasJS.Chart("chartContainer", {
   }]
 });
 
+window.onload=function(){
+
+var x1 = [1, 2, 3];
+var y1 = [4, 7, 4];
+var dataPoints = [];
+
+for (var i = 0; i < 3; i++) {
+  dataPoints.push({
+    x: x1[i],
+    y: y1[i]
+  });
+}
 chart.render();
 
-
 }
+
+function onclk() {
+  dataPoints.push({
+    x: 4,
+    y: 8
+  });
+}
+
+chart.render();
 
 </script>
 
 </head>
 
 <body>
+
+  <button onclick="onclk()">click</button>
   <br/>
 <!-- Just so that JSFiddle's Result label doesn't overlap the Chart -->
 <div id="chartContainer" style="height: 360px; width: 100%;"></div>
