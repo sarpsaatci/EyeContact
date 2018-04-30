@@ -473,8 +473,11 @@ function speechRecognize() {
           document.getElementById('myInput').dispatchEvent(evt);
           document.getElementById('myInput').focus();
           if(autoCompleteItemCount == 0) {
-            window.speechSynthesis.speak(new SpeechSynthesisUtterance('contact cannot be found'));
-            recognition.stop();
+            let ut = new SpeechSynthesisUtterance('contact cannot be found');
+            window.speechSynthesis.speak(ut);
+            ut.onend = function(e) {
+                recognition.stop();
+            }
           }
           if(autoCompleteItemCount > 0) {
             speakAutocompleteItems(autocompleteItems);
