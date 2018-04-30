@@ -491,6 +491,11 @@ function speechRecognize() {
         }
       };
 
+      recognition.onnomatch = function(e) {
+        recognition.stop();
+        speechRecognize();
+      }
+
       recognition.onerror = function(e) {
         recognition.stop();
       }
