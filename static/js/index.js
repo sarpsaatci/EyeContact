@@ -475,7 +475,7 @@ function speechRecognize() {
                     recognition.stop();
                 }
               }
-              if(autoCompleteItemCount > 0) {
+              if(autocompleteItems.length > 0) {
                 speakAutocompleteItems(autocompleteItems);
                 recognition.stop();
               }
