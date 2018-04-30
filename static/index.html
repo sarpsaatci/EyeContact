@@ -337,6 +337,13 @@
   <body>
 
     <div id="authPage">
+
+      <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
+      <div class="col-lg-4 col-md-8 col-sm-8 col-xs-10" style="padding-bottom: 4%; padding-top: 6%">
+        <img src="logo.png" style="height: auto; width: 100%">
+      </div>
+      <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
+
       <button id="authBtn" class="googleContactsButton">Get my contacts</button>
       <script type="text/javascript">
             var clientId = '305322108967-q02bfmg9l082jftr9e45vgd5ffje0klf';
@@ -526,30 +533,7 @@
               if(event.keyCode == 32 && event.ctrlKey) {
                 speakAutocompleteItems(autocompleteItems);
               }
-              if(event.keyCode == 13 && event.ctrlKey) {
-                if (window.hasOwnProperty('webkitSpeechRecognition')) {
 
-                  var recognition = new webkitSpeechRecognition();
-
-                  recognition.continuous = false;
-                  recognition.interimResults = false;
-
-                  recognition.lang = "en-US";
-                  recognition.start();
-
-                  recognition.onresult = function(e) {
-                    console.log(e.results[0][0].transcript);
-                    let number = parseInt(e.results[0][0].transcript);
-                    recognition.stop();
-                    let peer = autocompleteItems[number-1];
-                    makeCall(peer.substring(peer.indexOf('(')+1, peer.indexOf(')')));
-                  };
-
-                  recognition.onerror = function(e) {
-                    recognition.stop();
-                  }
-                }
-              }
             }
         });
         /*execute a function presses a key on the keyboard:*/
