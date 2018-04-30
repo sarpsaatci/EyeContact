@@ -22,17 +22,17 @@
 
 var dataPoints = [];
 
-var chart = new CanvasJS.Chart("chartContainer", {
-  title: {
-    text: " Populating chart using array "
-  },
-  data: [{
-    type: "line",
-    dataPoints: dataPoints
-  }]
-});
-
 window.onload=function(){
+
+  var chart = new CanvasJS.Chart("chartContainer", {
+    title: {
+      text: " Populating chart using array "
+    },
+    data: [{
+      type: "line",
+      dataPoints: dataPoints
+    }]
+  });
 
 var x1 = [1, 2, 3];
 var y1 = [4, 7, 4];
@@ -55,8 +55,6 @@ function onclk() {
 
   chart.render();
 }
-
-chart.render();
 
 </script>
 
