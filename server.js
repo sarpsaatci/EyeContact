@@ -617,7 +617,7 @@ function call(callerId, to, from, sdpOffer) {
     clearCandidatesQueue(callerId);
 
     var caller = userRegistry.getById(callerId);
-    var rejectCause = 'User ' + to + ' is not registered';
+    var rejectCause = 'User ' + to + ' is offline';
     if (userRegistry.getByName(to)) {
         var callee = userRegistry.getByName(to);
         caller.sdpOffer = sdpOffer
