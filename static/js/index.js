@@ -479,8 +479,6 @@ function speechRecognize() {
           speakAutocompleteItems(autocompleteItems);
           recognition.stop();
         }
-        recognition.stop();
-
       };
 
       recognition.onerror = function(e) {
