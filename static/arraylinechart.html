@@ -23,6 +23,8 @@
 var dataPoints = [];
 var chart = null;
 
+var c = 3;
+
 window.onload=function(){
 
   chart = new CanvasJS.Chart("chartContainer", {
@@ -50,7 +52,7 @@ chart.render();
 
 function onclk() {
   dataPoints.push({
-    x: 4,
+    x: ++c,
     y: 8
   });
 
