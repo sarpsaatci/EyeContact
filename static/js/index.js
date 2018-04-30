@@ -474,9 +474,9 @@ function speechRecognize() {
           document.getElementById('myInput').focus();
           if(autoCompleteItemCount == 0) {
             window.speechSynthesis.speak(new SpeechSynthesisUtterance('contact cannot be found'));
+            recognition.stop();
           }
           if(autoCompleteItemCount > 0) {
-            recognition.stop();
             speakAutocompleteItems(autocompleteItems);
           }
 
