@@ -466,7 +466,7 @@ function speechRecognize() {
         evt.initEvent('input', true, true);
         document.getElementById('myInput').contentEditable = "true";
         document.getElementById('myInput').value = e.results[0][0].transcript;
-        if(document.getElementById('myInput').dispatchEvent(evt);) {
+        if(document.getElementById('myInput').dispatchEvent(evt)) {
               document.getElementById('myInput').focus();
               if(autoCompleteItemCount == 0) {
                 let ut = new SpeechSynthesisUtterance('contact cannot be found');
