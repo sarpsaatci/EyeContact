@@ -453,10 +453,7 @@ function speechRecognize() {
       let uterance = new SpeechSynthesisUtterance('please say the contact name to call');
       window.speechSynthesis.speak(uterance);
       uterance.onend = function(e) {
-          document.getElementById('chimeAudio').play();
-      }
-      document.getElementById('chimeAudio').onended = function(e) {
-          // recognition.start();
+          recognition.start();
       }
 
 
