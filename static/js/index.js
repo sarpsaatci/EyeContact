@@ -321,7 +321,7 @@ function speakAutocompleteItems(items)
         console.log(e.results[0][0].transcript);
         let number = parseInt(e.results[0][0].transcript);
         recognition.stop();
-        let peer = autocompleteItems[number-1];
+        let peer = items[number-1];
         makeCall(peer.substring(peer.indexOf('(')+1, peer.indexOf(')')));
       };
 
