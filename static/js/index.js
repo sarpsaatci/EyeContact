@@ -465,26 +465,24 @@ function speechRecognize() {
       }
 
       recognition.onresult = function(e) {
-        if(e.results[0][0].transcript.toUpperCase == 'call'.toUpperCase) {
-          var evt = document.createEvent('HTMLEvents');
-          evt.initEvent('input', true, true);
-          document.getElementById('myInput').contentEditable = "true";
-          document.getElementById('myInput').value = e.results[0][0].transcript;
-          document.getElementById('myInput').dispatchEvent(evt);
-          document.getElementById('myInput').focus();
-          if(autoCompleteItemCount == 0) {
-            let ut = new SpeechSynthesisUtterance('contact cannot be found');
-            window.speechSynthesis.speak(ut);
-            ut.onend = function(e) {
-                recognition.stop();
-            }
+        var evt = document.createEvent('HTMLEvents');
+        evt.initEvent('input', true, true);
+        document.getElementById('myInput').contentEditable = "true";
+        document.getElementById('myInput').value = e.results[0][0].transcript;
+        document.getElementById('myInput').dispatchEvent(evt);
+        document.getElementById('myInput').focus();
+        if(autoCompleteItemCount == 0) {
+          let ut = new SpeechSynthesisUtterance('contact cannot be found');
+          window.speechSynthesis.speak(ut);
+          ut.onend = function(e) {
+              recognition.stop();
           }
-          if(autoCompleteItemCount > 0) {
-            speakAutocompleteItems(autocompleteItems);
-            recognition.stop();
-          }
+        }
+        if(autoCompleteItemCount > 0) {
+          speakAutocompleteItems(autocompleteItems);
           recognition.stop();
         }
+        recognition.stop();
 
       };
 
