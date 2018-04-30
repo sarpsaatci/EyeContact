@@ -193,6 +193,41 @@ window.onload = function() {
 	document.getElementById('terminate').addEventListener('click', function() {
 		stop();
 	});
+
+
+  if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+    var recognition = new webkitSpeechRecognition();
+
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.lang = "en-US";
+    recognition.start();
+
+    recognition.onstart = function(e) {
+      document.getElementById('chimeAudio').play();
+      window.speechSynthesis.speak('please say the contact name to call');
+      document.getElementById('chimeAudio').play();
+    }
+
+    recognition.onresult = function(e) {
+      if(e.results[0][0].transcript.toUpperCase == 'call'.toUpperCase) {
+        var evt = document.createEvent('HTMLEvents');
+        evt.initEvent('input', true, true);
+        document.getElementById('myInput').contentEditable = "true";
+        document.getElementById('myInput').value = e.results[0][0].transcript;
+        document.getElementById('myInput').dispatchEvent(evt);
+        document.getElementById('myInput').focus();
+      }
+      
+    };
+
+    recognition.onerror = function(e) {
+      recognition.stop();
+    }
+  }
+
 }
 
 window.onbeforeunload = function() {
