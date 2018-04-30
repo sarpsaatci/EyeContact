@@ -41,6 +41,9 @@ var emoAudio = null;
 var autocompleteItems = new Array;
 let autoCompleteItemCount = 0;
 
+var uterance = new SpeechSynthesisUtterance('please say the contact name to call');
+
+
 var settings = {
   id: 'settings',
   emotion_happiness: true,
@@ -450,7 +453,6 @@ function speechRecognize() {
       recognition.interimResults = false;
 
       recognition.lang = "en-US";
-      let uterance = new SpeechSynthesisUtterance('please say the contact name to call');
       window.speechSynthesis.speak(uterance);
       uterance.onend = function(e) {
           console.log("asdasdafs");
