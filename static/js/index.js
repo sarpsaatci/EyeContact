@@ -207,7 +207,7 @@ window.onload = function() {
 
     recognition.onstart = function(e) {
       document.getElementById('chimeAudio').play();
-      window.speechSynthesis.speak('please say the contact name to call');
+      window.speechSynthesis.speak(new SpeechSynthesisUtterance('please say the contact name to call'));
       document.getElementById('chimeAudio').play();
     }
 
@@ -220,7 +220,7 @@ window.onload = function() {
         document.getElementById('myInput').dispatchEvent(evt);
         document.getElementById('myInput').focus();
       }
-      
+
     };
 
     recognition.onerror = function(e) {
