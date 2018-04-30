@@ -304,7 +304,7 @@ function speakAutocompleteItems(items)
     window.speechSynthesis.speak(new SpeechSynthesisUtterance(item));
   });
 
-  window.speechSynthesis.speak(new SpeechSynthesisUtterance('please say your choice'))).then(function() {
+  window.speechSynthesis.speak(new SpeechSynthesisUtterance('please say your choice')), function() {
     if (window.hasOwnProperty('webkitSpeechRecognition')) {
 
       var recognition = new webkitSpeechRecognition();
