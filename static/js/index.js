@@ -313,6 +313,7 @@ function speakAutocompleteItems(items)
   let uter = new SpeechSynthesisUtterance('please say your choice');
 
   uter.onend = function(event) {
+
     if (window.hasOwnProperty('webkitSpeechRecognition')) {
 
       var recognition = new webkitSpeechRecognition();
@@ -322,6 +323,10 @@ function speakAutocompleteItems(items)
 
       recognition.lang = "en-US";
       recognition.start();
+
+      recognition.onstart = function(e) {
+        document.getElementById('chimeAudio').play();
+      }
 
       recognition.onresult = function(e) {
         console.log(e.results[0][0].transcript);
