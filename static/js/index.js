@@ -450,8 +450,11 @@ function speechRecognize() {
       recognition.interimResults = false;
 
       recognition.lang = "en-US";
-      window.speechSynthesis.speak(new SpeechSynthesisUtterance('please say the contact name to call'));
-      document.getElementById('chimeAudio').play();
+      let uterance = new SpeechSynthesisUtterance('please say the contact name to call');
+      window.speechSynthesis.speak(uterance);
+      uterance.onend = function(e) {
+          document.getElementById('chimeAudio').play();
+      }
       document.getElementById('chimeAudio').onended = function(e) {
           recognition.start();
       }
