@@ -321,7 +321,7 @@ function speakAutocompleteItems(items)
       recognition.continuous = false;
       recognition.interimResults = false;
 
-      recognition.lang = "en-US";
+      recognition.lang = "tr-TR";
       recognition.start();
 
       recognition.onstart = function(e) {
@@ -457,7 +457,7 @@ function speechRecognize() {
       recognition.continuous = false;
       recognition.interimResults = false;
 
-      recognition.lang = "en-US";
+      recognition.lang = "tr-TR";
       window.speechSynthesis.speak(uterance);
       uterance.onend = function(e) {
           console.log("asdasdafs");
@@ -529,7 +529,7 @@ function callResponse(message) {
 		console.log(errorMessage);
     let utter = new SpeechSynthesisUtterance(errorMessage);
     window.speechSynthesis.speak(utter);
-    uTter.onend = function(e) {
+    utter.onend = function(e) {
       speechRecognize();
     }
 		stop(true);
