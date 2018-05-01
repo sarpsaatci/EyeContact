@@ -529,7 +529,7 @@ function callResponse(message) {
 		console.log(errorMessage);
     let utter = new SpeechSynthesisUtterance(errorMessage);
     window.speechSynthesis.speak(utter);
-    uter.onend = function(e) {
+    uTter.onend = function(e) {
       speechRecognize();
     }
 		stop(true);
