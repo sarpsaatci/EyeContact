@@ -430,10 +430,10 @@ function manageUser(userData)
     }
   });
 
-  sendMessage({
-    id: 'getSettings',
-    email: currentUser.email.$t
-  });
+  // sendMessage({
+  //   id: 'getSettings',
+  //   email: currentUser.email.$t
+  // });
 
   synth = window.speechSynthesis;
   let utterThis = new SpeechSynthesisUtterance("Hello" + currentUser.name.$t.substr(0, currentUser.name.$t.indexOf(' ')) + ", welcome to EyeContact");
