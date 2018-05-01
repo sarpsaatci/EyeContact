@@ -66,7 +66,7 @@ var argv = minimist(process.argv.slice(2), {
 var options =
 {
   key:  fs.readFileSync('keys/server.key'),
-  cert: fs.readFileSync('keys/server.crt'),
+  crt: fs.readFileSync('keys/server.crt'),
   pem: fs.readFileSync('keys/server.pem')
 };
 
