@@ -193,9 +193,9 @@ window.onload = function() {
 	// document.getElementById('register').addEventListener('click', function() {
 	// 	register();
 	// });
-	document.getElementById('call').addEventListener('click', function() {
-		call();
-	});
+	// document.getElementById('call').addEventListener('click', function() {
+	// 	call();
+	// });
 	document.getElementById('terminate').addEventListener('click', function() {
 		stop();
 	});
