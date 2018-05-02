@@ -5,6 +5,8 @@
 window.onload = function () {
 
 var dps = []; // dataPoints
+var dps2 = [];
+
 var chart = new CanvasJS.Chart("chartContainer", {
 	title :{
 		text: "Dynamic Data"
@@ -17,7 +19,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		dataPoints: dps
 	}, {
 		type: "line",
-		dataPoints: dps
+		dataPoints: dps2
 	}]
 });
 
@@ -37,6 +39,10 @@ var updateChart = function (count) {
 			y: yVal
 		});
 		xVal++;
+    dps2.push({
+			x: xVal,
+			y: 39
+		});
 	}
 
 	if (dps.length > dataLength) {

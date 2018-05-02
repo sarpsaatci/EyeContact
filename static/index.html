@@ -760,6 +760,59 @@
           <source src="mp3/Store_Door_Chime-Mike_Koenig-570742973.mp3" type="audio/mpeg">
       </audio>
 
+      <div id="chartContainer" style="height: 370px; width:100%;"></div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+      <script>
+
+      var dps = []; // dataPoints
+
+      var chart = new CanvasJS.Chart("chartContainer", {
+        title :{
+          text: "Dynamic Data"
+        },
+        axisY: {
+          includeZero: false
+        },
+        data: [{
+          type: "line",
+          dataPoints: dps
+        }]
+      });
+
+      var xVal = 0;
+      var yVal = 0;
+      var updateInterval = 1000;
+      var dataLength = 20; // number of dataPoints visible at any point
+
+      var updateChart = function (val) {
+
+        // count = count || 1;
+
+        yVal = val;
+        dps.push({
+          x: xVal,
+          y: yVal
+        });
+        xVal++;
+        dps2.push({
+          x: xVal,
+          y: 39
+        });
+
+        if (dps.length > dataLength) {
+          dps.shift();
+        }
+
+        chart.render();
+      };
+
+      // updateChart(dataLength);
+      // setInterval(function(){updateChart()}, updateInterval);
+
+      }
+      </script>
+
 
       <!-- <div class="row col-lg-12">
 

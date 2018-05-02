@@ -275,6 +275,12 @@ ws.onmessage = function(message) {
       };
 
       synth.speak(emoUtter);
+
+      let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+      val = parsefloat(val);
+      if(val) {
+          updateChart(val);
+      }
     }
     // dummyFace(parsedMessage.data);
     break;
@@ -393,6 +399,12 @@ function getFrames()
     }
   };
 }
+
+// function lineChart(dataset)
+// {
+//
+//
+// }
 
 function manageUser(userData)
 {
