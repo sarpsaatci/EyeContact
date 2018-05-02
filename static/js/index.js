@@ -276,10 +276,12 @@ ws.onmessage = function(message) {
 
       synth.speak(emoUtter);
 
-      let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-      val = parseFloat(val);
-      if(val) {
-          updateChart(val);
+      if(parsedMessage.data.includes('happiness')) {
+        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        val = parseFloat(val);
+        if(val) {
+            updateChart(val);
+        }
       }
     }
     // dummyFace(parsedMessage.data);
