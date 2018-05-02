@@ -183,7 +183,7 @@ function setCallState(nextState) {
 }
 
 window.onload = function() {
-	console = new Console();
+	// console = new Console();
 	setRegisterState(NOT_REGISTERED);
 	var drag = new Draggabilly(document.getElementById('videoSmall'));
 	videoInput = document.getElementById('videoInput');
