@@ -765,7 +765,7 @@
 
       <script>
 
-      var dps = []; // dataPoints
+      var happinessArr = []; // dataPoints
 
       var chart = new CanvasJS.Chart("chartContainer", {
         title :{
@@ -776,7 +776,7 @@
         },
         data: [{
           type: "line",
-          dataPoints: dps
+          dataPoints: happinessArr
         }]
       });
 
@@ -790,14 +790,14 @@
         // count = count || 1;
 
         yVal = val;
-        dps.push({
+        happinessArr.push({
           x: xVal,
           y: yVal
         });
         xVal++;
 
-        if (dps.length > dataLength) {
-          dps.shift();
+        if (happinessArr.length > dataLength) {
+          happinessArr.shift();
         }
 
         chart.render();
