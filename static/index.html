@@ -741,27 +741,25 @@
           </div>
         </div> -->
         <div class="col-lg-12" style="text-align: center">
-          <div id="videoBig">
-            <video id="videoOutput" autoplay width="1024px" height="768px" poster="img/kurento.png"></video>
+          <div class="col-lg-4"></div>
+          <div class="col-lg-8" style="text-align: center">
+            <div id="videoBig">
+              <video id="videoOutput" autoplay width="1024px" height="768px" poster="img/kurento.png"></video>
+            </div>
+            <div id="videoSmall">
+              <video id="videoInput" autoplay width="240px" height="180px" poster="img/webrtc.png"></video>
+            </div>
+            <a id="terminate" href="#" style=""><img src="img/end_call.png" style="width: 5em; height: auto"></a>
           </div>
-          <div id="videoSmall">
-            <video id="videoInput" autoplay width="240px" height="180px" poster="img/webrtc.png"></video>
-          </div>
+          <div class="col-lg-4"></div>
         </div>
-        <div class="col-lg-4"></div>
-        <div class="col-lg-8" style="text-align: center">
-          <a id="terminate" href="#" style=""><img src="img/end_call.png" style="width: 5em; height: auto"></a>
-        </div>
-        <div class="col-lg-4"></div>
       <!-- </div> -->
 
       <audio id="chimeAudio">
           <source src="mp3/Store_Door_Chime-Mike_Koenig-570742973.mp3" type="audio/mpeg">
       </audio>
 
-      <div class="row">
-        <div id="chartContainer" class="col-lg-12" style="height: 370px; width:100%;"></div>
-      </div>
+      <div id="chartContainer" class="col-lg-12" style="height: 370px; width:100%;"></div>
 
       <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
