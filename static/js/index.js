@@ -259,6 +259,7 @@ ws.onmessage = function(message) {
   case 'capture':
     console.log(parsedMessage.id);
     readyToCaptureFrame = true;
+    docuent.getElementById('chartContainer').style.display = 'block';
     break;
   case 'openFace':
     console.log(parsedMessage.data);
