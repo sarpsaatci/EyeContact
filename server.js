@@ -449,7 +449,9 @@ function stop(sessionId) {
         return;
     }
 
-    of.kill('SIGHUP');
+    if(of) {
+        of.kill('SIGHUP');
+    }
 
     follower.close();
 
