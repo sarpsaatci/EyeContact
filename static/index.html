@@ -496,8 +496,7 @@
         /*execute a function when someone writes in the text field:*/
         inp.addEventListener("input", function(e) {
 
-            autocompleteItems = new Array;
-            let autoCompleteItemCount = 0;
+            autoCompleteItemCount = 0;
 
             var a, b, i, val = this.value;
             /*close any already open lists of autocompleted values*/
@@ -669,9 +668,9 @@
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
-              <a class="navbar-brand" href=".">Kurento Tutorial</a>
+              <a class="navbar-brand" href=".">Hello<script>currentUser.name.$t</script>, Welcome to EyeContact</a>
             </div>
-            <div class="collapse navbar-collapse"
+            <!-- <div class="collapse navbar-collapse"
               id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -679,7 +678,7 @@
                     <span class="glyphicon glyphicon-file"></span> Source Code</a>
                 </li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </div>
       </header>
