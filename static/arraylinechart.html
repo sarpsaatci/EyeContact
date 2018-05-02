@@ -1,85 +1,59 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="googlebot" content="noindex, nofollow">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+window.onload = function () {
 
-  <script type="text/javascript" src="/js/lib/dummy.js"></script>
+var dps = []; // dataPoints
+var chart = new CanvasJS.Chart("chartContainer", {
+	title :{
+		text: "Dynamic Data"
+	},
+	axisY: {
+		includeZero: false
+	},
+	data: [{
+		type: "line",
+		dataPoints: dps
+	}, {
+		type: "line",
+		dataPoints: dps
+	}]
+});
 
-    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+var xVal = 0;
+var yVal = 100;
+var updateInterval = 1000;
+var dataLength = 20; // number of dataPoints visible at any point
 
-      <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+var updateChart = function (count) {
 
-  <style type="text/css">
+	count = count || 1;
 
-  </style>
+	for (var j = 0; j < count; j++) {
+		yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+		dps.push({
+			x: xVal,
+			y: yVal
+		});
+		xVal++;
+	}
 
-  <title>Populating chart using array - CanvasJS JavaScript Charts by canvasjs</title>
+	if (dps.length > dataLength) {
+		dps.shift();
+	}
 
-<script type="text/javascript">
+	chart.render();
+};
 
-var dataPoints = [];
-var chart = null;
+updateChart(dataLength);
+setInterval(function(){updateChart()}, updateInterval);
 
-var c = 3;
-
-window.onload=function(){
-
-  chart = new CanvasJS.Chart("chartContainer", {
-    title: {
-      text: " Populating chart using array "
-    },
-    data: [{
-      type: "line",
-      dataPoints: dataPoints
-    }]
-  });
-
-var x1 = [1, 2, 3];
-var y1 = [4, 7, 4];
-
-for (var i = 0; i < 3; i++) {
-  dataPoints.push({
-    x: x1[i],
-    y: y1[i]
-  });
 }
-chart.render();
-
-}
-
-function onclk() {
-  dataPoints.push({
-    x: ++c,
-    y: 8
-  });
-
-  chart.render();
-}
-
 </script>
-
 </head>
-
 <body>
-
-  <button onclick="onclk()">click</button>
-  <br/>
-<!-- Just so that JSFiddle's Result label doesn't overlap the Chart -->
-<div id="chartContainer" style="height: 360px; width: 100%;"></div>
-
-  <script>
-  // tell the embed parent frame the height of the content
-  if (window.parent && window.parent.parent){
-    window.parent.parent.postMessage(["resultsFrame", {
-      height: document.body.getBoundingClientRect().height,
-      slug: "3srkbbsx"
-    }], "*")
-  }
-</script>
-
+<div id="chartContainer" style="height: 370px; width:100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
-
 </html>

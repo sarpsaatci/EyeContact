@@ -598,6 +598,8 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
 
     follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
 
+    let previous = null;
+
     follower.on('line', function(filename, line) {
       console.log('OpenFace: '+line);
       if(line.includes('$modelLoaded'))
