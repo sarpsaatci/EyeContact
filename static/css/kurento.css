@@ -55,9 +55,9 @@ video,#console {
 #videoBig {
 	width: 100%;
 	height: auto;
-	top: 0;
-	left: 0;
-	z-index: 1;
+	/* top: 0; */
+	/* left: 0; */
+	/* z-index: 1; */
 }
 
 div#videoSmall {
