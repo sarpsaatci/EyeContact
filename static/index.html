@@ -504,7 +504,7 @@
             if (!val) { return false;}
             currentFocus = -1;
             /*create a DIV element that will contain the items (values):*/
-            a = document.createElement("DIV");
+              a = document.createElement("DIV");
             a.setAttribute("id", this.id + "autocomplete-list");
             a.setAttribute("class", "autocomplete-items row col-lg-12");
             a.setAttribute("align", "center");
@@ -667,7 +667,10 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
           <div class="container">
             <div class="navbar-header">
-              <a class="navbar-brand"<script>Hello + currentUser.name.$t + , Welcome to EyeContact</script></a>
+              <script>
+                a = document.createElement("H1");
+                a.innerHTML = "Hello " + currentUser.name.$t + " welcome to EyeContact";
+              </script>
             </div>
             <!-- <div class="collapse navbar-collapse"
               id="bs-example-navbar-collapse-1">
