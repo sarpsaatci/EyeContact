@@ -640,7 +640,7 @@ function register(currentUser, contacts) {
     settings: settings
 	};
 	sendMessage(message);
-	document.getElementById('peer').focus();
+	// document.getElementById('peer').focus();
 }
 
 function call(peerEmail) {
