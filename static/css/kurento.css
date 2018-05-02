@@ -53,8 +53,8 @@ video,#console {
 }
 
 #videoBig {
-	width: 640px;
-	height: 480px;
+	width: 100%;
+	height: auto;
 	top: 0;
 	left: 0;
 	z-index: 1;
