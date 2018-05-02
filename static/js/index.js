@@ -277,7 +277,7 @@ ws.onmessage = function(message) {
       synth.speak(emoUtter);
 
       let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-      val = parsefloat(val);
+      val = parseFloat(val);
       if(val) {
           updateChart(val);
       }
