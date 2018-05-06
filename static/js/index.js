@@ -59,7 +59,7 @@ var settings = {
   emotion_surprised_sensivity: 'medium',
   emotion_angry: true,
   emotion_angry_sensivity: 'medium',
-  emotion_neutral: 'true'
+  emotion_neutral: 'true',
   gaze: 'true',
   gaze_sensivity: 'medium'
 }
