@@ -562,9 +562,16 @@ function dummyFace(line)
 function makeCall(peerEmail)
 {
   sendMessage({
-    id: 'getSettings',
-    email: currentUser.email.$t
+    id: 'applySettings',
+    user: currentUser,
+    contacts: contacts,
+    settings: settings
   });
+
+  // sendMessage({
+  //   id: 'getSettings',
+  //   email: currentUser.email.$t
+  // });
   call(peerEmail);
 }
 
