@@ -561,6 +561,10 @@ function dummyFace(line)
 
 function makeCall(peerEmail)
 {
+  sendMessage({
+    id: 'getSettings',
+    email: currentUser.email.$t
+  });
   call(peerEmail);
 }
 
@@ -623,11 +627,6 @@ function manageUser(userData)
         email: contact.gd$email[0].address
       });
     }
-  });
-
-  sendMessage({
-    id: 'getSettings',
-    email: currentUser.email.$t
   });
 
   synth = window.speechSynthesis;
