@@ -741,6 +741,8 @@ function stop(message) {
 	}
 
 
+  window.speechSynthesis.speak(new SpeechSynthesisUtterance('call ended'));
+
   var element = document.getElementById('output');
   outImg.src = "";
 	hideSpinner(videoInput, videoOutput);
