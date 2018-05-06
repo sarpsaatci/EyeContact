@@ -74,30 +74,24 @@
       content: "";
       background-color: #006bb3;
       background-size:100% 100%;
-    	background-position: center;
-    	   background-repeat: no-repeat;
-
+    background-position: center;
+       background-repeat: no-repeat;
       z-index: -1;
-
        min-height: 100%;
       min-width: 1024px;
-
       /* Set up proportionate scaling */
       width: 100%;
       height: auto;
-
       /* Set up positioning */
       position: absolute;
       top: 0;
       left: 0;
     }
-
     .autocomplete {
       /*the container must be positioned relative:*/
       position: relative;
       display: inline-block;
     }
-
     .auto-complete-input {
       border: 1px solid transparent;
       padding: 10px;
@@ -134,13 +128,11 @@
     </style>
 
     <style>
-
       .navbar {
           overflow: hidden;
           background-color: white;
           font-family: Arial, Helvetica, sans-serif;
       }
-
       .navbar a {
           float: left;
           font-size: 16px;
@@ -149,12 +141,10 @@
           padding: 14px 16px;
           text-decoration: none;
       }
-
       .dropdown {
           float: left;
           overflow: hidden;
       }
-
       .dropdown .dropbtn {
           font-size: 16px;
           border: none;
@@ -165,11 +155,9 @@
           font: inherit;
           margin: 0;
       }
-
       .navbar a:hover, .dropdown:hover .dropbtn {
           background-color: white;
       }
-
       .dropdown-content {
           display: none;
           position: absolute;
@@ -179,17 +167,14 @@
           box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
           z-index: 1;
       }
-
       .dropdown-content .header {
           background: red;
           padding: 16px;
           color: white;
       }
-
       .dropdown:hover .dropdown-content {
           display: block;
       }
-
       /* Create three equal columns that floats next to each other */
       .column {
           float: left;
@@ -198,7 +183,6 @@
           background-color: #ccc;
           height: 250px;
       }
-
       .column a {
           float: none;
           color: black;
@@ -207,18 +191,15 @@
           display: block;
           text-align: left;
       }
-
       .column a:hover {
           background-color: #ddd;
       }
-
       /* Clear floats after the columns */
       .row:after {
           content: "";
           display: table;
           clear: both;
       }
-
       /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
       @media screen and (max-width: 600px) {
           .column {
@@ -231,14 +212,6 @@
           transition: background-color .5s;
           margin: 0;
       }
-      .btn-group button {
-          background-color: white; /* Green background */
-          border: 1px solid grey; /* Green border */
-          color: black; /* White text */
-          padding: 5px 12px; /* Some padding */
-          cursor: pointer; /* Pointer/hand icon */
-          float: left; /* Float the buttons side by side */
-      }
 
       /* Clear floats (clearfix hack) */
       .btn-group:after {
@@ -246,16 +219,62 @@
           clear: both;
           display: table;
       }
-
       .btn-group button:not(:last-child) {
           border-right: none; /* Prevent double borders */
       }
+      .low-btn, .medium-btn, .high-btn {
+          background-color: white; /* Green background */
+          border: 1px solid grey; /* Green border */
+          color: black; /* White text */
+          padding: 5px 12px; /* Some padding */
+          margin: 10px 0px;
+          cursor: pointer; /* Pointer/hand icon */
+          float: left; /* Float the buttons side by side */
+        }
+
+        .sens-btn{
+          background-color: white; /* Green background */
+          border: 1px solid grey; /* Green border */
+          color: black; /* White text */
+          padding: 5px 12px; /* Some padding */
+          margin: 10px 0px;
+          cursor: pointer; /* Pointer/hand icon */
+          float: left; /* Float the buttons side by side */
+        }
+
+        #sens-low:hover, #anger-low:hover, #disgust-low:hover, #fear-low:hover,  #happiness-low:hover,  #sadness-low:hover,  #surprise-low:hover{
+          background-color: #ff8080;
+        }
+        #sens-medium:hover, #anger-medium:hover, #disgust-medium:hover, #fear-medium:hover,  #happiness-medium:hover,  #sadness-medium:hover,  #surprise-medium:hover{
+          background-color: #ffff80;
+        }
+        #sens-high:hover, #anger-high:hover, #disgust-high:hover, #fear-high:hover,  #happiness-high:hover,  #sadness-high:hover,  #surprise-high:hover{
+          background-color: #90ee90;
+        }
+
+        #active-low, #active-low-anger, #active-low-disgust, #active-low-fear, #active-low-happiness, #active-low-sadness, #active-low-surprise{
+          background-color: #ff8080;
+        }
+        #active-medium, #active-medium-anger,#active-medium-disgust, #active-medium-fear, #active-medium-happiness, #active-medium-sadness, #active-medium-surprise{
+          background-color: #ffff80;
+        }
+        #active-high, #active-high-anger, #active-high-disgust, #active-high-fear, #active-high-happiness, #active-high-sadness, #active-high-surprise{
+          background-color: #90ee90;
+        }
+
+
+
 
       /* Add a background color on hover */
-      .btn-group button:hover {
-          background-color: #3e8e41;
+      .low-active, .low-btn:hover {
+          background-color: #ff8080;
       }
-
+      .medium-active, .medium-btn:hover {
+          background-color: #ffff80;
+      }
+      .high-active, .high-btn:hover {
+          background-color: #90ee90;
+      }
       .tab {
           overflow: hidden;
           border: 1px solid #ccc;
@@ -263,7 +282,6 @@
           width: 100%;
           text-align: left;
       }
-
       /* Style the buttons inside the tab */
       .tab button {
         width: 100%;
@@ -277,21 +295,18 @@
           font-size: 17px;
           text-align: left;
       }
-
       /* Change background color of buttons on hover */
       .tab button:hover {
           background-color: #ddd;
           width: 100%;
           text-align: left;
       }
-
       /* Create an active/current tablink class */
       .tab button.active {
           background-color: #ccc;
           width: 100%;
           text-align: left;
       }
-
       /* Style the tab content */
       .tabcontent {
           display: none;
@@ -301,7 +316,6 @@
           animation: fadeEffect 1s;
           width: 100%;
       }
-
       .sidenav {
           height: 100%;
           width: 0;
@@ -314,7 +328,6 @@
           transition: 0.5s;
           padding-top: 60px;
       }
-
       .sidenav a {
           padding: 8px 8px 8px 32px;
           text-decoration: none;
@@ -324,11 +337,9 @@
           display: block;
           transition: 0.3s;
       }
-
       .sidenav a:hover {
           color: #f1f1f1;
       }
-
       .sidenav .closebtn {
           position: absolute;
           top: 0;
@@ -336,18 +347,75 @@
           font-size: 36px;
           margin-left: 50px;
       }
-
       #main {
           transition: margin-left .5s;
           padding: 16px;
       }
-
       @media screen and (max-height: 450px) {
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
       }
-    </style>
+      /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+  left: -7px;
+  top: 3px;
+}
 
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 17px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+    </style>
   </head>
 
   <body>
@@ -419,23 +487,22 @@
             document.getElementById(tabName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-
         </script>
 
 
       <script>
       function openNav() {
-          document.getElementById("mySidenav").style.width = "250px";
+          document.getElementById("mySidenav").style.width = "225px";
           document.getElementById("main").style.marginLeft = "250px";
           document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
       }
-
       function closeNav() {
           document.getElementById("mySidenav").style.width = "0";
           document.getElementById("main").style.marginLeft= "0";
           document.body.style.backgroundColor = "white";
       }
       </script>
+
 
       <!-- <form autocomplete="off"> -->
       <div class="row col-xs-12">
@@ -447,33 +514,332 @@
             </div>
 
             <div id="Emotions" class="tabcontent">
-
-              <form>
-              <input type="checkbox" name="happiness" value="Happiness">Happiness<br>
-              <input type="checkbox" name="sadness" value="Sadness">Sadness<br>
-              <input type="checkbox" name="fear" value="Fear">Fear<br>
-              <input type="checkbox" name="disgust" value="Disgust">Disgust<br>
-              <input type="checkbox" name="surprised" value="Surprised">Surprised<br>
-              <input type="checkbox" name="angry" value="Angry">Angry<br>
-              <input type="checkbox" name="neutral" value="Neutral">Neutral<br>
-              </form>
+<label class="switch">
+<input type="checkbox" id="angerSwitch" onclick="angerSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Anger<br>
+<div class="btn-group" id="angerButtons">
+                    <button class="low-btn" id="anger-low" onclick="clickedAngerLow()">Low</button>
+                    <button class="medium-btn" id="anger-medium" onclick="clickedAngerMedium()">Medium</button>
+                    <button class="high-btn" id="anger-high" onclick="clickedAngerHigh()">High</button>
+                </div>
+<label class="switch">
+<input type="checkbox" id="disgustSwitch" onclick="disgustSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Disgust<br>
+<div class="btn-group" id="disgustButtons">
+                    <button class="low-btn" id="disgust-low" onclick="clickedDisgustLow()">Low</button>
+                    <button class="medium-btn "id="disgust-medium" onclick="clickedDisgustMedium()">Medium</button>
+                    <button class="high-btn" id="disgust-high" onclick="clickedDisgustHigh()">High</button>
+                </div>
+<label class="switch">
+<input type="checkbox" id="fearSwitch" onclick="fearSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Fear<br>
+<div class="btn-group" id="fearButtons">
+                    <button class="low-btn" id="fear-low" onclick="clickedFearLow()">Low</button>
+                    <button class="medium-btn "id="fear-medium" onclick="clickedFearMedium()">Medium</button>
+                    <button class="high-btn" id="fear-high" onclick="clickedFearHigh()">High</button>
+                </div>
+<label class="switch">
+<input type="checkbox" id="happinessSwitch" onclick="happinessSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Happiness<br>
+<div class="btn-group" id="happinessButtons">
+                    <button class="low-btn" id="happiness-low" onclick="clickedHappinessLow()">Low</button>
+                    <button class="medium-btn "id="happiness-medium" onclick="clickedHappinessMedium()">Medium</button>
+                    <button class="high-btn" id="happiness-high" onclick="clickedHappinessHigh()">High</button>
+                </div>
+<label class="switch">
+<input type="checkbox" id="sadnessSwitch" onclick="sadnessSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Sadness<br>
+<div class="btn-group" id="sadnessButtons">
+                    <button class="low-btn" id="sadness-low" onclick="clickedSadnessLow()">Low</button>
+                    <button class="medium-btn "id="sadness-medium" onclick="clickedSadnessMedium()">Medium</button>
+                    <button class="high-btn" id="sadness-high" onclick="clickedSadnessHigh()">High</button>
+                </div>
+<label class="switch">
+<input type="checkbox" id="surpriseSwitch" onclick="surpriseSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Surprise<br>
+<div class="btn-group" id="surpriseButtons">
+                    <button class="low-btn" id="surprise-low" onclick="clickedSurpriseLow()">Low</button>
+                    <button class="medium-btn "id="surprise-medium" onclick="clickedSurpriseMedium()">Medium</button>
+                    <button class="high-btn" id="surprise-high" onclick="clickedSurpriseHigh()">High</button>
+                </div>
+<label class="switch">
+<input type="checkbox" id="neutralSwitch" onclick="neutralSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Back to Neutral<br>
             </div>
+
+<script>
+function angerSwitchClicked() {
+  var checkBox = document.getElementById("angerSwitch");
+  if (checkBox.checked == true) {
+      document.getElementById("angerButtons").style.display = "block";
+  }
+  else {
+      document.getElementById("angerButtons").style.display = "none";
+  }
+}
+function disgustSwitchClicked() {
+var checkBox = document.getElementById("disgustSwitch");
+if (checkBox.checked == true) {
+  document.getElementById("disgustButtons").style.display = "block";
+} else {
+document.getElementById("disgustButtons").style.display = "none";
+}
+}
+function fearSwitchClicked() {
+var checkBox = document.getElementById("fearSwitch");
+if (checkBox.checked == true) {
+  document.getElementById("fearButtons").style.display = "block";
+} else {
+document.getElementById("fearButtons").style.display = "none";
+}
+}
+function happinessSwitchClicked() {
+var checkBox = document.getElementById("happinessSwitch");
+if (checkBox.checked == true) {
+  document.getElementById("happinessButtons").style.display = "block";
+} else {
+document.getElementById("happinessButtons").style.display = "none";
+}
+}
+function sadnessSwitchClicked() {
+var checkBox = document.getElementById("sadnessSwitch");
+if (checkBox.checked == true) {
+  document.getElementById("sadnessButtons").style.display = "block";
+} else {
+document.getElementById("sadnessButtons").style.display = "none";
+}
+}
+function surpriseSwitchClicked() {
+var checkBox = document.getElementById("surpriseSwitch");
+if (checkBox.checked == true) {
+  document.getElementById("surpriseButtons").style.display = "block";
+} else {
+document.getElementById("surpriseButtons").style.display = "none";
+}
+}
+
+  function clickedAngerLow(){
+      document.getElementById("anger-low").setAttribute("id", "active-low-anger");
+      if( document.getElementById("active-medium-anger") ){
+              document.getElementById("active-medium-anger").setAttribute("id", "anger-medium");
+      }
+      if( document.getElementById("active-high-anger") ){
+              document.getElementById("active-high-anger").setAttribute("id", "anger-high");
+      }
+  }
+  function clickedAngerMedium(){
+      document.getElementById("anger-medium").setAttribute("id", "active-medium-anger");
+      if( document.getElementById("active-low-anger") ){
+              document.getElementById("active-low-anger").setAttribute("id", "anger-low");
+      }
+      if( document.getElementById("active-high-anger") ){
+              document.getElementById("active-high-anger").setAttribute("id", "anger-high");
+      }
+  }
+  function clickedAngerHigh(){
+      document.getElementById("anger-high").setAttribute("id", "active-high-anger");
+      if( document.getElementById("active-medium-anger") ){
+              document.getElementById("active-medium-anger").setAttribute("id", "anger-medium");
+      }
+      if( document.getElementById("active-low-anger") ){
+              document.getElementById("active-low-anger").setAttribute("id", "anger-low");
+      }
+  }
+
+  function clickedDisgustLow(){
+      document.getElementById("disgust-low").setAttribute("id", "active-low-disgust");
+      if( document.getElementById("active-medium-disgust") ){
+              document.getElementById("active-medium-disgust").setAttribute("id", "disgust-medium");
+      }
+      if( document.getElementById("active-high-disgust") ){
+              document.getElementById("active-high-disgust").setAttribute("id", "disgust-high");
+      }
+  }
+  function clickedDisgustMedium(){
+      document.getElementById("disgust-medium").setAttribute("id", "active-medium-disgust");
+      if( document.getElementById("active-low-disgust") ){
+              document.getElementById("active-low-disgust").setAttribute("id", "disgust-low");
+      }
+      if( document.getElementById("active-high-disgust") ){
+              document.getElementById("active-high-disgust").setAttribute("id", "disgust-high");
+      }
+  }
+  function clickedDisgustHigh(){
+      document.getElementById("disgust-high").setAttribute("id", "active-high-disgust");
+      if( document.getElementById("active-medium-disgust") ){
+              document.getElementById("active-medium-disgust").setAttribute("id", "disgust-medium");
+      }
+      if( document.getElementById("active-low-disgust") ){
+              document.getElementById("active-low-disgust").setAttribute("id", "disgust-low");
+      }
+  }
+
+  function clickedFearLow(){
+      document.getElementById("fear-low").setAttribute("id", "active-low-fear");
+      if( document.getElementById("active-medium-fear") ){
+              document.getElementById("active-medium-fear").setAttribute("id", "fear-medium");
+      }
+      if( document.getElementById("active-high-fear") ){
+              document.getElementById("active-high-fear").setAttribute("id", "fear-high");
+      }
+  }
+  function clickedFearMedium(){
+      document.getElementById("fear-medium").setAttribute("id", "active-medium-fear");
+      if( document.getElementById("active-low-fear") ){
+              document.getElementById("active-low-fear").setAttribute("id", "fear-low");
+      }
+      if( document.getElementById("active-high-fear") ){
+              document.getElementById("active-high-fear").setAttribute("id", "fear-high");
+      }
+  }
+  function clickedFearHigh(){
+      document.getElementById("fear-high").setAttribute("id", "active-high-fear");
+      if( document.getElementById("active-medium-fear") ){
+              document.getElementById("active-medium-fear").setAttribute("id", "fear-medium");
+      }
+      if( document.getElementById("active-low-fear") ){
+              document.getElementById("active-low-fear").setAttribute("id", "fear-low");
+      }
+  }
+
+  function clickedHappinessLow(){
+      document.getElementById("happiness-low").setAttribute("id", "active-low-happiness");
+      if( document.getElementById("active-medium-happiness") ){
+              document.getElementById("active-medium-happiness").setAttribute("id", "happiness-medium");
+      }
+      if( document.getElementById("active-high-happiness") ){
+              document.getElementById("active-high-happiness").setAttribute("id", "happiness-high");
+      }
+  }
+  function clickedHappinessMedium(){
+      document.getElementById("happiness-medium").setAttribute("id", "active-medium-happiness");
+      if( document.getElementById("active-low-happiness") ){
+              document.getElementById("active-low-happiness").setAttribute("id", "happiness-low");
+      }
+      if( document.getElementById("active-high-happiness") ){
+              document.getElementById("active-high-happiness").setAttribute("id", "happiness-high");
+      }
+  }
+  function clickedHappinessHigh(){
+      document.getElementById("happiness-high").setAttribute("id", "active-high-happiness");
+      if( document.getElementById("active-medium-happiness") ){
+              document.getElementById("active-medium-happiness").setAttribute("id", "happiness-medium");
+      }
+      if( document.getElementById("active-low-happiness") ){
+              document.getElementById("active-low-happiness").setAttribute("id", "happiness-low");
+      }
+  }
+
+
+    function clickedSadnessLow(){
+        document.getElementById("sadness-low").setAttribute("id", "active-low-sadness");
+        if( document.getElementById("active-medium-sadness") ){
+                document.getElementById("active-medium-sadness").setAttribute("id", "sadness-medium");
+        }
+        if( document.getElementById("active-high-sadness") ){
+                document.getElementById("active-high-sadness").setAttribute("id", "sadness-high");
+        }
+    }
+    function clickedSadnessMedium(){
+        document.getElementById("sadness-medium").setAttribute("id", "active-medium-sadness");
+        if( document.getElementById("active-low-sadness") ){
+                document.getElementById("active-low-sadness").setAttribute("id", "sadness-low");
+        }
+        if( document.getElementById("active-high-sadness") ){
+                document.getElementById("active-high-sadness").setAttribute("id", "sadness-high");
+        }
+    }
+    function clickedSadnessHigh(){
+        document.getElementById("sadness-high").setAttribute("id", "active-high-sadness");
+        if( document.getElementById("active-medium-sadness") ){
+                document.getElementById("active-medium-sadness").setAttribute("id", "sadness-medium");
+        }
+        if( document.getElementById("active-low-sadness") ){
+                document.getElementById("active-low-sadness").setAttribute("id", "sadness-low");
+        }
+    }
+
+    function clickedSurpriseLow(){
+        document.getElementById("surprise-low").setAttribute("id", "active-low-surprise");
+        if( document.getElementById("active-medium-surprise") ){
+                document.getElementById("active-medium-surprise").setAttribute("id", "surprise-medium");
+        }
+        if( document.getElementById("active-high-surprise") ){
+                document.getElementById("active-high-surprise").setAttribute("id", "surprise-high");
+        }
+    }
+    function clickedSurpriseMedium(){
+        document.getElementById("surprise-medium").setAttribute("id", "active-medium-surprise");
+        if( document.getElementById("active-low-surprise") ){
+                document.getElementById("active-low-surprise").setAttribute("id", "surprise-low");
+        }
+        if( document.getElementById("active-high-surprise") ){
+                document.getElementById("active-high-surprise").setAttribute("id", "surprise-high");
+        }
+    }
+    function clickedSurpriseHigh(){
+        document.getElementById("surprise-high").setAttribute("id", "active-high-surprise");
+        if( document.getElementById("active-medium-surprise") ){
+                document.getElementById("active-medium-surprise").setAttribute("id", "surprise-medium");
+        }
+        if( document.getElementById("active-low-surprise") ){
+                document.getElementById("active-low-surprise").setAttribute("id", "surprise-low");
+        }
+    }
+  function clickedSensLow(){
+      document.getElementById("sens-low").setAttribute("id", "active-low");
+      if( document.getElementById("active-medium") ){
+              document.getElementById("active-medium").setAttribute("id", "sens-medium");
+      }
+      if( document.getElementById("active-high") ){
+              document.getElementById("active-high").setAttribute("id", "sens-high");
+      }
+  }
+  function clickedSensMedium(){
+      document.getElementById("sens-medium").setAttribute("id", "active-medium");
+      if( document.getElementById("active-low") ){
+              document.getElementById("active-low").setAttribute("id", "sens-low");
+      }
+      if( document.getElementById("active-high") ){
+              document.getElementById("active-high").setAttribute("id", "sens-high");
+      }
+  }
+  function clickedSensHigh(){
+      document.getElementById("sens-high").setAttribute("id", "active-high");
+      if( document.getElementById("active-medium") ){
+              document.getElementById("active-medium").setAttribute("id", "sens-medium");
+      }
+      if( document.getElementById("active-low") ){
+              document.getElementById("active-low").setAttribute("id", "sens-low");
+      }
+  }
+
+
+</script>
 
             <div class="tab">
-              <button class="tablinks" onclick="openTab(event, 'Sensitivity')">Sensitivity</button>
+              <button class="tablinks" onclick="openTab(event, 'Sensitivity')">Gaze</button>
             </div>
-              <div id="Sensitivity" class="tabcontent">
-                  <h3>Emotion Sensitivity</h3>
-                  <div class="btn-group">
-                    <button>Low</button>
-                    <button>Medium</button>
-                    <button>High</button>
-                </div>
-                  <h3>Gaze Sensitivity</h3>
-                  <div class="btn-group">
-                    <button>Low</button>
-                    <button>Medium</button>
-                    <button>High</button>
+
+            <div id="Sensitivity" class="tabcontent">Gaze Sensivity<br>
+              <div class="btn-group" id="gazeButtons">
+                    <button class="sens-btn" id="sens-low" onclick="clickedSensLow()">Low</button>
+                    <button class="sens-btn" id="sens-medium" onclick="clickedSensMedium()">Medium</button>
+                    <button class="sens-btn" id="sens-high" onclick="clickedSensHigh()">High</button>
                 </div>
               </div>
           </div>
@@ -496,7 +862,6 @@
         </div>
         <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
       </div>
-
       <script>
       function autocomplete(inp, arr) {
         /*the autocomplete function takes two arguments,
