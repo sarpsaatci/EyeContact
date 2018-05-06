@@ -454,10 +454,10 @@ function getSettings(email, ws)
         return false;
       }
       if(user.settings) {
-        ws.send({
+        ws.send(JSON.stringify({
           id: 'getSettings',
           settings: user.settings
-        });
+        }));
 
         writeSettingsInput(user.settings);
 
