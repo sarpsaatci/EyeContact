@@ -377,22 +377,22 @@ wss.on('connection', function(ws) {
 
 function writeSettingsInput(settings) {
   try {
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$fear ' +  settings.emotion_fear);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$disgust ' +  settings.emotion_disgust);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$happiness ' +  settings.emotion_happiness);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$sadness ' +  settings.emotion_sadness);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$surprised ' +  settings.emotion_surprised);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$anger ' +  settings.emotion_anger);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$neutral ' +  settings.emotion_neutral);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$gaze ' +  settings.emotion_gaze);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$fear_sensivity ' +  settings.emotion_fear_sensivity);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$disgust_sensivity ' +  settings.emotion_disgust_sensivity);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$happiness_sensivity ' +  settings.emotion_happiness_sensivity);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$sadness_sensivity ' +  settings.emotion_sadness_sensivity);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$surprised_sensivity ' +  settings.emotion_surprised_sensivity);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$anger_sensivity ' +  settings.emotion_anger_sensivity);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$happiness_sensivity ' +  settings.emotion_happiness_sensivity);
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$gaze_sensivity ' +  settings.gaze_sensivity);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$fear ' +  settings.emotion_fear + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$disgust ' +  settings.emotion_disgust + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$happiness ' +  settings.emotion_happiness + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$sadness ' +  settings.emotion_sadness + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$surprised ' +  settings.emotion_surprised + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$anger ' +  settings.emotion_anger + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$neutral ' +  settings.emotion_neutral + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$gaze ' +  settings.emotion_gaze + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$fear_sensivity ' +  settings.emotion_fear_sensivity + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$disgust_sensivity ' +  settings.emotion_disgust_sensivity + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$happiness_sensivity ' +  settings.emotion_happiness_sensivity + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$sadness_sensivity ' +  settings.emotion_sadness_sensivity + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$surprised_sensivity ' +  settings.emotion_surprised_sensivity + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$anger_sensivity ' +  settings.emotion_anger_sensivity + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$happiness_sensivity ' +  settings.emotion_happiness_sensivity + '\n');
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$gaze_sensivity ' +  settings.gaze_sensivity + '\n');
   } catch (err) {
     /* Handle the error */
     console.log('error writing inputFile: ' + err);
