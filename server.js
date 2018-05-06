@@ -335,7 +335,7 @@ wss.on('connection', function(ws) {
               }));
               if(incImg == 1)
               {
-                // of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '/root/OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
+                of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '/root/OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
 
                 // of.stdout.on('data', function(data) {
                 //   console.log('--------- ' + data);
