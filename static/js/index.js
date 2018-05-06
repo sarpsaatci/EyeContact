@@ -893,6 +893,7 @@ function stop(message) {
 
   document.getElementById('activePage').style.display = "none";
   document.getElementById('callPage').style.display = "block";
+  document.getElementById('myInput').value = "";
   speechRecognize();
 
   window.speechSynthesis.speak(new SpeechSynthesisUtterance('call ended'));
