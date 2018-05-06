@@ -288,7 +288,7 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-            updateCharAnger(val);
+            updateChartAnger(val);
         }
       }
       else if(parsedMessage.data.includes('surprised')) {
