@@ -19,7 +19,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   	<link rel="stylesheet" type="text/css" href="style.css">
 
-
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
@@ -781,10 +781,15 @@
       <script>
 
       var happinessArr = []; // dataPoints
+      var angerArr = [];
+      var surprisedArr = [];
+      var sadnessArr = [];
+      var disgustArr = [];
+      var fearArr = [];
 
       var chart = new CanvasJS.Chart("chartContainer", {
         title :{
-          text: "Dynamic Data"
+          text: "Emotions"
         },
         axisY: {
           includeZero: false
@@ -792,6 +797,26 @@
         data: [{
           type: "line",
           dataPoints: happinessArr
+        },
+        {
+          type: "line",
+          dataPoints: angerArr
+        },
+        {
+          type: "line",
+          dataPoints: surprisedArr
+        },
+        {
+          type: "line",
+          dataPoints: sadnessArr
+        },
+        {
+          type: "line",
+          dataPoints: disgustArr
+        },
+        {
+          type: "line",
+          dataPoints: fearArr
         }]
       });
 
@@ -800,7 +825,7 @@
       var updateInterval = 1000;
       var dataLength = 20; // number of dataPoints visible at any point
 
-      function updateChart(val) {
+      function updateChartHappiness(val) {
 
         // count = count || 1;
 
@@ -813,6 +838,96 @@
 
         if (happinessArr.length > dataLength) {
           happinessArr.shift();
+        }
+
+        chart.render();
+      }
+
+      function updateChartAnger(val) {
+
+        // count = count || 1;
+
+        yVal = val;
+        angerArr.push({
+          x: xVal,
+          y: yVal
+        });
+        xVal++;
+
+        if (angerArr.length > dataLength) {
+          angerArr.shift();
+        }
+
+        chart.render();
+      }
+
+      function updateChartSurprised1(val) {
+
+        // count = count || 1;
+
+        yVal = val;
+        surprisedArr.push({
+          x: xVal,
+          y: yVal
+        });
+        xVal++;
+
+        if (surprisedArr.length > dataLength) {
+          surprisedArr.shift();
+        }
+
+        chart.render();
+      }
+
+      function updateChartSadness(val) {
+
+        // count = count || 1;
+
+        yVal = val;
+        sadnessArr.push({
+          x: xVal,
+          y: yVal
+        });
+        xVal++;
+
+        if (sadnessArr.length > dataLength) {
+          sadnessArr.shift();
+        }
+
+        chart.render();
+      }
+
+      function updateChartDisgust(val) {
+
+        // count = count || 1;
+
+        yVal = val;
+        disgustArr.push({
+          x: xVal,
+          y: yVal
+        });
+        xVal++;
+
+        if (disgustArr.length > dataLength) {
+          disgustArr.shift();
+        }
+
+        chart.render();
+      }
+
+      function updateChartFear(val) {
+
+        // count = count || 1;
+
+        yVal = val;
+        fearArr.push({
+          x: xVal,
+          y: yVal
+        });
+        xVal++;
+
+        if (fearArr.length > dataLength) {
+          fearArr.shift();
         }
 
         chart.render();

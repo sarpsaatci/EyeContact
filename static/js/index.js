@@ -281,7 +281,42 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-            updateChart(val);
+            updateChartHappiness(val);
+        }
+      }
+      else if(parsedMessage.data.includes('anger')) {
+        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        val = parseFloat(val);
+        if(val) {
+            updateCharAnger(val);
+        }
+      }
+      else if(parsedMessage.data.includes('surprised')) {
+        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        val = parseFloat(val);
+        if(val) {
+            updateChartSurprised(val);
+        }
+      }
+      else if(parsedMessage.data.includes('sadness')) {
+        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        val = parseFloat(val);
+        if(val) {
+            updateChartSadness(val);
+        }
+      }
+      else if(parsedMessage.data.includes('disgust')) {
+        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        val = parseFloat(val);
+        if(val) {
+            updateChartDisgust(val);
+        }
+      }
+      else if(parsedMessage.data.includes('fear')) {
+        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        val = parseFloat(val);
+        if(val) {
+            updateChartFear(val);
         }
       }
     }
