@@ -263,21 +263,22 @@ ws.onmessage = function(message) {
     break;
   case 'openFace':
     console.log(parsedMessage.data);
-    if(parsedMessage.data.includes("-")) {
-      let emoUtter = new SpeechSynthesisUtterance(parsedMessage.data.substring(parsedMessage.data.indexOf('$')+1, parsedMessage.data.indexOf('-')));
-      chime = document.getElementById('chimeAudio');
-      chime.play();
-
-      emoUtter.onend = function() {
-          document.getElementById('videoOutput').volume = 1.0;
-      };
-      emoUtter.onstart = function() {
-        document.getElementById('videoOutput').volume = 0.4;
-      };
-
-      synth.speak(emoUtter);
+    if(parsedMessage.data.includes("$")) {
 
       if(parsedMessage.data.includes('happiness')) {
+        let emoUtter = new SpeechSynthesisUtterance('happy');
+        chime = document.getElementById('chimeAudio');
+        chime.play();
+
+        synth.speak(emoUtter);
+
+        emoUtter.onend = function() {
+            document.getElementById('videoOutput').volume = 1.0;
+        };
+        emoUtter.onstart = function() {
+          document.getElementById('videoOutput').volume = 0.4;
+        };
+
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
@@ -285,6 +286,19 @@ ws.onmessage = function(message) {
         }
       }
       else if(parsedMessage.data.includes('anger')) {
+        let emoUtter = new SpeechSynthesisUtterance('angry');
+        chime = document.getElementById('chimeAudio');
+        chime.play();
+
+        synth.speak(emoUtter);
+
+        emoUtter.onend = function() {
+            document.getElementById('videoOutput').volume = 1.0;
+        };
+        emoUtter.onstart = function() {
+          document.getElementById('videoOutput').volume = 0.4;
+        };
+
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
@@ -292,6 +306,19 @@ ws.onmessage = function(message) {
         }
       }
       else if(parsedMessage.data.includes('surprised')) {
+        let emoUtter = new SpeechSynthesisUtterance('surprised');
+        chime = document.getElementById('chimeAudio');
+        chime.play();
+
+        synth.speak(emoUtter);
+
+        emoUtter.onend = function() {
+            document.getElementById('videoOutput').volume = 1.0;
+        };
+        emoUtter.onstart = function() {
+          document.getElementById('videoOutput').volume = 0.4;
+        };
+
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
@@ -299,6 +326,19 @@ ws.onmessage = function(message) {
         }
       }
       else if(parsedMessage.data.includes('sadness')) {
+        let emoUtter = new SpeechSynthesisUtterance('sad');
+        chime = document.getElementById('chimeAudio');
+        chime.play();
+
+        synth.speak(emoUtter);
+
+        emoUtter.onend = function() {
+            document.getElementById('videoOutput').volume = 1.0;
+        };
+        emoUtter.onstart = function() {
+          document.getElementById('videoOutput').volume = 0.4;
+        };
+
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
@@ -306,6 +346,19 @@ ws.onmessage = function(message) {
         }
       }
       else if(parsedMessage.data.includes('disgust')) {
+        let emoUtter = new SpeechSynthesisUtterance('disgust');
+        chime = document.getElementById('chimeAudio');
+        chime.play();
+
+        synth.speak(emoUtter);
+
+        emoUtter.onend = function() {
+            document.getElementById('videoOutput').volume = 1.0;
+        };
+        emoUtter.onstart = function() {
+          document.getElementById('videoOutput').volume = 0.4;
+        };
+
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
@@ -313,12 +366,60 @@ ws.onmessage = function(message) {
         }
       }
       else if(parsedMessage.data.includes('fear')) {
+        let emoUtter = new SpeechSynthesisUtterance('fear');
+        chime = document.getElementById('chimeAudio');
+        chime.play();
+
+        synth.speak(emoUtter);
+
+        emoUtter.onend = function() {
+            document.getElementById('videoOutput').volume = 1.0;
+        };
+        emoUtter.onstart = function() {
+          document.getElementById('videoOutput').volume = 0.4;
+        };
+
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
             updateChartFear(val);
         }
       }
+
+      else if(parsedMessage.data.includes('left')) {
+        let emoUtter = new SpeechSynthesisUtterance('gaze left');
+        chime = document.getElementById('chimeAudio');
+        chime.play();
+
+        synth.speak(emoUtter);
+
+        emoUtter.onend = function() {
+            document.getElementById('videoOutput').volume = 1.0;
+        };
+        emoUtter.onstart = function() {
+          document.getElementById('videoOutput').volume = 0.4;
+        };
+
+        renderGauge(-7);
+      }
+
+      else if(parsedMessage.data.includes('right')) {
+        let emoUtter = new SpeechSynthesisUtterance('gaze righr');
+        chime = document.getElementById('chimeAudio');
+        chime.play();
+
+        synth.speak(emoUtter);
+
+        emoUtter.onend = function() {
+            document.getElementById('videoOutput').volume = 1.0;
+        };
+        emoUtter.onstart = function() {
+          document.getElementById('videoOutput').volume = 0.4;
+        };
+
+        renderGauge(7);
+      }
+
     }
     // dummyFace(parsedMessage.data);
     break;

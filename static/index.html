@@ -43,6 +43,22 @@
 
     <script src="bower_components/kurento-utils/js/kurento-utils.js"></script>
 
+
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script>
+      zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+      ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+    </script>
+    <style>
+      html,
+      body,
+      #myChart {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+
     <script src="js/index.js"></script>
     <title>EyeContact</title>
 
@@ -776,6 +792,38 @@
 
       <div id="chartContainer" class="col-lg-12" style="height: 370px; width:100%; display: none"></div>
 
+      <div id='myChart'></div>
+      <script>
+        var myConfig1 = {
+          "type": "gauge",
+          "scale-r": {
+            "aperture": 200,
+            "values": "-10:10:10"
+          },
+          "series": [{
+            "values": [0]
+          }]
+        };
+
+
+        zingchart.render({
+          id: 'myChart',
+          data: myConfig1,
+          height: "100%",
+          width: "100%"
+        });
+
+        function renderGauge(val) {
+          myConfig1.series[0].values[0] = val;
+          zingchart.render({
+            id: 'myChart',
+            data: myConfig1,
+            height: "100%",
+            width: "100%"
+          });
+        }
+      </script>
+
       <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
       <script>
@@ -935,6 +983,10 @@
 
       // updateChart(dataLength);
       // setInterval(function(){updateChart()}, updateInterval);
+
+      </script>
+
+      <script>
 
       </script>
 
