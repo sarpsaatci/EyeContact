@@ -43,23 +43,25 @@ let autoCompleteItemCount = 0;
 
 var uterance = new SpeechSynthesisUtterance('please say the contact name to call');
 
+settingsDefault = true;
 
 var settings = {
   id: 'settings',
   emotion_happiness: true,
-  emotion_happiness_sensitivity: 'medium',
+  emotion_happiness_sensivity: 'medium',
   emotion_sadness: true,
-  emotion_sadness_sensitivity: 'medium',
+  emotion_sadness_sensivity: 'medium',
   emotion_fear: true,
-  emotion_fear_sensitivity: 'medium',
+  emotion_fear_sensivity: 'medium',
   emotion_disgust: true,
-  emotion_disgust_sensitivity: 'medium',
+  emotion_disgust_sensivity: 'medium',
   emotion_surprised: true,
-  emotion_surprised_sensitivity: 'medium',
+  emotion_surprised_sensivity: 'medium',
   emotion_angry: true,
-  emotion_angry_sensitivity: 'medium',
+  emotion_angry_sensivity: 'medium',
+  emotion_neutral: 'true'
   gaze: 'true',
-  gaze_sensitivity: 'medium'
+  gaze_sensivity: 'medium'
 }
 
 function captureVideoFrame(video, format, path) {
@@ -456,13 +458,13 @@ ws.onmessage = function(message) {
             updateChartFear(val);
         }
       }
-
     }
-    // dummyFace(parsedMessage.data);
     break;
-  case 'setSettings':
+  case 'getSettings':
+    settingsDefault = false;
     console.log(parsedMessage);
     settings = parsedMessage.settings;
+    changeSettingsMenu();
     break;
   case 'speechToNum':
     console.log(parsedMessage.num);
@@ -478,8 +480,13 @@ function applySettings(newSettings)
   sendMessage({
     id: 'applySettings',
     user: currentUser,
+    contacts: contacts,
     settings: newSettings
   });
+}
+
+function changeSettingsMenu() {
+
 }
 
 function speakAutocompleteItems(items)
@@ -618,10 +625,10 @@ function manageUser(userData)
     }
   });
 
-  // sendMessage({
-  //   id: 'getSettings',
-  //   email: currentUser.email.$t
-  // });
+  sendMessage({
+    id: 'getSettings',
+    email: currentUser.email.$t
+  });
 
   synth = window.speechSynthesis;
   let utterThis = new SpeechSynthesisUtterance("Hello" + currentUser.name.$t.substr(0, currentUser.name.$t.indexOf(' ')) + ", welcome to EyeContact");

@@ -353,6 +353,10 @@ wss.on('connection', function(ws) {
           getSettings(message.email, ws);
           break;
 
+        case: 'applySettings':
+          applySettings(message.user, message.contacts, message.settings, ws);
+          break;
+
         case 'speechToNum':
           ws.send(JSON.stringify({
             id: 'speechToNum',
@@ -371,6 +375,68 @@ wss.on('connection', function(ws) {
     });
 });
 
+function writeSettingsInput(settings) {
+  try {
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$fear ' +  settings.emotion_fear);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$disgust ' +  settings.emotion_disgust);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$happiness ' +  settings.emotion_happiness);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$sadness ' +  settings.emotion_sadness);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$surprised ' +  settings.emotion_surprised);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$anger ' +  settings.emotion_anger);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$neutral ' +  settings.emotion_neutral);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$gaze ' +  settings.emotion_gaze);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$fear_sensivity ' +  settings.emotion_fear_sensivity);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$disgust_sensivity ' +  settings.emotion_disgust_sensivity);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$happiness_sensivity ' +  settings.emotion_happiness_sensivity);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$sadness_sensivity ' +  settings.emotion_sadness_sensivity);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$surprised_sensivity ' +  settings.emotion_surprised_sensivity);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$anger_sensivity ' +  settings.emotion_anger_sensivity);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$happiness_sensivity ' +  settings.emotion_happiness_sensivity);
+    fs.appendFileSync('../OpenFace/inputFile.txt', '$gaze_sensivity ' +  settings.gaze_sensivity);
+  } catch (err) {
+    /* Handle the error */
+    console.log('error writing inputFile: ' + err);
+  }
+}
+
+function applySettings(currentUser, contacts, newSettings, ws) {
+
+
+  mongoose.connect('mongodb://eyecontact:123abcd1@ds239029.mlab.com:39029/eyecontact');
+
+  var db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'connection error:'));
+
+  let set = null;
+
+  db.once('open', function() {
+    var newUser = new User({
+      name: currentuser.name.$t,
+      email: currentUser.email.$t,
+      contacts: contacts,
+      settings: newSettings
+    });
+
+    var editUser = {};
+    editUser = Object.assign(editUser, newUser._doc);
+    delete editUser._id;
+
+    User.findOneAndUpdate({email: newUser.email}, editUser, {upsert: true}, function(error, result) {
+      if(error) {
+        if(error.code == 11000) {
+          console.log("User" + newUser.name + "already exists.");
+        }
+        else {
+          console.log(error);
+        }
+      }
+    });
+
+  });
+
+  writeSettingsInput(newSettings);
+}
+
 function getSettings(email, ws)
 {
 
@@ -387,11 +453,19 @@ function getSettings(email, ws)
         console.log(err);
         return false;
       }
-      ws.send(JSON.stringify({
-        id: 'setSettings',
-        email: email,
-        settings: user.settings
-      }))
+      if(user.settings) {
+        ws.send({
+          id: 'getSettings',
+          settings: user.settings
+        });
+
+        writeSettingsInput(user.settings);
+
+        return true;
+      }
+      else {
+        return false;
+      }
     });
   });
 }
@@ -598,8 +672,6 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
 
     follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
 
-    let previous = null;
-
     follower.on('line', function(filename, line) {
       console.log('OpenFace: '+line);
       if(line.includes('$modelLoaded'))
@@ -715,6 +787,7 @@ function register(id, userName, contacts, email, settings, ws, callback) {
         if(error) {
           if(error.code == 11000) {
             console.log("User" + newUser.name + "already exists.");
+            // getSettings(newUser.email, ws);
           }
           else {
             console.log(error);
@@ -729,7 +802,6 @@ function register(id, userName, contacts, email, settings, ws, callback) {
     } catch(exception) {
         onError(exception);
     }
-
   });
 }
 
