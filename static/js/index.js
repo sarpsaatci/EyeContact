@@ -265,7 +265,23 @@ ws.onmessage = function(message) {
     console.log(parsedMessage.data);
     if(parsedMessage.data.includes("$")) {
 
-      if(parsedMessage.data.includes('happiness')) {
+      if(parsedMessage.data.includes('color')) {
+        let emoUtter = new SpeechSynthesisUtterance('shirt color is ' + parsedMessage.data.substr(parsedMessage.data.indexOf(':')));
+        chime = document.getElementById('chimeAudio');
+        chime.play();
+
+        synth.speak(emoUtter);
+
+        emoUtter.onend = function() {
+            document.getElementById('videoOutput').volume = 1.0;
+        };
+        emoUtter.onstart = function() {
+          document.getElementById('videoOutput').volume = 0.4;
+        };
+
+      }
+
+      else if(parsedMessage.data.includes('happiness')) {
         let emoUtter = new SpeechSynthesisUtterance('happy');
         chime = document.getElementById('chimeAudio');
         chime.play();
@@ -439,23 +455,6 @@ ws.onmessage = function(message) {
         if(val) {
             updateChartFear(val);
         }
-      }
-
-
-      if(parsedMessage.data.includes('right')) {
-        let emoUtter = new SpeechSynthesisUtterance('shirt color is ' + parsedMessage.data.substr(parsedMessage.data.indexOf(':')));
-        chime = document.getElementById('chimeAudio');
-        chime.play();
-
-        synth.speak(emoUtter);
-
-        emoUtter.onend = function() {
-            document.getElementById('videoOutput').volume = 1.0;
-        };
-        emoUtter.onstart = function() {
-          document.getElementById('videoOutput').volume = 0.4;
-        };
-
       }
 
     }
