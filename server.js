@@ -411,7 +411,7 @@ function applySettings(currentUser, contacts, newSettings, ws) {
 
   db.once('open', function() {
     var newUser = new User({
-      name: currentuser.name.$t,
+      name: currentUser.name.$t,
       email: currentUser.email.$t,
       contacts: contacts,
       settings: newSettings
