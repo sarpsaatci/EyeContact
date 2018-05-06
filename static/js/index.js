@@ -420,6 +420,28 @@ ws.onmessage = function(message) {
         renderGauge(7);
       }
 
+      else if(parsedMessage.data.includes('neutral')) {
+        let emoUtter = new SpeechSynthesisUtterance('neutral');
+        chime = document.getElementById('chimeAudio');
+        chime.play();
+
+        synth.speak(emoUtter);
+
+        emoUtter.onend = function() {
+            document.getElementById('videoOutput').volume = 1.0;
+        };
+        emoUtter.onstart = function() {
+          document.getElementById('videoOutput').volume = 0.4;
+        };
+
+        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        val = parseFloat(val);
+        if(val) {
+            updateChartFear(val);
+        }
+      }
+
+
       if(parsedMessage.data.includes('right')) {
         let emoUtter = new SpeechSynthesisUtterance('shirt color is ' + parsedMessage.data.substr(parsedMessage.data.indexOf(':')));
         chime = document.getElementById('chimeAudio');
