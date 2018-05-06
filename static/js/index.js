@@ -266,7 +266,7 @@ ws.onmessage = function(message) {
     if(parsedMessage.data.includes("$")) {
 
       if(parsedMessage.data.includes('color')) {
-        let emoUtter = new SpeechSynthesisUtterance('shirt color is ' + parsedMessage.data.substr(parsedMessage.data.indexOf(':')));
+        let emoUtter = new SpeechSynthesisUtterance('shirt color is ' + parsedMessage.data.substr(parsedMessage.data.indexOf(';')));
         chime = document.getElementById('chimeAudio');
         chime.play();
 
