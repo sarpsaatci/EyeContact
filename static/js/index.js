@@ -891,12 +891,13 @@ function stop(message) {
 		}
 	}
 
+  document.getElementById('activePage').style.display = "none";
+  document.getElementById('callPage').style.display = "block";
+  speechRecognize();
 
   window.speechSynthesis.speak(new SpeechSynthesisUtterance('call ended'));
-
-  var element = document.getElementById('output');
-  outImg.src = "";
 	hideSpinner(videoInput, videoOutput);
+
 }
 
 function onIceCandidate(candidate) {
