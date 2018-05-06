@@ -57,8 +57,8 @@ var settings = {
   emotion_disgust_sensivity: 'medium',
   emotion_surprised: true,
   emotion_surprised_sensivity: 'medium',
-  emotion_angry: true,
-  emotion_angry_sensivity: 'medium',
+  emotion_anger: true,
+  emotion_anger_sensivity: 'medium',
   emotion_neutral: 'true',
   gaze: 'true',
   gaze_sensivity: 'medium'
