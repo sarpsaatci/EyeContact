@@ -353,7 +353,7 @@ wss.on('connection', function(ws) {
           getSettings(message.email, ws);
           break;
 
-        case: 'applySettings':
+        case 'applySettings':
           applySettings(message.user, message.contacts, message.settings, ws);
           break;
 
