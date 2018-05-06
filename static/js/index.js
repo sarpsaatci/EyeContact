@@ -404,7 +404,7 @@ ws.onmessage = function(message) {
       }
 
       else if(parsedMessage.data.includes('right')) {
-        let emoUtter = new SpeechSynthesisUtterance('gaze righr');
+        let emoUtter = new SpeechSynthesisUtterance('gaze right');
         chime = document.getElementById('chimeAudio');
         chime.play();
 
@@ -418,6 +418,22 @@ ws.onmessage = function(message) {
         };
 
         renderGauge(7);
+      }
+
+      if(parsedMessage.data.includes('right')) {
+        let emoUtter = new SpeechSynthesisUtterance('shirt color is ' + parsedMessage.data.substr(parsedMessage.data.indexOf(':')));
+        chime = document.getElementById('chimeAudio');
+        chime.play();
+
+        synth.speak(emoUtter);
+
+        emoUtter.onend = function() {
+            document.getElementById('videoOutput').volume = 1.0;
+        };
+        emoUtter.onstart = function() {
+          document.getElementById('videoOutput').volume = 0.4;
+        };
+
       }
 
     }
