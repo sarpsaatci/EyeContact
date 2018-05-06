@@ -492,7 +492,7 @@ input:checked + .slider:before {
 
       <script>
       function openNav() {
-          document.getElementById("mySidenav").style.width = "225px";
+          document.getElementById("mySidenav").style.width = "240px";
           document.getElementById("main").style.marginLeft = "250px";
           document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
       }
@@ -514,7 +514,7 @@ input:checked + .slider:before {
             </div>
 
             <div id="Emotions" class="tabcontent">
-<!-- <label class="switch">
+<label class="switch">
 <input type="checkbox" id="angerSwitch" onclick="angerSwitchClicked();" checked>
 <span class="slider round"></span>
 </label>
@@ -523,7 +523,7 @@ Anger<br>
                     <button class="low-btn" id="anger-low" onclick="clickedAngerLow()">Low</button>
                     <button class="medium-btn" id="anger-medium" onclick="clickedAngerMedium()">Medium</button>
                     <button class="high-btn" id="anger-high" onclick="clickedAngerHigh()">High</button>
-                </div> -->
+                </div>
 <label class="switch">
 <input type="checkbox" id="disgustSwitch" onclick="disgustSwitchClicked();" checked>
 <span class="slider round"></span>
@@ -580,6 +580,18 @@ Surprise<br>
 </label>
 Back to Neutral<br>
             </div>
+
+            <div class="tab">
+              <button class="tablinks" onclick="openTab(event, 'Sensitivity')">Gaze</button>
+            </div>
+
+            <div id="Sensitivity" class="tabcontent">Gaze Sensivity<br>
+              <div class="btn-group" id="gazeButtons">
+                    <button class="sens-btn" id="sens-low" onclick="clickedSensLow()">Low</button>
+                    <button class="sens-btn" id="sens-medium" onclick="clickedSensMedium()">Medium</button>
+                    <button class="sens-btn" id="sens-high" onclick="clickedSensHigh()">High</button>
+                </div>
+              </div>
 
 <script>
 function angerSwitchClicked() {
@@ -831,17 +843,7 @@ document.getElementById("surpriseButtons").style.display = "none";
 
 </script>
 
-            <div class="tab">
-              <button class="tablinks" onclick="openTab(event, 'Sensitivity')">Gaze</button>
-            </div>
 
-            <div id="Sensitivity" class="tabcontent">Gaze Sensivity<br>
-              <div class="btn-group" id="gazeButtons">
-                    <button class="sens-btn" id="sens-low" onclick="clickedSensLow()">Low</button>
-                    <button class="sens-btn" id="sens-medium" onclick="clickedSensMedium()">Medium</button>
-                    <button class="sens-btn" id="sens-high" onclick="clickedSensHigh()">High</button>
-                </div>
-              </div>
           </div>
 
           <div id="main">
