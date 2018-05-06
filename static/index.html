@@ -524,13 +524,11 @@ Anger<br>
                     <button class="medium-btn" id="anger-medium" onclick="clickedAngerMedium()">Medium</button>
                     <button class="high-btn" id="anger-high" onclick="clickedAngerHigh()">High</button>
                 </div>
-<div>
-  <label class="switch">
-  <input type="checkbox" id="disgustSwitch" onclick="disgustSwitchClicked();" checked>
-  <span class="slider round"></span>
-  </label>
-  Disgust<br>
-</div>
+<label class="switch">
+<input type="checkbox" id="disgustSwitch" onclick="disgustSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Disgust<br>
 <div class="btn-group" id="disgustButtons">
                     <button class="low-btn" id="disgust-low" onclick="clickedDisgustLow()">Low</button>
                     <button class="medium-btn "id="disgust-medium" onclick="clickedDisgustMedium()">Medium</button>
@@ -587,7 +585,12 @@ Back to Neutral<br>
               <button class="tablinks" onclick="openTab(event, 'Sensitivity')">Gaze</button>
             </div>
 
-            <div id="Sensitivity" class="tabcontent">Gaze Sensivity<br>
+            <div id="Sensitivity" class="tabcontent">
+              <label class="switch">
+              <input type="checkbox" id="gazeSwitch" onclick="gazeSwitchClicked();" checked>
+              <span class="slider round"></span>
+              </label>
+              Gaze Sensivity<br>
               <div class="btn-group" id="gazeButtons">
                     <button class="sens-btn" id="sens-low" onclick="clickedSensLow()">Low</button>
                     <button class="sens-btn" id="sens-medium" onclick="clickedSensMedium()">Medium</button>
@@ -600,50 +603,83 @@ function angerSwitchClicked() {
   var checkBox = document.getElementById("angerSwitch");
   if (checkBox.checked == true) {
       document.getElementById("angerButtons").style.display = "block";
+      settings.emotion_anger = 'true';
   }
   else {
       document.getElementById("angerButtons").style.display = "none";
+      settings.emotion_anger = 'false';
   }
 }
 function disgustSwitchClicked() {
 var checkBox = document.getElementById("disgustSwitch");
 if (checkBox.checked == true) {
   document.getElementById("disgustButtons").style.display = "block";
+  settings.emotion_disgust = 'true';
 } else {
 document.getElementById("disgustButtons").style.display = "none";
+settings.emotion_anger = 'false';
 }
 }
 function fearSwitchClicked() {
 var checkBox = document.getElementById("fearSwitch");
 if (checkBox.checked == true) {
   document.getElementById("fearButtons").style.display = "block";
+  settings.emotion_fear = 'true';
 } else {
 document.getElementById("fearButtons").style.display = "none";
+settings.emotion_fear = 'true';
 }
 }
 function happinessSwitchClicked() {
 var checkBox = document.getElementById("happinessSwitch");
 if (checkBox.checked == true) {
   document.getElementById("happinessButtons").style.display = "block";
+  settings.emotion_happiness = 'true';
 } else {
 document.getElementById("happinessButtons").style.display = "none";
+settings.emotion_happiness = 'false';
 }
 }
 function sadnessSwitchClicked() {
 var checkBox = document.getElementById("sadnessSwitch");
 if (checkBox.checked == true) {
   document.getElementById("sadnessButtons").style.display = "block";
+  settings.emotion_sadness = 'true';
 } else {
 document.getElementById("sadnessButtons").style.display = "none";
+settings.emotion_sadness = 'false';
 }
 }
 function surpriseSwitchClicked() {
 var checkBox = document.getElementById("surpriseSwitch");
 if (checkBox.checked == true) {
   document.getElementById("surpriseButtons").style.display = "block";
+  settings.emotion_surprised = 'true';
 } else {
 document.getElementById("surpriseButtons").style.display = "none";
+settings.emotion_surprised = 'false';
 }
+}
+
+function neutralSwitchClicked() {
+  var checkBox = document.getElementById("surpriseSwitch");
+  if (checkBox.checked == true) {
+    settings.emotion_neutral = 'true';
+  }
+  else {
+    settings.emotion_neutral = 'false';
+  }
+}
+function gazeSwitchClicked() {
+  var checkBox = document.getElementById("gazeSwitch");
+  if (checkBox.checked == true) {
+      document.getElementById("gazeButtons").style.display = "block";
+      settings.gaze = 'true';
+  }
+  else {
+      document.getElementById("gazeButtons").style.display = "none";
+      settings.gaze = 'false';
+  }
 }
 
   function clickedAngerLow(){
@@ -654,6 +690,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-high-anger") ){
               document.getElementById("active-high-anger").setAttribute("id", "anger-high");
       }
+      settings.emotion_anger_sensivity = 'low';
   }
   function clickedAngerMedium(){
       document.getElementById("anger-medium").setAttribute("id", "active-medium-anger");
@@ -663,6 +700,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-high-anger") ){
               document.getElementById("active-high-anger").setAttribute("id", "anger-high");
       }
+      settings.emotion_anger_sensivity = 'medium';
   }
   function clickedAngerHigh(){
       document.getElementById("anger-high").setAttribute("id", "active-high-anger");
@@ -672,6 +710,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-low-anger") ){
               document.getElementById("active-low-anger").setAttribute("id", "anger-low");
       }
+      settings.emotion_anger_sensivity = 'high';
   }
 
   function clickedDisgustLow(){
@@ -682,6 +721,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-high-disgust") ){
               document.getElementById("active-high-disgust").setAttribute("id", "disgust-high");
       }
+      settings.emotion_disgust_sensivity = 'low';
   }
   function clickedDisgustMedium(){
       document.getElementById("disgust-medium").setAttribute("id", "active-medium-disgust");
@@ -691,6 +731,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-high-disgust") ){
               document.getElementById("active-high-disgust").setAttribute("id", "disgust-high");
       }
+      settings.emotion_disgust_sensivity = 'medium';
   }
   function clickedDisgustHigh(){
       document.getElementById("disgust-high").setAttribute("id", "active-high-disgust");
@@ -700,6 +741,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-low-disgust") ){
               document.getElementById("active-low-disgust").setAttribute("id", "disgust-low");
       }
+      settings.emotion_disgust_sensivity = 'high';
   }
 
   function clickedFearLow(){
@@ -710,6 +752,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-high-fear") ){
               document.getElementById("active-high-fear").setAttribute("id", "fear-high");
       }
+      settings.emotion_fear_sensivity = 'low';
   }
   function clickedFearMedium(){
       document.getElementById("fear-medium").setAttribute("id", "active-medium-fear");
@@ -719,6 +762,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-high-fear") ){
               document.getElementById("active-high-fear").setAttribute("id", "fear-high");
       }
+      settings.emotion_fear_sensivity = 'medium';
   }
   function clickedFearHigh(){
       document.getElementById("fear-high").setAttribute("id", "active-high-fear");
@@ -728,6 +772,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-low-fear") ){
               document.getElementById("active-low-fear").setAttribute("id", "fear-low");
       }
+      settings.emotion_fear_sensivity = 'high';
   }
 
   function clickedHappinessLow(){
@@ -738,6 +783,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-high-happiness") ){
               document.getElementById("active-high-happiness").setAttribute("id", "happiness-high");
       }
+      settings.emotion_happiness_sensivity = 'low';
   }
   function clickedHappinessMedium(){
       document.getElementById("happiness-medium").setAttribute("id", "active-medium-happiness");
@@ -747,6 +793,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-high-happiness") ){
               document.getElementById("active-high-happiness").setAttribute("id", "happiness-high");
       }
+      settings.emotion_happiness_sensivity = 'medium';
   }
   function clickedHappinessHigh(){
       document.getElementById("happiness-high").setAttribute("id", "active-high-happiness");
@@ -756,6 +803,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-low-happiness") ){
               document.getElementById("active-low-happiness").setAttribute("id", "happiness-low");
       }
+      settings.emotion_happiness_sensivity = 'high';
   }
 
 
@@ -767,6 +815,7 @@ document.getElementById("surpriseButtons").style.display = "none";
         if( document.getElementById("active-high-sadness") ){
                 document.getElementById("active-high-sadness").setAttribute("id", "sadness-high");
         }
+        settings.emotion_sadness_sensivity = 'low';
     }
     function clickedSadnessMedium(){
         document.getElementById("sadness-medium").setAttribute("id", "active-medium-sadness");
@@ -776,6 +825,7 @@ document.getElementById("surpriseButtons").style.display = "none";
         if( document.getElementById("active-high-sadness") ){
                 document.getElementById("active-high-sadness").setAttribute("id", "sadness-high");
         }
+        settings.emotion_sadness_sensivity = 'medium';
     }
     function clickedSadnessHigh(){
         document.getElementById("sadness-high").setAttribute("id", "active-high-sadness");
@@ -785,6 +835,7 @@ document.getElementById("surpriseButtons").style.display = "none";
         if( document.getElementById("active-low-sadness") ){
                 document.getElementById("active-low-sadness").setAttribute("id", "sadness-low");
         }
+        settings.emotion_sadness_sensivity = 'high';
     }
 
     function clickedSurpriseLow(){
@@ -795,6 +846,7 @@ document.getElementById("surpriseButtons").style.display = "none";
         if( document.getElementById("active-high-surprise") ){
                 document.getElementById("active-high-surprise").setAttribute("id", "surprise-high");
         }
+        settings.emotion_surprised_sensivity = 'low';
     }
     function clickedSurpriseMedium(){
         document.getElementById("surprise-medium").setAttribute("id", "active-medium-surprise");
@@ -804,6 +856,7 @@ document.getElementById("surpriseButtons").style.display = "none";
         if( document.getElementById("active-high-surprise") ){
                 document.getElementById("active-high-surprise").setAttribute("id", "surprise-high");
         }
+        settings.emotion_surprised_sensivity = 'medium';
     }
     function clickedSurpriseHigh(){
         document.getElementById("surprise-high").setAttribute("id", "active-high-surprise");
@@ -813,6 +866,7 @@ document.getElementById("surpriseButtons").style.display = "none";
         if( document.getElementById("active-low-surprise") ){
                 document.getElementById("active-low-surprise").setAttribute("id", "surprise-low");
         }
+        settings.emotion_surprised_sensivity = 'high';
     }
   function clickedSensLow(){
       document.getElementById("sens-low").setAttribute("id", "active-low");
@@ -822,6 +876,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-high") ){
               document.getElementById("active-high").setAttribute("id", "sens-high");
       }
+      settings.gaze_sensivity = 'low';
   }
   function clickedSensMedium(){
       document.getElementById("sens-medium").setAttribute("id", "active-medium");
@@ -831,6 +886,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-high") ){
               document.getElementById("active-high").setAttribute("id", "sens-high");
       }
+      settings.gaze_sensivity = 'medium';
   }
   function clickedSensHigh(){
       document.getElementById("sens-high").setAttribute("id", "active-high");
@@ -840,6 +896,7 @@ document.getElementById("surpriseButtons").style.display = "none";
       if( document.getElementById("active-low") ){
               document.getElementById("active-low").setAttribute("id", "sens-low");
       }
+      settings.gaze_sensivity = 'high';
   }
 
 
