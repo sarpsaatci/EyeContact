@@ -426,12 +426,7 @@ function applySettings(currentUser, contacts, newSettings, ws) {
 
     User.findOneAndUpdate({email: newUser.email}, editUser, {upsert: true}, function(error, result) {
       if(error) {
-        if(error.code == 11000) {
-          console.log("User" + newUser.name + "already exists.");
-        }
-        else {
           console.log(error);
-        }
       }
     });
 
@@ -463,12 +458,7 @@ function setSettings(currentUser, contacts, newSettings, ws) {
 
     User.findOneAndUpdate({email: newUser.email}, editUser, {upsert: true}, function(error, result) {
       if(error) {
-        if(error.code == 11000) {
-          console.log("User" + newUser.name + "already exists.");
-        }
-        else {
           console.log(error);
-        }
       }
     });
 
