@@ -572,6 +572,12 @@ function makeCall(peerEmail)
   //   id: 'getSettings',
   //   email: currentUser.email.$t
   // });
+
+  if(recognition) {
+    recognition.stop();
+    window.speechSynthesis.cancel();
+  }
+
   call(peerEmail);
 }
 
