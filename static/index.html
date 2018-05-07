@@ -607,7 +607,7 @@ function angerSwitchClicked() {
       document.getElementById("angerButtons").style.display = "none";
       settings.emotion_anger = 'false';
   }
-  alert('emotion_anger' + settings.emotion_anger);
+  alert('emotion_anger: ' + settings.emotion_anger);
 }
 function disgustSwitchClicked() {
   var checkBox = document.getElementById("disgustSwitch");
@@ -618,7 +618,7 @@ function disgustSwitchClicked() {
   document.getElementById("disgustButtons").style.display = "none";
   settings.emotion_anger = 'false';
   }
-  alert('emotion_anger' + settings.emotion_disgust);
+  alert('emotion_disgust: ' + settings.emotion_disgust);
 }
 function fearSwitchClicked() {
   var checkBox = document.getElementById("fearSwitch");
@@ -629,7 +629,7 @@ function fearSwitchClicked() {
   document.getElementById("fearButtons").style.display = "none";
   settings.emotion_fear = 'true';
   }
-  alert('emotion_anger' + settings.emotion_fear);
+  alert('emotion_fear: ' + settings.emotion_fear);
 }
 function happinessSwitchClicked() {
   var checkBox = document.getElementById("happinessSwitch");
@@ -640,7 +640,7 @@ function happinessSwitchClicked() {
   document.getElementById("happinessButtons").style.display = "none";
   settings.emotion_happiness = 'false';
   }
-  alert('emotion_anger' + settings.emotion_happines);
+  alert('emotion_happiness: ' + settings.emotion_happiness);
 }
 function sadnessSwitchClicked() {
   var checkBox = document.getElementById("sadnessSwitch");
@@ -651,7 +651,7 @@ function sadnessSwitchClicked() {
   document.getElementById("sadnessButtons").style.display = "none";
   settings.emotion_sadness = 'false';
   }
-  alert('emotion_anger' + settings.emotion_sadness);
+  alert('emotion_sadness: ' + settings.emotion_sadness);
 }
 function surpriseSwitchClicked() {
   var checkBox = document.getElementById("surpriseSwitch");
@@ -662,7 +662,7 @@ function surpriseSwitchClicked() {
   document.getElementById("surpriseButtons").style.display = "none";
   settings.emotion_surprised = 'false';
   }
-  alert('emotion_anger' + settings.emotion_surprised);
+  alert('emotion_surprised: ' + settings.emotion_surprised);
 }
 
 function neutralSwitchClicked() {
@@ -673,7 +673,7 @@ function neutralSwitchClicked() {
   else {
     settings.emotion_neutral = 'false';
   }
-  alert('emotion_anger' + settings.emotion_neutral);
+  alert('emotion_neutral: ' + settings.emotion_neutral);
 }
 function gazeSwitchClicked() {
   var checkBox = document.getElementById("gazeSwitch");
@@ -685,7 +685,7 @@ function gazeSwitchClicked() {
       document.getElementById("gazeButtons").style.display = "none";
       settings.gaze = 'false';
   }
-  alert('emotion_anger' + settings.gaze);
+  alert('gaze: ' + settings.gaze);
 }
 
   function clickedAngerLow(){
@@ -697,7 +697,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-anger").setAttribute("id", "anger-high");
       }
       settings.emotion_anger_sensivity = 'low';
-      alert('emotion_anger' + settings.emotion_anger_sensivity);
+      alert('emotion_anger_sensivity: ' + settings.emotion_anger_sensivity);
   }
   function clickedAngerMedium(){
       document.getElementById("anger-medium").setAttribute("id", "active-medium-anger");
@@ -708,7 +708,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-anger").setAttribute("id", "anger-high");
       }
       settings.emotion_anger_sensivity = 'medium';
-      alert('emotion_anger' + settings.emotion_anger_sensivity);
+      alert('emotion_anger_sensivity: ' + settings.emotion_anger_sensivity);
   }
   function clickedAngerHigh(){
       document.getElementById("anger-high").setAttribute("id", "active-high-anger");
@@ -719,7 +719,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-low-anger").setAttribute("id", "anger-low");
       }
       settings.emotion_anger_sensivity = 'high';
-      alert('emotion_anger' + settings.emotion_anger_sensivity);
+      alert('emotion_anger_sensivity: ' + settings.emotion_anger_sensivity);
   }
 
   function clickedDisgustLow(){
@@ -731,7 +731,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-disgust").setAttribute("id", "disgust-high");
       }
       settings.emotion_disgust_sensivity = 'low';
-      alert('emotion_anger' + settings.emotion_disgust_sensivity);
+      alert('emotion_disgust_sensivity: ' + settings.emotion_disgust_sensivity);
   }
   function clickedDisgustMedium(){
       document.getElementById("disgust-medium").setAttribute("id", "active-medium-disgust");
@@ -742,7 +742,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-disgust").setAttribute("id", "disgust-high");
       }
       settings.emotion_disgust_sensivity = 'medium';
-      alert('emotion_anger' + settings.emotion_disgust_sensivity);
+      alert('emotion_disgust_sensivity: ' + settings.emotion_disgust_sensivity);
   }
   function clickedDisgustHigh(){
       document.getElementById("disgust-high").setAttribute("id", "active-high-disgust");
@@ -753,7 +753,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-low-disgust").setAttribute("id", "disgust-low");
       }
       settings.emotion_disgust_sensivity = 'high';
-      alert('emotion_anger' + settings.emotion_disgust_sensivity);
+      alert('emotion_disgust_sensivity: ' + settings.emotion_disgust_sensivity);
   }
 
   function clickedFearLow(){
@@ -765,7 +765,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-fear").setAttribute("id", "fear-high");
       }
       settings.emotion_fear_sensivity = 'low';
-      alert('emotion_anger' + settings.emotion_fear_sensivity);
+      alert('emotion_fear_sensivity: ' + settings.emotion_fear_sensivity);
   }
   function clickedFearMedium(){
       document.getElementById("fear-medium").setAttribute("id", "active-medium-fear");
@@ -776,7 +776,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-fear").setAttribute("id", "fear-high");
       }
       settings.emotion_fear_sensivity = 'medium';
-      alert('emotion_anger' + settings.emotion_fear_sensivity);
+      alert('emotion_fear_sensivity: ' + settings.emotion_fear_sensivity);
   }
   function clickedFearHigh(){
       document.getElementById("fear-high").setAttribute("id", "active-high-fear");
@@ -787,7 +787,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-low-fear").setAttribute("id", "fear-low");
       }
       settings.emotion_fear_sensivity = 'high';
-      alert('emotion_anger' + settings.emotion_fear_sensivity);
+      alert('emotion_fear_sensivity: ' + settings.emotion_fear_sensivity);
   }
 
   function clickedHappinessLow(){
@@ -799,7 +799,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-happiness").setAttribute("id", "happiness-high");
       }
       settings.emotion_happiness_sensivity = 'low';
-      alert('emotion_anger' + settings.emotion_happine_sensivity);
+      alert('emotion_happiness_sensivity: ' + settings.emotion_happiness_sensivity);
   }
   function clickedHappinessMedium(){
       document.getElementById("happiness-medium").setAttribute("id", "active-medium-happiness");
@@ -810,7 +810,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-happiness").setAttribute("id", "happiness-high");
       }
       settings.emotion_happiness_sensivity = 'medium';
-      alert('emotion_anger' + settings.emotion_happiness_sensivity);
+      alert('emotion_happiness_sensivity: ' + settings.emotion_happiness_sensivity);
   }
   function clickedHappinessHigh(){
       document.getElementById("happiness-high").setAttribute("id", "active-high-happiness");
@@ -821,7 +821,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-low-happiness").setAttribute("id", "happiness-low");
       }
       settings.emotion_happiness_sensivity = 'high';
-      alert('emotion_anger' + settings.emotion_happiness_sensivity);
+      alert('emotion_happiness_sensivity: ' + settings.emotion_happiness_sensivity);
   }
 
 
@@ -834,7 +834,7 @@ function gazeSwitchClicked() {
                 document.getElementById("active-high-sadness").setAttribute("id", "sadness-high");
         }
         settings.emotion_sadness_sensivity = 'low';
-        alert('emotion_anger' + settings.emotion_sadness_sensivity);
+        alert('emotion_sadness_sensivity: ' + settings.emotion_sadness_sensivity);
     }
     function clickedSadnessMedium(){
         document.getElementById("sadness-medium").setAttribute("id", "active-medium-sadness");
@@ -845,7 +845,7 @@ function gazeSwitchClicked() {
                 document.getElementById("active-high-sadness").setAttribute("id", "sadness-high");
         }
         settings.emotion_sadness_sensivity = 'medium';
-        alert('emotion_anger' + settings.emotion_sadness_sensivity);
+        alert('emotion_sadness_sensivity: ' + settings.emotion_sadness_sensivity);
     }
     function clickedSadnessHigh(){
         document.getElementById("sadness-high").setAttribute("id", "active-high-sadness");
@@ -856,7 +856,7 @@ function gazeSwitchClicked() {
                 document.getElementById("active-low-sadness").setAttribute("id", "sadness-low");
         }
         settings.emotion_sadness_sensivity = 'high';
-        alert('emotion_anger' + settings.emotion_sadness_sensivity);
+        alert('emotion_sadness_sensivity: ' + settings.emotion_sadness_sensivity);
     }
 
     function clickedSurpriseLow(){
@@ -868,7 +868,7 @@ function gazeSwitchClicked() {
                 document.getElementById("active-high-surprise").setAttribute("id", "surprise-high");
         }
         settings.emotion_surprised_sensivity = 'low';
-        alert('emotion_anger' + settings.emotion_surprised_sensivity);
+        alert('emotion_surprised_sensivity: ' + settings.emotion_surprised_sensivity);
     }
     function clickedSurpriseMedium(){
         document.getElementById("surprise-medium").setAttribute("id", "active-medium-surprise");
@@ -879,7 +879,7 @@ function gazeSwitchClicked() {
                 document.getElementById("active-high-surprise").setAttribute("id", "surprise-high");
         }
         settings.emotion_surprised_sensivity = 'medium';
-        alert('emotion_anger' + settings.emotion_surprised_sensivity);
+        alert('emotion_surprised_sensivity: ' + settings.emotion_surprised_sensivity);
     }
     function clickedSurpriseHigh(){
         document.getElementById("surprise-high").setAttribute("id", "active-high-surprise");
@@ -890,7 +890,7 @@ function gazeSwitchClicked() {
                 document.getElementById("active-low-surprise").setAttribute("id", "surprise-low");
         }
         settings.emotion_surprised_sensivity = 'high';
-        alert('emotion_anger' + settings.emotion_surprised_sensivity);
+        alert('emotion_surprised_sensivity: ' + settings.emotion_surprised_sensivity);
     }
   function clickedSensLow(){
       document.getElementById("sens-low").setAttribute("id", "active-low");
@@ -901,7 +901,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high").setAttribute("id", "sens-high");
       }
       settings.gaze_sensivity = 'low';
-      alert('emotion_anger' + settings.emotion_gaze_sensivity);
+      alert('emotion_gaze_sensivity: ' + settings.emotion_gaze_sensivity);
   }
   function clickedSensMedium(){
       document.getElementById("sens-medium").setAttribute("id", "active-medium");
@@ -912,7 +912,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high").setAttribute("id", "sens-high");
       }
       settings.gaze_sensivity = 'medium';
-      alert('emotion_anger' + settings.emotion_gaze_sensivity);
+      alert('emotion_gaze_sensivity: ' + settings.emotion_gaze_sensivity);
   }
   function clickedSensHigh(){
       document.getElementById("sens-high").setAttribute("id", "active-high");
@@ -923,7 +923,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-low").setAttribute("id", "sens-low");
       }
       settings.gaze_sensivity = 'high';
-      alert('emotion_anger' + settings.emotion_gaze_sensivity);
+      alert('gaze_sensivity: ' + settings.gaze_sensivity);
   }
 
 
