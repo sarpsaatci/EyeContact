@@ -486,6 +486,166 @@ function applySettings(newSettings)
 }
 
 function changeSettingsMenu() {
+  if(settings.emotion_anger == 'true') {
+      document.getElementById("angerSwitch").checked = true;
+  }
+  else if(settings.emotion_anger == 'false') {
+    document.getElementById("angerSwitch").checked = false;
+  }
+
+  if(settings.emotion_disgust == 'true') {
+      document.getElementById("disguSwitch").checked = true;
+  }
+  else if(settings.emotion_disgust == 'false') {
+    document.getElementById("disgustSwitch").checked = false;
+  }
+
+  if(settings.emotion_fear == 'true') {
+      document.getElementById("fearSwitch").checked = true;
+  }
+  else if(settings.emotion_fear == 'false') {
+    document.getElementById("fearSwitch").checked = false;
+  }
+
+  if(settings.emotion_happiness == 'true') {
+      document.getElementById("happinessSwitch").checked = true;
+  }
+  else if(settings.emotion_happiness == 'false') {
+    document.getElementById("happinessSwitch").checked = false;
+  }
+
+  if(settings.emotion_surprised == 'true') {
+      document.getElementById("surpriseSwitch").checked = true;
+  }
+  else if(settings.emotion_surprised == 'false') {
+    document.getElementById("surpriseSwitch").checked = false;
+  }
+
+  if(settings.emotion_sadness == 'true') {
+      document.getElementById("sadnessSwitch").checked = true;
+  }
+  else if(settings.emotion_sadness == 'false') {
+    document.getElementById("sadnessSwitch").checked = false;
+  }
+
+  if(settings.emotion_neutral == 'true') {
+      document.getElementById("neutralSwitch").checked = true;
+  }
+  else if(settings.emotion_neutral == 'false') {
+    document.getElementById("neutralSwitch").checked = false;
+  }
+
+  if(settings.gaze == 'true') {
+      document.getElementById("gazeSwitch").checked = true;
+  }
+  else if(settings.gaze == 'false') {
+    document.getElementById("gazeSwitch").checked = false;
+  }
+
+  if(document.getElementById("angerSwitch").checked) {
+    if(settings.emotion_anger_sensivity == 'low') {
+        angerSwitchClicked();
+        clickedAngerLow();
+    }
+    else if(settings.emotion_anger_sensivity == 'medium') {
+      angerSwitchClicked();
+      clickedAngerMedium();
+    }
+    else if(settings.emotion_anger_sensivity == 'medium') {
+      angerSwitchClicked();
+      clickedAngerHigh();
+    }
+  }
+
+  if(document.getElementById("disgustSwitch").checked) {
+    if(settings.emotion_disgust_sensivity == 'low') {
+        disgustSwitchClicked();
+        clickedDisgustLow();
+    }
+    else if(settings.emotion_disgust_sensivity == 'medium') {
+      disSwitchClicked();
+      clickedDisgustMedium();
+    }
+    else if(settings.emotion_disgust_sensivity == 'medium') {
+      disgustSwitchClicked();
+      clickedDisgustHigh();
+    }
+  }
+
+  if(document.getElementById("fearSwitch").checked) {
+    if(settings.emotion_fear_sensivity == 'low') {
+        fearSwitchClicked();
+        clickedFearLow();
+    }
+    else if(settings.emotion_fear_sensivity == 'medium') {
+      fearSwitchClicked();
+      clickedFearMedium();
+    }
+    else if(settings.emotion_fear_sensivity == 'medium') {
+      fearSwitchClicked();
+      clickedFearHigh();
+    }
+  }
+
+  if(document.getElementById("surpriseSwitch").checked) {
+    if(settings.emotion_surprised_sensivity == 'low') {
+        surpriseSwitchClicked();
+        clickedSurpriseLow();
+    }
+    else if(settings.emotion_surprised_sensivity == 'medium') {
+      surpriseSwitchClicked();
+      clickedSurpriseMedium();
+    }
+    else if(settings.emotion_surprised_sensivity == 'medium') {
+      surpriseSwitchClicked();
+      clickedSurpriseHigh();
+    }
+  }
+
+  if(document.getElementById("sadnessSwitch").checked) {
+    if(settings.emotion_anger_sensivity == 'low') {
+        sadnessSwitchClicked();
+        clickedSadnessLow();
+    }
+    else if(settings.emotion_sadness_sensivity == 'medium') {
+      sadnessSwitchClicked();
+      clickedSadnessMedium();
+    }
+    else if(settings.emotion_sadness_sensivity == 'medium') {
+      sadnessSwitchClicked();
+      clickedSadnessHigh();
+    }
+  }
+
+  if(document.getElementById("happinessSwitch").checked) {
+    if(settings.emotion_happiness_sensivity == 'low') {
+        happinessSwitchClicked();
+        clickedHappinessLow();
+    }
+    else if(settings.emotion_happiness_sensivity == 'medium') {
+      happinessSwitchClicked();
+      clickedHappinessMedium();
+    }
+    else if(settings.emotion_happiness_sensivity == 'medium') {
+      happinessSwitchClicked();
+      clickedHappinessHigh();
+    }
+  }
+
+  if(document.getElementById("gazeSwitch").checked) {
+    if(settings.emotion_gaze_sensivity == 'low') {
+        gazeSwitchClicked();
+        clickedSensLow();
+    }
+    else if(settings.emotion_gaze_sensivity == 'medium') {
+      gazeSwitchClicked();
+      clickedSensMedium();
+    }
+    else if(settings.emotion_gaze_sensivity == 'medium') {
+      gazeSwitchClicked();
+      clickedSensHigh();
+    }
+  }
 
 }
 
