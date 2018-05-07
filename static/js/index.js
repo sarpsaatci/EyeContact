@@ -810,6 +810,10 @@ function manageUser(userData)
   synth.speak(utterThis);
 
   register(currentUser, dbcontacts);
+  sendMessage({
+    id: 'getSettings',
+    email: currentUser.email.$t
+  });
 }
 
 function activatePage()
@@ -818,6 +822,7 @@ function activatePage()
   document.getElementById("callPage").style.display = "block";
   document.getElementById("myInput").focus();
   speechRecognize();
+  changeSettingsMenu();
 }
 
 function speechRecognize() {
