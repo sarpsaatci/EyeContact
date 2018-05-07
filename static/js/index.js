@@ -633,15 +633,15 @@ function changeSettingsMenu() {
   }
 
   if(document.getElementById("gazeSwitch").checked) {
-    if(settings.emotion_gaze_sensivity == 'low') {
+    if(settings.gaze_sensivity == 'low') {
         gazeSwitchClicked();
         clickedSensLow();
     }
-    else if(settings.emotion_gaze_sensivity == 'medium') {
+    else if(settings.gaze_sensivity == 'medium') {
       gazeSwitchClicked();
       clickedSensMedium();
     }
-    else if(settings.emotion_gaze_sensivity == 'medium') {
+    else if(settings.gaze_sensivity == 'high') {
       gazeSwitchClicked();
       clickedSensHigh();
     }
