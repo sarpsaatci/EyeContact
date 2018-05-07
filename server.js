@@ -383,7 +383,6 @@ function writeSettingsInput(settings) {
     fs.appendFileSync('../OpenFace/inputFile.txt', '$sadness_sensivity ' +  settings.emotion_sadness_sensivity + '\n');
     fs.appendFileSync('../OpenFace/inputFile.txt', '$surprised_sensivity ' +  settings.emotion_surprised_sensivity + '\n');
     fs.appendFileSync('../OpenFace/inputFile.txt', '$anger_sensivity ' +  settings.emotion_anger_sensivity + '\n');
-    fs.appendFileSync('../OpenFace/inputFile.txt', '$happiness_sensivity ' +  settings.emotion_happiness_sensivity + '\n');
     fs.appendFileSync('../OpenFace/inputFile.txt', '$gaze_sensivity ' +  settings.gaze_sensivity + '\n');
     fs.appendFileSync('../OpenFace/inputFile.txt', '$fear ' +  settings.emotion_fear + '\n');
     fs.appendFileSync('../OpenFace/inputFile.txt', '$disgust ' +  settings.emotion_disgust + '\n');
