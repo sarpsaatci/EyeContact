@@ -441,6 +441,7 @@ function applySettings(currentUser, contacts, newSettings, ws) {
 }
 
 function setSettings(currentUser, contacts, newSettings, ws) {
+
   mongoose.connect('mongodb://eyecontact:123abcd1@ds239029.mlab.com:39029/eyecontact');
 
   var db = mongoose.connection;

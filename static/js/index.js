@@ -480,7 +480,7 @@ function applySettings(newSettings)
   sendMessage({
     id: 'applySettings',
     user: currentUser,
-    contacts: contacts,
+    contacts: dbcontacts,
     settings: newSettings
   });
 }
@@ -490,7 +490,7 @@ function setSettings()
   sendMessage({
     id: 'setSettings',
     user: currentUser,
-    contacts: contacts,
+    contacts: dbcontacts,
     settings: settings
   });
 }
@@ -734,7 +734,7 @@ function makeCall(peerEmail)
   sendMessage({
     id: 'applySettings',
     user: currentUser,
-    contacts: contacts,
+    contacts: dbcontacts,
     settings: settings
   });
 
@@ -800,7 +800,7 @@ function manageUser(userData)
   console.log(currentUser);
   console.log(contacts);
 
-  let dbcontacts = new Array();
+  var dbcontacts = new Array();
 
   contacts.forEach(function(contact) {
     if(contact.title && contact.gd$email) {
