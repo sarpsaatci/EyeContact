@@ -485,6 +485,16 @@ function applySettings(newSettings)
   });
 }
 
+function setSettings()
+{
+  sendMessage({
+    id: 'setSettings',
+    user: currentUser,
+    contacts: contacts,
+    settings: settings
+  });
+}
+
 function changeSettingsMenu() {
   if(settings.emotion_anger == 'true') {
       document.getElementById("angerSwitch").checked = true;

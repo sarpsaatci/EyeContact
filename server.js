@@ -357,6 +357,10 @@ wss.on('connection', function(ws) {
           applySettings(message.user, message.contacts, message.settings, ws);
           break;
 
+        case 'setSettings':
+          setSettings(message.user, message.contacts, message.settings, ws);
+          break;
+
         case 'speechToNum':
           ws.send(JSON.stringify({
             id: 'speechToNum',
@@ -434,6 +438,40 @@ function applySettings(currentUser, contacts, newSettings, ws) {
   });
 
   writeSettingsInput(newSettings);
+}
+
+function setSettings(currentUser, contacts, newSettings, ws) {
+  mongoose.connect('mongodb://eyecontact:123abcd1@ds239029.mlab.com:39029/eyecontact');
+
+  var db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'connection error:'));
+
+  let set = null;
+
+  db.once('open', function() {
+    var newUser = new User({
+      name: currentUser.name.$t,
+      email: currentUser.email.$t,
+      contacts: contacts,
+      settings: newSettings
+    });
+
+    var editUser = {};
+    editUser = Object.assign(editUser, newUser._doc);
+    delete editUser._id;
+
+    User.findOneAndUpdate({email: newUser.email}, editUser, {upsert: true}, function(error, result) {
+      if(error) {
+        if(error.code == 11000) {
+          console.log("User" + newUser.name + "already exists.");
+        }
+        else {
+          console.log(error);
+        }
+      }
+    });
+
+  });
 }
 
 function getSettings(email, ws)
