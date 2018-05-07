@@ -494,7 +494,7 @@ function changeSettingsMenu() {
   }
 
   if(settings.emotion_disgust == 'true') {
-      document.getElementById("disguSwitch").checked = true;
+      document.getElementById("disgustSwitch").checked = true;
   }
   else if(settings.emotion_disgust == 'false') {
     document.getElementById("disgustSwitch").checked = false;
