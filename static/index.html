@@ -423,15 +423,12 @@ input:checked + .slider:before {
     <div id="authPage">
 
 
-      <div class="row">
         <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
         <div class="col-lg-4 col-md-8 col-sm-8 col-xs-10" style="padding-bottom: 4%; padding-top: 6%; ">
           <img src="logo.png" style="height: auto; width: 100%">
         </div>
         <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
-      </div>
 
-      <div class="row">
         <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
         <div class="col-lg-4 col-md-8 col-sm-8 col-xs-10;" style="text-align: center">
           <div class="col-lg-12 center-block;" style="text-align: center" >
@@ -439,7 +436,6 @@ input:checked + .slider:before {
           </div>
         </div>
         <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
-      </div>
 
       <script type="text/javascript">
             var clientId = '305322108967-q02bfmg9l082jftr9e45vgd5ffje0klf';
@@ -609,56 +605,62 @@ function angerSwitchClicked() {
       document.getElementById("angerButtons").style.display = "none";
       settings.emotion_anger = 'false';
   }
+  alert('emotion_anger' + settings.emotion_anger);
 }
 function disgustSwitchClicked() {
-var checkBox = document.getElementById("disgustSwitch");
-if (checkBox.checked == true) {
-  document.getElementById("disgustButtons").style.display = "block";
-  settings.emotion_disgust = 'true';
-} else {
-document.getElementById("disgustButtons").style.display = "none";
-settings.emotion_anger = 'false';
-}
+  var checkBox = document.getElementById("disgustSwitch");
+  if (checkBox.checked == true) {
+    document.getElementById("disgustButtons").style.display = "block";
+    settings.emotion_disgust = 'true';
+  } else {
+  document.getElementById("disgustButtons").style.display = "none";
+  settings.emotion_anger = 'false';
+  }
+  alert('emotion_anger' + settings.emotion_disgust);
 }
 function fearSwitchClicked() {
-var checkBox = document.getElementById("fearSwitch");
-if (checkBox.checked == true) {
-  document.getElementById("fearButtons").style.display = "block";
+  var checkBox = document.getElementById("fearSwitch");
+  if (checkBox.checked == true) {
+    document.getElementById("fearButtons").style.display = "block";
+    settings.emotion_fear = 'true';
+  } else {
+  document.getElementById("fearButtons").style.display = "none";
   settings.emotion_fear = 'true';
-} else {
-document.getElementById("fearButtons").style.display = "none";
-settings.emotion_fear = 'true';
-}
+  }
+  alert('emotion_anger' + settings.emotion_fear);
 }
 function happinessSwitchClicked() {
-var checkBox = document.getElementById("happinessSwitch");
-if (checkBox.checked == true) {
-  document.getElementById("happinessButtons").style.display = "block";
-  settings.emotion_happiness = 'true';
-} else {
-document.getElementById("happinessButtons").style.display = "none";
-settings.emotion_happiness = 'false';
-}
+  var checkBox = document.getElementById("happinessSwitch");
+  if (checkBox.checked == true) {
+    document.getElementById("happinessButtons").style.display = "block";
+    settings.emotion_happiness = 'true';
+  } else {
+  document.getElementById("happinessButtons").style.display = "none";
+  settings.emotion_happiness = 'false';
+  }
+  alert('emotion_anger' + settings.emotion_happines);
 }
 function sadnessSwitchClicked() {
-var checkBox = document.getElementById("sadnessSwitch");
-if (checkBox.checked == true) {
-  document.getElementById("sadnessButtons").style.display = "block";
-  settings.emotion_sadness = 'true';
-} else {
-document.getElementById("sadnessButtons").style.display = "none";
-settings.emotion_sadness = 'false';
-}
+  var checkBox = document.getElementById("sadnessSwitch");
+  if (checkBox.checked == true) {
+    document.getElementById("sadnessButtons").style.display = "block";
+    settings.emotion_sadness = 'true';
+  } else {
+  document.getElementById("sadnessButtons").style.display = "none";
+  settings.emotion_sadness = 'false';
+  }
+  alert('emotion_anger' + settings.emotion_sadness);
 }
 function surpriseSwitchClicked() {
-var checkBox = document.getElementById("surpriseSwitch");
-if (checkBox.checked == true) {
-  document.getElementById("surpriseButtons").style.display = "block";
-  settings.emotion_surprised = 'true';
-} else {
-document.getElementById("surpriseButtons").style.display = "none";
-settings.emotion_surprised = 'false';
-}
+  var checkBox = document.getElementById("surpriseSwitch");
+  if (checkBox.checked == true) {
+    document.getElementById("surpriseButtons").style.display = "block";
+    settings.emotion_surprised = 'true';
+  } else {
+  document.getElementById("surpriseButtons").style.display = "none";
+  settings.emotion_surprised = 'false';
+  }
+  alert('emotion_anger' + settings.emotion_surprised);
 }
 
 function neutralSwitchClicked() {
@@ -669,6 +671,7 @@ function neutralSwitchClicked() {
   else {
     settings.emotion_neutral = 'false';
   }
+  alert('emotion_anger' + settings.emotion_neutral);
 }
 function gazeSwitchClicked() {
   var checkBox = document.getElementById("gazeSwitch");
@@ -680,6 +683,7 @@ function gazeSwitchClicked() {
       document.getElementById("gazeButtons").style.display = "none";
       settings.gaze = 'false';
   }
+  alert('emotion_anger' + settings.gaze);
 }
 
   function clickedAngerLow(){
@@ -691,6 +695,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-anger").setAttribute("id", "anger-high");
       }
       settings.emotion_anger_sensivity = 'low';
+      alert('emotion_anger' + settings.emotion_anger_sensivity);
   }
   function clickedAngerMedium(){
       document.getElementById("anger-medium").setAttribute("id", "active-medium-anger");
@@ -701,6 +706,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-anger").setAttribute("id", "anger-high");
       }
       settings.emotion_anger_sensivity = 'medium';
+      alert('emotion_anger' + settings.emotion_anger_sensivity);
   }
   function clickedAngerHigh(){
       document.getElementById("anger-high").setAttribute("id", "active-high-anger");
@@ -711,6 +717,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-low-anger").setAttribute("id", "anger-low");
       }
       settings.emotion_anger_sensivity = 'high';
+      alert('emotion_anger' + settings.emotion_anger_sensivity);
   }
 
   function clickedDisgustLow(){
@@ -722,6 +729,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-disgust").setAttribute("id", "disgust-high");
       }
       settings.emotion_disgust_sensivity = 'low';
+      alert('emotion_anger' + settings.emotion_disgust_sensivity);
   }
   function clickedDisgustMedium(){
       document.getElementById("disgust-medium").setAttribute("id", "active-medium-disgust");
@@ -732,6 +740,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-disgust").setAttribute("id", "disgust-high");
       }
       settings.emotion_disgust_sensivity = 'medium';
+      alert('emotion_anger' + settings.emotion_disgust_sensivity);
   }
   function clickedDisgustHigh(){
       document.getElementById("disgust-high").setAttribute("id", "active-high-disgust");
@@ -742,6 +751,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-low-disgust").setAttribute("id", "disgust-low");
       }
       settings.emotion_disgust_sensivity = 'high';
+      alert('emotion_anger' + settings.emotion_disgust_sensivity);
   }
 
   function clickedFearLow(){
@@ -753,6 +763,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-fear").setAttribute("id", "fear-high");
       }
       settings.emotion_fear_sensivity = 'low';
+      alert('emotion_anger' + settings.emotion_fear_sensivity);
   }
   function clickedFearMedium(){
       document.getElementById("fear-medium").setAttribute("id", "active-medium-fear");
@@ -763,6 +774,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-fear").setAttribute("id", "fear-high");
       }
       settings.emotion_fear_sensivity = 'medium';
+      alert('emotion_anger' + settings.emotion_fear_sensivity);
   }
   function clickedFearHigh(){
       document.getElementById("fear-high").setAttribute("id", "active-high-fear");
@@ -773,6 +785,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-low-fear").setAttribute("id", "fear-low");
       }
       settings.emotion_fear_sensivity = 'high';
+      alert('emotion_anger' + settings.emotion_fear_sensivity);
   }
 
   function clickedHappinessLow(){
@@ -784,6 +797,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-happiness").setAttribute("id", "happiness-high");
       }
       settings.emotion_happiness_sensivity = 'low';
+      alert('emotion_anger' + settings.emotion_happine_sensivity);
   }
   function clickedHappinessMedium(){
       document.getElementById("happiness-medium").setAttribute("id", "active-medium-happiness");
@@ -794,6 +808,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high-happiness").setAttribute("id", "happiness-high");
       }
       settings.emotion_happiness_sensivity = 'medium';
+      alert('emotion_anger' + settings.emotion_happiness_sensivity);
   }
   function clickedHappinessHigh(){
       document.getElementById("happiness-high").setAttribute("id", "active-high-happiness");
@@ -804,6 +819,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-low-happiness").setAttribute("id", "happiness-low");
       }
       settings.emotion_happiness_sensivity = 'high';
+      alert('emotion_anger' + settings.emotion_happiness_sensivity);
   }
 
 
@@ -816,6 +832,7 @@ function gazeSwitchClicked() {
                 document.getElementById("active-high-sadness").setAttribute("id", "sadness-high");
         }
         settings.emotion_sadness_sensivity = 'low';
+        alert('emotion_anger' + settings.emotion_sadness_sensivity);
     }
     function clickedSadnessMedium(){
         document.getElementById("sadness-medium").setAttribute("id", "active-medium-sadness");
@@ -826,6 +843,7 @@ function gazeSwitchClicked() {
                 document.getElementById("active-high-sadness").setAttribute("id", "sadness-high");
         }
         settings.emotion_sadness_sensivity = 'medium';
+        alert('emotion_anger' + settings.emotion_sadness_sensivity);
     }
     function clickedSadnessHigh(){
         document.getElementById("sadness-high").setAttribute("id", "active-high-sadness");
@@ -836,6 +854,7 @@ function gazeSwitchClicked() {
                 document.getElementById("active-low-sadness").setAttribute("id", "sadness-low");
         }
         settings.emotion_sadness_sensivity = 'high';
+        alert('emotion_anger' + settings.emotion_sadness_sensivity);
     }
 
     function clickedSurpriseLow(){
@@ -847,6 +866,7 @@ function gazeSwitchClicked() {
                 document.getElementById("active-high-surprise").setAttribute("id", "surprise-high");
         }
         settings.emotion_surprised_sensivity = 'low';
+        alert('emotion_anger' + settings.emotion_surprised_sensivity);
     }
     function clickedSurpriseMedium(){
         document.getElementById("surprise-medium").setAttribute("id", "active-medium-surprise");
@@ -857,6 +877,7 @@ function gazeSwitchClicked() {
                 document.getElementById("active-high-surprise").setAttribute("id", "surprise-high");
         }
         settings.emotion_surprised_sensivity = 'medium';
+        alert('emotion_anger' + settings.emotion_surprised_sensivity);
     }
     function clickedSurpriseHigh(){
         document.getElementById("surprise-high").setAttribute("id", "active-high-surprise");
@@ -867,6 +888,7 @@ function gazeSwitchClicked() {
                 document.getElementById("active-low-surprise").setAttribute("id", "surprise-low");
         }
         settings.emotion_surprised_sensivity = 'high';
+        alert('emotion_anger' + settings.emotion_surprised_sensivity);
     }
   function clickedSensLow(){
       document.getElementById("sens-low").setAttribute("id", "active-low");
@@ -877,6 +899,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high").setAttribute("id", "sens-high");
       }
       settings.gaze_sensivity = 'low';
+      alert('emotion_anger' + settings.emotion_gaze_sensivity);
   }
   function clickedSensMedium(){
       document.getElementById("sens-medium").setAttribute("id", "active-medium");
@@ -887,6 +910,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-high").setAttribute("id", "sens-high");
       }
       settings.gaze_sensivity = 'medium';
+      alert('emotion_anger' + settings.emotion_gaze_sensivity);
   }
   function clickedSensHigh(){
       document.getElementById("sens-high").setAttribute("id", "active-high");
@@ -897,6 +921,7 @@ function gazeSwitchClicked() {
               document.getElementById("active-low").setAttribute("id", "sens-low");
       }
       settings.gaze_sensivity = 'high';
+      alert('emotion_anger' + settings.emotion_gaze_sensivity);
   }
 
 
