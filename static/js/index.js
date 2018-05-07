@@ -573,10 +573,10 @@ function makeCall(peerEmail)
   //   email: currentUser.email.$t
   // });
 
-  if(recognition) {
-    recognition.stop();
-    window.speechSynthesis.cancel();
-  }
+  // if(recognition) {
+  //   recognition.stop();
+  //   window.speechSynthesis.cancel();
+  // }
 
   call(peerEmail);
 }
