@@ -563,7 +563,7 @@ function changeSettingsMenu() {
         clickedDisgustLow();
     }
     else if(settings.emotion_disgust_sensivity == 'medium') {
-      disSwitchClicked();
+      disgustSwitchClicked();
       clickedDisgustMedium();
     }
     else if(settings.emotion_disgust_sensivity == 'medium') {
