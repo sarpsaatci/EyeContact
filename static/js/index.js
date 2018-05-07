@@ -29,6 +29,7 @@ var registerState = null;
 var currentUser = null;
 var contacts = null;
 var contactNames = new Array();
+var dbcontacts = null;
 
 var readyToCaptureFrame = false;
 
@@ -800,7 +801,7 @@ function manageUser(userData)
   console.log(currentUser);
   console.log(contacts);
 
-  var dbcontacts = new Array();
+  dbcontacts = new Array();
 
   contacts.forEach(function(contact) {
     if(contact.title && contact.gd$email) {
