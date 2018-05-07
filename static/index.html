@@ -616,7 +616,7 @@ function disgustSwitchClicked() {
     settings.emotion_disgust = 'true';
   } else {
   document.getElementById("disgustButtons").style.display = "none";
-  settings.emotion_anger = 'false';
+  settings.emotion_disgust = 'false';
   }
   alert('emotion_disgust: ' + settings.emotion_disgust);
 }
@@ -627,7 +627,7 @@ function fearSwitchClicked() {
     settings.emotion_fear = 'true';
   } else {
   document.getElementById("fearButtons").style.display = "none";
-  settings.emotion_fear = 'true';
+  settings.emotion_fear = 'false';
   }
   alert('emotion_fear: ' + settings.emotion_fear);
 }
