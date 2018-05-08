@@ -46,24 +46,7 @@ var uterance = new SpeechSynthesisUtterance('please say the contact name to call
 
 settingsDefault = true;
 
-var settings = {
-  id: 'settings',
-  emotion_happiness: 'true',
-  emotion_happiness_sensivity: 'medium',
-  emotion_sadness: 'true',
-  emotion_sadness_sensivity: 'medium',
-  emotion_fear: 'true',
-  emotion_fear_sensivity: 'medium',
-  emotion_disgust: 'true',
-  emotion_disgust_sensivity: 'medium',
-  emotion_surprised: 'true',
-  emotion_surprised_sensivity: 'medium',
-  emotion_anger: 'true',
-  emotion_anger_sensivity: 'medium',
-  emotion_neutral: 'true',
-  gaze: 'true',
-  gaze_sensivity: 'medium'
-}
+var settings = null;
 
 function captureVideoFrame(video, format, path) {
         if (typeof video === 'string') {
@@ -199,6 +182,26 @@ window.onload = function() {
 	// document.getElementById('call').addEventListener('click', function() {
 	// 	call();
 	// });
+
+  settings = {
+    id: 'settings',
+    emotion_happiness: 'true',
+    emotion_happiness_sensivity: 'medium',
+    emotion_sadness: 'true',
+    emotion_sadness_sensivity: 'medium',
+    emotion_fear: 'true',
+    emotion_fear_sensivity: 'medium',
+    emotion_disgust: 'true',
+    emotion_disgust_sensivity: 'medium',
+    emotion_surprised: 'true',
+    emotion_surprised_sensivity: 'medium',
+    emotion_anger: 'true',
+    emotion_anger_sensivity: 'medium',
+    emotion_neutral: 'true',
+    gaze: 'true',
+    gaze_sensivity: 'medium'
+  };
+
 	document.getElementById('terminate').addEventListener('click', function() {
 		stop();
 	});
