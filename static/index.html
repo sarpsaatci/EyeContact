@@ -1268,7 +1268,7 @@ function gazeSwitchClicked() {
             </div>
           </div>
           <div class="col-lg-6">
-            <div id="chartContainer" class="col-lg-12" style="height: auto; width:100%></div>
+            <div id="chartContainer" class="col-lg-12" style="height: auto; width:100%"></div>
           </div>
         </div>
 
@@ -1286,7 +1286,6 @@ function gazeSwitchClicked() {
             -moz-transform:rotateY(180deg); /* Firefox */
           }
         </style>
-      <!-- </div> -->
 
       <audio id="chimeAudio">
           <source src="mp3/dongi_dongi_yunus.mp3" type="audio/mpeg">
@@ -1294,7 +1293,9 @@ function gazeSwitchClicked() {
 
 
 
-      <div id='myChart'></div>
+        <div id='myChart'></div>
+      </div>
+
       <script>
         var myConfig1 = {
           "type": "gauge",
@@ -1345,27 +1346,27 @@ function gazeSwitchClicked() {
           includeZero: false
         },
         data: [{
-          type: "line",
+          type: "bar",
           dataPoints: happinessArr
         },
         {
-          type: "line",
+          type: "bar",
           dataPoints: angerArr
         },
         {
-          type: "line",
+          type: "bar",
           dataPoints: surprisedArr
         },
         {
-          type: "line",
+          type: "bar",
           dataPoints: sadnessArr
         },
         {
-          type: "line",
+          type: "bar",
           dataPoints: disgustArr
         },
         {
-          type: "line",
+          type: "bar",
           dataPoints: fearArr
         }]
       });
