@@ -301,7 +301,8 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-            updateChartHappiness(val);
+          chart.data[0].dataPoints[0].y = val;
+          chart.render();
         }
       }
       else if(parsedMessage.data.includes('anger')) {
@@ -321,7 +322,8 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-            updateChartAnger(val);
+          chart.data[0].dataPoints[1].y = val;
+          chart.render();
         }
       }
       else if(parsedMessage.data.includes('surprised')) {
@@ -341,7 +343,8 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-            updateChartSurprised(val);
+          chart.data[0].dataPoints[2].y = val;
+          chart.render();
         }
       }
       else if(parsedMessage.data.includes('sadness')) {
@@ -361,7 +364,8 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-            updateChartSadness(val);
+          chart.data[0].dataPoints[3].y = val;
+          chart.render();
         }
       }
       else if(parsedMessage.data.includes('disgust')) {
@@ -381,7 +385,8 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-            updateChartDisgust(val);
+          chart.data[0].dataPoints[4].y = val;
+          chart.render();
         }
       }
       else if(parsedMessage.data.includes('fear')) {
@@ -401,7 +406,8 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-            updateChartFear(val);
+          chart.data[0].dataPoints[5].y = val;
+          chart.render();
         }
       }
 
@@ -456,7 +462,8 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-            updateChartFear(val);
+            chart.data[0].dataPoints[6].y = val;
+            chart.render();
         }
       }
     }
@@ -849,6 +856,7 @@ function speechRecognize() {
       window.speechSynthesis.speak(uterance);
       uterance.onend = function(e) {
           console.log("asdasdafs");
+          recognition.abort();
           recognition.start();
       }
 
@@ -868,24 +876,24 @@ function speechRecognize() {
                 let ut = new SpeechSynthesisUtterance('contact cannot be found');
                 window.speechSynthesis.speak(ut);
                 ut.onend = function(e) {
-                    recognition.stop();
+                    recognition.abort();
                     speechRecognize();
                 }
               }
               if(autocompleteItems.length > 0) {
                 speakAutocompleteItems(autocompleteItems);
-                recognition.stop();
+                recognition.abort();
               }
         }
       };
 
       recognition.onnomatch = function(e) {
-        recognition.stop();
-        speechRecognize();
+        recognition.abort();
+        return speechRecognize();
       }
 
       recognition.onerror = function(e) {
-        recognition.stop();
+        recognition.abort();
       }
     }
 }

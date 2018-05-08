@@ -1338,37 +1338,69 @@ function gazeSwitchClicked() {
       var disgustArr = [];
       var fearArr = [];
 
+      // var chart = new CanvasJS.Chart("chartContainer", {
+      //   animationEnabled: true,
+      //   title :{
+      //     text: "Emotions"
+      //   },
+      //   axisY: {
+      //     includeZero: false
+      //   },
+      //   data: [{
+      //     type: "bar",
+      //     dataPoints: happinessArr
+      //   },
+      //   {
+      //     type: "bar",
+      //     dataPoints: angerArr
+      //   },
+      //   {
+      //     type: "bar",
+      //     dataPoints: surprisedArr
+      //   },
+      //   {
+      //     type: "bar",
+      //     dataPoints: sadnessArr
+      //   },
+      //   {
+      //     type: "bar",
+      //     dataPoints: disgustArr
+      //   },
+      //   {
+      //     type: "bar",
+      //     dataPoints: fearArr
+      //   }]
+      // });
+
       var chart = new CanvasJS.Chart("chartContainer", {
-        title :{
-          text: "Emotions"
-        },
-        axisY: {
-          includeZero: false
-        },
-        data: [{
-          type: "bar",
-          dataPoints: happinessArr
-        },
-        {
-          type: "bar",
-          dataPoints: angerArr
-        },
-        {
-          type: "bar",
-          dataPoints: surprisedArr
-        },
-        {
-          type: "bar",
-          dataPoints: sadnessArr
-        },
-        {
-          type: "bar",
-          dataPoints: disgustArr
-        },
-        {
-          type: "bar",
-          dataPoints: fearArr
-        }]
+      	animationEnabled: true,
+
+      	title:{
+      		text:"Real-time Emotion Densities"
+      	},
+      	axisX:{
+      		interval: 1
+      	},
+      	axisY2:{
+      		interlacedColor: "rgba(1,77,101,.2)",
+      		gridColor: "rgba(1,77,101,.1)",
+      		title: "density"
+      	},
+      	data: [{
+      		type: "bar",
+      		name: "emotions",
+      		axisYType: "secondary",
+      		color: "#014D65",
+      		dataPoints: [
+      			{ y: 0, label: "Happiness" },
+      			{ y: 0, label: "Anger" },
+            { y: 0, label: "Surprised" },
+      			{ y: 0, label: "Sadness" },
+      			{ y: 0, label: "Disgust" },
+            { y: 0, label: "Fear" },
+      			{ y: 0, label: "Neutral" }
+      		]
+      	}]
       });
 
       var xVal = 0;
