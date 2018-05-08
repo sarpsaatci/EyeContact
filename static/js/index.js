@@ -612,7 +612,7 @@ function changeSettingsMenu() {
       angerSwitchClicked();
       clickedAngerMedium();
     }
-    else if(settings.emotion_anger_sensivity == 'medium') {
+    else if(settings.emotion_anger_sensivity == 'high') {
       angerSwitchClicked();
       clickedAngerHigh();
     }
@@ -627,7 +627,7 @@ function changeSettingsMenu() {
       disgustSwitchClicked();
       clickedDisgustMedium();
     }
-    else if(settings.emotion_disgust_sensivity == 'medium') {
+    else if(settings.emotion_disgust_sensivity == 'high') {
       disgustSwitchClicked();
       clickedDisgustHigh();
     }
@@ -642,7 +642,7 @@ function changeSettingsMenu() {
       fearSwitchClicked();
       clickedFearMedium();
     }
-    else if(settings.emotion_fear_sensivity == 'medium') {
+    else if(settings.emotion_fear_sensivity == 'high') {
       fearSwitchClicked();
       clickedFearHigh();
     }
@@ -657,7 +657,7 @@ function changeSettingsMenu() {
       surpriseSwitchClicked();
       clickedSurpriseMedium();
     }
-    else if(settings.emotion_surprised_sensivity == 'medium') {
+    else if(settings.emotion_surprised_sensivity == 'high') {
       surpriseSwitchClicked();
       clickedSurpriseHigh();
     }
@@ -672,7 +672,7 @@ function changeSettingsMenu() {
       sadnessSwitchClicked();
       clickedSadnessMedium();
     }
-    else if(settings.emotion_sadness_sensivity == 'medium') {
+    else if(settings.emotion_sadness_sensivity == 'high') {
       sadnessSwitchClicked();
       clickedSadnessHigh();
     }
