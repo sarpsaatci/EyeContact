@@ -302,12 +302,12 @@ ws.onmessage = function(message) {
           document.getElementById('videoOutput').volume = 0.4;
         };
 
-        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-        val = parseFloat(val);
-        if(val) {
-          emodata[0].y = val;
-          chart.render();
-        }
+        // let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        // val = parseFloat(val);
+        // if(val) {
+        //   emodata[0].y = val;
+        //   chart.render();
+        // }
       }
       else if(parsedMessage.data.includes('anger')) {
         let emoUtter = new SpeechSynthesisUtterance('angry');

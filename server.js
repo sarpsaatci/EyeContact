@@ -712,10 +712,10 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     // allFollower = follow('/root/OpenFace/emotionsOutputFile.txt', options = {persistent: true, catchup: true});
 
     follower.on('line', function(filename, line) {
-      console.log('OpenFace: '+line);
+      // console.log('OpenFace: '+line);
       if(line.includes('$modelLoaded'))
       {
-        console.log('----------------');
+        // console.log('----------------');
         caller.sendMessage({
           id: 'capture'
         });
