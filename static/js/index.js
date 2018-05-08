@@ -476,6 +476,7 @@ ws.onmessage = function(message) {
     console.log(parsedMessage);
     if(parsedMessage.settings == 'default') {
       register(currentUser, dbcontacts);
+      changeSettingsMenu();
     }
     else {
       if(settings = parsedMessage.settings) {
@@ -646,7 +647,7 @@ function changeSettingsMenu() {
     else if(settings.emotion_happiness_sensivity == 'medium') {
       clickedHappinessMedium();
     }
-    else if(settings.emotion_happiness_sensivity == 'medium') {
+    else if(settings.emotion_happiness_sensivity == 'high') {
       clickedHappinessHigh();
     }
   }
