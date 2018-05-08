@@ -497,7 +497,7 @@ function applySettings(newSettings)
   });
 }
 
-function setSettings(settings)
+function setSettings()
 {
   sendMessage({
     id: 'setSettings',
