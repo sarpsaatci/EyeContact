@@ -323,12 +323,12 @@ ws.onmessage = function(message) {
           document.getElementById('videoOutput').volume = 0.4;
         };
 
-        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-        val = parseFloat(val);
-        if(val) {
-          emodata[1].y = val;
-          chart.render();
-        }
+        // let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        // val = parseFloat(val);
+        // if(val) {
+        //   emodata[1].y = val;
+        //   chart.render();
+        // }
       }
       else if(parsedMessage.data.includes('surprise')) {
         let emoUtter = new SpeechSynthesisUtterance('surprised');
@@ -344,12 +344,12 @@ ws.onmessage = function(message) {
           document.getElementById('videoOutput').volume = 0.4;
         };
 
-        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-        val = parseFloat(val);
-        if(val) {
-          emodata[2].y = val;
-          chart.render();
-        }
+        // let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        // val = parseFloat(val);
+        // if(val) {
+        //   emodata[2].y = val;
+        //   chart.render();
+        // }
       }
       else if(parsedMessage.data.includes('sadness')) {
         let emoUtter = new SpeechSynthesisUtterance('sad');
@@ -365,12 +365,12 @@ ws.onmessage = function(message) {
           document.getElementById('videoOutput').volume = 0.4;
         };
 
-        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-        val = parseFloat(val);
-        if(val) {
-          emodata[3].y = val;
-          chart.render();
-        }
+        // let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        // val = parseFloat(val);
+        // if(val) {
+        //   emodata[3].y = val;
+        //   chart.render();
+        // }
       }
       else if(parsedMessage.data.includes('disgust')) {
         let emoUtter = new SpeechSynthesisUtterance('disgust');
@@ -386,12 +386,12 @@ ws.onmessage = function(message) {
           document.getElementById('videoOutput').volume = 0.4;
         };
 
-        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-        val = parseFloat(val);
-        if(val) {
-          emodata[4].y = val;
-          chart.render();
-        }
+        // let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        // val = parseFloat(val);
+        // if(val) {
+        //   emodata[4].y = val;
+        //   chart.render();
+        // }
       }
       else if(parsedMessage.data.includes('fear')) {
         let emoUtter = new SpeechSynthesisUtterance('fear');
@@ -407,12 +407,12 @@ ws.onmessage = function(message) {
           document.getElementById('videoOutput').volume = 0.4;
         };
 
-        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-        val = parseFloat(val);
-        if(val) {
-          emodata[5].y = val;
-          chart.render();
-        }
+        // let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        // val = parseFloat(val);
+        // if(val) {
+        //   emodata[5].y = val;
+        //   chart.render();
+        // }
       }
 
       else if(parsedMessage.data.includes('left')) {
@@ -463,12 +463,12 @@ ws.onmessage = function(message) {
           document.getElementById('videoOutput').volume = 0.4;
         };
 
-        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-        val = parseFloat(val);
-        if(val) {
-            emodata[6].y = val;
-            chart.render();
-        }
+        // let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        // val = parseFloat(val);
+        // if(val) {
+        //     emodata[6].y = val;
+        //     chart.render();
+        // }
       }
     }
     break;
