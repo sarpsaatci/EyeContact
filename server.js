@@ -729,28 +729,28 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
               caller.sendMessage({
                 id: 'tracking',
                 emotion: 'anger',
-                data: line.substr(line.indexOf(':'))
+                data: line.substr(line.indexOf(':')+1)
               });
             }
             if(line.includes('disgust')) {
               caller.sendMessage({
                 id: 'tracking',
                 emotion: 'disgust',
-                data: line.substr(line.indexOf(':'))
+                data: line.substr(line.indexOf(':')+1)
               });
             }
             if(line.includes('fear')) {
               caller.sendMessage({
                 id: 'tracking',
                 emotion: 'fear',
-                data: line.substr(line.indexOf(':'))
+                data: line.substr(line.indexOf(':')+1)
               });
             }
             if(line.includes('happiness')) {
               caller.sendMessage({
                 id: 'tracking',
                 emotion: 'happiness',
-                data: line.substr(line.indexOf(':'))
+                data: line.substr(line.indexOf(':')+1)
               });
             }
             if(line.includes('sadness')) {
@@ -771,7 +771,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
               caller.sendMessage({
                 id: 'tracking',
                 emotion: 'neutral',
-                data: line.substr(line.indexOf(':'))
+                data: line.substr(line.indexOf(':')+1)
               });
             }
           }
