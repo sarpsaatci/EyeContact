@@ -1090,13 +1090,12 @@ function register(currentUser, contacts) {
 function call(peerEmail) {
 
   window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(new SpeechSynthesisUtterance('calling'));
 
 	setCallState(PROCESSING_CALL);
 
   document.getElementById('callPage').style.display = 'none';
   document.getElementById('dialPage').style.display = 'block';
-
-  window.speechSynthesis.speak(new SpeechSynthesisUtterance('calling'));
 
 	var options = {
 		localVideo : videoInput,
