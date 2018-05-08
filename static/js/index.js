@@ -491,31 +491,31 @@ ws.onmessage = function(message) {
     val = parseFloat(val);
     if(val && !isNaN(val)) {
       if(parsedMessage.emotion == 'happiness') {
-        emodata[0] = val;
+        emodata[0].y = val;
         chart.render();
       }
       if(parsedMessage.emotion == 'anger') {
-        emodata[1] = val;
+        emodata[1].y = val;
         chart.render();
       }
       if(parsedMessage.emotion == 'surprised') {
-        emodata[2] = val;
+        emodata[2].y = val;
         chart.render();
       }
       if(parsedMessage.emotion == 'sadness') {
-        emodata[3] = val;
+        emodata[3].y = val;
         chart.render();
       }
       if(parsedMessage.emotion == 'disgust') {
-        emodata[4] = val;
+        emodata[4].y = val;
         chart.render();
       }
       if(parsedMessage.emotion == 'fear') {
-        emodata[5] = val;
+        emodata[5].y = val;
         chart.render();
       }
       if(parsedMessage.emotion == 'neutral') {
-        emodata[6] = val;
+        emodata[6].y = val;
         chart.render();
       }
     }
