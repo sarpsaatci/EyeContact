@@ -88,6 +88,7 @@ var callerName = '';
 var of = null;
 
 var follower = null;
+var allFollower = null;
 
 var incImg = 1;
 
@@ -704,7 +705,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     //   .on('addDir', path => watcher.add(path, caller, callee));
 
     follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
-    let allFollower = follow('/root/OpenFace/emotionsOutputFile.txt', options = {persistent: true, catchup: true});
+    allFollower = follow('/root/OpenFace/emotionsOutputFile.txt', options = {persistent: true, catchup: true});
 
     follower.on('line', function(filename, line) {
       console.log('OpenFace: '+line);
