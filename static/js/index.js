@@ -489,9 +489,9 @@ ws.onmessage = function(message) {
     // console.log(parsedMessage);
     let val = parsedMessage.data;
     val = parseFloat(val);
-    if(val) {
+    if(val && !isNaN(val)) {
       if(parsedMessage.emotion == 'happiness') {
-        emodata[0] = (float) val;
+        emodata[0] = val;
         chart.render();
       }
       if(parsedMessage.emotion == 'anger') {
