@@ -452,6 +452,8 @@ function setSettings(currentUser, contacts, newSettings, ws) {
       settings: newSettings
     });
 
+    console.log(newSettings);
+
     var editUser = {};
     editUser = Object.assign(editUser, newUser._doc);
     delete editUser._id;
