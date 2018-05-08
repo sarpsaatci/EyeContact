@@ -232,6 +232,7 @@ ws.onmessage = function(message) {
 		incomingCall(parsedMessage);
 		break;
 	case 'startCommunication':
+    chart.render();
 		startCommunication(parsedMessage);
 		break;
 	case 'stopCommunication':
