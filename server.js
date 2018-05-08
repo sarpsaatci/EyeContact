@@ -757,14 +757,14 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
               caller.sendMessage({
                 id: 'tracking',
                 emotion: 'sadness',
-                data: line.substr(line.indexOf(':'))
+                data: line.substr(line.indexOf(':')+1)
               });
             }
             if(line.includes('surprise')) {
               caller.sendMessage({
                 id: 'tracking',
                 emotion: 'surprised',
-                data: line.substr(line.indexOf(':'))
+                data: line.substr(line.indexOf(':')+1)
               });
             }
             if(line.includes('neutral')) {
