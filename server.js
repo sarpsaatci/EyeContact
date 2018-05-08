@@ -709,7 +709,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     //   .on('addDir', path => watcher.add(path, caller, callee));
 
     follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
-    // allFollower = follow('/root/OpenFace/emotionsOutputFile.txt', options = {persistent: true, catchup: true});
+    allFollower = follow('/root/OpenFace/emotionsOutputFile.txt', options = {persistent: true, catchup: true});
 
     follower.on('line', function(filename, line) {
       // console.log('OpenFace: '+line);
@@ -728,61 +728,61 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
       }
     });
 
-    // allFollower.on('line', function(filename, line) {
-    //   // console.log('OpenFace: '+line);
-    //   if(line.includes('$'))
-    //   {
-    //     if(line.includes('anger')) {
-    //       caller.sendMessage({
-    //         id: 'tracking',
-    //         emotion: 'anger',
-    //         data: line.substr(line.indexOf(':'))
-    //       });
-    //     }
-    //     if(line.includes('disgust')) {
-    //       caller.sendMessage({
-    //         id: 'tracking',
-    //         emotion: 'disgust',
-    //         data: line.substr(line.indexOf(':'))
-    //       });
-    //     }
-    //     if(line.includes('fear')) {
-    //       caller.sendMessage({
-    //         id: 'tracking',
-    //         emotion: 'fear',
-    //         data: line.substr(line.indexOf(':'))
-    //       });
-    //     }
-    //     if(line.includes('happiness')) {
-    //       caller.sendMessage({
-    //         id: 'tracking',
-    //         emotion: 'happiness',
-    //         data: line.substr(line.indexOf(':'))
-    //       });
-    //     }
-    //     if(line.includes('sadness')) {
-    //       caller.sendMessage({
-    //         id: 'tracking',
-    //         emotion: 'sadness',
-    //         data: line.substr(line.indexOf(':'))
-    //       });
-    //     }
-    //     if(line.includes('surprise')) {
-    //       caller.sendMessage({
-    //         id: 'tracking',
-    //         emotion: 'surprised',
-    //         data: line.substr(line.indexOf(':'))
-    //       });
-    //     }
-    //     if(line.includes('neutral')) {
-    //       caller.sendMessage({
-    //         id: 'tracking',
-    //         emotion: 'neutral',
-    //         data: line.substr(line.indexOf(':'))
-    //       });
-    //     }
-    //   }
-    // });
+    allFollower.on('line', function(filename, line) {
+      // console.log('OpenFace: '+line);
+      if(line.includes('$'))
+      {
+        if(line.includes('anger')) {
+          caller.sendMessage({
+            id: 'tracking',
+            emotion: 'anger',
+            data: line.substr(line.indexOf(':'))
+          });
+        }
+        if(line.includes('disgust')) {
+          caller.sendMessage({
+            id: 'tracking',
+            emotion: 'disgust',
+            data: line.substr(line.indexOf(':'))
+          });
+        }
+        if(line.includes('fear')) {
+          caller.sendMessage({
+            id: 'tracking',
+            emotion: 'fear',
+            data: line.substr(line.indexOf(':'))
+          });
+        }
+        if(line.includes('happiness')) {
+          caller.sendMessage({
+            id: 'tracking',
+            emotion: 'happiness',
+            data: line.substr(line.indexOf(':'))
+          });
+        }
+        if(line.includes('sadness')) {
+          caller.sendMessage({
+            id: 'tracking',
+            emotion: 'sadness',
+            data: line.substr(line.indexOf(':'))
+          });
+        }
+        if(line.includes('surprise')) {
+          caller.sendMessage({
+            id: 'tracking',
+            emotion: 'surprised',
+            data: line.substr(line.indexOf(':'))
+          });
+        }
+        if(line.includes('neutral')) {
+          caller.sendMessage({
+            id: 'tracking',
+            emotion: 'neutral',
+            data: line.substr(line.indexOf(':'))
+          });
+        }
+      }
+    });
 }
 
 function call(callerId, to, from, sdpOffer) {
