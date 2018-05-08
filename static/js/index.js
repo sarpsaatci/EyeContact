@@ -20,8 +20,8 @@ var videoInput;
 var videoOutput;
 var webRtcPeer;
 
-window.speechSynthesis.onspeaking = function() {
-  this.cancel();
+// window.speechSynthesis.onspeaking = function() {
+//   this.cancel();
 }
 
 var registerName = null;
@@ -1089,7 +1089,9 @@ function register(currentUser, contacts) {
 
 function call(peerEmail) {
 
-  window.speechSynthesis.cancel();
+  if(window.speechSynthesis.pending) {
+      window.speechSynthesis.cancel();
+  }
   window.speechSynthesis.speak(new SpeechSynthesisUtterance('calling'));
 
 	setCallState(PROCESSING_CALL);
@@ -1128,7 +1130,9 @@ function call(peerEmail) {
 
 function stop(message) {
 
-  window.speechSynthesis.cancel();
+  if(window.speechSynthesis.pending) {
+      window.speechSynthesis.cancel();
+  }
   window.speechSynthesis.speak(new SpeechSynthesisUtterance('call ended'));
 
 	setCallState(NO_CALL);
