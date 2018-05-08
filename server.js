@@ -495,6 +495,10 @@ function getSettings(email, ws)
         return true;
       }
       else {
+        ws.send(JSON.stringify({
+          id: 'getSettings',
+          settings: 'default'
+        }));
         return false;
       }
     });

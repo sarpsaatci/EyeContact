@@ -473,10 +473,15 @@ ws.onmessage = function(message) {
     }
     break;
   case 'getSettings':
-    settingsDefault = false;
     console.log(parsedMessage);
-    settings = parsedMessage.settings;
-    changeSettingsMenu();
+    if(parsedMessage.settings == 'default') {
+      register(currentUser, dbcontacts);
+    }
+    else {
+      settings = parsedMessage.settings;
+      register(currentUser, dbcontacts);
+      changeSettingsMenu();
+    }
     break;
   case 'speechToNum':
     console.log(parsedMessage.num);
@@ -823,8 +828,6 @@ function manageUser(userData)
     id: 'getSettings',
     email: currentUser.email.$t
   });
-
-  register(currentUser, dbcontacts);
 }
 
 function activatePage()
