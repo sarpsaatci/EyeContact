@@ -338,9 +338,9 @@ wss.on('connection', function(ws) {
               {
                 of = cp.spawn('./../OpenFace/build/bin/FeatureExtraction', ['-fdir', '/root/OpenFace/samples/image_sequence' , '-of', '../OpenFace/outputs/deneme.txt', '-q']);
 
-                // of.stdout.on('data', function(data) {
-                //   console.log('--------- ' + data);
-                // });
+                of.stdout.on('data', function(data) {
+                  console.log('--------- ' + data);
+                });
 
                 of.on('close', function(code, signal) {
                   console.log('ls finished...');
@@ -711,22 +711,22 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
     follower = follow('/root/OpenFace/outputFile.txt', options = {persistent: true, catchup: true});
     // allFollower = follow('/root/OpenFace/emotionsOutputFile.txt', options = {persistent: true, catchup: true});
 
-    follower.on('line', function(filename, line) {
-      console.log('OpenFace: '+line);
-      if(line.includes('$modelLoaded'))
-      {
-        console.log('----------------');
-        caller.sendMessage({
-          id: 'capture'
-        });
-      }
-      else {
-        caller.sendMessage({
-          id: 'openFace',
-          data: line
-        });
-      }
-    });
+    // follower.on('line', function(filename, line) {
+    //   console.log('OpenFace: '+line);
+    //   if(line.includes('$modelLoaded'))
+    //   {
+    //     console.log('----------------');
+    //     caller.sendMessage({
+    //       id: 'capture'
+    //     });
+    //   }
+    //   else {
+    //     caller.sendMessage({
+    //       id: 'openFace',
+    //       data: line
+    //     });
+    //   }
+    // });
 
     // allFollower.on('line', function(filename, line) {
     //   // console.log('OpenFace: '+line);
