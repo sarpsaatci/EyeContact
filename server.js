@@ -781,13 +781,13 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
             data: line.substr(line.indexOf(':'))
           });
         }
-        else {
-          caller.sendMessage({
-            id: 'tracking',
-            emotion: 'n/a',
-            data: 0
-          });
-        }
+      }
+      else {
+        caller.sendMessage({
+          id: 'tracking',
+          emotion: 'n/a',
+          data: 0
+        });
       }
     });
 }
