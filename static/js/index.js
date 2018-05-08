@@ -491,7 +491,7 @@ ws.onmessage = function(message) {
     val = parseFloat(val);
     if(val) {
       if(parsedMessage.emotion == 'happiness') {
-        emodata[0] = val;
+        emodata[0] = (float) val;
         chart.render();
       }
       if(parsedMessage.emotion == 'anger') {
