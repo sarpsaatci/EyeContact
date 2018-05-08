@@ -20,6 +20,10 @@ var videoInput;
 var videoOutput;
 var webRtcPeer;
 
+window.speechSynthesis.onspeaking = function() {
+  this.cancel();
+}
+
 var registerName = null;
 const NOT_REGISTERED = 0;
 const REGISTERING = 1;
@@ -800,8 +804,6 @@ function makeCall(peerEmail)
   //   window.speechSynthesis.cancel();
   // }
 
-  window.speechSynthesis.cancel();
-
   // if (recognition) {
   //   recognition.abort();
   // }
@@ -1086,6 +1088,8 @@ function register(currentUser, contacts) {
 }
 
 function call(peerEmail) {
+
+  window.speechSynthesis.cancel();
 
 	setCallState(PROCESSING_CALL);
 
