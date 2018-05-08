@@ -491,6 +491,8 @@ function getSettings(email, ws)
           settings: user.settings
         }));
 
+        console.log(user.settings);
+
         writeSettingsInput(user.settings);
 
         return true;
