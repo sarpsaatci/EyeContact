@@ -22,7 +22,7 @@ var webRtcPeer;
 
 // window.speechSynthesis.onspeaking = function() {
 //   this.cancel();
-}
+// }
 
 var registerName = null;
 const NOT_REGISTERED = 0;
