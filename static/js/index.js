@@ -603,95 +603,107 @@ function changeSettingsMenu() {
     document.getElementById("gazeSwitch").checked = false;
   }
 
-  angerSwitchClicked();
-  disgustSwitchClicked();
-  fearSwitchClicked();
-  surpriseSwitchClicked();
-  sadnessSwitchClicked();
-  happinessSwitchClicked();
-  gazeSwitchClicked();
-
   if(document.getElementById("angerSwitch").checked) {
     if(settings.emotion_anger_sensivity == 'low') {
+        angerSwitchClicked();
         clickedAngerLow();
     }
     else if(settings.emotion_anger_sensivity == 'medium') {
+      angerSwitchClicked();
       clickedAngerMedium();
     }
     else if(settings.emotion_anger_sensivity == 'medium') {
+      angerSwitchClicked();
       clickedAngerHigh();
     }
   }
 
   if(document.getElementById("disgustSwitch").checked) {
     if(settings.emotion_disgust_sensivity == 'low') {
-        clickedDisgustLow();
+      disgustSwitchClicked();
+      clickedDisgustLow();
     }
     else if(settings.emotion_disgust_sensivity == 'medium') {
-
+      disgustSwitchClicked();
       clickedDisgustMedium();
     }
     else if(settings.emotion_disgust_sensivity == 'medium') {
+      disgustSwitchClicked();
       clickedDisgustHigh();
     }
   }
 
   if(document.getElementById("fearSwitch").checked) {
     if(settings.emotion_fear_sensivity == 'low') {
-        clickedFearLow();
+      fearSwitchClicked();
+      clickedFearLow();
     }
     else if(settings.emotion_fear_sensivity == 'medium') {
+      fearSwitchClicked();
       clickedFearMedium();
     }
     else if(settings.emotion_fear_sensivity == 'medium') {
+      fearSwitchClicked();
       clickedFearHigh();
     }
   }
 
   if(document.getElementById("surpriseSwitch").checked) {
     if(settings.emotion_surprised_sensivity == 'low') {
-        clickedSurpriseLow();
+      surpriseSwitchClicked();
+      clickedSurpriseLow();
     }
     else if(settings.emotion_surprised_sensivity == 'medium') {
+      surpriseSwitchClicked();
       clickedSurpriseMedium();
     }
     else if(settings.emotion_surprised_sensivity == 'medium') {
+      surpriseSwitchClicked();
       clickedSurpriseHigh();
     }
   }
 
   if(document.getElementById("sadnessSwitch").checked) {
     if(settings.emotion_anger_sensivity == 'low') {
-        clickedSadnessLow();
+      sadnessSwitchClicked();
+      clickedSadnessLow();
     }
     else if(settings.emotion_sadness_sensivity == 'medium') {
+      sadnessSwitchClicked();
       clickedSadnessMedium();
     }
     else if(settings.emotion_sadness_sensivity == 'medium') {
+      sadnessSwitchClicked();
       clickedSadnessHigh();
     }
   }
 
   if(document.getElementById("happinessSwitch").checked) {
     if(settings.emotion_happiness_sensivity == 'low') {
-        clickedHappinessLow();
+      happinessSwitchClicked();
+      clickedHappinessLow();
     }
     else if(settings.emotion_happiness_sensivity == 'medium') {
+      happinessSwitchClicked();
       clickedHappinessMedium();
     }
     else if(settings.emotion_happiness_sensivity == 'high') {
+      happinessSwitchClicked();
       clickedHappinessHigh();
     }
   }
 
   if(document.getElementById("gazeSwitch").checked) {
     if(settings.gaze_sensivity == 'low') {
-        clickedSensLow();
+      gazeSwitchClicked();
+      clickedSensLow();
     }
     else if(settings.gaze_sensivity == 'medium') {
+      gazeSwitchClicked();
       clickedSensMedium();
     }
     else if(settings.gaze_sensivity == 'high') {
+      gazeSwitchClicked();
       clickedSensHigh();
     }
   }
