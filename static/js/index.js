@@ -478,9 +478,10 @@ ws.onmessage = function(message) {
       register(currentUser, dbcontacts);
     }
     else {
-      settings = parsedMessage.settings;
-      register(currentUser, dbcontacts);
-      changeSettingsMenu();
+      if(settings = parsedMessage.settings) {
+        register(currentUser, dbcontacts);
+        changeSettingsMenu();
+      }
     }
     break;
   case 'speechToNum':
