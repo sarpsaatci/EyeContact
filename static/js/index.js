@@ -326,7 +326,7 @@ ws.onmessage = function(message) {
           chart.render();
         }
       }
-      else if(parsedMessage.data.includes('surprised')) {
+      else if(parsedMessage.data.includes('surprise')) {
         let emoUtter = new SpeechSynthesisUtterance('surprised');
         chime = document.getElementById('chimeAudio');
         chime.play();
