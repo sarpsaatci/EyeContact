@@ -802,8 +802,8 @@ function makeCall(peerEmail)
 
   window.speechSynthesis.cancel();
 
-  if (window.hasOwnProperty('webkitSpeechRecognition')) {
-    window.webkitSpeechRecognition.abort();
+  if (recognition) {
+    recognition.abort();
   }
 
   call(peerEmail);
