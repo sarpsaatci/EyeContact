@@ -266,7 +266,7 @@ ws.onmessage = function(message) {
   case 'capture':
     console.log(parsedMessage.id);
     readyToCaptureFrame = true;
-    // chimeAudio.play();
+    chimeAudio.play();
     synth.speak(new SpeechSynthesisUtterance('tracking started'));
     break;
   case 'openFace':
@@ -982,8 +982,10 @@ function callResponse(message) {
 		setCallState(IN_CALL);
 		webRtcPeer.processAnswer(message.sdpAnswer);
 
-    document.getElementById('callPage').style.display = "none";
+    document.getElementById('dialPage').style.display = "none";
     document.getElementById('activePage').style.display = "block";
+
+    window.speechSynthesis.speak(new SpeechSynthesisUtterance('call started'));
 
     showSpinner(videoInput, videoOutput);
 
@@ -1087,6 +1089,11 @@ function call(peerEmail) {
 
 	setCallState(PROCESSING_CALL);
 
+  document.getElementById('callPage').style.display = 'none';
+  document.getElementById('dialPage').style.display = 'block';
+
+  window.speechSynthesis.speak(new SpeechSynthesisUtterance('calling'));
+
 	var options = {
 		localVideo : videoInput,
 		remoteVideo : videoOutput,
@@ -1134,6 +1141,7 @@ function stop(message) {
 	}
 
   document.getElementById('activePage').style.display = "none";
+  document.getElementById('dialPage').style.display = 'none';
   document.getElementById('callPage').style.display = "block";
   document.getElementById('myInput').value = "";
   speechRecognize();
