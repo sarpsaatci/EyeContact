@@ -266,10 +266,8 @@ ws.onmessage = function(message) {
   case 'capture':
     console.log(parsedMessage.id);
     readyToCaptureFrame = true;
-    let trackAudio = document.getElementById('chimeAudio').play();
-    trackAudio.onended = function() {
-        window.speechSynthesis.speak(new SpeechSynthesisUtterance('tracking started'));
-    }
+    chimeAudio.play();
+    synth.speak(new SpeechSynthesisUtterance('tracking started'));
     break;
   case 'openFace':
     console.log(parsedMessage.data);
