@@ -802,9 +802,9 @@ function makeCall(peerEmail)
 
   window.speechSynthesis.cancel();
 
-  if (recognition) {
-    recognition.abort();
-  }
+  // if (recognition) {
+  //   recognition.abort();
+  // }
 
   call(peerEmail);
 }
