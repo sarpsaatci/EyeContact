@@ -1372,6 +1372,16 @@ function gazeSwitchClicked() {
       //   }]
       // });
 
+      var emodata = [
+        { y: 0, label: "Happiness" },
+        { y: 0, label: "Anger" },
+        { y: 0, label: "Surprised" },
+        { y: 0, label: "Sadness" },
+        { y: 0, label: "Disgust" },
+        { y: 0, label: "Fear" },
+        { y: 0, label: "Neutral" }
+      ];
+
       var chart = new CanvasJS.Chart("chartContainer", {
       	animationEnabled: true,
 
@@ -1391,15 +1401,7 @@ function gazeSwitchClicked() {
       		name: "emotions",
       		axisYType: "secondary",
       		color: "#014D65",
-      		dataPoints: [
-      			{ y: 0, label: "Happiness" },
-      			{ y: 0, label: "Anger" },
-            { y: 0, label: "Surprised" },
-      			{ y: 0, label: "Sadness" },
-      			{ y: 0, label: "Disgust" },
-            { y: 0, label: "Fear" },
-      			{ y: 0, label: "Neutral" }
-      		]
+      		dataPoints: emodata
       	}]
       });
 

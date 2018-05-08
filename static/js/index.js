@@ -301,7 +301,7 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-          chart.data[0].dataPoints[0].y = val;
+          emodata[0].y = val;
           chart.render();
         }
       }
@@ -322,7 +322,7 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-          chart.data[0].dataPoints[1].y = val;
+          emodata[1].y = val;
           chart.render();
         }
       }
@@ -343,7 +343,7 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-          chart.data[0].dataPoints[2].y = val;
+          emodata[2].y = val;
           chart.render();
         }
       }
@@ -364,7 +364,7 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-          chart.data[0].dataPoints[3].y = val;
+          emodata[3].y = val;
           chart.render();
         }
       }
@@ -385,7 +385,7 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-          chart.data[0].dataPoints[4].y = val;
+          emodata[4].y = val;
           chart.render();
         }
       }
@@ -406,7 +406,7 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-          chart.data[0].dataPoints[5].y = val;
+          emodata[5].y = val;
           chart.render();
         }
       }
@@ -462,7 +462,7 @@ ws.onmessage = function(message) {
         let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
         val = parseFloat(val);
         if(val) {
-            chart.data[0].dataPoints[6].y = val;
+            emodata[6].y = val;
             chart.render();
         }
       }
