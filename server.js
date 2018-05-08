@@ -561,18 +561,6 @@ function stop(sessionId) {
         return;
     }
 
-    if(of) {
-        of.kill('SIGHUP');
-    }
-
-    follower.close();
-
-    follower = null;
-
-    of = null;
-
-    incImg = 1;
-
     // fse.removeSync('/root/OpenFace/samples/image_sequence', err => {
     //   if (err) return console.error(err)
     //
@@ -613,6 +601,18 @@ function stop(sessionId) {
 
     if(shell.exec('> ../OpenFace/outputFile.txt'))
       console.log("outputFile cleared");
+
+      if(of) {
+          of.kill('SIGHUP');
+      }
+
+      follower.close();
+
+      follower = null;
+
+      of = null;
+
+      incImg = 1;
 
 }
 

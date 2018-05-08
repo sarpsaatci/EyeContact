@@ -486,7 +486,7 @@ ws.onmessage = function(message) {
     }
     break;
   case 'tracking':
-    // console.log(parsedMessage.num);
+    console.log(parsedMessage.data);
     let val = parsedMessage.data;
     val = parseFloat(val);
     if(val) {
