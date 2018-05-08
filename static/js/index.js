@@ -574,7 +574,6 @@ function changeSettingsMenu() {
 
   if(document.getElementById("angerSwitch").checked) {
     if(settings.emotion_anger_sensivity == 'low') {
-
         clickedAngerLow();
     }
     else if(settings.emotion_anger_sensivity == 'medium') {
@@ -820,11 +819,12 @@ function manageUser(userData)
 
   synth.speak(utterThis);
 
-  register(currentUser, dbcontacts);
   sendMessage({
     id: 'getSettings',
     email: currentUser.email.$t
   });
+
+  register(currentUser, dbcontacts);
 }
 
 function activatePage()
