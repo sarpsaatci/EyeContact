@@ -485,8 +485,40 @@ ws.onmessage = function(message) {
       }
     }
     break;
-  case 'speechToNum':
-    console.log(parsedMessage.num);
+  case 'tracking':
+    // console.log(parsedMessage.num);
+    let val = parsedMessage.data;
+    val = parseFloat(val);
+    if(val) {
+      if(parsedMessage.emotion == 'happiness') {
+        emodata[0] = val;
+        chart.render();
+      }
+      if(parsedMessage.emotion == 'anger') {
+        emodata[1] = val;
+        chart.render();
+      }
+      if(parsedMessage.emotion == 'surprised') {
+        emodata[2] = val;
+        chart.render();
+      }
+      if(parsedMessage.emotion == 'sadness') {
+        emodata[3] = val;
+        chart.render();
+      }
+      if(parsedMessage.emotion == 'disgust') {
+        emodata[4] = val;
+        chart.render();
+      }
+      if(parsedMessage.emotion == 'fear') {
+        emodata[5] = val;
+        chart.render();
+      }
+      if(parsedMessage.emotion == 'neutral') {
+        emodata[6] = val;
+        chart.render();
+      }
+    }
     break;
 	default:
 		console.error(parsedMessage);
