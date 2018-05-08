@@ -266,7 +266,7 @@ ws.onmessage = function(message) {
   case 'capture':
     console.log(parsedMessage.id);
     readyToCaptureFrame = true;
-    chimeAudio.play();
+    // chimeAudio.play();
     synth.speak(new SpeechSynthesisUtterance('tracking started'));
     break;
   case 'openFace':
@@ -800,6 +800,12 @@ function makeCall(peerEmail)
   //   window.speechSynthesis.cancel();
   // }
 
+  window.speechSynthesis.cancel();
+
+  if (window.hasOwnProperty('webkitSpeechRecognition')) {
+    window.webkitSpeechRecognition.abort();
+  }
+
   call(peerEmail);
 }
 
@@ -1111,6 +1117,9 @@ function call(peerEmail) {
 }
 
 function stop(message) {
+
+  window.speechSynthesis.cancel();
+
 	setCallState(NO_CALL);
 	if (webRtcPeer) {
 		webRtcPeer.dispose();
