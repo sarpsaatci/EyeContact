@@ -266,8 +266,10 @@ ws.onmessage = function(message) {
   case 'capture':
     console.log(parsedMessage.id);
     readyToCaptureFrame = true;
-    document.getElementById('chimeAudio').play();
-    window.speechSynthesis.speak(new SpeechSynthesisUtterance('tracking started'));
+    let trackAudio = document.getElementById('chimeAudio').play();
+    trackAudio.onended = function() {
+        window.speechSynthesis.speak(new SpeechSynthesisUtterance('tracking started'));
+    }
     break;
   case 'openFace':
     console.log(parsedMessage.data);
