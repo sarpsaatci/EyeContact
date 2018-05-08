@@ -602,13 +602,18 @@ function stop(sessionId) {
     if(shell.exec('> ../OpenFace/outputFile.txt'))
       console.log("outputFile cleared");
 
+    İF(shell.exec('> /root/OpenFace/emotionsOutputFile.txt'))
+      console.log("emotionsOutputFile cleared");
+
       if(of) {
           of.kill('SIGHUP');
       }
 
       follower.close();
+      allFollower.close();
 
       follower = null;
+      allFollower.close();
 
       of = null;
 
