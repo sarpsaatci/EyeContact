@@ -602,7 +602,7 @@ function stop(sessionId) {
     if(shell.exec('> ../OpenFace/outputFile.txt'))
       console.log("outputFile cleared");
 
-    İF(shell.exec('> /root/OpenFace/emotionsOutputFile.txt'))
+    if(shell.exec('> /root/OpenFace/emotionsOutputFile.txt'))
       console.log("emotionsOutputFile cleared");
 
       if(of) {
