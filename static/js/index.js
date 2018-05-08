@@ -1140,13 +1140,14 @@ function stop(message) {
 		}
 	}
 
+  window.speechSynthesis.speak(new SpeechSynthesisUtterance('call ended'));
+
   document.getElementById('activePage').style.display = "none";
   document.getElementById('dialPage').style.display = 'none';
   document.getElementById('callPage').style.display = "block";
   document.getElementById('myInput').value = "";
   speechRecognize();
 
-  window.speechSynthesis.speak(new SpeechSynthesisUtterance('call ended'));
 	hideSpinner(videoInput, videoOutput);
 
 }
