@@ -323,12 +323,12 @@ ws.onmessage = function(message) {
           document.getElementById('videoOutput').volume = 0.4;
         };
 
-        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-        val = parseFloat(val);
-        if(val) {
-          emodata[1].y = val;
-          chart.render();
-        }
+        // let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        // val = parseFloat(val);
+        // if(val) {
+        //   emodata[1].y = val;
+        //   chart.render();
+        // }
       }
       else if(parsedMessage.data.includes('surprise')) {
         let emoUtter = new SpeechSynthesisUtterance('surprised');
@@ -344,12 +344,12 @@ ws.onmessage = function(message) {
           document.getElementById('videoOutput').volume = 0.4;
         };
 
-        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-        val = parseFloat(val);
-        if(val) {
-          emodata[2].y = val;
-          chart.render();
-        }
+        // let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        // val = parseFloat(val);
+        // if(val) {
+        //   emodata[2].y = val;
+        //   chart.render();
+        // }
       }
       else if(parsedMessage.data.includes('sadness')) {
         let emoUtter = new SpeechSynthesisUtterance('sad');
@@ -365,12 +365,12 @@ ws.onmessage = function(message) {
           document.getElementById('videoOutput').volume = 0.4;
         };
 
-        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-        val = parseFloat(val);
-        if(val) {
-          emodata[3].y = val;
-          chart.render();
-        }
+        // let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        // val = parseFloat(val);
+        // if(val) {
+        //   emodata[3].y = val;
+        //   chart.render();
+        // }
       }
       else if(parsedMessage.data.includes('disgust')) {
         let emoUtter = new SpeechSynthesisUtterance('disgust');
@@ -386,12 +386,12 @@ ws.onmessage = function(message) {
           document.getElementById('videoOutput').volume = 0.4;
         };
 
-        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-        val = parseFloat(val);
-        if(val) {
-          emodata[4].y = val;
-          chart.render();
-        }
+        // let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        // val = parseFloat(val);
+        // if(val) {
+        //   emodata[4].y = val;
+        //   chart.render();
+        // }
       }
       else if(parsedMessage.data.includes('fear')) {
         let emoUtter = new SpeechSynthesisUtterance('fear');
@@ -407,12 +407,12 @@ ws.onmessage = function(message) {
           document.getElementById('videoOutput').volume = 0.4;
         };
 
-        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-        val = parseFloat(val);
-        if(val) {
-          emodata[5].y = val;
-          chart.render();
-        }
+        // let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        // val = parseFloat(val);
+        // if(val) {
+        //   emodata[5].y = val;
+        //   chart.render();
+        // }
       }
 
       else if(parsedMessage.data.includes('left')) {
@@ -463,12 +463,12 @@ ws.onmessage = function(message) {
           document.getElementById('videoOutput').volume = 0.4;
         };
 
-        let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
-        val = parseFloat(val);
-        if(val) {
-            emodata[6].y = val;
-            chart.render();
-        }
+        // let val = parsedMessage.data.substring(parsedMessage.data.indexOf('-')+1);
+        // val = parseFloat(val);
+        // if(val) {
+        //     emodata[6].y = val;
+        //     chart.render();
+        // }
       }
     }
     break;
@@ -485,8 +485,40 @@ ws.onmessage = function(message) {
       }
     }
     break;
-  case 'speechToNum':
-    console.log(parsedMessage.num);
+  case 'tracking':
+    // console.log(parsedMessage.num);
+    let val = parsedMessage.data;
+    val = parseFloat(val);
+    if(val) {
+      if(parsedMessage.emotion == 'happiness') {
+        emodata[0] = val;
+        chart.render();
+      }
+      if(parsedMessage.emotion == 'anger') {
+        emodata[1] = val;
+        chart.render();
+      }
+      if(parsedMessage.emotion == 'surprised') {
+        emodata[2] = val;
+        chart.render();
+      }
+      if(parsedMessage.emotion == 'sadness') {
+        emodata[3] = val;
+        chart.render();
+      }
+      if(parsedMessage.emotion == 'disgust') {
+        emodata[4] = val;
+        chart.render();
+      }
+      if(parsedMessage.emotion == 'fear') {
+        emodata[5] = val;
+        chart.render();
+      }
+      if(parsedMessage.emotion == 'neutral') {
+        emodata[6] = val;
+        chart.render();
+      }
+    }
     break;
 	default:
 		console.error(parsedMessage);
@@ -571,95 +603,107 @@ function changeSettingsMenu() {
     document.getElementById("gazeSwitch").checked = false;
   }
 
-  angerSwitchClicked();
-  disgustSwitchClicked();
-  fearSwitchClicked();
-  surpriseSwitchClicked();
-  sadnessSwitchClicked();
-  happinessSwitchClicked();
-  gazeSwitchClicked();
-
   if(document.getElementById("angerSwitch").checked) {
     if(settings.emotion_anger_sensivity == 'low') {
+        angerSwitchClicked();
         clickedAngerLow();
     }
     else if(settings.emotion_anger_sensivity == 'medium') {
+      angerSwitchClicked();
       clickedAngerMedium();
     }
     else if(settings.emotion_anger_sensivity == 'medium') {
+      angerSwitchClicked();
       clickedAngerHigh();
     }
   }
 
   if(document.getElementById("disgustSwitch").checked) {
     if(settings.emotion_disgust_sensivity == 'low') {
-        clickedDisgustLow();
+      disgustSwitchClicked();
+      clickedDisgustLow();
     }
     else if(settings.emotion_disgust_sensivity == 'medium') {
-
+      disgustSwitchClicked();
       clickedDisgustMedium();
     }
     else if(settings.emotion_disgust_sensivity == 'medium') {
+      disgustSwitchClicked();
       clickedDisgustHigh();
     }
   }
 
   if(document.getElementById("fearSwitch").checked) {
     if(settings.emotion_fear_sensivity == 'low') {
-        clickedFearLow();
+      fearSwitchClicked();
+      clickedFearLow();
     }
     else if(settings.emotion_fear_sensivity == 'medium') {
+      fearSwitchClicked();
       clickedFearMedium();
     }
     else if(settings.emotion_fear_sensivity == 'medium') {
+      fearSwitchClicked();
       clickedFearHigh();
     }
   }
 
   if(document.getElementById("surpriseSwitch").checked) {
     if(settings.emotion_surprised_sensivity == 'low') {
-        clickedSurpriseLow();
+      surpriseSwitchClicked();
+      clickedSurpriseLow();
     }
     else if(settings.emotion_surprised_sensivity == 'medium') {
+      surpriseSwitchClicked();
       clickedSurpriseMedium();
     }
     else if(settings.emotion_surprised_sensivity == 'medium') {
+      surpriseSwitchClicked();
       clickedSurpriseHigh();
     }
   }
 
   if(document.getElementById("sadnessSwitch").checked) {
     if(settings.emotion_anger_sensivity == 'low') {
-        clickedSadnessLow();
+      sadnessSwitchClicked();
+      clickedSadnessLow();
     }
     else if(settings.emotion_sadness_sensivity == 'medium') {
+      sadnessSwitchClicked();
       clickedSadnessMedium();
     }
     else if(settings.emotion_sadness_sensivity == 'medium') {
+      sadnessSwitchClicked();
       clickedSadnessHigh();
     }
   }
 
   if(document.getElementById("happinessSwitch").checked) {
     if(settings.emotion_happiness_sensivity == 'low') {
-        clickedHappinessLow();
+      happinessSwitchClicked();
+      clickedHappinessLow();
     }
     else if(settings.emotion_happiness_sensivity == 'medium') {
+      happinessSwitchClicked();
       clickedHappinessMedium();
     }
     else if(settings.emotion_happiness_sensivity == 'high') {
+      happinessSwitchClicked();
       clickedHappinessHigh();
     }
   }
 
   if(document.getElementById("gazeSwitch").checked) {
     if(settings.gaze_sensivity == 'low') {
-        clickedSensLow();
+      gazeSwitchClicked();
+      clickedSensLow();
     }
     else if(settings.gaze_sensivity == 'medium') {
+      gazeSwitchClicked();
       clickedSensMedium();
     }
     else if(settings.gaze_sensivity == 'high') {
+      gazeSwitchClicked();
       clickedSensHigh();
     }
   }
