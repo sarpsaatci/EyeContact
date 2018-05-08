@@ -1130,6 +1130,7 @@ function call(peerEmail) {
 function stop(message) {
 
   window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(new SpeechSynthesisUtterance('call ended'));
 
 	setCallState(NO_CALL);
 	if (webRtcPeer) {
@@ -1143,8 +1144,6 @@ function stop(message) {
 			sendMessage(message);
 		}
 	}
-
-  window.speechSynthesis.speak(new SpeechSynthesisUtterance('call ended'));
 
   document.getElementById('activePage').style.display = "none";
   document.getElementById('dialPage').style.display = 'none';
