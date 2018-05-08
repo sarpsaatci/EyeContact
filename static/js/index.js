@@ -1089,7 +1089,7 @@ function register(currentUser, contacts) {
 
 function call(peerEmail) {
 
-  if(window.speechSynthesis.pending {
+  if(window.speechSynthesis.pending) {
       window.speechSynthesis.cancel();
   }
   window.speechSynthesis.speak(new SpeechSynthesisUtterance('calling'));
@@ -1130,7 +1130,7 @@ function call(peerEmail) {
 
 function stop(message) {
 
-  if(window.speechSynthesis.pending {
+  if(window.speechSynthesis.pending) {
       window.speechSynthesis.cancel();
   }
   window.speechSynthesis.speak(new SpeechSynthesisUtterance('call ended'));
