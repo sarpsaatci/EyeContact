@@ -511,14 +511,14 @@ input:checked + .slider:before {
           document.body.style.backgroundColor = "white";
           setSettings();
       }
-      function togglenav() {
-        if(open == 1) {
-          closeNav();
-        }
-        else {
-          openNav();
-        }
-      }
+      // function togglenav() {
+      //   if(open == 1) {
+      //     closeNav();
+      //   }
+      //   else {
+      //     openNav();
+      //   }
+      // }
       </script>
 
 
@@ -528,7 +528,7 @@ input:checked + .slider:before {
           <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <div class="tab">
-              <button class="tablinks" onclick="togglenav(event, 'Emotions')">Emotions</button>
+              <button class="tablinks" onclick="openNav(event, 'Emotions')">Emotions</button>
             </div>
 
             <div id="Emotions" class="tabcontent">
