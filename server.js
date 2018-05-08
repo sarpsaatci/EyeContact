@@ -460,6 +460,7 @@ function setSettings(currentUser, contacts, newSettings, ws) {
       if(error) {
           console.log(error);
       }
+      console.log(result.settings);
     });
 
   });
