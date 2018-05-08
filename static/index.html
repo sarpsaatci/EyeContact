@@ -357,6 +357,7 @@
       }
       /* The switch - the box around the slider */
 .switch {
+  vertical-align: middle;
   position: relative;
   display: inline-block;
   width: 30px;
@@ -494,16 +495,29 @@ input:checked + .slider:before {
 
 
       <script>
+
+      var open = 0;
+
       function openNav() {
           document.getElementById("mySidenav").style.width = "240px";
           document.getElementById("main").style.marginLeft = "250px";
           document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+          open = 1;
       }
       function closeNav() {
+        open = 0;
           document.getElementById("mySidenav").style.width = "0";
           document.getElementById("main").style.marginLeft= "0";
           document.body.style.backgroundColor = "white";
           setSettings();
+      }
+      function togglenav() {
+        if(open == 1) {
+          closeNav();
+          else {
+            openNav();
+          }
+        }
       }
       </script>
 
@@ -514,7 +528,7 @@ input:checked + .slider:before {
           <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <div class="tab">
-              <button class="tablinks" onclick="openTab(event, 'Emotions')">Emotions</button>
+              <button class="tablinks" onclick="togglenav(event, 'Emotions')">Emotions</button>
             </div>
 
             <div id="Emotions" class="tabcontent">
