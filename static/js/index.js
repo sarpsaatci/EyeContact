@@ -1094,11 +1094,11 @@ function call(peerEmail) {
   }
   window.speechSynthesis.speak(new SpeechSynthesisUtterance('calling'));
 
+	setCallState(PROCESSING_CALL);
+
   while(callState && callState == PROCESSING_CALL) {
       document.getElementById('dialAudio').play();
   }
-
-	setCallState(PROCESSING_CALL);
 
   document.getElementById('callPage').style.display = 'none';
   document.getElementById('dialPage').style.display = 'block';
