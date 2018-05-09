@@ -968,6 +968,9 @@ function resgisterResponse(message) {
 }
 
 function callResponse(message) {
+
+  dialAudio.pause();
+
 	if (message.response != 'accepted') {
 		console.info('Call not accepted by peer. Closing call');
 		var errorMessage = message.message ? message.message
@@ -1097,14 +1100,7 @@ function call(peerEmail) {
 
 
   dialAudio.play();
-  dialAudio.onended = function() {
-    if(callState && callState == PROCESSING_CALL) {
-      setInterval(function() {
-        dialAudio.play();
-      }, 2000);
-    }
-  }
-
+  dialAudio.loop = true;
 
   document.getElementById('callPage').style.display = 'none';
   document.getElementById('dialPage').style.display = 'block';
