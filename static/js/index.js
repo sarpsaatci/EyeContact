@@ -927,7 +927,6 @@ function speechRecognize() {
                 let ut = new SpeechSynthesisUtterance('contact cannot be found');
                 window.speechSynthesis.speak(ut);
                 ut.onend = function(e) {
-                    recognition.abort();
                     speechRecognize();
                 }
               }
@@ -940,7 +939,7 @@ function speechRecognize() {
 
       recognition.onnomatch = function(e) {
         recognition.abort();
-        return speechRecognize();
+        speechRecognize();
       }
 
       recognition.onerror = function(e) {
@@ -1096,9 +1095,16 @@ function call(peerEmail) {
 
 	setCallState(PROCESSING_CALL);
 
-  while(callState && callState == PROCESSING_CALL) {
-      document.getElementById('dialAudio').play();
+
+  dialAudio.play();
+  dialAudio.onended = function() {
+    if(callState && callState == PROCESSING_CALL) {
+      setInterval(function() {
+        dialAudio.play();
+      }, 2000);
+    }
   }
+
 
   document.getElementById('callPage').style.display = 'none';
   document.getElementById('dialPage').style.display = 'block';
