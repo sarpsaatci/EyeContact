@@ -1094,6 +1094,10 @@ function call(peerEmail) {
   }
   window.speechSynthesis.speak(new SpeechSynthesisUtterance('calling'));
 
+  while(callState && callState == PROCESSING_CALL) {
+      document.getElementById('dialAudio').play();
+  }
+
 	setCallState(PROCESSING_CALL);
 
   document.getElementById('callPage').style.display = 'none';
