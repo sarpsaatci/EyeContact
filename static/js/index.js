@@ -277,8 +277,6 @@ ws.onmessage = function(message) {
     console.log(parsedMessage.data);
     if(parsedMessage.data.includes("$")) {
 
-      document.getElementById('videoOutput').style.border = '10px solid orange';
-
       if(parsedMessage.data.includes('color')) {
         let emoUtter = new SpeechSynthesisUtterance('clothing color is ' + parsedMessage.data.substr(parsedMessage.data.indexOf(';')));
         chime = document.getElementById('chimeAudio');
@@ -288,7 +286,6 @@ ws.onmessage = function(message) {
 
         emoUtter.onend = function() {
             document.getElementById('videoOutput').volume = 1.0;
-            document.getElementById('videoOutput').style.border = '0px solid orange';
         };
         emoUtter.onstart = function() {
           document.getElementById('videoOutput').volume = 0.4;
@@ -305,7 +302,6 @@ ws.onmessage = function(message) {
 
         emoUtter.onend = function() {
             document.getElementById('videoOutput').volume = 1.0;
-            document.getElementById('videoOutput').style.border = '0px solid orange';
         };
         emoUtter.onstart = function() {
           document.getElementById('videoOutput').volume = 0.4;
@@ -327,7 +323,6 @@ ws.onmessage = function(message) {
 
         emoUtter.onend = function() {
             document.getElementById('videoOutput').volume = 1.0;
-            document.getElementById('videoOutput').style.border = '0px solid orange';
         };
         emoUtter.onstart = function() {
           document.getElementById('videoOutput').volume = 0.4;
@@ -349,7 +344,6 @@ ws.onmessage = function(message) {
 
         emoUtter.onend = function() {
             document.getElementById('videoOutput').volume = 1.0;
-            document.getElementById('videoOutput').style.border = '0px solid orange';
         };
         emoUtter.onstart = function() {
           document.getElementById('videoOutput').volume = 0.4;
@@ -371,7 +365,6 @@ ws.onmessage = function(message) {
 
         emoUtter.onend = function() {
             document.getElementById('videoOutput').volume = 1.0;
-            document.getElementById('videoOutput').style.border = '0px solid orange';
         };
         emoUtter.onstart = function() {
           document.getElementById('videoOutput').volume = 0.4;
@@ -393,7 +386,6 @@ ws.onmessage = function(message) {
 
         emoUtter.onend = function() {
             document.getElementById('videoOutput').volume = 1.0;
-            document.getElementById('videoOutput').style.border = '0px solid orange';
         };
         emoUtter.onstart = function() {
           document.getElementById('videoOutput').volume = 0.4;
@@ -415,7 +407,6 @@ ws.onmessage = function(message) {
 
         emoUtter.onend = function() {
             document.getElementById('videoOutput').volume = 1.0;
-            document.getElementById('videoOutput').style.border = '0px solid orange';
         };
         emoUtter.onstart = function() {
           document.getElementById('videoOutput').volume = 0.4;
@@ -438,7 +429,6 @@ ws.onmessage = function(message) {
 
         emoUtter.onend = function() {
             document.getElementById('videoOutput').volume = 1.0;
-            document.getElementById('videoOutput').style.border = '0px solid orange';
         };
         emoUtter.onstart = function() {
           document.getElementById('videoOutput').volume = 0.4;
@@ -456,7 +446,6 @@ ws.onmessage = function(message) {
 
         emoUtter.onend = function() {
             document.getElementById('videoOutput').volume = 1.0;
-            document.getElementById('videoOutput').style.border = '0px solid orange';
         };
         emoUtter.onstart = function() {
           document.getElementById('videoOutput').volume = 0.4;
@@ -474,7 +463,6 @@ ws.onmessage = function(message) {
 
         emoUtter.onend = function() {
             document.getElementById('videoOutput').volume = 1.0;
-            document.getElementById('videoOutput').style.border = '0px solid orange';
         };
         emoUtter.onstart = function() {
           document.getElementById('videoOutput').volume = 0.4;
