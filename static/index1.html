@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- set the character set -->
+  <meta charset="utf-8">
+  <!-- tell IE to use latest version and chrome frame if available -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <script src="js/main.js"></script>
+
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAJi_z-4RcZfQHfOLLEvO9gUx0z7YIDuxU",
+      authDomain: "eyecontact-fe41b.firebaseapp.com",
+      databaseURL: "https://eyecontact-fe41b.firebaseio.com",
+      projectId: "eyecontact-fe41b",
+      storageBucket: "eyecontact-fe41b.appspot.com",
+      messagingSenderId: "687000785034"
+    };
+    firebase.initializeApp(config);
+
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+    var uiConfig = {
+      callbacks: {
+        signInSuccess: function(currentUser, credential, redirectUrl) {
+          // User successfully signed in.
+          // Return type determines whether we continue the redirect automatically
+          // or whether we leave that to developer to handle.
+          return true;
+        },
+        uiShown: function() {
+          // The widget is rendered.
+          // Hide the loader.
+          document.getElementById('loader').style.display = 'none';
+        }
+      },
+      // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+      signInFlow: 'popup',
+      signInSuccessUrl: '/index2.html',
+      signInOptions: [
+        // Leave the lines as is for the providers you want to offer your users.
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      ],
+      // Terms of service url.
+      tosUrl: 'index.html'
+    };
+
+    ui.start('#firebaseui-auth-container', uiConfig);
+
+  </script>
+
+
+
+  <title>Text Page</title>
+
+  <!-- include basic style sheet -->
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+</head>
+<body>
+  <h1>Welcome to My Awesome App</h1>
+  <div id="firebaseui-auth-container"></div>
+  <div id="loader">Loading...</div>
+</body>
+</html>

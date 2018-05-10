@@ -6,12 +6,31 @@
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="shortcut icon" href="img/kurento.png" type="image/png"/>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link rel="shortcut icon" href="EyeContact Logo.png" type="image/png"/>
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/demo-console/index.css">
     <link rel="stylesheet" href="bower_components/ekko-lightbox/dist/ekko-lightbox.min.css">
     <link rel="stylesheet" href="css/kurento.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="style.css">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+
+    <script src="http://apis.google.com/js/client:plusone.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js"></script>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script src="bower_components/adapter.js/adapter.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -20,124 +39,1653 @@
     <script src="bower_components/draggabilly/dist/draggabilly.pkgd.min.js"></script>
     <script src="bower_components/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+
     <script src="bower_components/kurento-utils/js/kurento-utils.js"></script>
 
+
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script>
+      zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+      ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+    </script>
+    <style>
+      html,
+      body,
+      #myChart {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+
     <script src="js/index.js"></script>
-    <title>Kurento Tutorial 4: Video Call 1 to 1 with WebRTC</title>
+    <title>EyeContact</title>
+
+    <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font: 16px Arial;
+      height: 100%;
+    }
+    body::after {
+      content: "";
+      background-color: #006bb3;
+      background-size:100% 100%;
+    background-position: center;
+       background-repeat: no-repeat;
+      z-index: -1;
+       min-height: 100%;
+      min-width: 1024px;
+      /* Set up proportionate scaling */
+      width: 100%;
+      height: auto;
+      /* Set up positioning */
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .autocomplete {
+      /*the container must be positioned relative:*/
+      position: relative;
+      display: inline-block;
+    }
+    .auto-complete-input {
+      border: 1px solid transparent;
+      padding: 10px;
+      background-color: white;
+      border-width: 2px;
+      border-color: #f2f2f2;
+    }
+    .autocomplete-items {
+      position: center;
+      /* border: 1px solid #d4d4d4; */
+      border-bottom: none;
+      border-top: none;
+      z-index: 99;
+      /*position the autocomplete items to be the same width as the container:*/
+      top: 100%;
+      width: 100%;
+    }
+    .autocomplete-items div {
+      text-align: left;
+      padding: 10px;
+      cursor: pointer;
+      background-color: #fff;
+      border-bottom: 1px solid #d4d4d4;
+    }
+    .autocomplete-items div:hover {
+      /*when hovering an item:*/
+      background-color: #e9e9e9;
+    }
+    .autocomplete-active {
+      /*when navigating through the items using the arrow keys:*/
+      background-color: DodgerBlue !important;
+      color: #ffffff;
+    }
+    </style>
+
+    <style>
+      .navbar {
+          overflow: hidden;
+          background-color: white;
+          font-family: Arial, Helvetica, sans-serif;
+      }
+      .navbar a {
+          float: left;
+          font-size: 16px;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+      }
+      .dropdown {
+          float: left;
+          overflow: hidden;
+      }
+      .dropdown .dropbtn {
+          font-size: 16px;
+          border: none;
+          outline: none;
+          color: white;
+          padding: 14px 16px;
+          background-color: inherit;
+          font: inherit;
+          margin: 0;
+      }
+      .navbar a:hover, .dropdown:hover .dropbtn {
+          background-color: white;
+      }
+      .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f9f9f9;
+          width: 100%;
+          left: 0;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+      }
+      .dropdown-content .header {
+          background: red;
+          padding: 16px;
+          color: white;
+      }
+      .dropdown:hover .dropdown-content {
+          display: block;
+      }
+      /* Create three equal columns that floats next to each other */
+      .column {
+          float: left;
+          width: 33.33%;
+          padding: 10px;
+          background-color: #ccc;
+          height: 250px;
+      }
+      .column a {
+          float: none;
+          color: black;
+          padding: 16px;
+          text-decoration: none;
+          display: block;
+          text-align: left;
+      }
+      .column a:hover {
+          background-color: #ddd;
+      }
+      /* Clear floats after the columns */
+      .row:after {
+          content: "";
+          display: table;
+          clear: both;
+      }
+      /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+      @media screen and (max-width: 600px) {
+          .column {
+              width: 100%;
+              height: auto;
+          }
+      }
+      body {
+          font-family: "Lato", sans-serif;
+          transition: background-color .5s;
+          margin: 0;
+      }
+
+      /* Clear floats (clearfix hack) */
+      .btn-group:after {
+          content: "";
+          clear: both;
+          display: table;
+      }
+      .btn-group button:not(:last-child) {
+          border-right: none; /* Prevent double borders */
+      }
+      .low-btn, .medium-btn, .high-btn {
+          background-color: white; /* Green background */
+          border: 1px solid grey; /* Green border */
+          color: black; /* White text */
+          padding: 5px 12px; /* Some padding */
+          margin: 10px 0px;
+          cursor: pointer; /* Pointer/hand icon */
+          float: left; /* Float the buttons side by side */
+        }
+
+        .sens-btn{
+          background-color: white; /* Green background */
+          border: 1px solid grey; /* Green border */
+          color: black; /* White text */
+          padding: 5px 12px; /* Some padding */
+          margin: 10px 0px;
+          cursor: pointer; /* Pointer/hand icon */
+          float: left; /* Float the buttons side by side */
+        }
+
+        #sens-low:hover, #anger-low:hover, #disgust-low:hover, #fear-low:hover,  #happiness-low:hover,  #sadness-low:hover,  #surprise-low:hover{
+          background-color: #ff8080;
+        }
+        #sens-medium:hover, #anger-medium:hover, #disgust-medium:hover, #fear-medium:hover,  #happiness-medium:hover,  #sadness-medium:hover,  #surprise-medium:hover{
+          background-color: #ffff80;
+        }
+        #sens-high:hover, #anger-high:hover, #disgust-high:hover, #fear-high:hover,  #happiness-high:hover,  #sadness-high:hover,  #surprise-high:hover{
+          background-color: #90ee90;
+        }
+
+        #active-low, #active-low-anger, #active-low-disgust, #active-low-fear, #active-low-happiness, #active-low-sadness, #active-low-surprise{
+          background-color: #ff8080;
+        }
+        #active-medium, #active-medium-anger,#active-medium-disgust, #active-medium-fear, #active-medium-happiness, #active-medium-sadness, #active-medium-surprise{
+          background-color: #ffff80;
+        }
+        #active-high, #active-high-anger, #active-high-disgust, #active-high-fear, #active-high-happiness, #active-high-sadness, #active-high-surprise{
+          background-color: #90ee90;
+        }
+
+
+
+
+      /* Add a background color on hover */
+      .low-active, .low-btn:hover {
+          background-color: #ff8080;
+      }
+      .medium-active, .medium-btn:hover {
+          background-color: #ffff80;
+      }
+      .high-active, .high-btn:hover {
+          background-color: #90ee90;
+      }
+      .tab {
+          overflow: hidden;
+          border: 1px solid #ccc;
+          background-color: #f1f1f1;
+          width: 100%;
+          text-align: left;
+      }
+      /* Style the buttons inside the tab */
+      .tab button {
+        width: 100%;
+          background-color: inherit;
+          float: left;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          padding: 7px 8px;
+          transition: 0.3s;
+          font-size: 17px;
+          text-align: left;
+      }
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+          background-color: #ddd;
+          width: 100%;
+          text-align: left;
+      }
+      /* Create an active/current tablink class */
+      .tab button.active {
+          background-color: #ccc;
+          width: 100%;
+          text-align: left;
+      }
+      /* Style the tab content */
+      .tabcontent {
+          display: none;
+          color: black;
+          padding: 6px 12px;
+          -webkit-animation: fadeEffect 1s;
+          animation: fadeEffect 1s;
+          width: 100%;
+      }
+      .sidenav {
+          height: 100%;
+          width: 0;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: white;
+          overflow-x: hidden;
+          transition: 0.5s;
+          padding-top: 60px;
+      }
+      .sidenav a {
+          padding: 8px 8px 8px 32px;
+          text-decoration: none;
+          font-size: 25px;
+          color: #818181;
+          background-color: white;
+          display: block;
+          transition: 0.3s;
+      }
+      .sidenav a:hover {
+          color: #f1f1f1;
+      }
+      .sidenav .closebtn {
+          position: absolute;
+          top: 0;
+          right: 25px;
+          font-size: 36px;
+          margin-left: 50px;
+      }
+      #main {
+          transition: margin-left .5s;
+          padding: 16px;
+      }
+      @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+      }
+      /* The switch - the box around the slider */
+.switch {
+  vertical-align: middle;
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+  left: -7px;
+  top: 3px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 17px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+    </style>
   </head>
+
   <body>
 
-    <header>
-      <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
-            <a class="navbar-brand" href=".">Kurento Tutorial</a>
-          </div>
-          <div class="collapse navbar-collapse"
-            id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-              <li>
-                <a href="https://github.com/Kurento/kurento-tutorial-node/tree/develop/kurento-one2one-call">
-                  <span class="glyphicon glyphicon-file"></span> Source Code</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </header>
+    <div id="authPage">
 
-    <div class="container">
-      <div class="page-header">
-        <h1>Tutorial 4: Video Call 1 to 1 with WebRTC</h1>
-        <p>
-          This web application consists on an one to one video call using <a
-            href="http://www.webrtc.org/">WebRTC</a>. In other words, this
-          application is similar to a phone but also with video. The <a
-            href="img/pipeline.png" data-toggle="lightbox"
-            data-title="Video Call 1 to 1 Media Pipeline"
-            data-footer="Two interconnected WebRtcEnpoints Media Elements">Media
-            Pipeline</a> is composed by two interconnected <i>WebRtcEndpoints</i>.
-          To run this demo follow these steps:
-        </p>
-        <ol>
-          <li>Open this page with a browser compliant with WebRTC (Chrome, Firefox).</li>
-          <li>Type a nick in the field <i>Name</i> and click on <i>Register</i>.</li>
-          <li>In a different machine (or a different tab in the same browser) follow the same procedure to register another user.</li>
-          <li>Type the name of the user to be called in the field <i>Peer</i> and click <i>Call</i>.</li>
-          <li>Grant the access to the camera and microphone for both users. After the SDP negotiation the communication should start.</li>
-          <li>The called user should accept the incoming call (by a confirmation dialog).</li>
-          <li>Click on <i>Stop</i> to finish the communication.</li>
-        </ol>
+
+      <div class="col-lg-12">
+        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
+        <div class="col-lg-4 col-md-8 col-sm-8 col-xs-10" style="padding-bottom: 4%; padding-top: 6%">
+          <img src="logo.png" style="height: auto; width: 100%">
+        </div>
+        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
+        <!-- <div class="col-lg-3 col-md-2 col-sm-2 col-xs-1"></div>
+        <div class="col-lg-6 col-md-8 col-sm-8 col-xs-10" style="padding-bottom: 4%; padding-top: 6%; ">
+          <img src="logo.png" style="height: auto; width: 100%">
+        </div>
+        <div class="col-lg-3 col-md-2 col-sm-2 col-xs-1"></div> -->
       </div>
-      <div class="row">
-        <div class="col-md-5">
-          <label class="control-label" for="name">Name</label>
-          <div class="row">
-            <div class="col-md-6">
-              <input id="name" name="name" class="form-control" type="text"/>
-            </div>
-            <div class="col-md-6 text-right">
-              <a id="register" href="#" class="btn btn-primary">
-                <span class="glyphicon glyphicon-plus"></span> Register</a>
-            </div>
-          </div>
-          <br/>
-          <br/>
-          <label class="control-label" for="peer">Peer</label>
-          <div class="row">
-            <div class="col-md-6">
-              <input id="peer" name="peer" class="form-control" type="text">
-            </div>
-            <div class="col-md-6 text-right">
-              <a id="call" href="#" class="btn btn-success">
-                <span class="glyphicon glyphicon-play"></span> Call</a>
-              <a id="terminate" href="#" class="btn btn-danger">
-                <span class="glyphicon glyphicon-stop"></span> Stop</a>
-            </div>
-          </div>
-          <br/>
-          <label class="control-label" for="console">Console</label><br><br>
-          <div id="console" class="democonsole">
-            <ul></ul>
+      <div class="col-lg-12">
+        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
+        <div class="col-lg-4 col-md-8 col-sm-8 col-xs-10;" style="text-align: center">
+          <div class="col-lg-12 center-block;" style="text-align: center" >
+            <a id="authBtn" class="googleContactsButton text-align: center"><img src="img/googlelogin.png" style=" position: relative; text-align: center; height: auto; width: 50%"></a>
           </div>
         </div>
-        <div class="col-md-7">
-          <div id="videoBig">
-            <video id="videoOutput" autoplay width="640px" height="480px" poster="img/kurento.png"></video>
+        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
+      </div>
+      <script type="text/javascript">
+            var clientId = '305322108967-q02bfmg9l082jftr9e45vgd5ffje0klf';
+            var apiKey = 'Y61ZxG-SKMrHqwrD5dp6BqPd';
+            var scopes = 'https://www.googleapis.com/auth/contacts.readonly';
+            $(document).on("click",".googleContactsButton", function(){
+              gapi.client.setApiKey(apiKey);
+              window.setTimeout(authorize);
+            });
+            function authorize() {
+              gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthorization);
+            }
+            function handleAuthorization(authorizationResult) {
+              if (authorizationResult && !authorizationResult.error) {
+                $.get("https://www.google.com/m8/feeds/contacts/default/thin?alt=json&access_token=" + authorizationResult.access_token + "&max-results=500&v=3.0",
+                  function(response){
+                    var currentUser = response;
+                    //process the response here
+                    // for(var i = 0; i < response.feed.entry.length; i++)
+                    //   console.log(response.feed.entry[i].title.$t);
+                    // console.log(currentUser);
+                    manageUser(currentUser);
+                    activatePage();
+                  });
+              }
+            }
+          </script>
+          <script src="https://apis.google.com/js/client.js"></script>
+    </div>
+
+
+    <div id="callPage" style="display: none">
+
+      <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        </script>
+
+
+      <script>
+
+      // var open = 0;
+
+      function openNav() {
+          document.getElementById("mySidenav").style.width = "240px";
+          document.getElementById("main").style.marginLeft = "250px";
+          document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+          // open = 1;
+      }
+      function closeNav() {
+        // open = 0;
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("main").style.marginLeft= "0";
+          document.body.style.backgroundColor = "white";
+          setSettings();
+      }
+      // function togglenav() {
+      //   if(open == 1) {
+      //     closeNav();
+      //   }
+      //   else {
+      //     openNav();
+      //   }
+      // }
+      </script>
+
+
+      <!-- <form autocomplete="off"> -->
+      <div class="row col-xs-12">
+        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1">
+          <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="tab">
+              <button class="tablinks" onclick="openTab(event, 'Emotions')">Emotions</button>
+            </div>
+
+            <div id="Emotions" class="tabcontent">
+<label class="switch">
+<input type="checkbox" id="angerSwitch" onclick="angerSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Anger<br>
+<div class="btn-group" id="angerButtons">
+                    <button class="low-btn" id="anger-low" onclick="clickedAngerLow()">Low</button>
+                    <button class="medium-btn" id="anger-medium" onclick="clickedAngerMedium()">Medium</button>
+                    <button class="high-btn" id="anger-high" onclick="clickedAngerHigh()">High</button>
+                </div>
+<label class="switch">
+<input type="checkbox" id="disgustSwitch" onclick="disgustSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Disgust<br>
+<div class="btn-group" id="disgustButtons">
+                    <button class="low-btn" id="disgust-low" onclick="clickedDisgustLow()">Low</button>
+                    <button class="medium-btn "id="disgust-medium" onclick="clickedDisgustMedium()">Medium</button>
+                    <button class="high-btn" id="disgust-high" onclick="clickedDisgustHigh()">High</button>
+                </div>
+<label class="switch">
+<input type="checkbox" id="fearSwitch" onclick="fearSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Fear<br>
+<div class="btn-group" id="fearButtons">
+                    <button class="low-btn" id="fear-low" onclick="clickedFearLow()">Low</button>
+                    <button class="medium-btn "id="fear-medium" onclick="clickedFearMedium()">Medium</button>
+                    <button class="high-btn" id="fear-high" onclick="clickedFearHigh()">High</button>
+                </div>
+<label class="switch">
+<input type="checkbox" id="happinessSwitch" onclick="happinessSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Happiness<br>
+<div class="btn-group" id="happinessButtons">
+                    <button class="low-btn" id="happiness-low" onclick="clickedHappinessLow()">Low</button>
+                    <button class="medium-btn "id="happiness-medium" onclick="clickedHappinessMedium()">Medium</button>
+                    <button class="high-btn" id="happiness-high" onclick="clickedHappinessHigh()">High</button>
+                </div>
+<label class="switch">
+<input type="checkbox" id="sadnessSwitch" onclick="sadnessSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Sadness<br>
+<div class="btn-group" id="sadnessButtons">
+                    <button class="low-btn" id="sadness-low" onclick="clickedSadnessLow()">Low</button>
+                    <button class="medium-btn "id="sadness-medium" onclick="clickedSadnessMedium()">Medium</button>
+                    <button class="high-btn" id="sadness-high" onclick="clickedSadnessHigh()">High</button>
+                </div>
+<label class="switch">
+<input type="checkbox" id="surpriseSwitch" onclick="surpriseSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Surprise<br>
+<div class="btn-group" id="surpriseButtons">
+                    <button class="low-btn" id="surprise-low" onclick="clickedSurpriseLow()">Low</button>
+                    <button class="medium-btn "id="surprise-medium" onclick="clickedSurpriseMedium()">Medium</button>
+                    <button class="high-btn" id="surprise-high" onclick="clickedSurpriseHigh()">High</button>
+                </div>
+<label class="switch">
+<input type="checkbox" id="neutralSwitch" onclick="neutralSwitchClicked();" checked>
+<span class="slider round"></span>
+</label>
+Back to Neutral<br>
+            </div>
+
+            <div class="tab">
+              <button class="tablinks" onclick="openTab(event, 'Sensitivity')">Gaze</button>
+            </div>
+
+            <div id="Sensitivity" class="tabcontent">
+              <label class="switch">
+              <input type="checkbox" id="gazeSwitch" onclick="gazeSwitchClicked();" checked>
+              <span class="slider round"></span>
+              </label>
+              Gaze Sensivity<br>
+              <div class="btn-group" id="gazeButtons">
+                    <button class="sens-btn" id="sens-low" onclick="clickedSensLow()">Low</button>
+                    <button class="sens-btn" id="sens-medium" onclick="clickedSensMedium()">Medium</button>
+                    <button class="sens-btn" id="sens-high" onclick="clickedSensHigh()">High</button>
+                </div>
+              </div>
+
+<script>
+function angerSwitchClicked() {
+  var checkBox = document.getElementById("angerSwitch");
+  if (checkBox.checked == true) {
+      document.getElementById("angerButtons").style.display = "block";
+      settings.emotion_anger = 'true';
+  }
+  else {
+      document.getElementById("angerButtons").style.display = "none";
+      settings.emotion_anger = 'false';
+  }
+  // alert('emotion_anger: ' + settings.emotion_anger);
+}
+function disgustSwitchClicked() {
+  var checkBox = document.getElementById("disgustSwitch");
+  if (checkBox.checked == true) {
+    document.getElementById("disgustButtons").style.display = "block";
+    settings.emotion_disgust = 'true';
+  } else {
+  document.getElementById("disgustButtons").style.display = "none";
+  settings.emotion_disgust = 'false';
+  }
+  // alert('emotion_disgust: ' + settings.emotion_disgust);
+}
+function fearSwitchClicked() {
+  var checkBox = document.getElementById("fearSwitch");
+  if (checkBox.checked == true) {
+    document.getElementById("fearButtons").style.display = "block";
+    settings.emotion_fear = 'true';
+  } else {
+  document.getElementById("fearButtons").style.display = "none";
+  settings.emotion_fear = 'false';
+  }
+  // alert('emotion_fear: ' + settings.emotion_fear);
+}
+function happinessSwitchClicked() {
+  var checkBox = document.getElementById("happinessSwitch");
+  if (checkBox.checked == true) {
+    document.getElementById("happinessButtons").style.display = "block";
+    settings.emotion_happiness = 'true';
+  } else {
+  document.getElementById("happinessButtons").style.display = "none";
+  settings.emotion_happiness = 'false';
+  }
+  // alert('emotion_happiness: ' + settings.emotion_happiness);
+}
+function sadnessSwitchClicked() {
+  var checkBox = document.getElementById("sadnessSwitch");
+  if (checkBox.checked == true) {
+    document.getElementById("sadnessButtons").style.display = "block";
+    settings.emotion_sadness = 'true';
+  } else {
+  document.getElementById("sadnessButtons").style.display = "none";
+  settings.emotion_sadness = 'false';
+  }
+  // alert('emotion_sadness: ' + settings.emotion_sadness);
+}
+function surpriseSwitchClicked() {
+  var checkBox = document.getElementById("surpriseSwitch");
+  if (checkBox.checked == true) {
+    document.getElementById("surpriseButtons").style.display = "block";
+    settings.emotion_surprised = 'true';
+  } else {
+  document.getElementById("surpriseButtons").style.display = "none";
+  settings.emotion_surprised = 'false';
+  }
+  // alert('emotion_surprised: ' + settings.emotion_surprised);
+}
+
+function neutralSwitchClicked() {
+  var checkBox = document.getElementById("neutralSwitch");
+  if (checkBox.checked == true) {
+    settings.emotion_neutral = 'true';
+  }
+  else {
+    settings.emotion_neutral = 'false';
+  }
+  // alert('emotion_neutral: ' + settings.emotion_neutral);
+}
+function gazeSwitchClicked() {
+  var checkBox = document.getElementById("gazeSwitch");
+  if (checkBox.checked == true) {
+      document.getElementById("gazeButtons").style.display = "block";
+      settings.gaze = 'true';
+  }
+  else {
+      document.getElementById("gazeButtons").style.display = "none";
+      settings.gaze = 'false';
+  }
+  // alert('gaze: ' + settings.gaze);
+}
+
+  function clickedAngerLow(){
+    if(document.getElementById("anger-low")) {
+      document.getElementById("anger-low").setAttribute("id", "active-low-anger");
+      if( document.getElementById("active-medium-anger") ){
+              document.getElementById("active-medium-anger").setAttribute("id", "anger-medium");
+      }
+      if( document.getElementById("active-high-anger") ){
+              document.getElementById("active-high-anger").setAttribute("id", "anger-high");
+      }
+      settings.emotion_anger_sensivity = 'low';
+      // alert('emotion_anger_sensivity: ' + settings.emotion_anger_sensivity);
+    }
+  }
+  function clickedAngerMedium(){
+    if(document.getElementById("anger-medium")) {
+      document.getElementById("anger-medium").setAttribute("id", "active-medium-anger");
+      if( document.getElementById("active-low-anger") ){
+              document.getElementById("active-low-anger").setAttribute("id", "anger-low");
+      }
+      if( document.getElementById("active-high-anger") ){
+              document.getElementById("active-high-anger").setAttribute("id", "anger-high");
+      }
+      settings.emotion_anger_sensivity = 'medium';
+      // alert('emotion_anger_sensivity: ' + settings.emotion_anger_sensivity);
+    }
+  }
+  function clickedAngerHigh(){
+    if(document.getElementById("anger-high")) {
+      document.getElementById("anger-high").setAttribute("id", "active-high-anger");
+      if( document.getElementById("active-medium-anger") ){
+              document.getElementById("active-medium-anger").setAttribute("id", "anger-medium");
+      }
+      if( document.getElementById("active-low-anger") ){
+              document.getElementById("active-low-anger").setAttribute("id", "anger-low");
+      }
+      settings.emotion_anger_sensivity = 'high';
+      // alert('emotion_anger_sensivity: ' + settings.emotion_anger_sensivity);
+    }
+  }
+
+  function clickedDisgustLow(){
+    if(document.getElementById("disgust-low")) {
+      document.getElementById("disgust-low").setAttribute("id", "active-low-disgust");
+      if( document.getElementById("active-medium-disgust") ){
+              document.getElementById("active-medium-disgust").setAttribute("id", "disgust-medium");
+      }
+      if( document.getElementById("active-high-disgust") ){
+              document.getElementById("active-high-disgust").setAttribute("id", "disgust-high");
+      }
+      settings.emotion_disgust_sensivity = 'low';
+      // alert('emotion_disgust_sensivity: ' + settings.emotion_disgust_sensivity);
+    }
+  }
+  function clickedDisgustMedium(){
+    if(document.getElementById("disgust-medium")) {
+      document.getElementById("disgust-medium").setAttribute("id", "active-medium-disgust");
+      if( document.getElementById("active-low-disgust") ){
+              document.getElementById("active-low-disgust").setAttribute("id", "disgust-low");
+      }
+      if( document.getElementById("active-high-disgust") ){
+              document.getElementById("active-high-disgust").setAttribute("id", "disgust-high");
+      }
+      settings.emotion_disgust_sensivity = 'medium';
+      // alert('emotion_disgust_sensivity: ' + settings.emotion_disgust_sensivity);
+    }
+  }
+  function clickedDisgustHigh(){
+    if(document.getElementById("disgust-high")) {
+      document.getElementById("disgust-high").setAttribute("id", "active-high-disgust");
+      if( document.getElementById("active-medium-disgust") ){
+              document.getElementById("active-medium-disgust").setAttribute("id", "disgust-medium");
+      }
+      if( document.getElementById("active-low-disgust") ){
+              document.getElementById("active-low-disgust").setAttribute("id", "disgust-low");
+      }
+      settings.emotion_disgust_sensivity = 'high';
+      // alert('emotion_disgust_sensivity: ' + settings.emotion_disgust_sensivity);
+    }
+  }
+
+  function clickedFearLow(){
+    if(document.getElementById("fear-low")) {
+      document.getElementById("fear-low").setAttribute("id", "active-low-fear");
+      if( document.getElementById("active-medium-fear") ){
+              document.getElementById("active-medium-fear").setAttribute("id", "fear-medium");
+      }
+      if( document.getElementById("active-high-fear") ){
+              document.getElementById("active-high-fear").setAttribute("id", "fear-high");
+      }
+      settings.emotion_fear_sensivity = 'low';
+      // alert('emotion_fear_sensivity: ' + settings.emotion_fear_sensivity);
+    }
+  }
+  function clickedFearMedium(){
+    if(document.getElementById("fear-medium")) {
+      document.getElementById("fear-medium").setAttribute("id", "active-medium-fear");
+      if( document.getElementById("active-low-fear") ){
+              document.getElementById("active-low-fear").setAttribute("id", "fear-low");
+      }
+      if( document.getElementById("active-high-fear") ){
+              document.getElementById("active-high-fear").setAttribute("id", "fear-high");
+      }
+      settings.emotion_fear_sensivity = 'medium';
+      // alert('emotion_fear_sensivity: ' + settings.emotion_fear_sensivity);
+    }
+  }
+  function clickedFearHigh(){
+    if(document.getElementById("fear-high")) {
+      document.getElementById("fear-high").setAttribute("id", "active-high-fear");
+      if( document.getElementById("active-medium-fear") ){
+              document.getElementById("active-medium-fear").setAttribute("id", "fear-medium");
+      }
+      if( document.getElementById("active-low-fear") ){
+              document.getElementById("active-low-fear").setAttribute("id", "fear-low");
+      }
+      settings.emotion_fear_sensivity = 'high';
+      // alert('emotion_fear_sensivity: ' + settings.emotion_fear_sensivity);
+    }
+  }
+
+  function clickedHappinessLow(){
+    if(document.getElementById("happiness-low")) {
+      document.getElementById("happiness-low").setAttribute("id", "active-low-happiness");
+      if( document.getElementById("active-medium-happiness") ){
+              document.getElementById("active-medium-happiness").setAttribute("id", "happiness-medium");
+      }
+      if( document.getElementById("active-high-happiness") ){
+              document.getElementById("active-high-happiness").setAttribute("id", "happiness-high");
+      }
+      settings.emotion_happiness_sensivity = 'low';
+      // alert('emotion_happiness_sensivity: ' + settings.emotion_happiness_sensivity);
+    }
+  }
+  function clickedHappinessMedium(){
+    if(document.getElementById("happiness-medium")) {
+      document.getElementById("happiness-medium").setAttribute("id", "active-medium-happiness");
+      if( document.getElementById("active-low-happiness") ){
+              document.getElementById("active-low-happiness").setAttribute("id", "happiness-low");
+      }
+      if( document.getElementById("active-high-happiness") ){
+              document.getElementById("active-high-happiness").setAttribute("id", "happiness-high");
+      }
+      settings.emotion_happiness_sensivity = 'medium';
+      // alert('emotion_happiness_sensivity: ' + settings.emotion_happiness_sensivity);
+    }
+  }
+  function clickedHappinessHigh(){
+    if(document.getElementById("happiness-high")) {
+      document.getElementById("happiness-high").setAttribute("id", "active-high-happiness");
+      if( document.getElementById("active-medium-happiness") ){
+              document.getElementById("active-medium-happiness").setAttribute("id", "happiness-medium");
+      }
+      if( document.getElementById("active-low-happiness") ){
+              document.getElementById("active-low-happiness").setAttribute("id", "happiness-low");
+      }
+      settings.emotion_happiness_sensivity = 'high';
+      // alert('emotion_happiness_sensivity: ' + settings.emotion_happiness_sensivity);
+    }
+  }
+
+
+    function clickedSadnessLow(){
+      if(document.getElementById("sadness-low")) {
+        document.getElementById("sadness-low").setAttribute("id", "active-low-sadness");
+        if( document.getElementById("active-medium-sadness") ){
+                document.getElementById("active-medium-sadness").setAttribute("id", "sadness-medium");
+        }
+        if( document.getElementById("active-high-sadness") ){
+                document.getElementById("active-high-sadness").setAttribute("id", "sadness-high");
+        }
+        settings.emotion_sadness_sensivity = 'low';
+        // alert('emotion_sadness_sensivity: ' + settings.emotion_sadness_sensivity);
+      }
+    }
+    function clickedSadnessMedium(){
+      if(document.getElementById("sadness-medium")) {
+        document.getElementById("sadness-medium").setAttribute("id", "active-medium-sadness");
+        if( document.getElementById("active-low-sadness") ){
+                document.getElementById("active-low-sadness").setAttribute("id", "sadness-low");
+        }
+        if( document.getElementById("active-high-sadness") ){
+                document.getElementById("active-high-sadness").setAttribute("id", "sadness-high");
+        }
+        settings.emotion_sadness_sensivity = 'medium';
+        // alert('emotion_sadness_sensivity: ' + settings.emotion_sadness_sensivity);
+      }
+    }
+    function clickedSadnessHigh(){
+      if(document.getElementById("sadness-high")) {
+        document.getElementById("sadness-high").setAttribute("id", "active-high-sadness");
+        if( document.getElementById("active-medium-sadness") ){
+                document.getElementById("active-medium-sadness").setAttribute("id", "sadness-medium");
+        }
+        if( document.getElementById("active-low-sadness") ){
+                document.getElementById("active-low-sadness").setAttribute("id", "sadness-low");
+        }
+        settings.emotion_sadness_sensivity = 'high';
+        // alert('emotion_sadness_sensivity: ' + settings.emotion_sadness_sensivity);
+      }
+    }
+
+    function clickedSurpriseLow(){
+      if(document.getElementById("surprise-low")) {
+        document.getElementById("surprise-low").setAttribute("id", "active-low-surprise");
+        if( document.getElementById("active-medium-surprise") ){
+                document.getElementById("active-medium-surprise").setAttribute("id", "surprise-medium");
+        }
+        if( document.getElementById("active-high-surprise") ){
+                document.getElementById("active-high-surprise").setAttribute("id", "surprise-high");
+        }
+        settings.emotion_surprised_sensivity = 'low';
+        // alert('emotion_surprised_sensivity: ' + settings.emotion_surprised_sensivity);
+      }
+    }
+    function clickedSurpriseMedium(){
+      if(document.getElementById("surprise-medium")) {
+        document.getElementById("surprise-medium").setAttribute("id", "active-medium-surprise");
+        if( document.getElementById("active-low-surprise") ){
+                document.getElementById("active-low-surprise").setAttribute("id", "surprise-low");
+        }
+        if( document.getElementById("active-high-surprise") ){
+                document.getElementById("active-high-surprise").setAttribute("id", "surprise-high");
+        }
+        settings.emotion_surprised_sensivity = 'medium';
+        // alert('emotion_surprised_sensivity: ' + settings.emotion_surprised_sensivity);
+      }
+    }
+    function clickedSurpriseHigh(){
+      if(document.getElementById("surprise-high")) {
+        document.getElementById("surprise-high").setAttribute("id", "active-high-surprise");
+        if( document.getElementById("active-medium-surprise") ){
+                document.getElementById("active-medium-surprise").setAttribute("id", "surprise-medium");
+        }
+        if( document.getElementById("active-low-surprise") ){
+                document.getElementById("active-low-surprise").setAttribute("id", "surprise-low");
+        }
+        settings.emotion_surprised_sensivity = 'high';
+        // alert('emotion_surprised_sensivity: ' + settings.emotion_surprised_sensivity);
+      }
+    }
+  function clickedSensLow(){
+    if(document.getElementById("sens-low")) {
+      document.getElementById("sens-low").setAttribute("id", "active-low");
+      if( document.getElementById("active-medium") ){
+              document.getElementById("active-medium").setAttribute("id", "sens-medium");
+      }
+      if( document.getElementById("active-high") ){
+              document.getElementById("active-high").setAttribute("id", "sens-high");
+      }
+      settings.gaze_sensivity = 'low';
+      // alert('gaze_sensivity: ' + settings.gaze_sensivity);
+    }
+  }
+  function clickedSensMedium(){
+    if(document.getElementById("sens-medium")) {
+      document.getElementById("sens-medium").setAttribute("id", "active-medium");
+      if( document.getElementById("active-low") ){
+              document.getElementById("active-low").setAttribute("id", "sens-low");
+      }
+      if( document.getElementById("active-high") ){
+              document.getElementById("active-high").setAttribute("id", "sens-high");
+      }
+      settings.gaze_sensivity = 'medium';
+      // alert('emotion_gaze_sensivity: ' + settings.emotion_gaze_sensivity);
+    }
+  }
+  function clickedSensHigh(){
+    if(document.getElementById("sens-high")) {
+      document.getElementById("sens-high").setAttribute("id", "active-high");
+      if( document.getElementById("active-medium") ){
+              document.getElementById("active-medium").setAttribute("id", "sens-medium");
+      }
+      if( document.getElementById("active-low") ){
+              document.getElementById("active-low").setAttribute("id", "sens-low");
+      }
+      settings.gaze_sensivity = 'high';
+      // alert('gaze_sensivity: ' + settings.gaze_sensivity);
+    }
+  }
+
+
+</script>
+
+
           </div>
-          <div id="videoSmall">
-            <video id="videoInput" autoplay width="240px" height="180px" poster="img/webrtc.png"></video>
+
+          <div id="main">
+            <i class="fas fa-cogs" style="font-size:24px; color: white"></i>
+            <span style="font-size:30px; cursor:pointer; color: white" onclick="openNav()"> Settings</span>
           </div>
         </div>
+        <div class="col-lg-4 col-md-8 col-sm-8 col-xs-10" style="padding-bottom: 4%; padding-top: 6%">
+          <img src="logo.png" style="height: auto; width: 100%">
+        </div>
+        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
+      </div>
+      <div class="row col-xs-12">
+        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
+        <div class="col-lg-4 col-md-8 col-sm-8 col-xs-10">
+          <input id="myInput" type="text" class="auto-complete-input" name="myCall" placeholder="Call User" style="width:100%">
+          <!-- <i onclick="startDictation()" class="fas fa-2x fa-microphone" style="width: 10% padding-left: 0.15em; padding-top: 0.4em; color: white"></i> -->
+        </div>
+        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
+      </div>
+      <script>
+      function autocomplete(inp, arr) {
+        /*the autocomplete function takes two arguments,
+        the text field element and an array of possible autocompleted values:*/
+        var currentFocus;
+
+        this.onkeydown = function(event) {
+          if(event.keyCode == 13 && event.ctrlKey) {
+            speechRecognize();
+          }
+        }
+
+        /*execute a function when someone writes in the text field:*/
+        inp.addEventListener("input", function(e) {
+
+            autoCompleteItemCount = 0;
+
+            var a, b, i, val = this.value;
+            /*close any already open lists of autocompleted values*/
+            closeAllLists();
+            if (!val) { return false;}
+            currentFocus = -1;
+            /*create a DIV element that will contain the items (values):*/
+              a = document.createElement("DIV");
+            a.setAttribute("id", this.id + "autocomplete-list");
+            a.setAttribute("class", "autocomplete-items row col-lg-12");
+            a.setAttribute("align", "center");
+            a.setAttribute("style", "overflow: auto");
+
+            /*append the DIV element as a child of the autocomplete container:*/
+            this.parentNode.appendChild(a);
+            /*for each item in the array...*/
+            for (i = 0; i < arr.length; i++) {
+              /*check if the item starts with the same letters as the text field value:*/
+              if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                /*create a DIV element for each matching element:*/
+                b = document.createElement("DIV");
+                b.setAttribute("id", this.id + "-autocomplete-item" + autoCompleteItemCount);
+                /*make the matching letters bold:*/
+                autoCompleteItemCount++;
+                b.innerHTML = "" + autoCompleteItemCount + "-";
+                b.innerHTML += "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML += arr[i].substr(val.length);
+                /*insert a input field that will hold the current array item's value:*/
+                b.innerHTML += "<input id='ai-" + i + "' type='hidden' value='" + arr[i] + "'>";
+                /*execute a function when someone clicks on the item value (DIV element):*/
+                b.addEventListener("click", function(e) {
+                    /*insert the value for the autocomplete text field:*/
+                    inp.value = this.getElementsByTagName("input")[0].value;
+                    let peer = inp.value;
+                    makeCall(peer.substring(peer.indexOf('(')+1, peer.indexOf(')')));
+                    /*close the list of autocompleted values,
+                    (or any other open lists of autocompleted values:*/
+                    closeAllLists();
+                });
+                a.appendChild(b);
+                autocompleteItems.push("" + autoCompleteItemCount + "," + arr[i]);
+              }
+            }
+            this.onkeydown = function(event) {
+              if(event.keyCode == 32 && event.ctrlKey) {
+                speakAutocompleteItems(autocompleteItems);
+              }
+
+            }
+        });
+        /*execute a function presses a key on the keyboard:*/
+        inp.addEventListener("keydown", function(e) {
+            var x = document.getElementById(this.id + "autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) {
+              /*If the arrow DOWN key is pressed,
+              increase the currentFocus variable:*/
+              currentFocus++;
+              /*and and make the current item more visible:*/
+              addActive(x);
+            } else if (e.keyCode == 38) { //up
+              /*If the arrow UP key is pressed,
+              decrease the currentFocus variable:*/
+              currentFocus--;
+              /*and and make the current item more visible:*/
+              addActive(x);
+            } else if (e.keyCode == 13 && !e.ctrlKey) {
+              /*If the ENTER key is pressed, prevent the form from being submitted,*/
+              e.preventDefault();
+              if (currentFocus >= 0) {
+                /*and simulate a click on the "active" item:*/
+                if (x) {
+                  x[currentFocus].click();
+
+                  var clkevt = document.createEvent('HTMLEvents');
+                  clkevt.initEvent('click', true, true);
+                  document.getElementById('myInput').dispatchEvent(clkevt);
+                  x[currentFocus]
+                }
+              }
+              else {
+                let peer = inp.value;
+                makeCall(peer);
+              }
+            }
+        });
+        function addActive(x) {
+          /*a function to classify an item as "active":*/
+          if (!x) return false;
+          /*start by removing the "active" class on all items:*/
+          removeActive(x);
+          if (currentFocus >= x.length) currentFocus = 0;
+          if (currentFocus < 0) currentFocus = (x.length - 1);
+          /*add class "autocomplete-active":*/
+          x[currentFocus].classList.add("autocomplete-active");
+        }
+        function removeActive(x) {
+          /*a function to remove the "active" class from all autocomplete items:*/
+          for (var i = 0; i < x.length; i++) {
+            x[i].classList.remove("autocomplete-active");
+          }
+        }
+        function closeAllLists(elmnt) {
+          /*close all autocomplete lists in the document,
+          except the one passed as an argument:*/
+          var x = document.getElementsByClassName("autocomplete-items");
+          for (var i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+              x[i].parentNode.removeChild(x[i]);
+            }
+          }
+        }
+        /*execute a function when someone clicks in the document:*/
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+      }
+
+      /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+
+      autocomplete(document.getElementById("myInput"), contactNames);
+      </script>
+
+      <!-- CSS Styles -->
+      <style>
+        .speech {border: 1px solid #DDD; width: 300px; padding: 0; margin: 0}
+        .speech input {border: 0; width: 240px; display: inline-block; height: 30px;}
+        .speech img {float: right; width: 40px }
+      </style>
+
+      <!-- HTML5 Speech Recognition API -->
+      <script>
+        function startDictation() {
+
+          if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+            var recognition = new webkitSpeechRecognition();
+
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.lang = "tr-TR";
+            recognition.start();
+
+            recognition.onresult = function(e) {
+              var evt = document.createEvent('HTMLEvents');
+              evt.initEvent('input', true, true);
+              document.getElementById('myInput').contentEditable = "true";
+              document.getElementById('myInput').value = e.results[0][0].transcript;
+              document.getElementById('myInput').dispatchEvent(evt);
+              document.getElementById('myInput').focus();
+              recognition.stop();
+
+            };
+
+            recognition.onerror = function(e) {
+              recognition.stop();
+            }
+
+          }
+        }
+      </script>
+    </div>
+
+    <div id="dialPage" class="col-lg-12" style="vertical-align: middle; display: none">
+      <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
+      <div class="col-lg-4 col-md-8 col-sm-8 col-xs-10" style="padding-bottom: 4%; padding-top: 6% text-align: center">
+        <img src="logo.png" style="height: auto; width: 100%">
+      </div>
+      <div class="col-lg-4 col-md-2 col-sm-2 col-xs-1"></div>
+      <div class="col-lg-12">
+        <i class="fas fa-3x fa-spinner fa-spin center-block" style="color: white; position: center"></i>
       </div>
     </div>
 
-    <footer>
-      <div class="foot-fixed-bottom">
-        <div class="container text-center">
-          <hr/>
-          <div class="row">&copy; 2014-2015 Kurento</div>
-          <div class="row">
-            <div class="col-md-4">
-              <a href="http://www.urjc.es">
-                <img src="img/urjc.gif" alt="Universidad Rey Juan Carlos" height="50px"/>
-              </a>
+
+    <div id="activePage" style="display:none">
+      <!-- <header>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <script>
+                a = document.createElement("H1");
+                a.innerHTML = "Hello " + currentUser.name.$t + " welcome to EyeContact";
+              </script>
             </div>
-            <div class="col-md-4">
-              <a href="http://www.kurento.org">
-                <img src="img/kurento.png" alt="Kurento" height="50px"/>
-              </a>
-            </div>
-            <div class="col-md-4">
-              <a href="http://www.naevatec.com">
-                <img src="img/naevatec.png" alt="Naevatec" height="50px"/>
-              </a>
+            <div class="collapse navbar-collapse"
+              id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                  <a href="http://github.com/Kurento/kurento-tutorial-node/tree/develop/kurento-one2one-call">
+                    <span class="glyphicon glyphicon-file"></span> Source Code</a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
+      </header> -->
+
+      <!-- <div class="container"> -->
+        <!-- <div class="page-header">
+          <h1>Tutorial 4: Video Call 1 to 1 with WebRTC</h1>
+          <p>
+            This web application consists on an one to one video call using <a
+              href="http://www.webrtc.org/">WebRTC</a>. In other words, this
+            application is similar to a phone but also with video. The <a
+              href="img/pipeline.png" data-toggle="lightbox"
+              data-title="Video Call 1 to 1 Media Pipeline"
+              data-footer="Two interconnected WebRtcEnpoints Media Elements">Media
+              Pipeline</a> is composed by two interconnected <i>WebRtcEndpoints</i>.
+            To run this demo follow these steps:
+          </p>
+          <ol>
+            <li>Open this page with a browser compliant with WebRTC (Chrome, Firefox).</li>
+            <li>Type a nick in the field <i>Name</i> and click on <i>Register</i>.</li>
+            <li>In a different machine (or a different tab in the same browser) follow the same procedure to register another user.</li>
+            <li>Type the name of the user to be called in the field <i>Peer</i> and click <i>Call</i>.</li>
+            <li>Grant the access to the camera and microphone for both users. After the SDP negotiation the communication should start.</li>
+            <li>The called user should accept the incoming call (by a confirmation dialog).</li>
+            <li>Click on <i>Stop</i> to finish the communication.</li>
+          </ol>
+        </div> -->
+        <!-- <div class="row">
+          <div class="col-md-5">
+            <label class="control-label" for="name">Name</label>
+            <div class="row">
+              <div class="col-md-6">
+                <input id="name" name="name" class="form-control" type="text"/>
+              </div>
+              <div class="col-md-6 text-right">
+                <a id="register" href="#" class="btn btn-primary">
+                  <span class="glyphicon glyphicon-plus"></span> Register</a>
+              </div>
+            </div>
+            <br/>
+            <br/>
+            <label class="control-label" for="peer">Peer</label>
+            <div class="row">
+              <div class="col-md-6">
+                <input id="peer" name="peer" class="form-control" type="text">
+              </div>
+              <div class="col-md-6 text-right">
+                <a id="call" href="#" class="btn btn-success">
+                  <span class="glyphicon glyphicon-play"></span> Call</a>
+
+              </div>
+            </div>
+            <br/>
+            <label class="control-label" for="console">Console</label><br><br>
+            <div id="console" class="democonsole">
+              <ul></ul>
+            </div>
+          </div>
+        </div> -->
+        <div class="col-lg-12">
+          <!-- <div class="col-lg-1"></div> -->
+          <div class="col-lg-12">
+            <div class="col-lg-8" style="text-align: center">
+              <div id="videoBig">
+                <video id="videoOutput" autoplay width="720px" height="540px" poster="img/webrtc.png"><video>
+              </div>
+              <div id="videoSmall">
+                <video id="videoInput" style="" autoplay width="240px" height="180px" poster="img/webrtc.png"></video>
+                <a id="terminate" href="#"><img src="img/end_call.png" style="width: 5em; height: auto; z-index: -1; position: relative"></a>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="col-lg-12">
+                <div id="chartContainer" class="col-lg-12" style="height: 540px; width:250px"></div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-lg-1"></div> -->
+        </div>
+
+        <style>
+          #videoOutput
+          {
+            transform: rotateY(180deg);
+            -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+            -moz-transform:rotateY(180deg); /* Firefox */
+          }
+          #videoInput
+          {
+            transform: rotateY(180deg);
+            -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+            -moz-transform:rotateY(180deg); /* Firefox */
+          }
+        </style>
+
+      <audio id="chimeAudio">
+          <source src="mp3/dongi_dongi_yunus.mp3" type="audio/mpeg">
+      </audio>
+
+      <audio id="dialAudio">
+          <source src="mp3/dongi_dongi_sarp.mp3" type="audio/mpeg">
+      </audio>
+
+        <div id='myChart'></div>
       </div>
-    </footer>
+
+      <script>
+        var myConfig1 = {
+          "type": "gauge",
+          "scale-r": {
+            "aperture": 200,
+            "values": "-10:10:10"
+          },
+          "series": [{
+            "values": [0]
+          }]
+        };
+
+
+        zingchart.render({
+          id: 'myChart',
+          data: myConfig1,
+          height: "100%",
+          width: "100%"
+        });
+
+        function renderGauge(val) {
+          myConfig1.series[0].values[0] = val;
+          zingchart.render({
+            id: 'myChart',
+            data: myConfig1,
+            height: "100%",
+            width: "100%"
+          });
+        }
+      </script>
+
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+      <script>
+
+      var happinessArr = []; // dataPoints
+      var angerArr = [];
+      var surprisedArr = [];
+      var sadnessArr = [];
+      var disgustArr = [];
+      var fearArr = [];
+
+      // var chart = new CanvasJS.Chart("chartContainer", {
+      //   animationEnabled: true,
+      //   title :{
+      //     text: "Emotions"
+      //   },
+      //   axisY: {
+      //     includeZero: false
+      //   },
+      //   data: [{
+      //     type: "bar",
+      //     dataPoints: happinessArr
+      //   },
+      //   {
+      //     type: "bar",
+      //     dataPoints: angerArr
+      //   },
+      //   {
+      //     type: "bar",
+      //     dataPoints: surprisedArr
+      //   },
+      //   {
+      //     type: "bar",
+      //     dataPoints: sadnessArr
+      //   },
+      //   {
+      //     type: "bar",
+      //     dataPoints: disgustArr
+      //   },
+      //   {
+      //     type: "bar",
+      //     dataPoints: fearArr
+      //   }]
+      // });
+
+      var emodata = [
+        { y: 0, label: "Happiness" },
+        { y: 0, label: "Anger" },
+        { y: 0, label: "Surprised" },
+        { y: 0, label: "Sadness" },
+        { y: 0, label: "Disgust" },
+        { y: 0, label: "Fear" },
+        { y: 0, label: "Neutral" }
+      ];
+
+      var chart = new CanvasJS.Chart("chartContainer", {
+      	animationEnabled: true,
+
+      	title:{
+      		text:"Real-time Emotion Densities"
+      	},
+      	axisX:{
+      		interval: 1
+      	},
+      	axisY2:{
+          interval: 0.25,
+           maximum: 1,
+           minimum: 0,
+      		interlacedColor: "rgba(1,77,101,.2)",
+      		gridColor: "rgba(1,77,101,.1)",
+      		title: "density"
+      	},
+      	data: [{
+      		type: "bar",
+      		name: "emotions",
+      		axisYType: "secondary",
+      		color: "#014D65",
+      		dataPoints: emodata
+      	}]
+      });
+
+      var xVal = 0;
+      var yVal = 0;
+      var updateInterval = 1000;
+      var dataLength = 20; // number of dataPoints visible at any point
+
+      function updateChartHappiness(val) {
+
+        // count = count || 1;
+
+        yVal = val;
+        happinessArr.push({
+          x: xVal,
+          y: yVal
+        });
+        xVal++;
+
+        if (happinessArr.length > dataLength) {
+          happinessArr.shift();
+        }
+
+        // chart.render();
+      }
+
+      function updateChartAnger(val) {
+
+        // count = count || 1;
+
+        yVal = val;
+        angerArr.push({
+          x: xVal,
+          y: yVal
+        });
+        xVal++;
+
+        if (angerArr.length > dataLength) {
+          angerArr.shift();
+        }
+
+        chart.render();
+      }
+
+      function updateChartSurprised(val) {
+
+        // count = count || 1;
+
+        yVal = val;
+        surprisedArr.push({
+          x: xVal,
+          y: yVal
+        });
+        xVal++;
+
+        if (surprisedArr.length > dataLength) {
+          surprisedArr.shift();
+        }
+
+        chart.render();
+      }
+
+      function updateChartSadness(val) {
+
+        // count = count || 1;
+
+        yVal = val;
+        sadnessArr.push({
+          x: xVal,
+          y: yVal
+        });
+        xVal++;
+
+        if (sadnessArr.length > dataLength) {
+          sadnessArr.shift();
+        }
+
+        chart.render();
+      }
+
+      function updateChartDisgust(val) {
+
+        // count = count || 1;
+
+        yVal = val;
+        disgustArr.push({
+          x: xVal,
+          y: yVal
+        });
+        xVal++;
+
+        if (disgustArr.length > dataLength) {
+          disgustArr.shift();
+        }
+
+        chart.render();
+      }
+
+      function updateChartFear(val) {
+
+        // count = count || 1;
+
+        yVal = val;
+        fearArr.push({
+          x: xVal,
+          y: yVal
+        });
+        xVal++;
+
+        if (fearArr.length > dataLength) {
+          fearArr.shift();
+        }
+
+        chart.render();
+      }
+
+      // updateChart(dataLength);
+      // setInterval(function(){updateChart()}, updateInterval);
+
+      </script>
+
+      <script>
+
+      </script>
+
+
+      <!-- <div class="row col-lg-12">
+
+        <div id="container">
+          <div class="box" id="box1">
+      			<img id="im1" src= "img/neutral.png">
+      		</div>
+      	</div>
+      </div> -->
+
+      <!-- <footer>
+        <div class="foot-fixed-bottom">
+          <div class="container text-center">
+            <hr/>
+            <div class="row">&copy; 2014-2015 Kurento</div>
+            <div class="row">
+              <div class="col-md-4">
+                <a href="http://www.urjc.es">
+                  <img src="img/urjc.gif" alt="Universidad Rey Juan Carlos" height="50px"/>
+                </a>
+              </div>
+              <div class="col-md-4">
+                <a href="http://www.kurento.org">
+                  <img src="img/kurento.png" alt="Kurento" height="50px"/>
+                </a>
+              </div>
+              <div class="col-md-4">
+                <a href="http://www.naevatec.com">
+                  <img src="img/naevatec.png" alt="Naevatec" height="50px"/>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer> -->
+
+    </div>
+
+
+  <!-- <style>
+  #container {
+      width: 200px;
+      height:200px;
+      position: relative;
+  }
+
+  #box1{
+      width: 200px;
+      height:200px;
+      position: absolute;
+      top:0;
+      left:0;
+  }
+
+  #box1 img{
+
+        width: 100%;
+        height:100%;
+  }
+
+  </style> -->
+	<script>
+
+  // function myfunc2( p1 ){
+  //   var images = ["img/fear.png", "img/angry.png", "img/neutral.png", "img/Disgust", "img/happiness.png", "img/sadness.png", "img/surprised.png"];
+  //   $(document).ready(function(){
+  //     if(p1=="1"){
+  //       $("#im1").fadeOut(500);
+  //       $("#im1").attr("src", "img/angry.png").fadeIn(500);
+  //     }
+  //     else if(p1=="2"){
+  //       $("#im1").fadeOut(500);
+  //       $("#im1").attr("src", "img/fear.png").fadeIn(500);
+  //     }
+  //     else if(p1=="3"){
+  //       $("#im1").fadeOut(500);
+  //       $("#im1").attr("src", "img/happiness.png").fadeIn(500);
+  //     }
+  //     else if(p1=="4"){
+  //       $("#im1").fadeOut(500);
+  //       $("#im1").attr("src", "img/sadness.png").fadeIn(500);
+  //     }
+  //     else if(p1=="5"){
+  //       $("#im1").fadeOut(500);
+  //       $("#im1").attr("src", "img/disgust.png").fadeIn(500);
+  //     }
+  //     else if(p1=="6"){
+  //       $("#im1").fadeOut(500);
+  //       $("#im1").attr("src", "img/surprised.png").fadeIn(500);
+  //     }
+  //     else if(p1=="7"){
+  //       $("#im1").fadeOut(500);
+  //       $("#im1").attr("src", "img/neutral.png").fadeIn(500);
+  //     }
+  //   });
+  // }
+
+  // function myfunc2(emo) {
+  //   if(emo == 1){
+  //       ducoment.getElementById('im1').src = "img/angry.png";
+  //   }
+  //   else if(emo == 2){
+  //       ducoment.getElementById('im1').src = "img/fear.png";
+  //   }
+  //   else if(emo == 3){
+  //       ducoment.getElementById('im1').src = "img/happiness.png";
+  //       console.log("+++++++++++++");
+  //   }
+  //   else if(emo == 4){
+  //       ducoment.getElementById('im1').src = "img/sadness.png";
+  //   }
+  //   else if(emo == 5){
+  //       ducoment.getElementById('im1').src = "img/disgust.png";
+  //   }
+  //   else if(emo == 6){
+  //       ducoment.getElementById('im1').src = "img/surprised.png";
+  //   }
+  //   else if(emo == 7){
+  //       ducoment.getElementById('im1').src = "img/neutral.png";
+  //   }
+  // }
+
+	</script>
 
   </body>
 </html>
